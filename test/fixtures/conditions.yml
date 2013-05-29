@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  verbiage: MyString
+  status: false
+  approved: false
+  change_approved_by: 1
+  change_approved_at: 2012-05-25 08:14:31
+
+two:
+  name: MyString
+  verbiage: MyString
+  status: false
+  approved: false
+  change_approved_by: 1
+  change_approved_at: 2012-05-25 08:14:31

@@ -1,0 +1,13 @@
+%div.panel{:class => resource_class.to_s.underscore}
+  %h3 Address
+  %div.panel_contents
+
+    - if resource.addresses.empty?
+      %div
+        There is no address given.
+
+    - else
+      %div.attributes_table
+        %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+          = row :address
+          = row :map_reference

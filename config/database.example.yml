@@ -1,0 +1,16 @@
+common: &common
+  adapter: postgresql
+  username: postgres
+  password: 
+
+development:
+  <<: *common
+  database: roster365_development
+
+test:
+  <<: *common
+  database: roster365_test
+
+production:
+  <<: *common
+  database: roster365_production

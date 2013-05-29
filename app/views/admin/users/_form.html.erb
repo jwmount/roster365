@@ -1,0 +1,13 @@
+<%= semantic_form_for @user do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :email, :required => true, :input_html => {:class => "large"} %>
+  <% end %>
+
+  <% if can? :manage, @user %>
+    <%= f.inputs :name => "Roles" do %>
+      <%= f.input :roles, :as => :select, :collection => Role.by_name.all, :input_html => {"data-placeholder" => "Select Users...", :style=> "width:500px", :class => "chzn-select"} %>
+    <% end %>
+  <% end %>
+
+  <%= f.buttons :commit %>
+<% end %>

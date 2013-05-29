@@ -1,0 +1,180 @@
+%div.panel
+  %h3 Approval
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        = row :t360_approved, value: (boolean_helper :active)
+        = row :client_approved, value: (boolean_helper :active)
+
+
+%div.panel
+  %h3 Information
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        = row :name
+        = row :equipment_units_required_per_day
+        - if @solution.partner
+          = row :partner, :value => link_to(@solution.partner.display_name, admin_company_path(@solution.partner))
+        - else
+          = row :partner, :value => ""
+        = row :po, label: "Purchase Order"
+        = row :solution_type
+        = row :material, :value => resource.material.name
+        = row :quantity
+        = row :unit_of_material
+        = row :kms_one_way
+        = row :semis_permitted, value: (boolean_helper :active)
+
+= render(:partial => "admin/shared/address_show", :locals => { :_path => [:admin, @project, @quote, @solution] } )
+
+
+/ = row :excel_data
+%div.panel
+  %h3 Contract
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        = row :markup, :value => number_to_currency(@solution.excel_data[:markup])
+        = row :contract_price, :value => number_to_currency(@solution.excel_data[:contract_price])
+        = row :margin, :value => number_to_percentage(@solution.excel_data[:margin]*100, :precision => 2)
+
+
+%div.panel
+  %h3 Solution Manager
+  %div.panel_contents
+    %div.attributes_table
+      - if @solution.excel
+        %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+          = row :excel, :label => "Solution Worksheet", :value => link_to("Download #{@solution.excel_identifier}", @solution.excel_url)
+      - else
+        %p There is no excel file for this solution.
+
+%div.panel
+  %h3 Equipment
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        - @solution.equipments.alphabetically.all.each do |equipment|
+          - links = link_to("View", polymorphic_path([:admin, equipment]))
+          - links << link_to("Edit", polymorphic_path([:admin, equipment], :action => :edit))
+          = row :contact, :label => equipment.name, :value => links
+
+
+%div.panel
+  %h3 Assumptions
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        = row :hours_per_day, :value => @solution.excel_data[:hours_per_day]
+        = row :profit_margin, :value => number_to_percentage(@solution.excel_data[:profit_margin]*100, :precision => 2)
+        = row :profit_margin_tip, :value => number_to_percentage(@solution.excel_data[:profit_margin_tip]*100, :precision => 2)
+        = row :float_cost, :value => number_to_currency(@solution.excel_data[:float_cost])
+        = row :machine_cost_per_day, :value => number_to_currency(@solution.excel_data[:machine_cost_per_day])
+
+
+%div.panel
+  %h3 Drive Times
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        = row :time_drive_in_load, :value => @solution.excel_data[:time_drive_in_load]
+        = row :time_load, :value => @solution.excel_data[:time_load]
+        = row :time_drive_out_load, :value => @solution.excel_data[:time_drive_out_load]
+        = row :time_drive_load_to_tip, :value => @solution.excel_data[:time_drive_load_to_tip]
+        = row :time_drive_in_tip, :value => @solution.excel_data[:time_drive_in_tip]
+        = row :time_unload_tip, :value => @solution.excel_data[:time_unload_tip]
+        = row :time_drive_out_tip, :value => @solution.excel_data[:time_drive_out_tip]
+        = row :time_drive_return_load, :value => @solution.excel_data[:time_drive_return_load]
+        = row :total_run_time, :value => @solution.excel_data[:total_run_time]
+        = row :loads_per_day, :value => @solution.excel_data[:loads_per_day]
+        = row :km_load_tip, :value => @solution.excel_data[:km_load_tip]
+        = row :km_tip_load, :value => @solution.excel_data[:km_tip_load]
+        = row :tolls_load_to_tip, :value => @solution.excel_data[:tolls_load_to_tip]
+        = row :tolls_tip_to_load, :value => @solution.excel_data[:tolls_tip_to_load]
+
+%div.panel
+  %h3 Tip Fees
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        = row :tip_fee, :value => number_to_currency(@solution.excel_data[:tip_fee])
+        = row :material_fee, :value => number_to_currency(@solution.excel_data[:material_fee])
+        = row :spread_other_fees, :value => number_to_currency(@solution.excel_data[:spread_other_fees])
+        = row :total_tip_fee, :value => number_to_currency(@solution.excel_data[:total_tip_fee])
+
+
+- if @solution.m3?
+  %div.panel
+    %h3 m3
+    %div.panel_contents
+      %div.attributes_table
+        %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+          = row :material_moved_per_day, :value => @solution.excel_data[:material_moved_per_day]
+          = row :pay_tip, :value => number_to_currency(@solution.excel_data[:pay_tip])
+          = row :pay_truck, :value => number_to_currency(@solution.excel_data[:pay_truck])
+          = row :pay_tolls, :value => number_to_currency(@solution.excel_data[:pay_tolls])
+          = row :pay_total, :value => number_to_currency(@solution.excel_data[:pay_total])
+          = row :markup, :value => number_to_currency(@solution.excel_data[:markup])
+          = row :contract_price, :value => number_to_currency(@solution.excel_data[:contract_price])
+          = row :margin, :value => number_to_currency(@solution.excel_data[:margin])
+
+
+- if @solution.tonne?
+  %div.panel
+    %h3 m3
+    %div.panel_contents
+      %div.attributes_table
+        %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+          = row :loads_per_day, :value => @solution.excel_data[:loads_per_day]
+          = row :material_moved_per_day, :value => @solution.excel_data[:material_moved_per_day]
+          = row :pay_tip, :value => @solution.excel_data[:pay_tip]
+          = row :pay_truck, :value => @solution.excel_data[:pay_truck]
+          = row :pay_tolls, :value => @solution.excel_data[:pay_tolls]
+          = row :pay_total, :value => @solution.excel_data[:pay_total]
+          = row :markup, :value => @solution.excel_data[:markup]
+          = row :contract_price, :value => @solution.excel_data[:contract_price]
+          = row :margin, :value => @solution.excel_data[:margin]
+          = row :pay_truck_total, :value => @solution.excel_data[:pay_truck_total]
+          = row :pay_tip_total, :value => @solution.excel_data[:pay_tip_total]
+          = row :total, :value => @solution.excel_data[:total]
+
+
+- if @solution.hourly_hire?
+  %div.panel
+    %h3 Hourly Hire
+    %div.panel_contents
+      %div.attributes_table
+        %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+          = row :pay_truck, :value => @solution.excel_data[:pay_truck]
+          = row :hours, :value => @solution.excel_data[:hours]
+          = row :pay_total, :value => @solution.excel_data[:pay_total]
+          = row :pay_truck, :value => @solution.excel_data[:pay_truck]
+
+
+- if @solution.loads?
+  %div.panel
+    %h3 Loads
+    %div.panel_contents
+      %div.attributes_table
+        %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+          = row :pay_truck, :value => @solution.excel_data[:pay_truck]
+          = row :loads, :value => @solution.excel_data[:loads]
+          = row :pay_total, :value => @solution.excel_data[:pay_total]
+          = row :pay_truck, :value => @solution.excel_data[:pay_truck]
+
+%div.panel
+  %h3 Costings
+  %div.panel_contents
+    %div.attributes_table
+      %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+        = row :rig_dollars_per_day, :label => "Equipment $/day"
+        = row :loads_per_day
+        = row :invoice_load_client, :label => "inv_load_client (%)".humanize
+        = row :pay_client, :label => "pay_load_client (%)".humanize
+        = row :invoice_tip_client, :label => "invoice_tip_client (%)".humanize
+        = row :pay_tip_client, :label => "invoice_tip_client (%)".humanize
+        = row :pay_tolls
+        = row :pay_tip
+
+

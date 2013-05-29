@@ -1,0 +1,12 @@
+
+- unless address.nil?   
+
+  %address
+    =address.street_address
+    =address.city
+    =address.state
+    =address.post_code
+    =address.map_reference
+
+- else
+  %h4= "No address assigned."

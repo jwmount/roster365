@@ -1,0 +1,2 @@
+-unless docket.nil?
+  = link_to docket.booking_no.to_s + '-' + docket.contact.first_name.initial + docket.contact.last_name.initial, admin_docket_path(docket.id)

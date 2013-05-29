@@ -1,0 +1,35 @@
+#content-wrapper
+  #content
+    #column-one
+      %h1 Quotation
+    #column-two
+      %h1= "No: #{print.name}"
+
+  #content
+    #column-one
+      %h3= "Project:"
+    #column-two
+      %p= print.project.name
+
+  #content
+    #column-one
+      %h3= "Location:"
+    #column-two
+      %p= print.project.company.address
+
+  #content
+    #column-one
+      %h3= "Customer:"
+    #column-two
+      %p= print.project.company.name
+
+=render :partial => 'client', :object => print
+
+%h4 Solutions
+=render print.solutions
+%br
+
+=render :partial => 'conditions', :object => print
+
+=render :partial => 'concurrence', :object => print
+

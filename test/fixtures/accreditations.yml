@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  certificate_id: 1
+  contact_id: 1
+  company_id: 1
+  equipment_id: 1
+  active: false
+
+two:
+  certificate_id: 1
+  contact_id: 1
+  company_id: 1
+  equipment_id: 1
+  active: false

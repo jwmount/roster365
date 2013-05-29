@@ -1,0 +1,61 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  material_id: 1
+  kns_one_way: 1
+  quantity: 1
+  unit_of_material: MyString
+  solution_type: MyString
+  semis_permitted: false
+  equipment_id: 1
+  t360_approved: false
+  client_approved: false
+  equipment_dollars_per_day: 9.99
+  drive_time_into_site: 1
+  load_time: 1
+  drive_time_out_of_site: 1
+  drive_time_from_load_to_tip: 1
+  drive_time_tip_to_load: 1
+  drive_time_into_tip: 1
+  unload_time: 1
+  drive_time_out_of_tip_site: 1
+  loads_per_day: 1
+  inv_client_1: 9.99
+  inv_client_2: 9.99
+  pay_equipment_per_unit: 9.99
+  pay_tolls: 9.99
+  pay_tip: 9.99
+  excel: MyText
+  equipment_units_required_per_day: 1
+  total_material: 1
+
+two:
+  name: MyString
+  material_id: 1
+  kns_one_way: 1
+  quantity: 1
+  unit_of_material: MyString
+  solution_type: MyString
+  semis_permitted: false
+  equipment_id: 1
+  t360_approved: false
+  client_approved: false
+  equipment_dollars_per_day: 9.99
+  drive_time_into_site: 1
+  load_time: 1
+  drive_time_out_of_site: 1
+  drive_time_from_load_to_tip: 1
+  drive_time_tip_to_load: 1
+  drive_time_into_tip: 1
+  unload_time: 1
+  drive_time_out_of_tip_site: 1
+  loads_per_day: 1
+  inv_client_1: 9.99
+  inv_client_2: 9.99
+  pay_equipment_per_unit: 9.99
+  pay_tolls: 9.99
+  pay_tip: 9.99
+  excel: MyText
+  equipment_units_required_per_day: 1
+  total_material: 1

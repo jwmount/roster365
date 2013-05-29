@@ -1,0 +1,29 @@
+/_client.html.haml
+
+%fieldset
+  %legend= "#{client.project.company.name} Details"
+  
+  #content-wrapper
+    #content
+      #column-one
+        Client Contact:
+      #column-two
+        = render client.project.company.contacts
+      #column-three
+        %p= "Quote date:"
+      #column-four
+        %p= client.updated_at.strftime("%d %b, %Y")
+
+    #content
+      #column-one
+        Site Contact:
+      #column-two
+        = render client.project.company.contacts
+      #column-three
+        %p= "Roster365 Project Rep:"
+      #column-four
+        %p= client.prep_name
+
+%br
+
+

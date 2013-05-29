@@ -1,0 +1,12 @@
+!!! 5
+%html
+  %head
+    %title= ENV['TITLE']
+    = stylesheet_link_tag :all
+    = stylesheet_link_tag 'roster365_print', :media => "print"
+    = javascript_include_tag :defaults
+    = csrf_meta_tag
+
+= render 'header'
+= yield
+= render 'footer'

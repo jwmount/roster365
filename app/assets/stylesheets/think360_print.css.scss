@@ -1,0 +1,52 @@
+body {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 8px;  
+}
+
+h1 {
+  font-size: 120%;    
+}
+h2 {
+  font-size: 110%;    
+}
+h3 {
+  font-size: 100%;    
+}
+h4 {
+  font-size: 90%;    
+}
+
+
+#content-wrapper{
+  display:table;
+}
+
+#content{
+  display:table-row;
+}
+
+#content>div{
+  display:table-cell
+}
+
+#column-one{
+  width: 300px;
+}
+#column-two{
+  width: 300px;
+}
+#column-three{
+  width: 300px;
+}
+#column-four{
+  width: 300px;
+}
+
+#header-right{
+  position: fixed;
+  left: 560px;
+  top: 0px;
+  width: 250px;
+  line-height: .7;
+}
+

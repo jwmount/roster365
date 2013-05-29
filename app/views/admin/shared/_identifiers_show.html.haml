@@ -1,0 +1,13 @@
+%div.panel{:class => resource_class.to_s.underscore}
+  %h3 Rollodex Items (Identifiers)
+  %div.panel_contents
+    - if resource.identifiers.empty?
+      %div
+        There are no Rollodex items (identifiers).
+    - else
+      %div.attributes_table
+        %table{:border=>"0", :cellspacing=>"0",:cellpadding=>"0"}
+          - resource.identifiers.ranked.all.each do |identifier|
+            = row :identifier, :label => identifier.name, :value => identifier.value
+
+

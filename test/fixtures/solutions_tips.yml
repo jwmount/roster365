@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  solution_id: 1
+  tips_id: 1
+
+two:
+  solution_id: 1
+  tips_id: 1

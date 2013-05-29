@@ -1,0 +1,12 @@
+
+- unless @tip.blank?   
+
+  %h4= "No tip assigned."
+
+- else
+
+  %h4= tip.name
+  %p= "Fee: #{number_to_currency(tip.fee)}"
+  %address= render tip.addresses.limit(1)
+
+%hr

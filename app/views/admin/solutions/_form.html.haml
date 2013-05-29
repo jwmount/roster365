@@ -1,0 +1,72 @@
+
+
+= semantic_form_for [:admin, @project, @quote, @solution], :html => {:multipart => true} do |f|
+  - if Rails.env.development?
+    = @solution.errors.inspect
+
+  = f.inputs "" do
+    = f.input :name, :as => :hidden
+    = f.input :name, :required => true, :input_html => {:disabled => true, :class => "large disabled"}
+
+    = f.input :equipment_units_required_per_day, :required => true, label: 'Equipment required (units per day)'
+
+    = f.input :partner, magic_select_options(Company.all, false)
+
+    - if @solution.partner
+      = f.input :equipments, :as => :select, :collection => @solution.partner.equipments, :label => "Equipment Type", :required => true, :input_html => {"data-placeholder" => "Select Partner ...", :style=> "width:500px", :class => "chzn-select", :disabled => true}
+    - else
+      = f.input :equipments, :as => :string, :required => true,  :label => "Equipment List",  :input_html => {:disabled => true, :class => "disabled", :value => ""}
+
+    = f.input :purchase_order, :hint => "Required if partner P.O. is required", :required => @solution.partner && @solution.partner.PO_required, :input_html => {:class => "medium"}
+
+    = f.input :solution_type, magic_select_options(solution_type_options)
+
+    = f.input :material_id, :as => :select, label: 'Material', :collection => Material.all, :input_html => {"data-placeholder" => "Select Material ...",  :class => "chzn-select"}
+
+    = f.input :unit_of_material, magic_select_options(Solution::UNITS_OF_MATERIAL)
+
+    = f.input :total_material, label: 'Total Material (volume)', required: true
+
+    = f.inputs "Solution Manager" do
+      = f.hidden_field :excel_cache, hint: "explain this here"
+      
+      - if @solution.excel?        
+        - if @solution.new_record?
+          = f.input :excel, :as => :file,  :required => true, :label => "Replace Solution"          
+          %div.current_file
+            = link_to("#{@solution.excel.identifier}", @solution.excel_url)
+        -else 
+          %div.current_file
+            = link_to("Download #{@solution.excel.identifier}", @solution.excel_url)
+          - if Rails.env.development?
+            = f.input :excel, :as => :file, :label => "Solution Check in, out"                
+      - else
+        = f.input :excel, :as => :file,  :required => true, :label => "Upload Solution"
+
+  
+
+  - unless @solution.new_record?
+    = f.inputs "Approval" do
+      = f.input :t360_approved
+      = f.input :client_approved
+
+  = f.buttons do
+    = f.commit_button
+    //= f.commit_button "Calculate", :input_html => {:id => "Calculate"}
+
+:javascript
+
+  $("#solution_vendor_id").chosen().change(function(){
+    var company_id = $("#solution_vendor_id").val();
+    var url = "/admin/companies/"+company_id+"/equipment"
+    $("#solution_equipments_input").load(url, function() {
+      $("#solution_equipment_ids").chosen();
+      $("#solution_equipments_input").effect("highlight", {}, 3000);
+    });
+
+  });
+
+  $("form").submit(function() {
+    //action = $(this).attr("action") + "/calculate"
+    //$(this).attr("action", action)
+  })

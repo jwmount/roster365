@@ -1,0 +1,7 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  project_missing_rep:   "WARNING: No Rep is assigned to this project.  You should assign a Rep as soon as you have one."
+  schedule_missing_reps: "ERROR: No Rep is responsible for this project.  You should NOT schedule a Job until a Rep is assigned."
+  quote_missing_rep:     "WARNING: The Rep responsible for this quote is not given."

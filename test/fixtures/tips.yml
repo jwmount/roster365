@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  solution_id: 1
+  company_id: 1
+  name: MyString
+  fee: 9.99
+  fire_ant_level: 1
+
+two:
+  solution_id: 1
+  company_id: 1
+  name: MyString
+  fee: 9.99
+  fire_ant_level: 1

@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  schedule_id: 1
+  contact_id: 1
+  day: 2012-05-25 08:02:00
+  booking_no: 1
+  onsite_now: false
+  onsite_at: false
+  breakdown: false
+  no_show: false
+  OK_tomorrow: false
+  engagement_declined: false
+  next_available_day: 2012-05-25 08:02:00
+  contacted_at: 2012-05-25 08:02:00
+  contacted_at: 2012-05-25 08:02:00
+  date_next_available: 2012-05-25 08:02:00
+
+two:
+  schedule_id: 1
+  contact_id: 1
+  day: 2012-05-25 08:02:00
+  booking_no: 1
+  onsite_now: false
+  onsite_at: false
+  breakdown: false
+  no_show: false
+  OK_tomorrow: false
+  engagement_declined: false
+  next_available_day: 2012-05-25 08:02:00
+  contacted_at: 2012-05-25 08:02:00
+  contacted_at: 2012-05-25 08:02:00
+  date_next_available: 2012-05-25 08:02:00

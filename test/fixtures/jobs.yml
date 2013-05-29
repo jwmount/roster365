@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  solution_id: 1
+  project_id: 1
+  start_on: 2012-05-24
+  time: MyString
+  name: MyString
+  finished_on: 1
+  purchase_order: MyString
+  active: false
+
+two:
+  solution_id: 1
+  project_id: 1
+  start_on: 2012-05-24
+  time: MyString
+  name: MyString
+  finished_on: 1
+  purchase_order: MyString
+  active: false

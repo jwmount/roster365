@@ -1,0 +1,14 @@
+= semantic_form_for [:admin, @message] do |f|
+  = f.inputs "Recipient" do
+    = f.input :contacts, contact_select_options
+    = f.input :scheduled_time, :start_year => Time.now.year, :end_year => (Time.now + 14.days).year, :labels => { :year => "Y", :month => "M", :day => "D" }
+
+  = f.inputs "Message" do
+    = f.input :content, :required => true
+
+  = f.inputs "Contact Response" do
+    = f.input :response_received_at, :label => "Response Received", :start_year => Time.now.year, :end_year => (Time.now + 14.days).year, :disabled => true
+    = f.input :response, :input_html => {:disabled => true}
+
+  = f.buttons
+
