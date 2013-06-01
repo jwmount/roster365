@@ -38,9 +38,6 @@ class Project < ActiveRecord::Base
       self.active ||= true 
       self.rep_id ||= nil
       self.project_start_on  ||= Time.now
-      self.T360_bid ||= false
-      self.T360_intend_to_bid ||= false
-      self.T360_won ||= false
     end
   end
 
@@ -49,7 +46,7 @@ class Project < ActiveRecord::Base
 
   # form of find works, see use to scope to employee Reps in projects.rb
   def XXrequirement_list
-    Certificate.where({:for_company => true} | {:for_contact => true}) - certificates
+    Certificate.where({:for_company => true} | {:for_person => true}) - certificates
   end
 
 

@@ -152,12 +152,9 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.datetime "received_on"
     t.boolean  "operator_signed"
     t.boolean  "client_signed"
-    t.boolean  "T360_approved"
-    t.integer  "T360_approved_by"
-    t.datetime "T360_approved_on"
-    t.boolean  "T360_2nd_approval"
-    t.integer  "T360_2nd_approval_by"
-    t.datetime "T360_2nd_approval_on"
+    t.boolean  "approved"
+    t.integer  "approved_by"
+    t.datetime "approved_on"
     t.decimal  "a_inv_pay",            :precision => 7, :scale => 2
     t.decimal  "b_inv_pay",            :precision => 7, :scale => 2
     t.decimal  "supplier_inv_pay",     :precision => 7, :scale => 2

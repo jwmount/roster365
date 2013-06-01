@@ -3,7 +3,7 @@
 one:
   name: MyString
   description: MyString
-  for_contact: false
+  for_person: false
   for_company: false
   for_equipment: false
   active: false
@@ -11,7 +11,7 @@ one:
 two:
   name: MyString
   description: MyString
-  for_contact: false
+  for_person: false
   for_company: false
   for_equipment: false
   active: false

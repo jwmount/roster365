@@ -18,15 +18,6 @@ ActiveAdmin.register Project do
   scope :in_active do |projects|
     projects.where ({active: false})
   end
-#  scope :intend_to_bid do |projects|
-#    projects.where ({T360_intend_to_bid: true})
-#  end
-#  scope :bid do |projects|
-#    projects.where ({T360_bid: true})
-#  end
-#  scope :won do |projects|
-#    projects.where ({T360_won: true})
-#  end
 
 
   index do
@@ -66,9 +57,6 @@ ActiveAdmin.register Project do
       status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error)      
     end     
     
-#    column :T360_won do |project|
-#      status_tag (project.T360_won ? 'YES' : 'No'), (project.T360_won ? :ok : :error)
-#    end
   end
   
   form do |f|
@@ -111,9 +99,6 @@ ActiveAdmin.register Project do
         a.input :map_reference
       end
 
-#      f.input :T360_bid, :as => :radio, :hint => "Check if we have bid this project."
-#      f.input :T360_intend_to_bid, :as => :radio, :hint => "Check if we intend to bid this project."
-#      f.input :T360_won, :as => :radio, :hint => "Check if we have been awarded this contract."
       f.input :active, :as => :radio, :hint => "Check if the customer has given us a definite start work order."
       end
           
@@ -125,7 +110,7 @@ ActiveAdmin.register Project do
     panel project.name do
       attributes_table_for(project) do
         rows :company_id,  :project_start_on
-        row("Think 360 Rep") do |project|
+        row("Project Rep") do |project|
           begin
             rep = Person.find project.rep_id
             link_to rep.full_name, admin_person_path(rep)
@@ -141,12 +126,7 @@ ActiveAdmin.register Project do
           render project.addresses
         end
      end
-   #end
-
         row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
-#        row("Intend to Bid") { status_tag (project.T360_intend_to_bid ? "YES" : "No"), (project.T360_intend_to_bid ? :ok : :error) }
-#        row("Has bid") { status_tag (project.T360_bid ? "YES" : "No"), (project.T360_bid ? :ok : :error) }
-#        row("Won") { status_tag (project.T360_won ? "YES" : "No"), (project.T360_won ? :ok : :error) }
       end
       active_admin_comments
     end

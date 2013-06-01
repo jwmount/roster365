@@ -10,7 +10,7 @@ ActiveAdmin.register Certificate do
     certificates.where ({active: false})
   end
   scope :people do |certificates|
-    certificates.where ({for_contact: true})
+    certificates.where ({for_person: true})
   end
   scope :companies do |certificates|
     certificates.where ({for_company: true})
@@ -24,8 +24,8 @@ ActiveAdmin.register Certificate do
       link_to certificate.name, admin_certificate_path(certificate)
     end
     column :description
-    column :for_contact do |certificate|
-      status_tag (certificate.for_contact ? "YES" : "No"), (certificate.for_contact ? :ok : :error)
+    column :for_person do |certificate|
+      status_tag (certificate.for_person ? "YES" : "No"), (certificate.for_person ? :ok : :error)
     end    
     column :for_company do |certificate|
       status_tag (certificate.for_company ? 'YES' : 'No'), (certificate.for_company ? :ok : :error)
@@ -50,9 +50,9 @@ ActiveAdmin.register Certificate do
               :placeholder => "Description"
       f.input :active, 
               :as => :radio
-      f.input :for_contact,  
+      f.input :for_person,  
               :as => :radio, :collection => ["Person", "Equipment", "Company", "Project", "Site"]
-      f.input :for_contact
+      f.input :for_person
       f.input :for_equipment
       f.input :for_company
     end
@@ -66,7 +66,7 @@ ActiveAdmin.register Certificate do
         row("Name") { certificate.name }
         row("Active") { status_tag (certificate.active ? "YES" : "No"), (certificate.active ? :ok : :error) }
         row("Description") {certificate.description}
-        row("For Person") { status_tag (certificate.for_contact ? "YES" : "No"), (certificate.for_contact ? :ok : :error) }
+        row("For Person") { status_tag (certificate.for_person ? "YES" : "No"), (certificate.for_person ? :ok : :error) }
         row("For Equipment") { status_tag (certificate.for_equipment ? "YES" : "No"), (certificate.for_equipment ? :ok : :error) }
         row("For Company") { status_tag (certificate.for_company ? "YES" : "No"), (certificate.for_company ? :ok : :error) }
       end

@@ -6,9 +6,6 @@ one:
   rep_id: 1
   project_start_on: 1
   active: false
-  T360_bid: false
-  T360_won: false
-  T360_intend_to_bid: false
 
 two:
   name: MyString
@@ -16,6 +13,3 @@ two:
   rep_id: 1
   project_start_on: 1
   active: false
-  T360_bid: false
-  T360_won: false
-  T360_intend_to_bid: false

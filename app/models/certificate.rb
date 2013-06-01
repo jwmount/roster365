@@ -1,5 +1,5 @@
 class Certificate < ActiveRecord::Base
-  attr_accessible :active, :description, :for_company, :for_contact, :for_equipment, :name
+  attr_accessible :active, :description, :for_company, :for_person, :for_equipment, :name
 
   audited
   
