@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
   create_table "certificates", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.boolean  "for_contact"
+    t.boolean  "for_person"
     t.boolean  "for_company"
     t.boolean  "for_equipment"
     t.boolean  "active"
@@ -239,9 +239,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.integer  "rep_id"
     t.datetime "project_start_on"
     t.boolean  "active"
-    t.boolean  "T360_bid"
-    t.boolean  "T360_won"
-    t.boolean  "T360_intend_to_bid"
+    t.boolean  "intend_to_bid"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
@@ -297,7 +295,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.string   "solution_type"
     t.boolean  "semis_permitted"
     t.integer  "equipment_id"
-    t.boolean  "#{INSTALLATION_NAME}_approved"
+    t.boolean  "approved"
     t.boolean  "client_approved"
     t.decimal  "equipment_dollars_per_day"
     t.integer  "drive_time_into_site"

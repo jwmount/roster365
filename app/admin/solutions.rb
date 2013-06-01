@@ -6,7 +6,7 @@ ActiveAdmin.register Solution do
   
    scope :all, :default => true
    scope :T360_approved do |solutions|
-     solutions.where ({T360_approved: true})
+     solutions.where ({approved: true})
    end    
    scope :client_approved do |solutions|
      solutions.where ({client_approved: true})
@@ -29,7 +29,7 @@ ActiveAdmin.register Solution do
     def check_approval
        solution = Solution.find params[:id]
        if solution
-         if solution.T360_approved
+         if solution.approved
            flash[:warning] = "Solution cannot be changed because it has been approved by Roster365.  You can Copy it and edit that one."
            redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
          end
@@ -63,8 +63,8 @@ ActiveAdmin.register Solution do
     
     column :equipment_units_required_per_day, :label => 'Units/day'
     
-    column :T360_approved do |solution|
-      status_tag (solution.T360_approved ? "YES" : "No"), (solution.T360_approved ? :ok : :error)      
+    column :approved do |solution|
+      status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error)      
     end       
     
     column :client_approved do |solution|
@@ -105,7 +105,7 @@ form do |f|
   error_panel f
 
     f.inputs "Approvals" do
-      f.input :T360_approved, :as => :radio, :hint => 'Once approved solutions cannot be changed.'
+      f.input :approved, :as => :radio, :hint => 'Once approved solutions cannot be changed.'
       f.input :client_approved, :as => :radio, :hint => 'Once approved solutions cannot be changed.'
       f.input :updated_at, :disabled => true, :hint => "Last updated timestamp; blank if New Solution."
     end
@@ -237,7 +237,7 @@ form do |f|
       row :solution_type
       row :tip_site
       row :updated_at
-      row("Roster365 Approved") { status_tag (solution.T360_approved ? "YES" : "No"), (solution.T360_approved ? :ok : :error) }        
+      row("Roster365 Approved") { status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error) }        
       row("Client Approved") { status_tag (solution.client_approved ? "YES" : "No"), (solution.client_approved ? :ok : :error) }        
       row :material
       row(:total_material) { "#{solution.total_material} #{solution.unit_of_material}"}
@@ -313,7 +313,7 @@ form do |f|
     quote = Quote.find @original.quote_id
     n = quote.solutions.count + 1
     @solution_new.name = "S" + n.to_s
-    @solution_new.T360_approved = false
+    @solution_new.approved = false
     
     # SOLUTION_TIPS ASSOCIATION 
     # If validated for prescence of will cause this to fail as the association is NOT managed by .dup.

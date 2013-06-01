@@ -13,7 +13,7 @@ class Solution < ActiveRecord::Base
   attr_accessible :invoice_load_client, :pay_load_client,:invoice_tip_client, :pay_tip_client
   attr_accessible :kms_one_way, :load_time, :loads_per_day, :material_id,
                   :pay_equipment_per_unit, :pay_tip, :pay_tolls
-  attr_accessible :semis_permitted, :T360_approved, :total_material, :unit_of_material, 
+  attr_accessible :semis_permitted, :approved, :total_material, :unit_of_material, 
                   :unload_time
   attr_accessible :purchase_order_required, :vendor_id, :material_id
   attr_accessible :drive_time_out_of_tip_site
@@ -108,7 +108,7 @@ class Solution < ActiveRecord::Base
       self.pay_tip ||= 0.00
       self.pay_tolls ||= 0.00
       self.semis_permitted ||= false
-      self.T360_approved ||= false
+      self.approved ||= false
       self.total_material ||= 0
       self.unit_of_material ||= 'm3'
       self.unload_time ||= 0
@@ -223,7 +223,7 @@ class Solution < ActiveRecord::Base
 
 
   def approved?
-    self.T360_approved && client_approved
+    self.approved && client_approved
   end
 
 end

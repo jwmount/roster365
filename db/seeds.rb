@@ -292,9 +292,9 @@ end
    "Machine Hire - Dry, Insured"
  ],
  [
-   "Think 360 Free Tip - Private Customers",
+   "Free Tip - Private Customers",
    "Conditions: Material is to be supplied and placed as directed, at the time of tipping, by the property owner or their representative. If no representative is available, all effort will be made to ensure material is placed and spread in a previously designated, and owner directed, area. roster365 has been requested to arrange supply of material to the above address by the property owner or their representative. roster365 does not take responsibility for material tipped by others. The property owner confirms that this project has the relevant Government or Council approvals. ",
-   "Think 360 Free Tip - Private Customers"
+   "Free Tip - Private Customers"
  ],
  [
    "COD, Credit Card Accounts",

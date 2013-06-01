@@ -58,7 +58,7 @@ class Job < ActiveRecord::Base
 
   class << self
     def approved
-      includes(:solution).where("solutions.T360_approved = ? && solutions.client_approved = ?", true, true)
+      includes(:solution).where("solutions.approved = ? && solutions.client_approved = ?", true, true)
     end
   end
 
