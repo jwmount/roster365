@@ -1,3 +1,3 @@
-class ProjectContact < ActiveRecord::Base
-  attr_accessible :contact_id, :project_id
+class ProjectPerson < ActiveRecord::Base
+  attr_accessible :person_id, :project_id
 end

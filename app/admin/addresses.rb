@@ -2,12 +2,12 @@
 ActiveAdmin.register Address do
   
   menu parent: "Admin"
-  # Address must be created from parent, e.g. Company, Contact, Tip
+  # Address must be created from parent, e.g. Company, Person, Tip
   actions :all, :except => :new
 
   scope :all, :default => true
-  scope :Contacts do |addresses|
-    addresses.where ({addressable_type: 'Contact'})
+  scope :People do |addresses|
+    addresses.where ({addressable_type: 'Person'})
   end
   scope :Companies do |addresses|
     addresses.where ({addressable_type: 'Company'})
@@ -29,14 +29,14 @@ ActiveAdmin.register Address do
             owner.name = "Delete: Company not found!"
             flash[:error] = 'Company does not exist, address should be deleted.'
           end
-        when  'Contact'
+        when  'Person'
           begin
-            owner = Contact.find("#{id.addressable_id}")
-            link_to "#{owner.display_name} (#{id.addressable_type})", admin_contact_path(owner.id)
+            owner = Person.find("#{id.addressable_id}")
+            link_to "#{owner.display_name} (#{id.addressable_type})", admin_person_path(owner.id)
           rescue ActiveRecord::RecordNotFound
-            owner = Contact.new
-            owner.name = 'Delete: Contact not found.'
-            flash[:error] = 'Bad Contact (does not exist), address should be deleted.'
+            owner = Person.new
+            owner.name = 'Delete: Person not found.'
+            flash[:error] = 'Bad Person (does not exist), address should be deleted.'
           end
         when  'Project'
           begin
@@ -72,8 +72,8 @@ ActiveAdmin.register Address do
   form do |f|
     error_panel f
 
-    f.inputs "Contacts" do
-      f.input :addressable, magic_select_options(Contact.all)
+    f.inputs "People" do
+      f.input :addressable, magic_select_options(Person.all)
     end
     f.inputs  "Companies" do
       f.input :addressable, magic_select_options(Company.all)

@@ -2,7 +2,7 @@
 
 one:
   schedule_id: 1
-  contact_id: 1
+  person_id: 1
   day: 2012-05-25 08:02:00
   booking_no: 1
   onsite_now: false
@@ -18,7 +18,7 @@ one:
 
 two:
   schedule_id: 1
-  contact_id: 1
+  person_id: 1
   day: 2012-05-25 08:02:00
   booking_no: 1
   onsite_now: false

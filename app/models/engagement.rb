@@ -1,7 +1,7 @@
 #require 'debugger'
 class Engagement < ActiveRecord::Base
   
-  attr_accessible :OK_tomorrow, :breakdown, :contact_id, :contacted_at, :date_next_available
+  attr_accessible :OK_tomorrow, :breakdown, :person_id, :contacted_at, :date_next_available
   attr_accessible :engagement_declined, :next_available_day, :no_show, :onsite_at, :onsite_now, :schedule_id
   attr_accessible :do_not_contact_until
     

@@ -8,16 +8,16 @@ module ActiveModel
   #
   # Let's take for example this non-persisted object.
   #
-  #   class ContactMessage
+  #   class PersonMessage
   #     include ActiveModel::Conversion
   #
-  #     # ContactMessage are never persisted in the DB
+  #     # PersonMessage are never persisted in the DB
   #     def persisted?
   #       false
   #     end
   #   end
   #
-  #   cm = ContactMessage.new
+  #   cm = PersonMessage.new
   #   cm.to_model == self # => true
   #   cm.to_key           # => nil
   #   cm.to_param         # => nil

@@ -4,7 +4,7 @@ class Identifier < ActiveRecord::Base
   audited
 
   belongs_to :addressable, :polymorphic => true
-  belongs_to :contactable, :polymorphic => true
+  belongs_to :personable, :polymorphic => true
 
   # removed, prevents @contact.save operations if present
   # validates_presence_of :identifiable_id, :identifiable_type, :name, :value

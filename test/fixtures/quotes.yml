@@ -3,7 +3,7 @@
 one:
   project_id: 1
   quote_to_id: 1
-  contact_id: 1
+  person_id: 1
   name: MyString
   fire_ants: false
   fire_ants_verified_by: false
@@ -17,7 +17,7 @@ one:
 two:
   project_id: 1
   quote_to_id: 1
-  contact_id: 1
+  person_id: 1
   name: MyString
   fire_ants: false
   fire_ants_verified_by: false

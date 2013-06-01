@@ -73,18 +73,18 @@ class Job < ActiveRecord::Base
   # get Project Rep 
   def prep
     begin
-      @prep = Contact.find (self.solution.quote.project.rep_id)
+      @prep = Person.find (self.solution.quote.project.rep_id)
     rescue ActiveRecord::RecordNotFound
-      @prep = Contact.new(:last_name=>'none')
+      @prep = Person.new(:last_name=>'none')
     end
   end
 
   # get Quote Rep full name (may be same as prep)
   def qrep
     begin
-      @qrep = Contact.find (self.solution.quote.rep_id)
+      @qrep = Person.find (self.solution.quote.rep_id)
     rescue ActiveRecord::RecordNotFound
-      @qrep = Contact.new(:last_name=>'none')
+      @qrep = Person.new(:last_name=>'none')
     end
   end
 

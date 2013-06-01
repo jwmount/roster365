@@ -1144,7 +1144,7 @@ In the event that the collection is empty, +render+ will return nil, so it shoul
 * +index.html.erb+
 
 <erb>
-<h1>Contacts</h1>
+<h1>People</h1>
 <%= render [customer1, employee1, customer2, employee2] %>
 </erb>
 

@@ -500,7 +500,7 @@ run on port 11211) and memcache-client installed.
   * Fix a race condition that could result in overwritten pidfiles
   * Various documentation additions
 
-== Contact
+== Person
 
 Please post bugs, suggestions and patches to
 the bug tracker at <http://github.com/rack/rack/issues>.

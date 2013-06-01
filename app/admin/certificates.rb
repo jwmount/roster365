@@ -9,7 +9,7 @@ ActiveAdmin.register Certificate do
   scope :inactive do |certificates|
     certificates.where ({active: false})
   end
-  scope :contacts do |certificates|
+  scope :people do |certificates|
     certificates.where ({for_contact: true})
   end
   scope :companies do |certificates|
@@ -51,7 +51,7 @@ ActiveAdmin.register Certificate do
       f.input :active, 
               :as => :radio
       f.input :for_contact,  
-              :as => :radio, :collection => ["Contact", "Equipment", "Company", "Project", "Site"]
+              :as => :radio, :collection => ["Person", "Equipment", "Company", "Project", "Site"]
       f.input :for_contact
       f.input :for_equipment
       f.input :for_company
@@ -66,7 +66,7 @@ ActiveAdmin.register Certificate do
         row("Name") { certificate.name }
         row("Active") { status_tag (certificate.active ? "YES" : "No"), (certificate.active ? :ok : :error) }
         row("Description") {certificate.description}
-        row("For Contact") { status_tag (certificate.for_contact ? "YES" : "No"), (certificate.for_contact ? :ok : :error) }
+        row("For Person") { status_tag (certificate.for_contact ? "YES" : "No"), (certificate.for_contact ? :ok : :error) }
         row("For Equipment") { status_tag (certificate.for_equipment ? "YES" : "No"), (certificate.for_equipment ? :ok : :error) }
         row("For Company") { status_tag (certificate.for_company ? "YES" : "No"), (certificate.for_company ? :ok : :error) }
       end

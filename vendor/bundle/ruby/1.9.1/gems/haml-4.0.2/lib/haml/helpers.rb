@@ -165,7 +165,7 @@ MESSAGE
     #
     # While:
     #
-    #     = list_of(["Home", "About", "Contact", "FAQ"], {class: "nav", role: "nav"}) do |item|
+    #     = list_of(["Home", "About", "Person", "FAQ"], {class: "nav", role: "nav"}) do |item|
     #       %a{ href="#" }= item
     #
     # Produces:
@@ -177,7 +177,7 @@ MESSAGE
     #       <a href='#'>About</a>
     #     </li>
     #     <li class='nav' role='nav'>
-    #       <a href='#'>Contact</a>
+    #       <a href='#'>Person</a>
     #     </li>
     #     <li class='nav' role='nav'>
     #       <a href='#'>FAQ</a>

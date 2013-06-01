@@ -247,7 +247,7 @@ The name passed to +form_for+ controls the key used in +params+ to access the fo
 
 The helper methods called on the form builder are identical to the model object helpers except that it is not necessary to specify which object is being edited since this is already managed by the form builder.
 
-You can create a similar binding without actually creating +&lt;form&gt;+ tags with the +fields_for+ helper. This is useful for editing additional model objects with the same form. For example if you had a Person model with an associated ContactDetail model you could create a form for creating both like so:
+You can create a similar binding without actually creating +&lt;form&gt;+ tags with the +fields_for+ helper. This is useful for editing additional model objects with the same form. For example if you had a Person model with an associated PersonDetail model you could create a form for creating both like so:
 
 <erb>
 <%= form_for @person, :url => { :action => "create" } do |person_form| %>

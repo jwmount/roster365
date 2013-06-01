@@ -217,7 +217,7 @@ Documents           :: http://builder.rubyforge.org/
 Github Clone        :: git://github.com/jimweirich/builder.git
 Issue / Bug Reports :: https://github.com/jimweirich/builder/issues?state=open
 
-== Contact
+== Person
 
 Author::         Jim Weirich
 Email::          jim.weirich@gmail.com

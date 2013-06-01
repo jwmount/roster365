@@ -26,9 +26,9 @@ module ApplicationHelper
   end
 
 
-  # This gives back all Contacts 
-  def contact_select_options(opts = {})
-    {:as => "select", :required => true, :collection => Contact.order("last_name").all, :include_blank => true, :input_html => {"data-placeholder" => "Select a Contact...", :style=> "width:500px", :class => "chzn-select"}}.merge(opts)
+  # This gives back all People 
+  def person_select_options(opts = {})
+    {:as => "select", :required => true, :collection => Person.order("last_name").all, :include_blank => true, :input_html => {"data-placeholder" => "Select a Person...", :style=> "width:500px", :class => "chzn-select"}}.merge(opts)
   end
 
   def magic_select_options(collection, r=true)

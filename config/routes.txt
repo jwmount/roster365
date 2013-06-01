@@ -47,13 +47,13 @@
                         admin_condition GET        /admin/conditions/:id(.:format)                                                             admin/conditions#show
                                         PUT        /admin/conditions/:id(.:format)                                                             admin/conditions#update
                                         DELETE     /admin/conditions/:id(.:format)                                                             admin/conditions#destroy
-            batch_action_admin_contacts POST       /admin/contacts/batch_action(.:format)                                                      admin/contacts#batch_action
-                         admin_contacts GET        /admin/contacts(.:format)                                                                   admin/contacts#index
-                                        POST       /admin/contacts(.:format)                                                                   admin/contacts#create
-                      new_admin_contact GET        /admin/contacts/new(.:format)                                                               admin/contacts#new
-                     edit_admin_contact GET        /admin/contacts/:id/edit(.:format)                                                          admin/contacts#edit
-                          admin_contact GET        /admin/contacts/:id(.:format)                                                               admin/contacts#show
-                                        PUT        /admin/contacts/:id(.:format)                                                               admin/contacts#update
+            batch_action_admin_people POST       /admin/people/batch_action(.:format)                                                      admin/people#batch_action
+                         admin_people GET        /admin/people(.:format)                                                                   admin/people#index
+                                        POST       /admin/people(.:format)                                                                   admin/people#create
+                      new_admin_contact GET        /admin/people/new(.:format)                                                               admin/people#new
+                     edit_admin_contact GET        /admin/people/:id/edit(.:format)                                                          admin/people#edit
+                          admin_contact GET        /admin/people/:id(.:format)                                                               admin/people#show
+                                        PUT        /admin/people/:id(.:format)                                                               admin/people#update
             admin_maintenance_dashboard            /admin/maintenance_dashboard(.:format)                                                      admin/maintenance_dashboard#index
              batch_action_admin_dockets POST       /admin/dockets/batch_action(.:format)                                                       admin/dockets#batch_action
                           admin_dockets GET        /admin/dockets(.:format)                                                                    admin/dockets#index
@@ -256,13 +256,13 @@ batch_action_admin_schedule_engagements POST       /admin/schedules/:schedule_id
                                         GET        /admin/companies/:company_id/address(.:format)                                              admin/addresses#show
                                         PUT        /admin/companies/:company_id/address(.:format)                                              admin/addresses#update
                                         DELETE     /admin/companies/:company_id/address(.:format)                                              admin/addresses#destroy
-                 admin_company_contacts GET        /admin/companies/:company_id/contacts(.:format)                                             admin/contacts#index
-                                        POST       /admin/companies/:company_id/contacts(.:format)                                             admin/contacts#create
-              new_admin_company_contact GET        /admin/companies/:company_id/contacts/new(.:format)                                         admin/contacts#new
-             edit_admin_company_contact GET        /admin/companies/:company_id/contacts/:id/edit(.:format)                                    admin/contacts#edit
-                  admin_company_contact GET        /admin/companies/:company_id/contacts/:id(.:format)                                         admin/contacts#show
-                                        PUT        /admin/companies/:company_id/contacts/:id(.:format)                                         admin/contacts#update
-                                        DELETE     /admin/companies/:company_id/contacts/:id(.:format)                                         admin/contacts#destroy
+                 admin_company_people GET        /admin/companies/:company_id/people(.:format)                                             admin/people#index
+                                        POST       /admin/companies/:company_id/people(.:format)                                             admin/people#create
+              new_admin_company_contact GET        /admin/companies/:company_id/people/new(.:format)                                         admin/people#new
+             edit_admin_company_contact GET        /admin/companies/:company_id/people/:id/edit(.:format)                                    admin/people#edit
+                  admin_company_contact GET        /admin/companies/:company_id/people/:id(.:format)                                         admin/people#show
+                                        PUT        /admin/companies/:company_id/people/:id(.:format)                                         admin/people#update
+                                        DELETE     /admin/companies/:company_id/people/:id(.:format)                                         admin/people#destroy
               admin_company_identifiers GET        /admin/companies/:company_id/identifiers(.:format)                                          admin/identifiers#index
                                         POST       /admin/companies/:company_id/identifiers(.:format)                                          admin/identifiers#create
            new_admin_company_identifier GET        /admin/companies/:company_id/identifiers/new(.:format)                                      admin/identifiers#new
@@ -416,24 +416,24 @@ batch_action_admin_schedule_engagements POST       /admin/schedules/:schedule_id
                                         GET        /admin/engagements/:id(.:format)                                                            admin/engagements#show
                                         PUT        /admin/engagements/:id(.:format)                                                            admin/engagements#update
                                         DELETE     /admin/engagements/:id(.:format)                                                            admin/engagements#destroy
-              admin_contact_identifiers GET        /admin/contacts/:contact_id/identifiers(.:format)                                           admin/identifiers#index
-                                        POST       /admin/contacts/:contact_id/identifiers(.:format)                                           admin/identifiers#create
-           new_admin_contact_identifier GET        /admin/contacts/:contact_id/identifiers/new(.:format)                                       admin/identifiers#new
-          edit_admin_contact_identifier GET        /admin/contacts/:contact_id/identifiers/:id/edit(.:format)                                  admin/identifiers#edit
-               admin_contact_identifier GET        /admin/contacts/:contact_id/identifiers/:id(.:format)                                       admin/identifiers#show
-                                        PUT        /admin/contacts/:contact_id/identifiers/:id(.:format)                                       admin/identifiers#update
-                                        DELETE     /admin/contacts/:contact_id/identifiers/:id(.:format)                                       admin/identifiers#destroy
-                    admin_contact_certs GET        /admin/contacts/:contact_id/certs(.:format)                                                 admin/certs#index
-                                        POST       /admin/contacts/:contact_id/certs(.:format)                                                 admin/certs#create
-                 new_admin_contact_cert GET        /admin/contacts/:contact_id/certs/new(.:format)                                             admin/certs#new
-                edit_admin_contact_cert GET        /admin/contacts/:contact_id/certs/:id/edit(.:format)                                        admin/certs#edit
-                     admin_contact_cert GET        /admin/contacts/:contact_id/certs/:id(.:format)                                             admin/certs#show
-                                        PUT        /admin/contacts/:contact_id/certs/:id(.:format)                                             admin/certs#update
-                                        DELETE     /admin/contacts/:contact_id/certs/:id(.:format)                                             admin/certs#destroy
-                                        GET        /admin/contacts(.:format)                                                                   admin/contacts#index
-                                        POST       /admin/contacts(.:format)                                                                   admin/contacts#create
-                                        GET        /admin/contacts/new(.:format)                                                               admin/contacts#new
-                                        GET        /admin/contacts/:id/edit(.:format)                                                          admin/contacts#edit
-                                        GET        /admin/contacts/:id(.:format)                                                               admin/contacts#show
-                                        PUT        /admin/contacts/:id(.:format)                                                               admin/contacts#update
-                                        DELETE     /admin/contacts/:id(.:format)                                                               admin/contacts#destroy
+              admin_person_identifiers GET        /admin/people/:person_id/identifiers(.:format)                                           admin/identifiers#index
+                                        POST       /admin/people/:person_id/identifiers(.:format)                                           admin/identifiers#create
+           new_admin_person_identifier GET        /admin/people/:person_id/identifiers/new(.:format)                                       admin/identifiers#new
+          edit_admin_person_identifier GET        /admin/people/:person_id/identifiers/:id/edit(.:format)                                  admin/identifiers#edit
+               admin_person_identifier GET        /admin/people/:person_id/identifiers/:id(.:format)                                       admin/identifiers#show
+                                        PUT        /admin/people/:person_id/identifiers/:id(.:format)                                       admin/identifiers#update
+                                        DELETE     /admin/people/:person_id/identifiers/:id(.:format)                                       admin/identifiers#destroy
+                    admin_contact_certs GET        /admin/people/:person_id/certs(.:format)                                                 admin/certs#index
+                                        POST       /admin/people/:person_id/certs(.:format)                                                 admin/certs#create
+                 new_admin_contact_cert GET        /admin/people/:person_id/certs/new(.:format)                                             admin/certs#new
+                edit_admin_contact_cert GET        /admin/people/:person_id/certs/:id/edit(.:format)                                        admin/certs#edit
+                     admin_contact_cert GET        /admin/people/:person_id/certs/:id(.:format)                                             admin/certs#show
+                                        PUT        /admin/people/:person_id/certs/:id(.:format)                                             admin/certs#update
+                                        DELETE     /admin/people/:person_id/certs/:id(.:format)                                             admin/certs#destroy
+                                        GET        /admin/people(.:format)                                                                   admin/people#index
+                                        POST       /admin/people(.:format)                                                                   admin/people#create
+                                        GET        /admin/people/new(.:format)                                                               admin/people#new
+                                        GET        /admin/people/:id/edit(.:format)                                                          admin/people#edit
+                                        GET        /admin/people/:id(.:format)                                                               admin/people#show
+                                        PUT        /admin/people/:id(.:format)                                                               admin/people#update
+                                        DELETE     /admin/people/:id(.:format)                                                               admin/people#destroy

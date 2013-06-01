@@ -43,8 +43,8 @@ ActiveAdmin.register Engagement do
     # http://stackoverflow.com/questions/1192843/grouped-select-in-rails
     # http://stackoverflow.com/questions/9579402/active-admin-refresh-second-drop-down-based-on-first-drop-down-ruby-on-rails
     # http://apidock.com/rails/ActionView/Helpers/FormTagHelper/select_tag
-    #  select_tag  :contact_id, options_for_select([["A",1],["B",2]]), 
-    #            :onchange => "$.post('#{admin_contact_path(engagement.contact.id)}', 
+    #  select_tag  :person_id, options_for_select([["A",1],["B",2]]), 
+    #            :onchange => "$.post('#{admin_person_path(engagement.contact.id)}', 
     #            {'_method':'put', 'engagement[:contact]':this.value} );"
 
     column "Subbie" do |engagement|
@@ -88,7 +88,7 @@ ActiveAdmin.register Engagement do
       f.input :contact, 
               :required=>true, 
               :as => :select, 
-              :collection => Contact.alphabetically.all.map {|u| [u.display_name, u.id]}, 
+              :collection => Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
               :include_blank => false,
               :hint => "Person you are engaging to work."
                         
@@ -160,7 +160,7 @@ ActiveAdmin.register Engagement do
      docket.booking_no = 'To be Supplied'
      docket.engagement_id = params[:id]
      docket.date_worked = Date.current
-     docket.contact_id = docket.engagement.contact_id
+     docket.person_id = docket.engagement.person_id
      begin
        docket.save
        flash[:notice] = "Docket has been created."

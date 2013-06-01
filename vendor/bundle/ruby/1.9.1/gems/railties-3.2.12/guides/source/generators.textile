@@ -16,7 +16,7 @@ endprologue.
 
 NOTE: This guide is about generators in Rails 3, previous versions are not covered.
 
-h3. First Contact
+h3. First Person
 
 When you create an application using the +rails+ command, you are in fact using a Rails generator. After that, you can get a list of all available generators by just invoking +rails generate+:
 

@@ -26,7 +26,7 @@ ActiveAdmin.register Cert do
     # The find here returns an Arel relation object so this works so long as the 
     # located model has a display_name method.
     column :holder do |cert|
-      @holder = Contact.where("id = ?",cert.certifiable_id)
+      @holder = Person.where("id = ?",cert.certifiable_id)
       @holder.empty? ? 'Empty' : @holder[0].display_name
     end
     column :type do |cert|

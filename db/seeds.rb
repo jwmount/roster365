@@ -19,7 +19,7 @@ user_list.each do |email, role|
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
 end
 
-# Companies and Contacts
+# Companies and People
 # First one is licensee
 # NOTE:  @company is ActiveRecord::Relation
 companies_list = [
@@ -29,21 +29,21 @@ companies_list.each do |name|
   Company.create!( name: name)
 end
 
-# now put some contacts in each company
+# now put some people in each company
 company_relation = Company.where ({name: 'Roster365'})
 @company = company_relation[0]
-@contact_1 = Contact.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep')
-@contact_2 = Contact.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.')
+@person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep')
+@person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.')
 
 company_relation = Company.where ({name: 'Projects-r-us'})
 @company_1 = company_relation[0]
-@contact_3 = Contact.create!(company_id: @company_1.id, first_name: 'William', last_name: 'Wellsmore', title: 'Mr.')
-@contact_4 = Contact.create!(company_id: @company_1.id, first_name: 'Peter', last_name: 'Petersen', title: 'Project Mgr')
+@person_3 = Person.create!(company_id: @company_1.id, first_name: 'William', last_name: 'Wellsmore', title: 'Mr.')
+@person_4 = Person.create!(company_id: @company_1.id, first_name: 'Peter', last_name: 'Petersen', title: 'Project Mgr')
 
 company_relation = Company.where ({name: 'Trucks-r-us'})
 @company_2 = company_relation[0]
-@contact_5 = Contact.create!(company_id: @company_2.id, first_name: 'Vance', last_name: 'Smith', title: 'Owner')
-@contact_6 = Contact.create!(company_id: @company_2.id, first_name: 'Sam', last_name: 'Jones', title: 'Driver')
+@person_5 = Person.create!(company_id: @company_2.id, first_name: 'Vance', last_name: 'Smith', title: 'Owner')
+@person_6 = Person.create!(company_id: @company_2.id, first_name: 'Sam', last_name: 'Jones', title: 'Driver')
 
 Address.create!( addressable_id: @company.id, addressable_type: 'Company', street_address: '7 Strathaird Road',
                  city: 'Bundall', state: 'QLD', post_code: '4217' )
@@ -57,7 +57,7 @@ equipment_list.each do |name|
 end
 
 # Compliance
-# Contact
+# Person
 # Company
 # Equipment
 certificate_list = [
@@ -71,7 +71,7 @@ certificate_list.each do |name, description, for_contact, for_company, for_equip
   certificate = Certificate.where(name: name)
   case 
     when certificate[0].for_contact
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Contact', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
+      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Person', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
     when certificate[0].for_company     
       Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Company', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
     when certificate[0].for_equipment
@@ -85,18 +85,18 @@ Identifier.create!( :identifiable_id => @company.id, :identifiable_type => 'Comp
 Identifier.create!( :identifiable_id => @company.id, :identifiable_type => 'Company', :name => "eMail", :value => 'info@roster365.com.au', :rank => 2)
 Identifier.create!( :identifiable_id => @company.id, :identifiable_type => 'Company', :name => "FAX", :value => '07-55-047-133', :rank => 3)
 
-Identifier.create!( :identifiable_id => @contact_1.id, :identifiable_type => 'Contact', :name => "Phone", :value => '07-55-047-100', :rank => 1)
-Identifier.create!( :identifiable_id => @contact_1.id, :identifiable_type => 'Contact', :name => "Mobile", :value => '07-55-047-100', :rank => 2)
+Identifier.create!( :identifiable_id => @contact_1.id, :identifiable_type => 'Person', :name => "Phone", :value => '07-55-047-100', :rank => 1)
+Identifier.create!( :identifiable_id => @contact_1.id, :identifiable_type => 'Person', :name => "Mobile", :value => '07-55-047-100', :rank => 2)
 
-Identifier.create!( :identifiable_id => @contact_2.id, :identifiable_type => 'Contact', :name => "Phone", :value => '07-55-047-100', :rank => 1)
-Identifier.create!( :identifiable_id => @contact_2.id, :identifiable_type => 'Contact', :name => "Mobile", :value => '07-55-047-100', :rank => 2)
-Identifier.create!( :identifiable_id => @contact_2.id, :identifiable_type => 'Contact', :name => "Blackberry", :value => '07-55-047-100', :rank => 3)
+Identifier.create!( :identifiable_id => @contact_2.id, :identifiable_type => 'Person', :name => "Phone", :value => '07-55-047-100', :rank => 1)
+Identifier.create!( :identifiable_id => @contact_2.id, :identifiable_type => 'Person', :name => "Mobile", :value => '07-55-047-100', :rank => 2)
+Identifier.create!( :identifiable_id => @contact_2.id, :identifiable_type => 'Person', :name => "Blackberry", :value => '07-55-047-100', :rank => 3)
 
-Identifier.create!( :identifiable_id => @contact_3.id, :identifiable_type => 'Contact', :name => "Phone", :value => 'unknown', :rank => 1)
-Identifier.create!( :identifiable_id => @contact_3.id, :identifiable_type => 'Contact', :name => "Mobile", :value => 'unknown', :rank => 2)
+Identifier.create!( :identifiable_id => @contact_3.id, :identifiable_type => 'Person', :name => "Phone", :value => 'unknown', :rank => 1)
+Identifier.create!( :identifiable_id => @contact_3.id, :identifiable_type => 'Person', :name => "Mobile", :value => 'unknown', :rank => 2)
 
-Identifier.create!( :identifiable_id => @contact_4.id, :identifiable_type => 'Contact', :name => "Phone", :value => 'unknown', :rank => 1)
-Identifier.create!( :identifiable_id => @contact_4.id, :identifiable_type => 'Contact', :name => "Mobile", :value => 'unknown', :rank => 2)
+Identifier.create!( :identifiable_id => @contact_4.id, :identifiable_type => 'Person', :name => "Phone", :value => 'unknown', :rank => 1)
+Identifier.create!( :identifiable_id => @contact_4.id, :identifiable_type => 'Person', :name => "Mobile", :value => 'unknown', :rank => 2)
 
 # OPERATIONS models
 # Projects

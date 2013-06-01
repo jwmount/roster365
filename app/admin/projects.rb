@@ -4,7 +4,7 @@ ActiveAdmin.register Project do
   #menu :parent => "Sales", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Company.all.empty? &&
-  #  !Contact.all.empty?
+  #  !Person.all.empty?
   #}
   
   
@@ -46,8 +46,8 @@ ActiveAdmin.register Project do
     column "Rep" do |project|
       begin
         flash[:WARNING] = nil
-        rep = Contact.find project.rep_id
-        link_to rep.full_name, admin_contact_path(rep.id)
+        rep = Person.find project.rep_id
+        link_to rep.full_name, admin_person_path(rep.id)
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:project_missing_rep), "WARNING:")
       end
@@ -85,9 +85,9 @@ ActiveAdmin.register Project do
       # Roster365 is company = Company.where({:name => 'Roster365'})
       # Cleanup:  need a scheme to identify primary company, here 'Roster365' -- in a config file?
       f.input :rep_id, :as => :select,
-              collection: Contact.alphabetically.where({:company_id => Company.where({:name => 'Roster365'})} && {:title => 'Rep'}), 
+              collection: Person.alphabetically.where({:company_id => Company.where({:name => 'Roster365'})} && {:title => 'Rep'}), 
               hint: "Our Rep on this project.",
-              placeholder: "Contact",
+              placeholder: "Person",
               include_blank: true
 
       f.input :company, 
@@ -127,8 +127,8 @@ ActiveAdmin.register Project do
         rows :company_id,  :project_start_on
         row("Think 360 Rep") do |project|
           begin
-            rep = Contact.find project.rep_id
-            link_to rep.full_name, admin_contact_path(rep)
+            rep = Person.find project.rep_id
+            link_to rep.full_name, admin_person_path(rep)
           rescue ActiveRecord::RecordNotFound
             flash["Error:  No Rep assigned to this project."]
           end

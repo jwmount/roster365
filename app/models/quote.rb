@@ -70,14 +70,14 @@ class Quote < ActiveRecord::Base
   end
 
   def quote_to_name
-    contact = Contact.find self.quote_to_id
+    contact = Person.find self.quote_to_id
     contact.display_name
   end
   
   def prep_name
     m = ""
     begin
-      prep = Contact.find (self.project.rep_id)
+      prep = Person.find (self.project.rep_id)
       m << prep.full_name
     rescue ActiveRecord::RecordNotFound
       m << "Not assigned."
@@ -88,7 +88,7 @@ class Quote < ActiveRecord::Base
   def qrep_name
     m = ""
     begin
-      prep = Contact.find (self.rep_id)
+      prep = Person.find (self.rep_id)
       m << prep.full_name
     rescue ActiveRecord::RecordNotFound
       m << "Not assigned." 

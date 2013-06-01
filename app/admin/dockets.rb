@@ -30,7 +30,7 @@ ActiveAdmin.register Docket do
       link_to docket.booking_no, admin_engagement_docket_path(docket.engagement_id, docket.id)
     end
     column :date_worked
-    column :contact, :label => "Subcontractor"
+    column :person, :label => "Subcontractor"
     column :operator_signed do |docket|
       status_tag (docket.operator_signed ? "YES" : "No"), (docket.operator_signed ? :ok : :error)      
     end      
@@ -46,7 +46,7 @@ ActiveAdmin.register Docket do
   form do |f|
     error_panel f
 
-    #f.inputs "Docket from #{docket.contact.display_name} for #{docket.engagement.schedule.job.name}" do      
+    #f.inputs "Docket from #{docket.person.display_name} for #{docket.engagement.schedule.job.name}" do      
     f.inputs do
       f.input :booking_no, 
               #:input_html => {:disabled => true },
@@ -54,7 +54,7 @@ ActiveAdmin.register Docket do
               :hint => "Unique Booking number provided by subbie entered by operations to complete the engagement.",
               :placeholder => "ssssssss"
       
-      f.input :contact
+      f.input :person
       
       f.input :date_worked, 
               :as => :string, 
@@ -124,7 +124,7 @@ ActiveAdmin.register Docket do
     attributes_table do
       row :booking_no
       row ("Engagement For (Job)") { docket.engagement.schedule.job.name }
-      row ("Subcontractor") {docket.contact}
+      row ("Subcontractor") {docket.person}
     #  "2010-07-27".to_date              # => Tue, 27 Jul 2010
       row :date_worked
       row :dated
@@ -180,8 +180,8 @@ ActiveAdmin.register Docket do
     # column("Description") { |docket|
     #    docket.solution.display_name
     #  }
-    column("Contact") { |docket|
-      docket.contact.display_name
+    column("Person") { |docket|
+      docket.person.display_name
     }
     column("Address") { |docket|
       docket.solution.address.to_s

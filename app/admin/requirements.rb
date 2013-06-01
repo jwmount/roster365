@@ -13,8 +13,8 @@ ActiveAdmin.register Requirement do
   scope :companies do |requirements|
     requirements.where({requireable_type: 'Company'})
   end
-  scope :contacts do |requirements|
-    requirements.where({requireable_type: 'Contact'})
+  scope :people do |requirements|
+    requirements.where({requireable_type: 'Persion'})
   end
   scope :equipment do |requirements|
     requirements.where({requireable_type: 'Equipment'})

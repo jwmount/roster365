@@ -7,8 +7,8 @@ ActiveAdmin.register Identifier do
   actions :all, :except => :new
 
   scope :all, :default => true
-  scope :Contacts do |identifiers|
-    identifiers.where ({identifiable_type: 'Contact'})
+  scope :People do |identifiers|
+    identifiers.where ({identifiable_type: 'Person'})
   end
   scope :Companies do |identifiers|
     identifiers.where ({identifiable_type: 'Company'})
@@ -30,14 +30,14 @@ ActiveAdmin.register Identifier do
             flash[:error] = 'Bad company (does not exist), address should be deleted.'
             owner.display_name
           end
-        when  'Contact'
+        when  'Person'
           begin
-            owner = Contact.find  "#{id.identifiable_id}"
-            link_to owner.display_name, admin_contact_path(owner.id)
+            owner = Person.find  "#{id.identifiable_id}"
+            link_to owner.display_name, admin_person_path(owner.id)
           rescue
-            owner = Contact.find
-            owner.name = 'Delete: Contact not found.'
-            flash[:error] = 'Bad Contact (does not exist), address should be deleted.'
+            owner = Person.find
+            owner.name = 'Delete: Person not found.'
+            flash[:error] = 'Bad Person (does not exist), address should be deleted.'
             owner.display_name
           end
         else

@@ -6,9 +6,9 @@ module ActionMailer
     #
     #   def test_emails
     #     assert_emails 0
-    #     ContactMailer.deliver_contact
+    #     PersonMailer.deliver_contact
     #     assert_emails 1
-    #     ContactMailer.deliver_contact
+    #     PersonMailer.deliver_contact
     #     assert_emails 2
     #   end
     #
@@ -16,12 +16,12 @@ module ActionMailer
     #
     #   def test_emails_again
     #     assert_emails 1 do
-    #       ContactMailer.deliver_contact
+    #       PersonMailer.deliver_contact
     #     end
     #
     #     assert_emails 2 do
-    #       ContactMailer.deliver_contact
-    #       ContactMailer.deliver_contact
+    #       PersonMailer.deliver_contact
+    #       PersonMailer.deliver_contact
     #     end
     #   end
     def assert_emails(number)
@@ -39,7 +39,7 @@ module ActionMailer
     #
     #   def test_emails
     #     assert_no_emails
-    #     ContactMailer.deliver_contact
+    #     PersonMailer.deliver_contact
     #     assert_emails 1
     #   end
     #

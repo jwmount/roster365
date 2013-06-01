@@ -14,12 +14,13 @@ Roster365::Application.routes.draw do
     resources :jobs      
     resources :engagements
     resources :schedules
+    resources :people
     resources :quotes
     resources :solutions
 
     resources :companies do
       resource :address
-      resources :contacts
+      resources :people
       resources :identifiers
       resources :equipment
     end
@@ -87,7 +88,7 @@ Roster365::Application.routes.draw do
       resources :dockets
     end
     
-    resources :contacts do
+    resources :people do
       resources :identifiers
       resources :certs
     end

@@ -6,7 +6,7 @@ class Schedule < ActiveRecord::Base
 
   belongs_to :job
   has_many :engagements, :dependent => :destroy
-  has_and_belongs_to_many :contacts
+  has_and_belongs_to_many :people
 
   audited
   after_initialize :set_defaults
@@ -40,7 +40,7 @@ class Schedule < ActiveRecord::Base
 
   # collection of identifiers or numbers for a rep
   def rep_identifiers id
-    contact = Contact.find id
+    contact = Person.find id
     identifiers = contact.identifiers.order(:rank)
   end
   
@@ -53,18 +53,18 @@ class Schedule < ActiveRecord::Base
   # and step around it.  
   def prep
     begin
-      @prep = Contact.find (self.job.solution.quote.project.rep_id)
+      @prep = Person.find (self.job.solution.quote.project.rep_id)
     rescue ActiveRecord::RecordNotFound
-      @prep = Contact.new(:last_name=>'none')
+      @prep = Person.new(:last_name=>'none')
     end
   end
 
   # get Quote Rep full name (may be same as prep)
   def qrep
     begin
-      @qrep = Contact.find (self.job.solution.quote.rep_id)
+      @qrep = Person.find (self.job.solution.quote.rep_id)
     rescue ActiveRecord::RecordNotFound
-      @qrep = Contact.new(:last_name=>'none')
+      @qrep = Person.new(:last_name=>'none')
     end
   end
 

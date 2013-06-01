@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
 
   audited
 
-  has_many :contacts
+  has_many :people
   has_many :equipment
   has_many :projects
   has_many :solutions
@@ -38,7 +38,7 @@ class Company < ActiveRecord::Base
 # A T T R I B U T E S   &  D E F A U L T S
   attr_accessible :MYOB_number, :PO_required, :active, :credit_terms, :name
   attr_accessible :addresses_attributes, :identifiers_attributes
-  attr_accessible :equipment_ids, :contact_ids
+  attr_accessible :equipment_ids, :person_ids
   attr_accessible :certs_attributes
 
   after_initialize :defaults
@@ -62,7 +62,7 @@ class Company < ActiveRecord::Base
     name
   end
 
-  def show_contacts(company)
+  def show_people(company)
     'contact'
   end
 

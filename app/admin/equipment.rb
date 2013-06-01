@@ -16,8 +16,8 @@ ActiveAdmin.register Equipment do
     column :company do |equipment|
       begin
         h5 equipment.company.display_name
-        @contacts = equipment.company.contacts
-        render @contacts
+        @people = equipment.company.people
+        render @people
       rescue NameError
         company = Company.new
         company.name = "Equipment.id #{equipment.id} has an unknown company, delete it."

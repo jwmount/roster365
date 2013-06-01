@@ -17,13 +17,13 @@ module ActiveRecord
   #
   # This Observer sends an email when a Comment#save is finished.
   #
-  #   class ContactObserver < ActiveRecord::Observer
+  #   class PersonObserver < ActiveRecord::Observer
   #     def after_create(contact)
   #       contact.logger.info('New contact added!')
   #     end
   #
   #     def after_destroy(contact)
-  #       contact.logger.warn("Contact with an id of #{contact.id} was destroyed!")
+  #       contact.logger.warn("Person with an id of #{contact.id} was destroyed!")
   #     end
   #   end
   #

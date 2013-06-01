@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  title: MyString
+  company_id: 1
+  available: false
+  available_on: 2013-06-01 12:39:15
+  OK_to_contact: false
+  active: false
+
+two:
+  first_name: MyString
+  last_name: MyString
+  title: MyString
+  company_id: 1
+  available: false
+  available_on: 2013-06-01 12:39:15
+  OK_to_contact: false
+  active: false

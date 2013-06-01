@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Quote do
       
-  menu false
+  menu parent: 'Sales'
   
   filter :name
   filter :rep
@@ -18,8 +18,8 @@ ActiveAdmin.register Quote do
 
     column :rep do |quote|
       begin
-        rep = Contact.find quote.rep_id
-        link_to rep.full_name, admin_contact_path(rep)
+        rep = Person.find quote.rep_id
+        link_to rep.full_name, admin_person_path(rep)
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:quote_missing_rep), "WARNING:")
       end
@@ -48,15 +48,15 @@ ActiveAdmin.register Quote do
               label: "Quote Rep",
               hint:  "Quote and Project Reps may be same person.",
               as: :select,
-              #collection: roster365.contacts,  #company.contacts.where("name = ?", "Roster365"),
-              collection: Contact.alphabetically.where({:company_id => Company.where({name: 'Roster365'})} && {title: 'Rep'}), 
+              #collection: roster365.people,  #company.people.where("name = ?", "Roster365"),
+              collection: Person.alphabetically.where({:company_id => Company.where({name: 'Roster365'})} && {title: 'Rep'}), 
               include_blank: true
 
       # This select needs to be scoped to employees of this company
       f.input :quote_to_id, label: "Quote to", hint: "Who we deliver the quote to.",
                          :required => true,
                          :as => :select, 
-                         :collection => quote.project.company.contacts, 
+                         :collection => quote.project.company.people, 
                          :include_blank => false
     end
     

@@ -25,9 +25,9 @@ ActiveAdmin.register Company do
         @certs = company.certs
         @certs.each {|cert| render cert.certificate}
       end
-      if company.contacts.count > 0
-        @contacts = company.contacts
-        render @contacts
+      if company.people.count > 0
+        @people = company.people
+        render @people
       end
     end
 
@@ -41,13 +41,13 @@ ActiveAdmin.register Company do
       end
     end
     
-    column :contacts do |company|
-      contact_count = company.contacts.size
-      if contact_count == 0
+    column :people do |company|
+      person_count = company.people.size
+      if person_count == 0
         nil
       else
-#        link_to "Contacts (#{contact_count})", admin_company_contacts_path(company)
-        contact_count.to_s
+#        link_to "People (#{person_count})", admin_company_people_path(company)
+        person_count.to_s
       end
     end
     column :MYOB_number
@@ -92,12 +92,12 @@ ActiveAdmin.register Company do
       end
     end
 
-    f.inputs "Contacts" do
-      if company.contacts.empty?
-        "NOTE:  Company has no contacts.  Use the Contacts menu to identify them."
+    f.inputs "People" do
+      if company.people.empty?
+        "NOTE:  Company has no people.  Use the People menu to identify them."
       else
-        f.input :contacts, :as => :select, 
-                           :collection => Contact.alphabetically.all.map {|u| [u.full_name, u.id]}, 
+        f.input :people, :as => :select, 
+                           :collection => Person.alphabetically.all.map {|u| [u.full_name, u.id]}, 
                            :include_blank => false
       end
     end
@@ -118,7 +118,7 @@ ActiveAdmin.register Company do
       f.has_many :identifiers do |f|
           f.input :name, :collection => %w[Mobile Office Truck Pager FAX Skype SMS Twitter],
                   :label => 'Type or kind*',
-                  :hint => 'Kind of device or way to communicate with this Contact.  Cannot be blank.'
+                  :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
           f.input :value,
                   :label => 'Number, address, etc.',
                   :placeholder => 'Phone number, email address, ...'
@@ -152,14 +152,14 @@ ActiveAdmin.register Company do
       row :MYOB_number
     end
 
-    panel "Contacts" do
+    panel "People" do
       attributes_table_for( company ) do
-        unless company.contacts.any?
-          h4 'WARNING:  No contacts defined for this company.  You must create at least one contact before you create the company.'
+        unless company.people.any?
+          h4 'WARNING:  No people defined for this company.  You must create at least one contact before you create the company.'
         else
-          company.contacts.alphabetically.all.each do |contact|
+          company.people.alphabetically.all.each do |contact|
             row ('Name') {link_to (contact.first_name + ' ' + contact.last_name + ', ' + contact.title),
-              admin_contact_path(contact)}
+              admin_person_path(contact)}
           end
         end
       end
@@ -183,7 +183,7 @@ ActiveAdmin.register Company do
    end
 
     # Cert model is polymorphic
-    # certifiable_id == who owns it, e.g. Contact, Company, Vehicle...
+    # certifiable_id == who owns it, e.g. Person, Company, Vehicle...
     # certificate_id == what is it, e.g. Driving License, Birth Certificate...
     panel "Certifications" do
       attributes_table_for(company) do

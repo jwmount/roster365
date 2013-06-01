@@ -27,13 +27,13 @@ ActiveAdmin.register Job do
       h5 link_to job.name, edit_admin_project_quote_solution_job_path(job.solution.quote.project.id, job.solution.quote.id, job.solution.id, job.id),
                  :class => "member_link"
       begin
-        @prep = Contact.find(job.solution.quote.project.rep_id)
+        @prep = Person.find(job.solution.quote.project.rep_id)
         render @prep if @prep
       rescue ActiveRecord::RecordNotFound
         h5 "No Project Rep assigned."
       end
       begin
-        @qrep = Contact.find(job.solution.quote.rep_id)
+        @qrep = Person.find(job.solution.quote.rep_id)
         render @qrep if @qrep
       rescue ActiveRecord::RecordNotFound
         h5 "No Quote Rep assigned."
@@ -85,8 +85,8 @@ ActiveAdmin.register Job do
   show :title => :name do |job|
     attributes_table do
       row :name
-      #row ("Project Rep") { link_to job.prep.full_name, admin_contact_path(@prep.id) }
-      #row ("Quote Rep") { link_to job.qrep.full_name, admin_contact_path(@qrep.id) }
+      #row ("Project Rep") { link_to job.prep.full_name, admin_person_path(@prep.id) }
+      #row ("Quote Rep") { link_to job.qrep.full_name, admin_person_path(@qrep.id) }
       row :start_on.to_s #strftime("%b %m, %Y")
       row :finished_on.to_s #strftime("%b %m, %Y")
       row :purchase_order

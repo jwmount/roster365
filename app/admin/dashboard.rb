@@ -82,7 +82,7 @@ ActiveAdmin.register_page "Dashboard" do
               case 
               when  schedule.equipment_units_today == schedule.engagements.size
                 'OK'
-#             status_tag (schedule.equipment_units_today == schedule.engagements.size ? "OK" : "No"), (schedule.equipment_units_today == schedule.contacts.size ? :ok : :error)      
+#             status_tag (schedule.equipment_units_today == schedule.engagements.size ? "OK" : "No"), (schedule.equipment_units_today == schedule.people.size ? :ok : :error)      
               when schedule.equipment_units_today > schedule.engagements.size
                 link_to "HIRE", new_admin_schedule_engagement_path(schedule)
               else
@@ -117,10 +117,10 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
-    section "Recent Contacts" do
+    section "Recent People" do
       ul do
-        Contact.order("updated_at DESC").limit(15).collect do |contact|
-          li link_to(contact.display_name, admin_contact_path(contact))
+        Person.order("updated_at DESC").limit(15).collect do |person|
+          li link_to(person.display_name, admin_person_path(person))
         end
       end
     end

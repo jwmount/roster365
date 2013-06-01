@@ -339,10 +339,10 @@
 *   Deep hashes are converted into collections of resources.  *Jeremy Kemper*
         Person.new :name => 'Bob',
                    :address => { :id => 1, :city => 'Portland' },
-                   :contacts => [{ :id => 1 }, { :id => 2 }]
-    Looks for Address and Contact resources and creates them if unavailable.
+                   :people => [{ :id => 1 }, { :id => 2 }]
+    Looks for Address and Person resources and creates them if unavailable.
     So clients can fetch a complex resource in a single request if you e.g.
-        render :xml => @person.to_xml(:include => [:address, :contacts])
+        render :xml => @person.to_xml(:include => [:address, :people])
     in your controller action.
 
 *   Major updates *Rick Olson*

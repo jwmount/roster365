@@ -2,7 +2,7 @@
 #  Cert -- the state of having some Certificate.
 #  Certs are polymorphic with certifiable_types expected to be:
 #   - Company, e.g. ISO 9000, Australian Owned
-#   - Contact, e.g. QLD Driving License, Australian Citizen, Pink Card
+#   - Person, e.g. QLD Driving License, Australian Citizen, Pink Card
 #   - Equipment, e.g. Insured, Mud flaps, Aluminum Body...etc.
 #  Requirements
 #   Solutions may require Certs, e.g. 'must have automatic tarpolin covers'

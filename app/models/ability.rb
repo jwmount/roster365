@@ -10,7 +10,7 @@ class Ability
     #
       user ||= AdminUser.new # guest user (not logged in)
 
-      # superadmin (have to be one to create a Contact with role of 'admin')
+      # superadmin (have to be one to create a Person with role of 'admin')
       # admin (works for the company, creates IDs for field teams)
       # management (can see everything, can approve certain things admins cannot, e.g. contact price approvals)
       # sales (sees anything related to accounts they have oversight for)
@@ -36,7 +36,7 @@ class Ability
       end
 
       if user.role? :drivers
-        # can [:read, :update], Contact, :id => user.id
+        # can [:read, :update], Person, :id => user.id
         can [:create], Docket
       end
 

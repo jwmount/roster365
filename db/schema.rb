@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.datetime "updated_at",         :null => false
   end
 
-  create_table "contacts", :force => true do |t|
+  create_table "xcontacts", :force => true do |t|
     t.integer  "company_id"
     t.string   "first_name"
     t.string   "last_name"
@@ -137,14 +137,15 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.datetime "updated_at",                          :null => false
   end
 
-  create_table "contacts_schedules", :id => false, :force => true do |t|
-    t.integer "contact_id"
+  # Are we using this?
+  create_table "people_schedules", :id => false, :force => true do |t|
+    t.integer "person_id"
     t.integer "schedule_id"
   end
 
   create_table "dockets", :force => true do |t|
     t.integer  "engagement_id"
-    t.integer  "contact_id"
+    t.integer  "person_id"
     t.string   "booking_no"
     t.datetime "date_worked"
     t.datetime "dated"
@@ -166,7 +167,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
 
   create_table "engagements", :force => true do |t|
     t.integer  "schedule_id"
-    t.integer  "contact_id"
+    t.integer  "person_id"
     t.boolean  "onsite_now"
     t.boolean  "onsite_at"
     t.boolean  "breakdown"
@@ -217,6 +218,19 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "people", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.boolean  "available"
+    t.datetime "available_on"
+    t.boolean  "OK_to_contact"
+    t.boolean  "active"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -283,7 +297,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.string   "solution_type"
     t.boolean  "semis_permitted"
     t.integer  "equipment_id"
-    t.boolean  "T360_approved"
+    t.boolean  "#{INSTALLATION_NAME}_approved"
     t.boolean  "client_approved"
     t.decimal  "equipment_dollars_per_day"
     t.integer  "drive_time_into_site"
