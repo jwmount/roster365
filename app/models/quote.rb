@@ -19,7 +19,7 @@ class Quote < ActiveRecord::Base
 
   has_many :requirements
   has_many :certificates, :through => :requirements
-  has_one  :rep,          :as => :contact
+  has_one  :rep,          :as => :person
 
   # polymorphs
   

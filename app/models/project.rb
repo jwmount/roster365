@@ -13,7 +13,7 @@ class Project < ActiveRecord::Base
 
   has_many :certificates, :through => :requirements
   has_many :quotes,       :dependent => :destroy
-  has_one  :rep,          :as => :contact
+  has_one  :rep,          :as => :person
 
   # polymorphs
   has_many  :addresses,     :as => :addressable, :autosave => true, :dependent => :destroy

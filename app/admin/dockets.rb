@@ -16,11 +16,11 @@ ActiveAdmin.register Docket do
   scope :client_not_signed do |solutions|
     solutions.where ({client_signed: false})
   end
-  scope :T360_approved do |solutions|
-    solutions.where ({T360_approved: true})
+  scope :approved do |solutions|
+    solutions.where ({approved: true})
   end
-  scope :T360_not_approved do |solutions|
-    solutions.where ({T360_approved: false})
+  scope :not_approved do |solutions|
+    solutions.where ({approved: false})
   end
   
   #actions :all, :except => :new
@@ -38,8 +38,8 @@ ActiveAdmin.register Docket do
       status_tag (docket.client_signed ? "YES" : "No"), (docket.client_signed ? :ok : :error)      
     end      
     
-    column :T360_approved do |docket|
-      status_tag (docket.T360_approved ? "YES" : "No"), (docket.T360_approved ? :ok : :error)      
+    column :approved do |docket|
+      status_tag (docket.approved ? "YES" : "No"), (docket.approved ? :ok : :error)      
     end      
   end
  
@@ -89,13 +89,9 @@ ActiveAdmin.register Docket do
     end
 
     f.inputs "Approvals" do
-      f.input :T360_approved, :as => :radio
-      f.input :T360_approved_by
-      f.input :T360_approved_on, :as => :string, :input_html => {:class => 'datepicker'},
-                    :hint => "Date we approved docket."
-      f.input :T360_2nd_approval, :as => :radio
-      f.input :T360_2nd_approval_by
-      f.input :T360_2nd_approval_on, :as => :string, :input_html => {:class => 'datepicker'},
+      f.input :approved, :as => :radio
+      f.input :approved_by
+      f.input :approved_on, :as => :string, :input_html => {:class => 'datepicker'},
                     :hint => "Date we approved docket."
     end
     
@@ -134,11 +130,9 @@ ActiveAdmin.register Docket do
     attributes_table do
       row("Operator Signed") { status_tag (docket.operator_signed ? "YES" : "No"), (docket.operator_signed ? :ok : :error) }        
       row("Client Signed") { status_tag (docket.client_signed ? "YES" : "No"), (docket.client_signed ? :ok : :error) }        
-      row("T360 Approved") { status_tag (docket.T360_approved ? "YES" : "No"), (docket.T360_approved ? :ok : :error) }        
-      row :T360_approved_by
-      row :T360_approved_on
-      row("T360 2nd Approval") { status_tag (docket.T360_2nd_approval ? "YES" : "No"), (docket.T360_2nd_approval ? :ok : :error) }            
-      row :T360_2nd_approval_by
+      row("Approved") { status_tag (docket.approved ? "YES" : "No"), (docket.approved ? :ok : :error) }        
+      row :approved_by
+      row :approved_on
     end
   h3 "Invoice amounts"
     attributes_table do

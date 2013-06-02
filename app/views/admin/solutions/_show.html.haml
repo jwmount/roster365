@@ -58,7 +58,7 @@
         - @solution.equipments.alphabetically.all.each do |equipment|
           - links = link_to("View", polymorphic_path([:admin, equipment]))
           - links << link_to("Edit", polymorphic_path([:admin, equipment], :action => :edit))
-          = row :contact, :label => equipment.name, :value => links
+          = row :person, :label => equipment.name, :value => links
 
 
 %div.panel

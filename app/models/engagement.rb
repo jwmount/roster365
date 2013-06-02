@@ -5,7 +5,7 @@ class Engagement < ActiveRecord::Base
   attr_accessible :engagement_declined, :next_available_day, :no_show, :onsite_at, :onsite_now, :schedule_id
   attr_accessible :do_not_contact_until
     
-  belongs_to :contact
+  belongs_to :person
   belongs_to :schedule
   has_one    :docket, :dependent => :destroy
   
@@ -39,7 +39,7 @@ class Engagement < ActiveRecord::Base
     rescue Exception
       # apparently not, normally due to loss of schedule as context since then cannot determine what equipment the 
       # solution stipulates.
-      errors.add(:contact, "PROBLEM: Driver selected from a company that does not have equipment required.")
+      errors.add(:person, "PROBLEM: Person selected is with a company that does not have equipment required.")
       return false
     end    
     
@@ -47,7 +47,7 @@ class Engagement < ActiveRecord::Base
     # want the equipment list of contact.company.equipment to contain :equipment
     equipment_list = self.contact.company.equipment.where("name = ?", equipment_name)
     if equipment_list.count == 0
-      errors.add(:contact, "WARNING:  Driver selected is from a company that does not have the equipment required.  " +
+      errors.add(:person, "WARNING:  Driver selected is from a company that does not have the equipment required.  " +
         "Suggestion:  Use Equipment list and filter with name = #{equipment_name}." +
         "It is also possible the Equipment inventory of the company involved needs to be updated.")
     end

@@ -12,7 +12,7 @@ ActiveAdmin.register Engagement do
   #  !Schedule.all.empty?
   #}
   
-  belongs_to :contact, :optional=>true
+  belongs_to :person, :optional=>true
   belongs_to :schedule, :optional=>true
 
   scope :all, :default => true
@@ -33,7 +33,7 @@ ActiveAdmin.register Engagement do
   end    
 
   
-  filter :contact
+  filter :person
   filter :schedule
   filter :do_not_contact_until
     
@@ -45,7 +45,7 @@ ActiveAdmin.register Engagement do
     # http://apidock.com/rails/ActionView/Helpers/FormTagHelper/select_tag
     #  select_tag  :person_id, options_for_select([["A",1],["B",2]]), 
     #            :onchange => "$.post('#{admin_person_path(engagement.contact.id)}', 
-    #            {'_method':'put', 'engagement[:contact]':this.value} );"
+    #            {'_method':'put', 'engagement[:person]':this.value} );"
 
     column "Subbie" do |engagement|
       render engagement
@@ -85,7 +85,7 @@ ActiveAdmin.register Engagement do
     error_panel f
 
     f.inputs "Schedule" do      
-      f.input :contact, 
+      f.input :person, 
               :required=>true, 
               :as => :select, 
               :collection => Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
@@ -128,7 +128,7 @@ ActiveAdmin.register Engagement do
     attributes_table do
       row :id
       row :schedule
-      row :contact
+      row :person
       row(:onsite_now) { status_tag (engagement.onsite_now ? "YES" : "No"), (engagement.onsite_now ? :ok : :error) }
       row(:onsite_at)  { status_tag (engagement.onsite_at ? "YES" : "No"), (engagement.onsite_at ? :ok : :error) }
       row(:breakdown) { status_tag (engagement.breakdown ? "YES" : "No"), (engagement.breakdown ? :ok : :error) }        
