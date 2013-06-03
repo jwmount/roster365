@@ -5,7 +5,7 @@ ActiveAdmin.register Solution do
 
   
    scope :all, :default => true
-   scope :T360_approved do |solutions|
+   scope :approved do |solutions|
      solutions.where ({approved: true})
    end    
    scope :client_approved do |solutions|
@@ -30,7 +30,7 @@ ActiveAdmin.register Solution do
        solution = Solution.find params[:id]
        if solution
          if solution.approved
-           flash[:warning] = "Solution cannot be changed because it has been approved by Roster365.  You can Copy it and edit that one."
+           flash[:warning] = "Solution cannot be changed because it has final approval.  You can Copy it and edit that one."
            redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
          end
        end
@@ -338,7 +338,7 @@ form do |f|
   member_action :jobify, :method => :get do
     @solution = Solution.find(params[:id])
     name = "#{@solution.quote.project.name} - #{@solution.quote.name} - #{@solution.name} - J#{@solution.jobs.count+1}"
-    if @solution.approved?
+    if @solution.has_final_approval?
       if @solution.purchase_order_required == true
         @job = Job.create!(
           :name => name, 

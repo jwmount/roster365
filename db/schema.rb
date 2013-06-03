@@ -124,20 +124,6 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.datetime "updated_at",         :null => false
   end
 
-  create_table "xcontacts", :force => true do |t|
-    t.integer  "company_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "title"
-    t.boolean  "available"
-    t.datetime "next_available_on"
-    t.boolean  "OK_to_contact"
-    t.boolean  "active",            :default => true
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-  end
-
-  # Are we using this?
   create_table "people_schedules", :id => false, :force => true do |t|
     t.integer "person_id"
     t.integer "schedule_id"

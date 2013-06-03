@@ -40,8 +40,8 @@ class Schedule < ActiveRecord::Base
 
   # collection of identifiers or numbers for a rep
   def rep_identifiers id
-    contact = Person.find id
-    identifiers = contact.identifiers.order(:rank)
+    person = Person.find id
+    identifiers = person.identifiers.order(:rank)
   end
   
   def method_missing(name, *args, &block)

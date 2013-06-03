@@ -221,8 +221,7 @@ class Solution < ActiveRecord::Base
     self.solution_type == "hourly hire" or self.solution_type == 'Hourly Hire'
   end
 
-
-  def approved?
+  def has_final_approval?
     self.approved && client_approved
   end
 

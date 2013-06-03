@@ -113,7 +113,7 @@ solution_options = [
       'Free Tip - Private Customers', 'COD, Credit Card Accounts'
 ]
 project_list.each do |name|
-  Project.create!( name: name, :company_id => @company_1.id, 
+  Project.create!( name: name, company_id: @company_1.id, 
                    rep_id: 1,
                    project_start_on: Date.today, 
                    active: true
@@ -135,6 +135,9 @@ end
     solution.save!
   end
 
+# Tip Sites
+Tip.create!( name: 'ABC Tip', company_id: @company_1.id, fee: 10.00, fire_ant_risk_level: 'High')
+Tip.create!( name: 'XYZ Tip', company_id: @company_2.id, fee: 5.00, fire_ant_risk_level: 'Low')
 
 # Material types  
 [
