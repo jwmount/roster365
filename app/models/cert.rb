@@ -9,12 +9,10 @@
 #   Companies may require Certs, e.g. 'must be military veteran'
 
 class Cert < ActiveRecord::Base
-  attr_accessible :certifiable_id, :certifiable_type
-  attr_accessible :active, :certificate_id, :expires_on, :permanent, :serial_number
   
   belongs_to :certificate
   belongs_to :certifiable, :polymorphic => true
   
-  audited
+  # audited, not on Rails 4 yet
   
 end

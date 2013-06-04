@@ -3,11 +3,7 @@
 class Project < ActiveRecord::Base
   include Sluggable
 
-  attr_accessible :active, :company_id, :name, :project_start_on, :rep_id
-  attr_accessible :quotes_attributes
-  attr_accessible :addresses_attributes
-
-  audited
+  # audited, not on Rails 4 yet
 
   belongs_to :company
 

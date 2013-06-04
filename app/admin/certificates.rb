@@ -73,5 +73,12 @@ ActiveAdmin.register Certificate do
     end
     active_admin_comments
   end          
-  
+
+  #per Ryan Bates, but how does this work with ActiveAdmin?
+  private
+
+    def certificate_params 
+      params.require(:certificate).permit( :active, :description, :for_company, :for_person, :for_equipment, :name )
+    end
+
 end

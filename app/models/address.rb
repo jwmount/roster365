@@ -1,10 +1,9 @@
 class Address < ActiveRecord::Base
-  attr_accessible :addressable_id, :addressable_type, :map_reference, :post_code, :state, :street_address, :city, :updated_at, :created_at
   
   belongs_to :addressable, :polymorphic => true
 
 #  validates_presence_of  :addressable_type, :street_address, :city, :state
-  audited
+  # audited, not on Rails 4 yet
   
   def display_name
     'some name'

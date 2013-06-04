@@ -40,5 +40,11 @@ ActiveAdmin.register Requirement do
     end
   end
      
+private
+
+  def requirement_params 
+    params.require(:requirement).permit( :requireable_id, :requireable_type, 
+                                         :certificate_id, :description ) 
+  end
   
 end

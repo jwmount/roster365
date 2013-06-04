@@ -1,11 +1,9 @@
 #require 'debugger'; debugger
 
 class Equipment < ActiveRecord::Base
-  attr_accessible :company, :description, :name
-  attr_accessible :company_id
-  attr_accessible :certs_attributes
+
   
-  audited
+  # audited, not on Rails 4 yet
 
   belongs_to :company
   has_many :solutions, :dependent => :destroy

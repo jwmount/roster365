@@ -23,7 +23,7 @@ ActiveAdmin.register Solution do
     nested_belongs_to :project
     nested_belongs_to :quote
 
-    before_filter :check_approval, :only => [:edit, :update]
+    before_action :check_approval, :only => [:edit, :update]
           
     # Remember:  redirect_to include admin_project_*_path or breadcrumbs will be invalid.  
     def check_approval
@@ -363,6 +363,26 @@ form do |f|
       flash[:alert] = "Solution needs to be approved before a job can be created"
       redirect_to admin_project_quote_solution_path(@solution.quote.project, @solution.quote, @solution)
     end
+  end
+
+private
+
+  def solution_params 
+    params.require(:solution).permit( :id, :name, :solution_type,
+                                      :quote_id, :client_approved, :drive_time_from_load_to_tip,
+                                      :drive_time_into_site, :drive_time_into_tip, :drive_time_out_of_site,
+                                      :drive_time_tip_to_load,
+                                      :drove_time_out_of_tip_site, :equipment_dollars_per_day, :equipment_id,
+                                      :invoice_load_client, :pay_load_client,:invoice_tip_client, :pay_tip_client,
+                                      :kms_one_way, :load_time, :loads_per_day, :material_id,
+                                      :pay_equipment_per_unit, :pay_tip, :pay_tolls,
+                                      :semis_permitted, :approved, :total_material, :unit_of_material, :unload_time,
+                                      :purchase_order_required, :vendor_id, :material_id, :drive_time_out_of_tip_site,
+                                      :equipment_ids, :requirements_attributes,
+                                    # Job delegates to :equipment_units_required_per_day
+                                      :equipment_units_required_per_day,
+                                      :created_at, :updated_at,
+                                      :tip_ids, :hourly_hire_rate, :printed_quote ) 
   end
 
 end

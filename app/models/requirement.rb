@@ -1,8 +1,6 @@
 class Requirement < ActiveRecord::Base
-  attr_accessible :requireable_id, :requireable_type
-  attr_accessible :certificate_id, :description
   
-  audited
+  # audited, not on Rails 4 yet
 
   belongs_to :certificate
   belongs_to :requireable, :polymorphic => true

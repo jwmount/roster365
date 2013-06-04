@@ -2,13 +2,11 @@
 
 class Schedule < ActiveRecord::Base
 
-  attr_accessible :day, :equipment_id, :equipment_units_today, :job_id
-
   belongs_to :job
   has_many :engagements, :dependent => :destroy
   has_and_belongs_to_many :people
 
-  audited
+  # audited, not on Rails 4 yet
   after_initialize :set_defaults
 
   scope :is_active?, includes(:job).where("jobs.active = ?", true)

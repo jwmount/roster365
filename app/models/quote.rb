@@ -7,11 +7,6 @@ require 'active_support/core_ext/object/blank.rb'
 class Quote < ActiveRecord::Base
   include Sluggable
 
-  attr_accessible :name, :rep_id, :quote_to_id, :project_id
-  attr_accessible :council, :duration, :expected_start, :fire_ants, :fire_ants_verified_by, :inclusions
-  attr_accessible :addresses_attributes
-
-  
   belongs_to :project
   
   has_many :solutions, :dependent => :destroy
@@ -31,7 +26,7 @@ class Quote < ActiveRecord::Base
   validates_presence_of :project_id, :quote_to_id, :duration
   validates_presence_of :fire_ants_verified_by #, :inclusions
 
-  audited
+  # audited, not on Rails 4 yet
   after_initialize :set_defaults
   serialize :inclusions
 

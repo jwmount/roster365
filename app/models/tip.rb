@@ -2,9 +2,6 @@
 
 class Tip < ActiveRecord::Base
 
-  attr_accessible :company_id, :fee, :fire_ant_risk_level, :name, :solution_id
-  attr_accessible :addresses_attributes
-
   audited
 
   belongs_to :company

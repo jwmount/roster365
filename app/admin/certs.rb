@@ -73,5 +73,11 @@ ActiveAdmin.register Cert do
     end
     active_admin_comments
   end #show
-  
+
+private
+
+    def cert_params 
+      params.require(:cert).permit(:certifiable_id, :certifiable_type, :active, :certificate_id, :expires_on, :permanent, :serial_number )
+    end
+
 end

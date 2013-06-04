@@ -96,4 +96,11 @@ ActiveAdmin.register Job do
     active_admin_comments
   end
 
+private
+
+  def job_params 
+    params.require(:job).permit( :active, :complete, :name, :solution_id, :start_on, :time, :finished_on, 
+                                     :purchase_order, :solution_ids )
+  end
+
 end

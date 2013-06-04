@@ -194,5 +194,10 @@ ActiveAdmin.register Schedule do
 #    render @companies, :layout => 'application'
 #  end    
 
+private
+
+  def schedule_params 
+    params.require(:schedule).permit( :day, :equipment_id, :equipment_units_today, :job_id ) 
+  end
 
 end

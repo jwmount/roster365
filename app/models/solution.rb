@@ -5,27 +5,7 @@ class Solution < ActiveRecord::Base
   include Sluggable
   include ActiveModel::Validations
   
-  attr_accessible :id, :name, :solution_type  
-  attr_accessible :quote_id, :client_approved, :drive_time_from_load_to_tip, 
-                  :drive_time_into_site, :drive_time_into_tip, :drive_time_out_of_site, 
-                  :drive_time_tip_to_load
-  attr_accessible :drove_time_out_of_tip_site, :equipment_dollars_per_day, :equipment_id
-  attr_accessible :invoice_load_client, :pay_load_client,:invoice_tip_client, :pay_tip_client
-  attr_accessible :kms_one_way, :load_time, :loads_per_day, :material_id,
-                  :pay_equipment_per_unit, :pay_tip, :pay_tolls
-  attr_accessible :semis_permitted, :approved, :total_material, :unit_of_material, 
-                  :unload_time
-  attr_accessible :purchase_order_required, :vendor_id, :material_id
-  attr_accessible :drive_time_out_of_tip_site
-  attr_accessible :equipment_ids
-  attr_accessible :requirements_attributes
-  # Job delegates to :equipment_units_required_per_day
-  attr_accessible :equipment_units_required_per_day
-  attr_accessible :created_at, :updated_at
-  attr_accessible :tip_ids, :hourly_hire_rate
-  attr_accessible :printed_quote
-
-  audited
+  # audited, not on Rails 4 yet
   
   # A S S O C I A T I O N S     A S S O C I A T I O N S     A S S O C I A T I O N S     A S S O C I A T I O N S     
   belongs_to :equipment

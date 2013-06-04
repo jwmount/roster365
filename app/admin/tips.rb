@@ -74,4 +74,10 @@ ActiveAdmin.register Tip do
     end
   end
 
+private
+
+  def tip_params 
+    params.require(:tip).permit( :company_id, :fee, :fire_ant_risk_level, :name, :solution_id, :addresses_attributes ) 
+  end
+
 end

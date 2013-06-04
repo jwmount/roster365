@@ -44,4 +44,11 @@ ActiveAdmin.register Role do
     end
     active_admin_comments    
   end
+
+private
+
+  def role_params 
+    params.require(:role).permit( :user_ids, :name ) 
+  end
+
 end

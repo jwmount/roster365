@@ -246,5 +246,12 @@ ActiveAdmin.register Company do
     h4 link_to "Projects", admin_projects_path
   end
 
-  
+private
+
+    def company_params 
+      params.require(:company).permit( :MYOB_number, :PO_required, :active, :credit_terms, :name,
+                                       :addresses_attributes, :identifiers_attributes,
+                                       :equipment_ids, :person_ids, :certs_attributes )
+    end
+
 end

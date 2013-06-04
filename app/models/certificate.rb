@@ -1,7 +1,7 @@
 class Certificate < ActiveRecord::Base
-  attr_accessible :active, :description, :for_company, :for_person, :for_equipment, :name
 
-  audited
+
+  # audited, not on Rails 4 yet
   
   has_many :certs
   has_many :requirements

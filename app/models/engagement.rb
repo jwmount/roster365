@@ -1,15 +1,15 @@
 #require 'debugger'
 class Engagement < ActiveRecord::Base
-  
-  attr_accessible :OK_tomorrow, :breakdown, :person_id, :contacted_at, :date_next_available
-  attr_accessible :engagement_declined, :next_available_day, :no_show, :onsite_at, :onsite_now, :schedule_id
-  attr_accessible :do_not_contact_until
-    
+      
   belongs_to :person
   belongs_to :schedule
   has_one    :docket, :dependent => :destroy
   
-  audited
+  # audited, not on Rails 4 yet
+
+  # Scope syntax introduced in Rails 4.0.0
+  # scope is 'within some date'
+  # scope :published, -> { where('published_on <= ?', Time.now.to_date) }
 
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
   after_initialize :set_defaults

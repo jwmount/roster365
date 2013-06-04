@@ -1,7 +1,6 @@
 class Material < ActiveRecord::Base
-  attr_accessible :description, :name
 
-  audited
+  # audited, not on Rails 4 yet
 
   has_many :requirements
   has_many :certificates, :through => :requirements

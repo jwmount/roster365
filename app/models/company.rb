@@ -1,7 +1,7 @@
 # require 'debugger'; debugger
 class Company < ActiveRecord::Base
 
-  audited
+  # audited, not on Rails 4 yet
 
   has_many :people
   has_many :equipment
@@ -35,11 +35,7 @@ class Company < ActiveRecord::Base
                         :less_than_or_equal_to => '99999', :equal_to => '00000' }
   end
 
-# A T T R I B U T E S   &  D E F A U L T S
-  attr_accessible :MYOB_number, :PO_required, :active, :credit_terms, :name
-  attr_accessible :addresses_attributes, :identifiers_attributes
-  attr_accessible :equipment_ids, :person_ids
-  attr_accessible :certs_attributes
+# D E F A U L T S
 
   after_initialize :defaults
 

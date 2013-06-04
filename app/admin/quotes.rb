@@ -180,5 +180,12 @@ end # show
     render :partial => "print", :layout => "quotes/print", :object => @quote, :target => '_blank'
   end
 
+private
+
+  def quote_params 
+    params.require(:quote).permit( :name, :rep_id, :quote_to_id, :project_id,
+                                   :council, :duration, :expected_start, :fire_ants, :fire_ants_verified_by, :inclusions,
+                                   :addresses_attributes ) 
+  end
 
 end

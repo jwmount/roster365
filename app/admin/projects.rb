@@ -141,4 +141,11 @@ ActiveAdmin.register Project do
     link_to "Quotes", admin_project_quotes_path( project.id )
   end
 
+private
+
+  def project_params 
+    params.require(:project).permit( :active, :company_id, :name, :project_start_on, :rep_id, 
+                                     :quotes_attributes, :addresses_attributes )
+  end
+
 end

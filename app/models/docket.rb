@@ -1,15 +1,11 @@
 class Docket < ActiveRecord::Base
-  attr_accessible :booking_no, :date_worked, :dated, :received_on, :operator_signed, :client_signed
-  attr_accessible :approved, :approved_by, :approved_on
-  attr_accessible :a_inv_pay, :b_inv_pay, :supplier_inv_pay
-  attr_accessible :engagement_id, :person_id
   
   belongs_to :person
   belongs_to :engagement
   
   validates_uniqueness_of :booking_no
   
-  audited
+  # audited, not on Rails 4 yet
 
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
   after_initialize :set_defaults

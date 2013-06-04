@@ -1,9 +1,6 @@
 #require 'debugger'
 
 class Job < ActiveRecord::Base
-  attr_accessible :active, :complete, :name, :solution_id, :start_on, :time, :finished_on
-  attr_accessible :purchase_order
-  attr_accessible :solution_ids
   
   belongs_to :solution
 
@@ -11,7 +8,7 @@ class Job < ActiveRecord::Base
   has_many :dockets
   has_many :schedules
 
-  audited
+  # audited, not on Rails 4 yet
 
   validates :name, :presence => true
   validate :is_solution_approved?

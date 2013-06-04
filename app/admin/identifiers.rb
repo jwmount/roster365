@@ -58,5 +58,11 @@ ActiveAdmin.register Identifier do
       id.rank.ordinalize
     end
   end
+
+private
+
+  def identifier_params 
+    params.require(:identifier).permit( :identifiable_id, :identifiable_type, :name, :rank, :value, :created_at, :updated_at)
+  end
   
 end

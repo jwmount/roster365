@@ -1,10 +1,14 @@
 Roster365::Application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   ActiveAdmin.routes(self)
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :admin_users, ActiveAdmin::Devise.config, ActiveAdmin::Devise.config
   root :to => "application#index"
- 
+
+  patch :update_many
+
   namespace :admin do
 
     resources :dockets
@@ -32,7 +36,7 @@ Roster365::Application.routes.draw do
 
     resources :dockets do
       member do
-        put 'print'
+        patch 'print'
       end
     end          
 
@@ -46,16 +50,16 @@ Roster365::Application.routes.draw do
     
     resources :solutions do
       member do
-        put 'costing'
+        patch 'costing'
       end
     end
     
     resources :quotes do
       member do
-        put 'print'
+        patch 'print'
       end
       member do
-        put 'express'
+        patch 'express'
       end
     end  
     
@@ -66,7 +70,7 @@ Roster365::Application.routes.draw do
     
     resources :jobs do
       member do
-        put 'jobify'
+        patch 'jobify'
       end
     end
     
@@ -78,7 +82,7 @@ Roster365::Application.routes.draw do
 
     resources :engagements do
       member do
-        put 'docketify'
+        patch 'docketify'
       end
     end
 

@@ -1,7 +1,6 @@
 class Identifier < ActiveRecord::Base
-  attr_accessible :identifiable_id, :identifiable_type, :name, :rank, :value, :created_at, :updated_at
   
-  audited
+  # audited, not on Rails 4 yet
 
   belongs_to :addressable, :polymorphic => true
   belongs_to :personable, :polymorphic => true

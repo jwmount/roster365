@@ -159,4 +159,11 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
+private
+
+  def person_params 
+    params.require(:person).permit(  )
+  end
+
 end
+w
