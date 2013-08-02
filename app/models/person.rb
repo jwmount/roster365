@@ -1,10 +1,5 @@
 class Person < ActiveRecord::Base
 
-# A T T R I B U T E S   &  D E F A U L T S
-  attr_accessible :OK_to_contact, :available, :company_id, :first_name, :last_name, :available_on, :title, :active
-  attr_accessible :addresses_attributes, :identifiers_attributes, :certs_attributes
-  attr_accessible :cert_ids
-  after_initialize :defaults
 
   # self.assoc = [OtherModel.find_by_name('special')]
   # self.address ||= build_address #let's you set a default association

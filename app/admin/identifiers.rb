@@ -59,10 +59,11 @@ ActiveAdmin.register Identifier do
     end
   end
 
-private
 
-  def identifier_params 
+controller do
+  def permitted_params
     params.require(:identifier).permit( :identifiable_id, :identifiable_type, :name, :rank, :value, :created_at, :updated_at)
+    end
   end
   
 end

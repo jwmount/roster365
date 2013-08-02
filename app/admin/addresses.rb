@@ -5,10 +5,6 @@ ActiveAdmin.register Address do
   # Address must be created from parent, e.g. Company, Person, Tip
   actions :all, :except => :new
 
-  # scopes are lambdas as callable objects in 4.0
-  scope :all, {default: true}
-  scope :People, -> { where 'addressable_type = ?', 'Person' }
-  scope :Companies, -> { where 'addressable_type = ?', "Company" }
 
   index do
     column :id
@@ -108,13 +104,12 @@ ActiveAdmin.register Address do
     link_to 'Company Address', edit_admin_addresses_path(address.id) 
   end
 
-  # per Ryan Bates, but how does this work with ActiveAdmin?
-#private
-
-    def address_params 
+controller do
+    def permitted_params
       params.require(:address).permit( :addressable_id, :addressable_type, :map_reference, 
                                        :post_code, :state, :street_address, :city, :updated_at, :created_at)
     end
+  end
 
 end
 

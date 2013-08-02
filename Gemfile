@@ -1,54 +1,49 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
+ruby '2.0.0'
 
-gem 'rails', '4.0.0.rc1'
-gem 'thin'
+gem 'rails', '>=4.0.0'
 gem 'rake'
-gem 'activerecord', '4.0.0.rc1'
-gem 'railties', '4.0.0.rc1'
-gem 'actionpack', '4.0.0.rc1'
 
-gem 'sqlite3'
-
-gem 'sass-rails',   '~> 4.0.0.rc1'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-
-gem 'jquery-rails', '2.3.0'
-
-gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
-
-# add these gems to help with the transition:
-# remove protected_attributes once these have all been taken out
-gem 'protected_attributes'
-gem 'rails-observers'
-gem 'actionpack-page_caching'
-
-
-#gem 'devise'
-#gem 'meta_search'
-gem "database_cleaner"
-#gem "audited-activerecord"  not in Rails 4 yet
-#gem "inherited_resources"
-
-### MISSING UNTIL THE RAILS 4.0 platform is ready
-# per Greg Bell
-#gem "activeadmin", :git => "git://github.com/gregbell/active_admin.git"
-
-gem "cancan"
-gem "nested_has_many_through"
-gem "carrierwave"
-gem "simple_enum", :git => "https://github.com/lwe/simple_enum.git"
-gem "haml-rails"
-#gem "formtastic", ">=2.1.1"
-gem 'dynamic_form'
-gem 'json', '1.7.7'
-gem 'best_in_place'
-
-gem 'pg' # turn on for HEROKU
-
-gem 'devise',              github: 'plataformatec/devise',     branch: 'rails4'
-gem 'responders',          github: 'plataformatec/responders'
+gem 'sass-rails'
+gem 'cancan'
+gem 'haml'
+gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
+gem 'ransack',             github: 'ernie/ransack',         branch: 'rails-4'
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
-gem 'ransack',             github: 'ernie/ransack',            branch: 'rails-4'
-gem 'activeadmin',         github: 'akashkamboj/active_admin', branch: 'rails4'
-gem 'formtastic',          github: 'justinfrench/formtastic', branch: 'rails4beta'  
+gem 'formtastic',          github: 'justinfrench/formtastic'
+gem 'protected_attributes'
+
+gem 'mysql2'
+gem 'pg'
+gem 'taps'  #needed by Heroku
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  # gem 'coffee-rails', '~> 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms => :ruby
+
+  gem 'uglifier', '>= 1.0.3'
+end
+
+group :production do
+  # gem 'mysql2'  On AWS using RDS instead
+end
+
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'debugger'

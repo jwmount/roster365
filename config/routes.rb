@@ -4,23 +4,35 @@ Roster365::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  devise_for :admin_users, ActiveAdmin::Devise.config, ActiveAdmin::Devise.config
   root :to => "application#index"
 
-  patch :update_many
 
   namespace :admin do
 
-    resources :dockets
-    resources :projects
-    resources :addresses
-    resources :identifiers
-    resources :jobs      
-    resources :engagements
-    resources :schedules
-    resources :people
-    resources :quotes
-    resources :solutions
+    resources :ability
+    resources :address
+    resources :admin_user
+    resources :cert
+    resources :certificate
+    resources :company
+    resources :condition
+    resources :contact_schedule
+    resources :docket
+    resources :engagement
+    resources :equipment
+    resources :identifier
+    resources :job
+    resources :material
+    resources :person
+    resources :project
+    resources :project_contact
+    resources :quote
+    resources :requirement
+    resources :role
+    resources :schedule
+    resources :solution
+    resources :solutions_tips
+    resources :tip
 
     resources :companies do
       resource :address

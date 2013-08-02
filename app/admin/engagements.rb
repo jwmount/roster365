@@ -174,12 +174,13 @@ ActiveAdmin.register Engagement do
      end
    end  
    
-private
 
-    def engagement_params 
+controller do
+  def permitted_params
       params.require(:engagement).permit( :OK_tomorrow, :breakdown, :person_id, :contacted_at, :date_next_available,
         :engagement_declined, :next_available_day, :no_show, :onsite_at, :onsite_now, :schedule_id,
         :do_not_contact_until )
     end
+  end
  
 end

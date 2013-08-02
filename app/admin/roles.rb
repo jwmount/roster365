@@ -5,7 +5,7 @@
   
 #end
 ActiveAdmin.register Role do
-  controller.authorize_resource
+### ?? from before Rails 4.0.0  controller.authorize_resource
 
   menu :parent => "System Administration"
 
@@ -45,10 +45,11 @@ ActiveAdmin.register Role do
     active_admin_comments    
   end
 
-private
 
-  def role_params 
-    params.require(:role).permit( :user_ids, :name ) 
+  controller do
+    def permitted_params
+      params.require(:role).permit( :user_ids, :name ) 
+    end
   end
 
 end

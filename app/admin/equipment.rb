@@ -78,10 +78,11 @@ ActiveAdmin.register Equipment do
     active_admin_comments
   end          
 
-private
 
-  def equipment_params 
+controller do
+  def permitted_params
       params.require(:equipment).permit( :company, :description, :name, :company_id, :certs_attributes )
     end
+  end
 
 end

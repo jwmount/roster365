@@ -38,10 +38,11 @@ ActiveAdmin.register Material do
     active_admin_comments
   end          
 
-private
 
-  def identifier_params 
-    params.require(:identifier).permit( :description, :name )
+  controller do
+    def permitted_params
+      params.require(:identifier).permit( :description, :name )
+    end
   end
 
 end

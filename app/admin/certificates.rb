@@ -1,5 +1,11 @@
 ActiveAdmin.register Certificate do
 
+controller do
+    def permitted_params
+      params.permit admin_user: [ :active, :description, :for_company, :for_person, :for_equipment, :name ]
+    end
+  end
+
   menu parent: "Compliance"
 
   scope :all, :default => true 
@@ -74,11 +80,5 @@ ActiveAdmin.register Certificate do
     active_admin_comments
   end          
 
-  #per Ryan Bates, but how does this work with ActiveAdmin?
-  private
-
-    def certificate_params 
-      params.require(:certificate).permit( :active, :description, :for_company, :for_person, :for_equipment, :name )
-    end
 
 end

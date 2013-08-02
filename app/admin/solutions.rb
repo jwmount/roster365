@@ -365,9 +365,9 @@ form do |f|
     end
   end
 
-private
 
-  def solution_params 
+  controller do
+    def permitted_params
     params.require(:solution).permit( :id, :name, :solution_type,
                                       :quote_id, :client_approved, :drive_time_from_load_to_tip,
                                       :drive_time_into_site, :drive_time_into_tip, :drive_time_out_of_site,
@@ -383,6 +383,7 @@ private
                                       :equipment_units_required_per_day,
                                       :created_at, :updated_at,
                                       :tip_ids, :hourly_hire_rate, :printed_quote ) 
+    end
   end
 
 end

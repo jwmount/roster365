@@ -56,7 +56,7 @@ ActiveAdmin.register Schedule do
         status_tag("No load site.", :warning)
       end
       
-      if @address = []
+      if @address == []
         flash[:error] = simple_format("At least one schedule has no load site address.")
       end
     end
@@ -194,10 +194,11 @@ ActiveAdmin.register Schedule do
 #    render @companies, :layout => 'application'
 #  end    
 
-private
 
-  def schedule_params 
-    params.require(:schedule).permit( :day, :equipment_id, :equipment_units_today, :job_id ) 
+  controller do
+    def permitted_params
+      params.require(:schedule).permit( :day, :equipment_id, :equipment_units_today, :job_id ) 
+    end
   end
 
 end

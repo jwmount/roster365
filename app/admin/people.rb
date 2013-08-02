@@ -159,11 +159,15 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
-private
 
-  def person_params 
-    params.require(:person).permit(  )
+  controller do
+    def permitted_params
+    params.require(:person).permit( :OK_to_contact, :available, :company_id, :first_name, :last_name, 
+                                    :available_on, :title, :active,
+                                    :addresses_attributes, :identifiers_attributes, :certs_attributes, 
+                                    :cert_ids, :defaults
+     )
+    end
   end
 
 end
-w

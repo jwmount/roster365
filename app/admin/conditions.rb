@@ -65,11 +65,11 @@ ActiveAdmin.register Condition do
     active_admin_comments
   end
 
-private
-
-    def condition_params 
+ controller do
+    def permitted_params
       params.require(:condition).permit( :approved, :change_approved_at, :change_approved_by, 
                                        :indication, :name, :status, :verbiage )
     end
+  end
   
 end
