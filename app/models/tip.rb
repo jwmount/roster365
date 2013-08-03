@@ -14,12 +14,26 @@ class Tip < ActiveRecord::Base
 
   scope :alphabetically, order("name ASC")
   
-  #Whoaa, this HACK shows off my FORTRAN background....
-  # array a should be application_helper::fire_ant_risk_levels array.
-  def risk_level
-    i = self.fire_ant_risk_level
-    a = %w[None Medium High]
-    a[i]
+# D E F A U L T S
+
+  after_initialize :defaults
+
+  def defaults
+     unless persisted?
+       self.fire_ant_risk_level ||= 0
+    end
+  end  
+  # use to create select drop down for tips
+  def fire_ant_risk_levels
+    [
+      ['None', 0],
+      ['Medium', 1],
+      ['High', 2]
+    ]
+  end
+ 
+  def fire_ant_risk_level_name
+    fire_ant_risk_levels[self.fire_ant_risk_level][0]
   end
 
 end

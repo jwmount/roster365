@@ -13,7 +13,7 @@ ActiveAdmin.register Tip do
     end
 
     column :fire_ant_risk_level do |tip|
-      tip.risk_level
+      tip.fire_ant_risk_level
     end
 
     column :address do |tip|
@@ -39,7 +39,7 @@ ActiveAdmin.register Tip do
         :hint => "Customary tip fee.  May be negotiated by reps.",
         :placeholder => "0.00"
 
-      f.input :fire_ant_risk_level,
+      f.input :fire_ant_risk_level_name,
         :as => :select,
         :collection => fire_ant_risk_levels,
         :placeholder => "None",
