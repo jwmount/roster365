@@ -66,6 +66,7 @@ Devise.setup do |config|
   # Does not affect registerable.
   # config.paranoid = true
 
+  # Devise - config.secret_key added going to Rails 4.0.0 & Ruby 2.0
   config.secret_key = '9d47022b51eb9827fd3513d0b62f95e22d950272b8c1fbd645523a4920f9779744d1849bb7307cf7f07ead7fff17ef6a832b2d7a64ce661dc704bcc5a159ca33'
   # By default Devise will store the user in session. You can skip storage for
   # :http_auth and :token_auth by adding those symbols to the array below.

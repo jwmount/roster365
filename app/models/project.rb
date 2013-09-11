@@ -9,7 +9,9 @@ class Project < ActiveRecord::Base
 
   has_many :certificates, :through => :requirements
   has_many :quotes,       :dependent => :destroy
-  has_one  :rep,          :as => :person
+#  has_one  :rep,          :as => :person
+#  has_one  :rep
+  has_many  :people
 
   # polymorphs
   has_many  :addresses,     :as => :addressable, :autosave => true, :dependent => :destroy

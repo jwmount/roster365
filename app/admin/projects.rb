@@ -19,6 +19,10 @@ ActiveAdmin.register Project do
   scope :in_active do |projects|
     projects.where ({active: false})
   end
+  # No effect at this point, need to work on this if singleton rep is not adequate (can we have 2?)
+  scope :rep do |projects|
+    projects.where ({rep_id: !nil})
+  end
 
 
   index do
@@ -35,12 +39,12 @@ ActiveAdmin.register Project do
       link_to project.company.name, admin_company_path(project.company)
     end
 
+    # Project may have no rep, or some rep (one); multiple reps not supported so far.
     column "Rep" do |project|
       flash[:WARNING] = nil
       begin
-        rep = Person.find project.rep_id
-        debugger
-        link_to rep.full_name, admin_person_path(rep.id)
+        @rep = Person.find project.rep_id
+        link_to @rep.full_name, admin_person_path(@rep.id)
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:project_missing_rep), "WARNING:")
         'None'
