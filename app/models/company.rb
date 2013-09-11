@@ -1,6 +1,6 @@
 # require 'debugger'; debugger
 class Company < ActiveRecord::Base
-
+  ActiveRecord::Base.send(:include, ActiveModel::ForbiddenAttributesProtection)
   # audited, not on Rails 4 yet
 
   has_many :people

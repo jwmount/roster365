@@ -1,3 +1,4 @@
+#require 'debugger'
 ActiveAdmin.register Project do
 
   menu parent: "Sales"  
@@ -35,12 +36,14 @@ ActiveAdmin.register Project do
     end
 
     column "Rep" do |project|
+      flash[:WARNING] = nil
       begin
-        flash[:WARNING] = nil
         rep = Person.find project.rep_id
+        debugger
         link_to rep.full_name, admin_person_path(rep.id)
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:project_missing_rep), "WARNING:")
+        'None'
       end
     end
 

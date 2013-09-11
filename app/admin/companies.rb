@@ -246,12 +246,17 @@ ActiveAdmin.register Company do
     h4 link_to "Projects", admin_projects_path
   end
 
-
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  controller do
-    def permitted_params
-      params.permit( :addressable_id, :addressable_type, :map_reference, 
-                                       :post_code, :state, :street_address, :city, :updated_at, :created_at)
-    end
+   def create_company_params
+     debugger
+     params.require(:company).permit( :name, :MYOB_number, :PO_required, :credit_terms, :active )
+   end
+
+   def update_company_params
+     params.require(:company).permit(:name, :MYOB_number, :PO_required, :credit_terms, :active )
+   end
+   
   end
      
 end

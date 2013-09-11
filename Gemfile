@@ -7,11 +7,9 @@ gem 'rake'
 gem 'sass-rails'
 gem 'cancan'
 gem 'haml'
+
+# Rails 4 support, see https://github.com/gregbell/active_admin/pull/2326
 gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
-gem 'ransack',             github: 'ernie/ransack',         branch: 'rails-4'
-gem 'inherited_resources', github: 'josevalim/inherited_resources'
-gem 'formtastic',          github: 'justinfrench/formtastic'
-#gem 'protected_attributes'
 
 gem 'mysql2'
 gem 'pg'
@@ -46,4 +44,4 @@ end
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
