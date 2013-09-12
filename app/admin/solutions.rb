@@ -365,14 +365,17 @@ form do |f|
     end
   end
 
-=begin
-
-  this appears right, but does not run, CRUD operations fail 
-  --jwm 09-11-2013
-
   controller do
     def permitted_params
-      params.require(:solution).permit( :id , :name, :solution_type,
+      params.require(:solution).permit!
+    end
+  end
+=begin
+# http://guides.rubyonrails.org/action_controller_overview.html#more-examples
+# You can't use require() when calling new since root key does not exist yet.  Duh.
+  controller do
+    def permitted_params
+      params.require(:solution).permit( :name, :solution_type, :client_approved,
                                       :quote_id, :client_approved, :drive_time_from_load_to_tip,
                                       :drive_time_into_site, :drive_time_into_tip, :drive_time_out_of_site,
                                       :drive_time_tip_to_load,
@@ -383,9 +386,7 @@ form do |f|
                                       :semis_permitted, :approved, :total_material, :unit_of_material, :unload_time,
                                       :purchase_order_required, :vendor_id, :material_id, :drive_time_out_of_tip_site,
                                       :equipment_ids, :requirements_attributes,
-                                    # Job delegates to :equipment_units_required_per_day
                                       :equipment_units_required_per_day,
-                                      :created_at, :updated_at,
                                       :tip_ids, :hourly_hire_rate, :printed_quote) 
     end
   end
