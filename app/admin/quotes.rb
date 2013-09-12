@@ -18,10 +18,11 @@ ActiveAdmin.register Quote do
 
     column :rep do |quote|
       begin
-        rep = Person.find quote.rep_id
-        link_to rep.full_name, admin_person_path(rep)
+        @rep = Person.find quote.rep_id
+        link_to @rep.full_name, admin_person_path(@rep.id)
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:quote_missing_rep), "WARNING:")
+       'None'
       end
     end
 

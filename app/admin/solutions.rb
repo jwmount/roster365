@@ -365,14 +365,18 @@ form do |f|
     end
   end
 
+=begin
+
+  this appears right, but does not run, CRUD operations fail 
+  --jwm 09-11-2013
 
   controller do
     def permitted_params
-    params.require(:solution).permit( :id, :name, :solution_type,
+      params.require(:solution).permit( :id , :name, :solution_type,
                                       :quote_id, :client_approved, :drive_time_from_load_to_tip,
                                       :drive_time_into_site, :drive_time_into_tip, :drive_time_out_of_site,
                                       :drive_time_tip_to_load,
-                                      :drove_time_out_of_tip_site, :equipment_dollars_per_day, :equipment_id,
+                                      :drive_time_out_of_tip_site, :equipment_dollars_per_day, :equipment_id,
                                       :invoice_load_client, :pay_load_client,:invoice_tip_client, :pay_tip_client,
                                       :kms_one_way, :load_time, :loads_per_day, :material_id,
                                       :pay_equipment_per_unit, :pay_tip, :pay_tolls,
@@ -382,8 +386,9 @@ form do |f|
                                     # Job delegates to :equipment_units_required_per_day
                                       :equipment_units_required_per_day,
                                       :created_at, :updated_at,
-                                      :tip_ids, :hourly_hire_rate, :printed_quote ) 
+                                      :tip_ids, :hourly_hire_rate, :printed_quote) 
     end
   end
+=end
 
 end

@@ -14,7 +14,11 @@ class Quote < ActiveRecord::Base
 
   has_many :requirements
   has_many :certificates, :through => :requirements
-  has_one  :rep,          :as => :person
+
+  # This follows association used for Project, however it's not what we want exactly
+  # There is a single rep, if any.  We need a scope :rep to refer to is, or?
+  #has_one  :rep,          :as => :person
+  has_many :people
 
   # polymorphs
   

@@ -14,6 +14,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require best_in_place
-// require best_in_place.purr
+// require best_in_place     where did this come from?  
+// require best_in_place.purr where did this come from?
 //= require_tree .
