@@ -365,31 +365,49 @@ form do |f|
     end
   end
 
-  controller do
-    def permitted_params
-      params.require(:solution).permit!
-    end
-  end
-=begin
+
 # http://guides.rubyonrails.org/action_controller_overview.html#more-examples
 # You can't use require() when calling new since root key does not exist yet.  Duh.
   controller do
     def permitted_params
-      params.require(:solution).permit( :name, :solution_type, :client_approved,
-                                      :quote_id, :client_approved, :drive_time_from_load_to_tip,
-                                      :drive_time_into_site, :drive_time_into_tip, :drive_time_out_of_site,
-                                      :drive_time_tip_to_load,
-                                      :drive_time_out_of_tip_site, :equipment_dollars_per_day, :equipment_id,
-                                      :invoice_load_client, :pay_load_client,:invoice_tip_client, :pay_tip_client,
-                                      :kms_one_way, :load_time, :loads_per_day, :material_id,
-                                      :pay_equipment_per_unit, :pay_tip, :pay_tolls,
-                                      :semis_permitted, :approved, :total_material, :unit_of_material, :unload_time,
-                                      :purchase_order_required, :vendor_id, :material_id, :drive_time_out_of_tip_site,
-                                      :equipment_ids, :requirements_attributes,
-                                      :equipment_units_required_per_day,
-                                      :tip_ids, :hourly_hire_rate, :printed_quote) 
+      params.permit!
+=begin
+      params.require(:solution).permit!
+                                        :approved,
+                                        :client_approved,
+                                        :drive_time_from_load_to_tip,
+                                        :drive_time_into_site, 
+                                        :drive_time_into_tip, 
+                                        :drive_time_out_of_site,
+                                        :drive_time_out_of_tip_site,
+                                        :drive_time_tip_to_load,
+                                        :equipment_dollars_per_day, 
+                                        :equipment_id, 
+                                        :equipment_units_required_per_day,
+                                        :hourly_hire_rate, 
+                                        :invoice_load_client, 
+                                        :invoice_tip_client, 
+                                        :kms_one_way, 
+                                        :load_time, 
+                                        :loads_per_day, 
+                                        :material_id, 
+                                        :name, 
+                                        :pay_equipment_per_unit, 
+                                        :pay_load_client,
+                                        :pay_tip_client,
+                                        :pay_tip, 
+                                        :pay_tolls,                                        
+                                        :purchase_order_required, 
+                                        :quote_id, 
+                                        :solution_type,  
+                                        :semis_permitted, 
+                                        :total_material, 
+                                        :unit_of_material, 
+                                        :unload_time,
+                                        ) 
+=end                                        
     end
   end
-=end
+
 
 end
