@@ -15,6 +15,9 @@ gem 'mysql2'
 gem 'pg'
 gem 'taps'  #needed by Heroku
 
+# Needed for Rails 4.0 on Heroku
+gem 'rails_12factor', group: :production
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -29,7 +32,6 @@ end
 group :production do
   # gem 'mysql2'  On AWS using RDS instead
 end
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

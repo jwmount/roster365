@@ -19,7 +19,7 @@ ActiveAdmin.register Solution do
   # "Total is %<total>.02f" % {:total => 43.1}  # => Total is 43.10
 
   controller do
-    # Breadcrumbs for CRUD ops, e.g. Edit do not generate complete paths without nested_belongs_to :project
+    # Breadcrumbs for CRUD ops, e.g. Edit does not generate complete paths without nested_belongs_to :project
     nested_belongs_to :project
     nested_belongs_to :quote
 
@@ -126,20 +126,20 @@ form do |f|
       f.input :material_id, :as => :select, 
                             :label => 'Material', 
                             :hint => "What kind material will be moved.", 
-                            :required => false,
+                            :required => true,
                             :collection => Material.all, 
                             :input_html => {"data-placeholder" => "Select Material ...", 
                             :style=> "width:200px", 
                             :class => "chzn-select"}
                             
-      f.input :unit_of_material, :as=>:select, 
-                                 :label => 'Unit of Material', 
-                                 :hint => "Unit that is basis for our price.", 
-                                 :collection => %w[m3 tonne 'hourly hire' loads], 
-                                 required: false
+      f.input :unit_of_material, as:         :select, 
+                                 label:      "Unit of Material", 
+                                 hint:       "Unit that is basis for our price.", 
+                                 collection: %w[m3 tonne 'hourly hire' loads], 
+                                 required:   false
 
-      f.input :total_material, :hint => "Total material moved in this solution.",
-                               :required => false
+      f.input :total_material, hint:     "How much material will be moved in this solution.",
+                               required: true
     end
     
     f.inputs "Tip Site (Choose one)" do
@@ -196,7 +196,7 @@ form do |f|
       #                     :class => "chzn-select"}
       f.input :semis_permitted, :as => :radio
       f.input :equipment_id, :as => :select, :required => true,
-                          :collection => Equipment.all.map {|u| [u.name, u.id]}, 
+                          :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
                           :include_blank => false,
                           :hint => "Equipment for this solution.  To search for equipment use the Equipment menu."
                            
@@ -365,14 +365,17 @@ form do |f|
     end
   end
 
-
+# http://api.rubyonrails.org/classes/ActionController/Parameters.html
 # http://guides.rubyonrails.org/action_controller_overview.html#more-examples
-# You can't use require() when calling new since root key does not exist yet.  Duh.
+# http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters
+# You can't use require() when calling new since root key does not exist yet.  Duh.  However
+# this approach is DANGEROUS as it defeats the whitelisting altogether.
   controller do
     def permitted_params
-      params.permit!
-=begin
-      params.require(:solution).permit!
+      begin
+       # params.permit(:solution => [:name, :description])
+       # params.require(:solution).permit(
+        params.permit(:solution => [
                                         :approved,
                                         :client_approved,
                                         :drive_time_from_load_to_tip,
@@ -403,9 +406,11 @@ form do |f|
                                         :semis_permitted, 
                                         :total_material, 
                                         :unit_of_material, 
-                                        :unload_time,
-                                        ) 
-=end                                        
+                                        :unload_time
+          ])
+    end
+    rescue
+      params.permit!
     end
   end
 
