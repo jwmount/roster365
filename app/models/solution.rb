@@ -39,7 +39,6 @@ class Solution < ActiveRecord::Base
   #          :drive_time_from_load_to_tip, :drive_time_tip_to_load, :drive_time_into_tip, :unload_time, 
   #          :drive_time_out_of_tip_site, 
   #          :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :less_than => 540}
-  validates :total_material, :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than => 500001}
   validates :invoice_load_client, :pay_load_client, :numericality => {:greater_than_or_equal_to => 0}
   validates :invoice_tip_client, :pay_tip_client, :numericality => {:greater_than_or_equal_to => 0}
 
@@ -48,7 +47,8 @@ class Solution < ActiveRecord::Base
   validate :PO_required?
 
 
-  # conditional validations -- given contract type, do we have what we need?
+  # I N C O M P L E T E
+  # CONTRACT TYPE conditional validations -- given contract type, do we have what we need?
   with_options :if => :export? do |s|
     s.validates :total_material, 
       :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than => 500001}

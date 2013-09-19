@@ -101,6 +101,8 @@ ActiveAdmin.register Solution do
     h4 link_to "Project: #{solution.quote.project.display_name}", admin_project_path(solution.quote.project.id)
   end
 
+# Use conditional validations to determine if input is complete for a given contract type.
+# At this time if contract type is not given, nothing is required.
 form do |f|
   error_panel f
 
@@ -111,9 +113,11 @@ form do |f|
     end
     
     f.inputs "Solution Details" do 
-      f.input :name, :required => true, :input_html => {:disabled => true },
-                     :hint => "Name is pre-assigned.  Fully qualified name will be used for scheduling."
-      f.input :solution_type,:required => false, 
+      f.input :name, 
+              :input_html => {:disabled => true },
+              :hint => "Name is pre-assigned.  Fully qualified name will be used for scheduling."
+
+      f.input :solution_type,
                             :label => 'Contract type',
                              :hint => "Type of solution this is.", 
                              :as=>:select, 
@@ -126,26 +130,20 @@ form do |f|
       f.input :material_id, :as => :select, 
                             :label => 'Material', 
                             :hint => "What kind material will be moved.", 
-                            :required => true,
-                            :collection => Material.all, 
-                            :input_html => {"data-placeholder" => "Select Material ...", 
-                            :style=> "width:200px", 
-                            :class => "chzn-select"}
+                            :collection => Material.all
                             
       f.input :unit_of_material, as:         :select, 
                                  label:      "Unit of Material", 
                                  hint:       "Unit that is basis for our price.", 
-                                 collection: %w[m3 tonne 'hourly hire' loads], 
-                                 required:   false
+                                 collection: %w[m3 tonne 'hourly hire' loads]
 
-      f.input :total_material, hint:     "How much material will be moved in this solution.",
-                               required: true
+      f.input :total_material, hint:     "How much material will be moved in this solution."
+
     end
     
     f.inputs "Tip Site (Choose one)" do
       f.input :tips, 
-               :as => :check_boxes,
-               :required => true
+              :as => :check_boxes
        end
 
     f.inputs "Time & Distance" do
@@ -194,18 +192,27 @@ form do |f|
       #                     :hint => "Subcontractor or Supplier of the equipment.  To search for equipment use the Equipment menu.", 
       #                     :collection => Company.all, :input_html => {"data-placeholder" => "Select Partner Company ...", :style=> "width:200px", 
       #                     :class => "chzn-select"}
-      f.input :semis_permitted, :as => :radio
-      f.input :equipment_id, :as => :select, :required => true,
-                          :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
-                          :include_blank => false,
-                          :hint => "Equipment for this solution.  To search for equipment use the Equipment menu."
+      f.input :semis_permitted, 
+              :as => :radio
+
+      f.input :equipment_id, 
+              :as => :select, 
+              :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
+              :include_blank => false,
+              :hint => "Equipment for this solution.  To search for equipment use the Equipment menu."
                            
-      f.input :purchase_order_required, :as => :radio, 
-                          :hint => "ALERT:  #{solution.quote.project.company.name} may require a purchase order before a job is activated."                                 
+      f.input :purchase_order_required, 
+              :as => :radio, 
+              :hint => "ALERT:  #{solution.quote.project.company.name} may require a purchase order before a job is activated."                                 
+
       f.input :equipment_units_required_per_day,
               :hint => "How many we expect to have on site each day."
-      f.input :equipment_dollars_per_day,  :precision => 8, :scale => 2,
-              :placeholder => "usually 1250 or 750...",:hint => 'Total daily payment target amount.'
+
+      f.input :equipment_dollars_per_day,
+              :precision => 8, 
+              :scale => 2,
+              :placeholder => "usually 1250 or 750...",
+              :hint => 'Total daily payment target amount.'
     end
     
 
@@ -213,20 +220,35 @@ form do |f|
       f.input :invoice_load_client,
               :precision => 8, :scale => 2,
               :placeholder => '00.00'
+
       f.input :pay_load_client,
               :precision => 8, :scale => 2,
               :placeholder => '00.00'
+
       f.input :invoice_tip_client,
               :precision => 8, :scale => 2,
               :placeholder => '00.00'
+
       f.input :pay_tip_client,
               :precision => 8, :scale => 2,
               :placeholder => '00.00'
               
-      f.input :pay_equipment_per_unit,  :precision => 8, :scale => 2
-      f.input :pay_tolls,  :precision => 8, :scale => 2
-      f.input :pay_tip,  :precision => 8, :scale => 2
-      f.input :hourly_hire_rate, :precision => 8, :scale => 2
+      f.input :pay_equipment_per_unit,  
+              :precision => 8, 
+              :scale => 2
+
+      f.input :pay_tolls,  
+              :precision => 8, 
+              :scale => 2
+
+      f.input :pay_tip,  
+              :precision => 8, 
+              :scale => 2
+
+      f.input :hourly_hire_rate, 
+              :precision => 8, 
+              :scale => 2
+
     end    
     f.buttons
   end
