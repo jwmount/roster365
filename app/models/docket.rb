@@ -20,4 +20,6 @@ class Docket < ActiveRecord::Base
     end
   end
   
+  validate :engagement, presence => true
+
 end

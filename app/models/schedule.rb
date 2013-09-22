@@ -33,7 +33,8 @@ class Schedule < ActiveRecord::Base
   attr_accessor :search
 
   def display_name
-    "#{self.day.to_s(:short)} - #{self.job.display_name}"
+    name = self.job.nil? ? 'None' : self.job.display_name
+    "#{self.day.to_s(:short)} - #{name}"
   end
 
   # collection of identifiers or numbers for a rep

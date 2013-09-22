@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 
 ActiveAdmin.register Job do
   # remove all default actions, e.g. [:new, :edit, :show etc]
@@ -32,11 +32,10 @@ ActiveAdmin.register Job do
       rescue ActiveRecord::RecordNotFound
         h5 "No Project Rep assigned."
       end
-      begin
+
+      unless job.solution.quote.rep_id.nil?
         @qrep = Person.find(job.solution.quote.rep_id)
         render @qrep if @qrep
-      rescue ActiveRecord::RecordNotFound
-        h5 "No Quote Rep assigned."
       end
     end
 
@@ -73,11 +72,13 @@ ActiveAdmin.register Job do
 
       f.input :start_on, 
               :as => :string, 
-              :input_html => {:class => 'datepicker'}, required: true
+              :input_html => {:class => 'datepicker'}, 
+              :required => true
               
       f.input :finished_on, 
               :as => :string, 
-              :input_html => {:class => 'datepicker'}, required: true
+              :input_html => {:class => 'datepicker'}, 
+              :required => true
     end
     f.buttons
   end
@@ -96,11 +97,11 @@ ActiveAdmin.register Job do
     active_admin_comments
   end
 
-
 controller do
   def permitted_params
-    params.require(:job).permit( :active, :complete, :name, :solution_id, :start_on, :time, :finished_on, 
-                                     :purchase_order, :solution_ids )
+    params.permit(:job => [ :active, :complete, :name, :solution_id, :start_on, :time, :finished_on, 
+                                     :purchase_order, :solution_ids 
+                                     ])
     end
   end
 

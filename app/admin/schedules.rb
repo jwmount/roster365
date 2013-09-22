@@ -197,7 +197,7 @@ ActiveAdmin.register Schedule do
 
   controller do
     def permitted_params
-      params.require(:schedule).permit( :day, :equipment_id, :equipment_units_today, :job_id ) 
+      params.permit(:schedule => [ :day, :equipment_id, :equipment_units_today, :job_id ] )
     end
   end
 
