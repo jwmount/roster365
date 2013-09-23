@@ -24,7 +24,11 @@ ActiveAdmin.register Schedule do
     end
 
     column "Schedule" do |schedule|
-      link_to schedule.job.name, edit_admin_schedule_path(schedule.id)
+      begin
+        link_to schedule.job.name, edit_admin_schedule_path(schedule.id)
+      rescue Exception
+        flash[:error] = "ERROR:  Job does not exist!"
+      end
     end
 
     column "Rep(s)" do |schedule|
@@ -88,7 +92,7 @@ ActiveAdmin.register Schedule do
         else
           render @tip
         end
-      rescue ActiveRecord::RecordNotFound
+      rescue Exception
         @solution = nil
       end
     end

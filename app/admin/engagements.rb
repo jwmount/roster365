@@ -177,14 +177,21 @@ ActiveAdmin.register Engagement do
 
 controller do
   def permitted_params
-      #params.require(:engagement).permit( :OK_tomorrow, :breakdown, :person_id, :contacted_at, :date_next_available,
-      #  :engagement_declined, :next_available_day, :no_show, :onsite_at, :onsite_now, :schedule_id,
-      #  :do_not_contact_until )
-      params.permit(:schedule => [  :OK_tomorrow, :breakdown, :person_id, :contacted_at, :date_next_available,
-                                    :engagement_declined, :next_available_day, :no_show,
-                                    :onsite_at, :onsite_now, :schedule_id,
-                                    :do_not_contact_until 
-                                 ] )
+      params.permit(:engagement => [ :schedule_id,
+                                     :person_id,
+                                     :onsite_now,
+                                     :onsite_at,
+                                     :breakdown,
+                                     :no_show,
+                                     :OK_tomorrow,
+                                     :engagement_declined,
+                                     :next_available_day,
+                                     :do_not_contact_until,
+                                     :contacted_at,
+                                     :date_next_available,
+                                     :docket_id
+                                   ]
+                   )
     end
   end
  

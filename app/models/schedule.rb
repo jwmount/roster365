@@ -53,7 +53,7 @@ class Schedule < ActiveRecord::Base
   def prep
     begin
       @prep = Person.find (self.job.solution.quote.project.rep_id)
-    rescue ActiveRecord::RecordNotFound
+    rescue Exception #NameError better?
       @prep = Person.new(:last_name=>'none')
     end
   end
@@ -62,7 +62,7 @@ class Schedule < ActiveRecord::Base
   def qrep
     begin
       @qrep = Person.find (self.job.solution.quote.rep_id)
-    rescue ActiveRecord::RecordNotFound
+    rescue Exception
       @qrep = Person.new(:last_name=>'none')
     end
   end
@@ -71,4 +71,8 @@ class Schedule < ActiveRecord::Base
     'No tip assigned.'
   end
  
+   def method_missing
+    flash[:error] = "something's missing."
+  end
+
 end

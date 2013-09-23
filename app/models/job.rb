@@ -6,7 +6,7 @@ class Job < ActiveRecord::Base
 
   has_one :company
   has_many :dockets
-  has_many :schedules
+  has_many :schedules, :dependent => :destroy
 
   # audited, not on Rails 4 yet
 

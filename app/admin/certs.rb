@@ -80,4 +80,18 @@ controller do
     active_admin_comments
   end #show
 
+controller do
+  def permitted_params
+    params.permit(:cert => [ :id,
+                             :certifiable_id,
+                             :certifiable_type,
+                             :certificate_id,
+                             :expires_on,
+                             :serial_number,
+                             :permanent,
+                             :active
+                           ])
+    end
+  end
+
 end
