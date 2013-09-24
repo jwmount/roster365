@@ -9,6 +9,7 @@ roles_list.each do |role|
 end
 
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
+=begin
 user_list = [
   ["admin@example.com", 'demo'],
   ['staff@example.com', 'staff_role'], 
@@ -18,6 +19,7 @@ user_list = [
 user_list.each do |email, role|  
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
 end
+=end
 
 # Companies and People
 # First one is licensee
