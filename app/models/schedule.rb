@@ -53,7 +53,7 @@ class Schedule < ActiveRecord::Base
   def prep
     begin
       @prep = Person.find (self.job.solution.quote.project.rep_id)
-    rescue Exception #NameError better?
+    rescue Exception
       @prep = Person.new(:last_name=>'none')
     end
   end

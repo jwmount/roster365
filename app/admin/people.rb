@@ -162,10 +162,16 @@ ActiveAdmin.register Person do
 
   controller do
     def permitted_params
-      params.require(:person).permit( 
-        :company_id, :OK_to_contact, :available, :first_name, :last_name, 
-        :available_on, :title, :active
-     )
+      params.permit(:person => [ :company_id, 
+                                 :OK_to_contact, 
+                                 :available, 
+                                 :first_name, 
+                                 :last_name, 
+                                 :available_on, 
+                                 :title, 
+                                 :active
+                                ]
+                   )
     end
   end
 
