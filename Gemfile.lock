@@ -66,7 +66,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
-    debugger (1.6.1)
+    debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.2.3)
@@ -97,7 +97,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (4.0.5)
       railties (>= 3.1.0)
-    json (1.7.7)
+    json (1.8.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
