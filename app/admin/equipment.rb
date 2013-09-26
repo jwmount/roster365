@@ -81,7 +81,13 @@ ActiveAdmin.register Equipment do
 
 controller do
   def permitted_params
-      params.require(:equipment).permit( :company, :description, :name, :company_id, :certs_attributes )
+      params.permit(:equipment => [ :company, 
+                                    :description, 
+                                    :name, 
+                                    :company_id, 
+                                    :certs_attributes
+                                  ]
+                   )                  
     end
   end
 

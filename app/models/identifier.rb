@@ -11,12 +11,15 @@ class Identifier < ActiveRecord::Base
    
   # this doesn't seem to work?
   scope :ranked, order("rank DSC")
-  
+
+  # D E F A U L T  V A L U E S  
   after_initialize :defaults
 
   def defaults
      unless persisted?
+       self.name ||= 'unknown'
        self.rank ||= 1
+       self.value ||= 'unknown'
     end
   end
   

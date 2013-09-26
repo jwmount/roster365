@@ -247,16 +247,16 @@ ActiveAdmin.register Company do
   end
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- controller do
-   def create_company_params
-     debugger
-     params.require(:company).permit( :name, :MYOB_number, :PO_required, :credit_terms, :active )
-   end
-
-   def update_company_params
-     params.require(:company).permit(:name, :MYOB_number, :PO_required, :credit_terms, :active )
-   end
-   
+  controller do
+    def permitted_params
+      params.permit(:company => [  :name, 
+                                   :MYOB_number, 
+                                   :PO_required, 
+                                   :credit_terms, 
+                                   :active,
+                                   :certs_attributes
+                                ]
+                   )   
+    end
   end
-     
 end

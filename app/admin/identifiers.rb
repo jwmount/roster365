@@ -46,7 +46,11 @@ ActiveAdmin.register Identifier do
         end
     end
       
-    column :name
+    #column :name
+    column :name do |id|
+      link_to id.name, admin_identifier_path(id)
+    end
+
     column :value do |id|
       if ['email','Email'].any? { |word| id.name.include?(word) }
         mail_to id.value 
@@ -62,7 +66,13 @@ ActiveAdmin.register Identifier do
 
 controller do
   def permitted_params
-    params.require(:identifier).permit( :identifiable_id, :identifiable_type, :name, :rank, :value, :created_at, :updated_at)
+    params.permit(:identifier => [ :identifiable_id, 
+                                   :identifiable_type, 
+                                   :name, 
+                                   :rank, 
+                                   :value
+                                ]
+                 )
     end
   end
   

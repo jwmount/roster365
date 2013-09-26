@@ -1,11 +1,5 @@
 ActiveAdmin.register Cert do
 
-controller do
-    def permitted_params
-      params.permit admin_user: [:certifiable_id, :certifiable_type, :active, :certificate_id, :expires_on, :permanent, :serial_number ]
-    end
-  end
-
   menu :parent => "Compliance"
   #menu :parent => "Compliance", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
@@ -55,15 +49,22 @@ controller do
         'No certificates have been added yet.'
       else
         f.input :certificate, :as => :select, 
-                          :collection => Certificate.alphabetically.all.map {|u| [u.name, u.id]}, 
-                          :include_blank => false
+                              :collection => Certificate.alphabetically.all.map {|u| [u.name, u.id]}, 
+                              :include_blank => false
       end
-      f.input :serial_number, :hint => "ID number, license number or value that makes this document unique."
-      f.input :expires_on, :as => :string, :input_html => {:class => 'datepicker'},
-                  :hint => "When the certificate or license expires.  Leave blank if document or status is permanent."  
+      
+      f.input :serial_number, 
+              :hint => "ID number, license number or value that makes this document unique."
+
+      f.input :expires_on, 
+              :as => :string, 
+              :input_html => {:class => 'datepicker'}, 
+              :hint => "When the certificate or license expires.  Leave blank if document or status is permanent."  
+
       f.input :permanent do |cert|
         status_tag (cert.permanent ? "YES" : "No"), (cert.permanent ? :ok : :error)  
       end          
+
       f.input :active do |cert|
         status_tag (cert.active ? "YES" : "No"), (cert.active ? :ok : :error)            
       end        
@@ -93,5 +94,4 @@ controller do
                            ])
     end
   end
-
 end

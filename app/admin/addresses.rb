@@ -106,8 +106,15 @@ ActiveAdmin.register Address do
 
 controller do
     def permitted_params
-      params.require(:address).permit( :addressable_id, :addressable_type, :map_reference, 
-                                       :post_code, :state, :street_address, :city, :updated_at, :created_at)
+      params.permit(:address => [ :addressable_id, 
+                                  :addressable_type, 
+                                  :state, 
+                                  :street_address, 
+                                  :city,
+                                  :post_code, 
+                                  :map_reference
+                                ]
+                    )
     end
   end
 

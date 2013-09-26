@@ -118,7 +118,7 @@ ActiveAdmin.register Person do
       attributes_table_for(person) do
         row("Available") { status_tag (person.available ? "YES" : "No"), (person.available ? :ok : :error) }
         unless person.available
-          row( "When #{person.display_name} will be available") {person.next_available_on}
+          row( "When #{person.display_name} will be available") {person.available_on}
         end
         row("OK_to_contact") { status_tag (person.OK_to_contact ? "YES" : "No"), (person.OK_to_contact ? :ok : :error) }
       end
@@ -162,14 +162,35 @@ ActiveAdmin.register Person do
 
   controller do
     def permitted_params
-      params.permit(:person => [ :company_id, 
+      params.permit(:person => [ :available, 
+                                 :available_on, 
+                                 :company_id, 
                                  :OK_to_contact, 
-                                 :available, 
                                  :first_name, 
                                  :last_name, 
-                                 :available_on, 
                                  :title, 
-                                 :active
+                                 :active,
+                                 certs_attributes: [:active,
+                                                    :certifiable_id,
+                                                    :certifiable_type,
+                                                    :certificate_id,
+                                                    :permanent,
+                                                    :serial_number
+                                                   ],
+                                 addresses_attributes:[:addressable_id, 
+                                                      :addressable_type, 
+                                                      :state, 
+                                                      :street_address, 
+                                                      :city,
+                                                      :post_code, 
+                                                      :map_reference
+                                                     ], 
+                                 identifiers_attributes:[:identifiable_id, 
+                                                        :identifiable_type, 
+                                                        :name, 
+                                                        :rank, 
+                                                        :value
+                                                       ]
                                 ]
                    )
     end

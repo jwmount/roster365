@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 
 ActiveAdmin.register Job do
   # remove all default actions, e.g. [:new, :edit, :show etc]
