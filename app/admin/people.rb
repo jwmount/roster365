@@ -147,15 +147,17 @@ ActiveAdmin.register Person do
       end
     end
 
-    # HACK?  trinary assignment to catch item.name being nil
+    # HACK?  Here we use a trinary assignment to catch item.name being nil.
     # Should prevent this via defaults and verifications,  ??.
+    # In identifier.rb with defaults enforced validations seem to work fine.  Line marked
+    # as trial below can be removed if no further problems.  Sept. 27, 2013.
     panel 'Rollodex' do
       attributes_table_for(person) do
         person.identifiers.order(:rank).each do |item|
           if item.name.include?("email")
             row("#{item.name}") {mail_to "#{item.value}"}
           else
-            item.name = item.name.nil? ? 'unknown' : item.name
+ #trial           item.name = item.name.nil? ? 'unknown' : item.name
             row("#{item.name}") {item.value} 
           end
         end
