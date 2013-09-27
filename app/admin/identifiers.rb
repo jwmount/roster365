@@ -69,7 +69,8 @@ controller do
     params.permit(:identifier => [ :identifiable_id, 
                                    :identifiable_type, 
                                    :name, 
-                                   :rank, 
+                                   :rank,
+                                   :updated_at, 
                                    :value
                                 ]
                  )

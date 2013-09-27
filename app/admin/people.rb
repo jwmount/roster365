@@ -1,3 +1,5 @@
+require 'debugger'
+
 ActiveAdmin.register Person do
 
   actions :all, :except => [:destroy]
@@ -145,13 +147,16 @@ ActiveAdmin.register Person do
       end
     end
 
+    # HACK?  trinary assignment to catch item.name being nil
+    # Should prevent this via defaults and verifications,  ??.
     panel 'Rollodex' do
       attributes_table_for(person) do
-        person.identifiers.order(:rank).each do |i|
-          if i.name.include?("email")
-            row("#{i.name}") {mail_to "#{i.value}"}
+        person.identifiers.order(:rank).each do |item|
+          if item.name.include?("email")
+            row("#{item.name}") {mail_to "#{item.value}"}
           else
-            row("#{i.name}") {i.value}
+            item.name = item.name.nil? ? 'unknown' : item.name
+            row("#{item.name}") {item.value} 
           end
         end
       end
@@ -170,6 +175,7 @@ ActiveAdmin.register Person do
                                  :last_name, 
                                  :title, 
                                  :active,
+                                 :updated_at,
                                  certs_attributes: [:active,
                                                     :certifiable_id,
                                                     :certifiable_type,
