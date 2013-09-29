@@ -1,4 +1,10 @@
-require 'debugger'
+#require 'debugger'
+
+# SolutionTips is HABTM join, action_on_permitted_parameters allows this to work 
+# Not entirely clear on this!  Also this probably applies to all models, take care.
+# Reference: http://api.rubyonrails.org/classes/ActionController/Parameters.html 
+ActionController::Parameters.action_on_unpermitted_parameters = :raise
+
 ActiveAdmin.register Solution do
    
    menu false 
@@ -142,8 +148,8 @@ form do |f|
     end
     
     f.inputs "Tip Site (Choose one)" do
-      f.input :tips, 
-              :as => :check_boxes
+      f.input :tips, :as => :check_boxes, :collection => Tip.alphabetically.all.map {|u| [u.name, u.id]}
+
        end
 
     f.inputs "Time & Distance" do
@@ -395,8 +401,6 @@ form do |f|
   controller do
     def permitted_params
       begin
-       # params.permit(:solution => [:name, :description])
-       # params.require(:solution).permit(
         params.permit(:solution => [
                                         :approved,
                                         :client_approved,
@@ -421,14 +425,17 @@ form do |f|
                                         :pay_load_client,
                                         :pay_tip_client,
                                         :pay_tip, 
-                                        :pay_tolls,                                        
+                                        :pay_tolls,   
+                                        :project_id,                                     
                                         :purchase_order_required, 
                                         :quote_id, 
                                         :solution_type,  
                                         :semis_permitted, 
                                         :total_material, 
+                                        :tip_ids,
                                         :unit_of_material, 
-                                        :unload_time
+                                        :unload_time,
+                                        :updated_at
           ])
     end
     rescue

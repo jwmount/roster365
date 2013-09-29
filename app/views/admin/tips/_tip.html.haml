@@ -5,7 +5,8 @@
 
 - else
 
-  %h4= tip.name
+  %h5= tip.name
+  %h5= tip.company.name
   %p= "Fee: #{number_to_currency(tip.fee)}"
   %address= render tip.addresses.limit(1)
 
