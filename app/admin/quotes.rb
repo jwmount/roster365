@@ -81,14 +81,14 @@ ActiveAdmin.register Quote do
     f.buttons :commit
   end
   
-  show :title => :name do |q|
+  show :title => :name do |quote|
     
     panel :Names do
-      attributes_table_for(q) do
+      attributes_table_for(quote) do
         row :name
-        row (:quote_to_id) {q.quote_to_name} 
-        row ("Project Rep") {q.prep_name}        
-        row ("Quote Rep") {q.qrep_name}        
+        row (:quote_to_id) {quote.quote_to_name} 
+        row ("Project Rep") {quote.prep_name}        
+        row ("Quote Rep") {quote.qrep_name}        
       end
     end
   
@@ -107,7 +107,7 @@ ActiveAdmin.register Quote do
       row :fire_ants_verified_by
       row :council
       row "Address" do |quote|
-        @address = Address.where("addressable_id = ? AND addressable_type = ?", self.project.id, 'Project').limit(1)
+        @address = Address.where("addressable_id = ? AND addressable_type = ?", quote.project_id, 'Project').limit(1)
         if @address.blank?
           flash[:error] = "Missing load site address.  Correct this in Project."
         else
@@ -139,11 +139,13 @@ end # show
     quote.fire_ants_verified_by = current_user.email
   end
 
+  #
   # Express Quote - Create from Deep copy of this quote
+  #
   action_item :only => [:edit, :show] do
-    link_to 'Express Quote', express_admin_project_quote_path( quote.id ) 
+    link_to 'Express Quote', express_admin_project_quote_path( params[:project_id], params[:id] ) 
   end
-
+  # Express Quote
   # Deep copy quote with its solutions, if any.  Solution names no longer 
   # validated to be unique to allow this.  Issue 40.
   member_action :express, :method => :get do
@@ -168,11 +170,11 @@ end # show
 
   # Appears on Quotes page but needs qualification
   action_item :only => [:edit, :show] do
-    link_to 'Solutions', admin_project_quote_solutions_path( quote.project.id, quote.id ) 
+    link_to 'Solutions', admin_project_quote_solutions_path( params[:project_id], params[:id] ) 
   end
 
   action_item :only => [:edit, :show ] do
-    link_to "Print", print_admin_project_quote_path(quote.id)
+    link_to "Print", print_admin_project_quote_path( params[:project_id], params[:id] )
   end
 
   # In partials the local variable 'print' refers to @quote
@@ -183,10 +185,27 @@ end # show
 
 
   controller do
+    def new
+      params.permit(id: [])
+      return super
+    end
+
+    def show
+      params.permit(quote:  [:project_id, :id])
+      return super
+    end
+
     def permitted_params
-    params.require(:quote).permit( :name, :rep_id, :quote_to_id, :project_id,
+      params.permit(:quote => [ :name, :rep_id, :quote_to_id, :project_id,    
+                                   :council, :duration, :expected_start, :fire_ants, 
+                                   :fire_ants_verified_by, :inclusions,
+                                   :addresses_attributes ] )
+=begin
+      params.require(:quote).permit( :name, :rep_id, :quote_to_id, :project_id,    
+                                   :project_id, :quote_id,
                                    :council, :duration, :expected_start, :fire_ants, :fire_ants_verified_by, :inclusions,
                                    :addresses_attributes ) 
+=end
     end
   end
 

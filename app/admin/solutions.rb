@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 ActiveAdmin.register Solution do
    
    menu false 
