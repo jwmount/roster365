@@ -185,27 +185,12 @@ end # show
 
 
   controller do
-    def new
-      params.permit(id: [])
-      return super
-    end
-
-    def show
-      params.permit(quote:  [:project_id, :id])
-      return super
-    end
 
     def permitted_params
       params.permit(:quote => [ :name, :rep_id, :quote_to_id, :project_id,    
                                    :council, :duration, :expected_start, :fire_ants, 
                                    :fire_ants_verified_by, :inclusions,
                                    :addresses_attributes ] )
-=begin
-      params.require(:quote).permit( :name, :rep_id, :quote_to_id, :project_id,    
-                                   :project_id, :quote_id,
-                                   :council, :duration, :expected_start, :fire_ants, :fire_ants_verified_by, :inclusions,
-                                   :addresses_attributes ) 
-=end
     end
   end
 
