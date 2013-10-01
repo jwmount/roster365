@@ -170,6 +170,8 @@ ActiveAdmin.register Person do
 
   controller do
     def permitted_params
+      params.permit!
+=begin
       params.permit(:person => [ 
                                  :available, 
                                  :available_on, 
@@ -203,6 +205,8 @@ ActiveAdmin.register Person do
                                                        ]
                                 ]
                    )
+=end                                
+                   
     end
   end
 
