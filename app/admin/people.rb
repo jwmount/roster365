@@ -178,13 +178,6 @@ ActiveAdmin.register Person do
                                  :title, 
                                  :active,
                                  :updated_at,
-                                 certs_attributes: [:active,
-                                                    :certifiable_id,
-                                                    :certifiable_type,
-                                                    :certificate_id,
-                                                    :permanent,
-                                                    :serial_number
-                                                   ],
                                  addresses_attributes:[:addressable_id, 
                                                       :addressable_type, 
                                                       :state, 
@@ -193,6 +186,13 @@ ActiveAdmin.register Person do
                                                       :post_code, 
                                                       :map_reference
                                                      ], 
+                                 certs_attributes: [:active,
+                                                    :certifiable_id,
+                                                    :certifiable_type,
+                                                    :certificate_id,
+                                                    :permanent,
+                                                    :serial_number
+                                                   ],
                                  identifiers_attributes:[:identifiable_id, 
                                                         :identifiable_type, 
                                                         :name, 

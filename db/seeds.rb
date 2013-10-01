@@ -1,3 +1,6 @@
+require_relative 'load_certificates'
+require_relative 'load_companies'
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
@@ -9,27 +12,21 @@ roles_list.each do |role|
 end
 
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
-=begin
+
 user_list = [
   ["admin@example.com", 'demo'],
   ['staff@example.com', 'staff_role'], 
   ['john@venuesoftware.com', 'vendor_support'],
   ['peta.forbes@roster365.com.au', 'management']
+  #['tgodino@me.com', 'vendor_support']
   ]
 user_list.each do |email, role|  
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
 end
-=end
 
-# Companies and People
-# First one is licensee
-# NOTE:  @company is ActiveRecord::Relation
-companies_list = [
-  "Roster365", "Projects-r-us", "Trucks-r-us"
-]
-companies_list.each do |name|
-  Company.create!( name: name)
-end
+load_certificates
+load_companies
+
 
 # now put some people in each company
 company_relation = Company.where ({name: 'Roster365'})
@@ -50,7 +47,7 @@ company_relation = Company.where ({name: 'Trucks-r-us'})
 Address.create!( addressable_id: @company.id, addressable_type: 'Company', street_address: '7 Strathaird Road',
                  city: 'Bundall', state: 'QLD', post_code: '4217' )
 
-# Equipment:  The company that has equipment has some
+# Equipment:  The company that has equipment has one or more of these kinds.
 equipment_list = [
   'Semi', 'Semi Tipper', 'Truck', 'Truck & Dog', 'Watercart'
   ]
@@ -58,28 +55,6 @@ equipment_list.each do |name|
   Equipment.create!( name: name, company_id: @company_2.id )
 end
 
-# Compliance
-# Person
-# Company
-# Equipment
-certificate_list = [
-  [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, true ],
-  [ 'ISO 9000', 'May be required.', false, true, false, true ],
-  [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true ]
-]
-certificate_list.each do |name, description, for_person, for_company, for_equipment, active |
-  Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
-                       for_equipment: for_equipment, active: active )
-  certificate = Certificate.where(name: name)
-  case 
-    when certificate[0].for_person
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Person', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
-    when certificate[0].for_company     
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Company', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
-    when certificate[0].for_equipment
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Equipment', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
-  end
-end
 
 
 
@@ -140,6 +115,7 @@ end
 # Tip Sites
 Tip.create!( name: 'ABC Tip', company_id: @company_1.id, fee: 10.00, fire_ant_risk_level: 'High')
 Tip.create!( name: 'XYZ Tip', company_id: @company_2.id, fee: 5.00, fire_ant_risk_level: 'Low')
+
 
 # Material types  
 [

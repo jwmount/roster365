@@ -1,4 +1,5 @@
 #require 'debugger'
+
 ActiveAdmin.register Company do
   
   menu parent: "Admin"
@@ -21,6 +22,10 @@ ActiveAdmin.register Company do
   index do
     column :name do |company|
       h5 link_to company.name, admin_company_path(company)
+      if company.identifiers.count > 0
+        @identifiers = company.identifiers
+        render @identifiers 
+      end
       if company.certs.count > 0
         @certs = company.certs
         @certs.each {|cert| render cert.certificate}
@@ -102,25 +107,24 @@ ActiveAdmin.register Company do
       end
     end
     
-    f.inputs "Address" do
+    f.inputs "Addresses" do
       f.has_many :addresses do |a|
-        a.inputs do
           a.input :street_address
           a.input :city
           a.input :state
           a.input :post_code
           a.input :map_reference
-        end
       end
     end
     
-    f.inputs "Rollodex Items for Company" do
+    f.inputs "Rollodex Items for Company (formerly Identifiers)" do
       f.has_many :identifiers do |f|
           f.input :name, :collection => %w[Mobile Office Truck Pager FAX Skype SMS Twitter],
                   :label => 'Type or kind*',
                   :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
           f.input :value,
-                  :label => 'Number, address, etc.',
+                  :label => 'Phone Number, address, etc.',
+                  :hint => 'Number, address, etc.  For example, 514 509-8381, or info@somecompany.com.',
                   :placeholder => 'Phone number, email address, ...'
           f.input :rank, :collection => %w[1 2 3 4 5 6 7 8 9],
                   :label => 'Priority',
@@ -249,14 +253,28 @@ ActiveAdmin.register Company do
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
   controller do
     def permitted_params
-      params.permit(:company => [  :name, 
-                                   :MYOB_number, 
-                                   :PO_required, 
+      params.permit!
+=begin
+      with full parameter list get Unpermitted parameters utf8, commit, ... ???
+      params.permit(:company => [  :active,
                                    :credit_terms, 
-                                   :active,
-                                   :certs_attributes
+                                   :id,
+                                   :MYOB_number, 
+                                   :name, 
+                                   :PO_required, 
+                                   :updated_at,
+                                   addresses_attributes: [:addressable_id, 
+                                                          :addressable_type, 
+                                                          :state, 
+                                                          :street_address, 
+                                                          :city,
+                                                          :post_code, 
+                                                          :map_reference
+                                                         ]
+
                                 ]
                    )   
+=end                   
     end
   end
 end
