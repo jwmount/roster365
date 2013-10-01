@@ -1,4 +1,5 @@
 require 'debugger'
+#ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
 ActiveAdmin.register Person do
 
@@ -169,7 +170,11 @@ ActiveAdmin.register Person do
 
   controller do
     def permitted_params
-      params.permit(:person => [ :available, 
+      params.permit(:person => [ :utf8,
+                                 :authenticity_token,
+                                 :commit,
+
+                                 :available, 
                                  :available_on, 
                                  :company_id, 
                                  :OK_to_contact, 
