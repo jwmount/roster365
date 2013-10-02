@@ -112,6 +112,13 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.datetime "updated_at",   :null => false
   end
 
+=begin
+  create_table "companies_equipment", :id=>false, :force => true do |t|
+    t.integer "company_id"
+    t.integer "equipment_id"
+  end
+=end
+
   create_table "conditions", :force => true do |t|
     t.string   "name"
     t.text     "verbiage"

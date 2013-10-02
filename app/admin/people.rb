@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
 ActiveAdmin.register Person do
@@ -168,8 +168,13 @@ ActiveAdmin.register Person do
   end
 
 
-  controller do
-    def permitted_params
+controller do
+  def create
+    params.permit!
+    super
+  end
+
+    def people_params
       params.permit!
 =begin
       params.permit(:person => [ 

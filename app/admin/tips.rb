@@ -74,8 +74,14 @@ ActiveAdmin.register Tip do
     end
   end
 
-  controller do
-    def permitted_params
+controller do
+
+  def create
+    params.permit!
+    super
+  end
+
+  def tip_params
       params.permit(:tip => [ :name, 
                               :company_id, 
                               :fee, 

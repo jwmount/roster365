@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 
 ActiveAdmin.register Equipment do
 
@@ -35,7 +35,7 @@ ActiveAdmin.register Equipment do
 
     f.inputs "Equipment" do
       f.input :name, :as => :select, 
-                     :collection => equipment.equipment_list,
+                     :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
                      :include_blank => false,
                      :required => true,
                      :hint => "Select one."
@@ -59,12 +59,11 @@ ActiveAdmin.register Equipment do
     end
        
   show do
-    panel "Equipment Details" do
-      attributes_table_for equipment do
-        row :name
-        row :company
-      end
+
+    attributes_table do
+      rows :name, :company
     end
+
     
     panel 'Certificates' do
       attributes_table_for(equipment) do
@@ -80,15 +79,33 @@ ActiveAdmin.register Equipment do
 
 
 controller do
-  def permitted_params
-      params.permit(:equipment => [ :company, 
-                                    :description, 
-                                    :name, 
-                                    :company_id, 
-                                    :certs_attributes
-                                  ]
-                   )                  
-    end
+
+  def create
+    params.permit!
+    super
   end
+
+  def update
+    params.permit!
+    super
+  end
+
+  def equipment_params
+    params.require(:equipment).permit(  :utf8, :authenticity_token, :equipment, :company_id, :commit,
+                                        :id,
+                                        :name, 
+                                        :company_id,
+                                        :certs_attributes => [:id,
+                                                               :certifiable_id,
+                                                               :certifiable_type,
+                                                               :certificate_id,
+                                                               :expires_on,
+                                                               :serial_number,
+                                                               :permanent,
+                                                               :active]
+                                       )
+    end
+  end  
+
 
 end

@@ -176,7 +176,13 @@ ActiveAdmin.register Engagement do
    
 
 controller do
-  def permitted_params
+
+  def create
+    params.permit!
+    super
+  end
+
+  def engagement_params
       params.permit(:engagement => [ :schedule_id,
                                      :person_id,
                                      :onsite_now,

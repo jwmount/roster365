@@ -199,7 +199,12 @@ ActiveAdmin.register Docket do
 controller do
   nested_belongs_to :engagement
 
-  def permitted_params
+  def create
+    params.permit!
+    super
+  end
+
+  def docket_params
     params.permit(:docket => [  :booking_no, :date_worked, :dated, :received_on, :operator_signed, :client_signed,
                                        :approved, :approved_by, :approved_on,
                                        :a_inv_pay, :b_inv_pay, :supplier_inv_pay,

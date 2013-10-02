@@ -157,7 +157,7 @@ ActiveAdmin.register Company do
     end
 
     panel "People" do
-      attributes_table_for( company ) do
+      attributes_table_for( :company ) do
         unless company.people.any?
           h4 'WARNING:  No people defined for this company.  You must create at least one contact before you create the company.'
         else
@@ -170,7 +170,7 @@ ActiveAdmin.register Company do
     end
 
     panel 'Projects' do
-      attributes_table_for(company) do
+      attributes_table_for(:company) do
         unless company.projects.any?
           h4 'There are no projects'
         else
@@ -190,7 +190,7 @@ ActiveAdmin.register Company do
     # certifiable_id == who owns it, e.g. Person, Company, Vehicle...
     # certificate_id == what is it, e.g. Driving License, Birth Certificate...
     panel "Certifications" do
-      attributes_table_for(company) do
+      attributes_table_for(:company) do
         unless company.certs.any?
           h4 'Empty'
         else
@@ -202,7 +202,7 @@ ActiveAdmin.register Company do
     end
 
     panel "Rollodex" do
-      attributes_table_for( company ) do
+      attributes_table_for( :company ) do
         unless company.identifiers.any?
           h4 'Empty'
         else
@@ -218,7 +218,7 @@ ActiveAdmin.register Company do
     end
         
     panel "Equipment" do
-      attributes_table_for( company ) do
+      attributes_table_for( :company ) do
         if company.equipment.empty?
           h4 'There is no equipment for this company.'
         else
@@ -251,8 +251,14 @@ ActiveAdmin.register Company do
   end
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-  controller do
-    def permitted_params
+controller do
+
+  def create
+    params.permit!
+    super
+  end
+
+    def company_params
       params.permit!
 =begin
       with full parameter list get Unpermitted parameters utf8, commit, ... ???

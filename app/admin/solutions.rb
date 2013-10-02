@@ -399,7 +399,13 @@ form do |f|
 # You can't use require() when calling new since root key does not exist yet.  Duh.  However
 # this approach is DANGEROUS as it defeats the whitelisting altogether.
   controller do
-    def permitted_params
+
+    def create
+      params.permit!
+      super
+    end
+
+    def solution_params
       begin
         params.permit(:solution => [
                                         :approved,

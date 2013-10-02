@@ -82,7 +82,13 @@ ActiveAdmin.register Cert do
   end #show
 
 controller do
-  def permitted_params
+
+  def create
+    params.permit!
+    super
+  end
+
+  def cert_params
     params.permit(:cert => [ :id,
                              :certifiable_id,
                              :certifiable_type,

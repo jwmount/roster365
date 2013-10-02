@@ -98,7 +98,13 @@ ActiveAdmin.register Job do
   end
 
 controller do
-  def permitted_params
+
+  def create
+    params.permit!
+    super
+  end
+
+  def job_params
     params.permit(:job => [ :active, :complete, :name, :solution_id, :start_on, :time, :finished_on, 
                                      :purchase_order, :solution_ids 
                                      ])

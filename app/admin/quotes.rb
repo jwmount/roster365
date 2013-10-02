@@ -186,7 +186,12 @@ end # show
 
   controller do
 
-    def permitted_params
+    def create
+      params.permit!
+      super
+    end
+
+    def quote_params
       params.permit(:quote => [ :name, :rep_id, :quote_to_id, :project_id,    
                                    :council, :duration, :expected_start, :fire_ants, 
                                    :fire_ants_verified_by, :inclusions,

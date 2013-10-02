@@ -40,7 +40,13 @@ ActiveAdmin.register Material do
 
 
   controller do
-    def permitted_params
+
+  def create
+    params.permit!
+    super
+  end
+
+  def material_params
       params.require(:identifier).permit( :description, :name )
     end
   end

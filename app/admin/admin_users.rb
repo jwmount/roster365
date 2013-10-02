@@ -43,6 +43,7 @@ ActiveAdmin.register AdminUser do
      #params.require(:admin_user).permit(
       params.permit!
 =begin
+
       params.permit(:admin_user => [ 
         :email,
         :encrypted_password,

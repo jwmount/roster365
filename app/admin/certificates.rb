@@ -1,10 +1,15 @@
 ActiveAdmin.register Certificate do
 
 controller do
-    def permitted_params
-      params.permit admin_user: [ :active, :description, :for_company, :for_person, :for_equipment, :name ]
-    end
+  def create
+    params.permit!
+   super
   end
+
+  def certificate_params
+    params.permit admin_user: [ :active, :description, :for_company, :for_person, :for_equipment, :name ]
+  end
+end
 
   menu parent: "Compliance"
 

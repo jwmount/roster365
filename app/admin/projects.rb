@@ -150,8 +150,14 @@ ActiveAdmin.register Project do
 
 
   controller do
-    def permitted_params
-    params.require(:project).permit( :active, :company_id, :name, :project_start_on, :rep_id, 
+
+    def create
+      params.permit!
+      super
+    end
+
+    def project_params
+      params.require(:project).permit( :active, :company_id, :name, :project_start_on, :rep_id, 
                                      :quotes_attributes, :addresses_attributes )
     end
   end

@@ -42,8 +42,14 @@ ActiveAdmin.register Requirement do
      
 
   controller do
-    def permitted_params
-    params.require(:requirement).permit( :requireable_id, :requireable_type, 
+
+    def create
+      params.permit!
+      super
+    end
+
+    def requirement_params
+      params.require(:requirement).permit( :requireable_id, :requireable_type, 
                                          :certificate_id, :description ) 
     end
   end

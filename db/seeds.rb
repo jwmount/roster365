@@ -1,6 +1,3 @@
-require_relative 'load_certificates'
-require_relative 'load_companies'
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
@@ -24,8 +21,39 @@ user_list.each do |email, role|
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
 end
 
-load_certificates
-load_companies
+# load certificates
+certificate_list = [
+  [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, true ],
+  [ 'ISO 9000', 'May be required.', false, true, false, true ],
+  [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true ]
+]
+certificate_list.each do |name, description, for_person, for_company, for_equipment, active |
+  Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
+                       for_equipment: for_equipment, active: active )
+  certificate = Certificate.where(name: name)
+  case 
+    when certificate[0].for_person
+      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Person', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
+    when certificate[0].for_company     
+      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Company', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
+    when certificate[0].for_equipment
+      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Equipment', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
+  end
+end
+
+# load companies
+# Companies and People
+# First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
+# Two methods here, names list and completely specified attributes.
+companies_list = [
+  "Roster365", 
+  'Projects-r-us',
+  'Trucks-r-us',
+  "American Debris Box Service Inc."
+]
+companies_list.each do |name|
+  Company.create!( name: name)
+end
 
 
 # now put some people in each company
@@ -116,6 +144,122 @@ end
 Tip.create!( name: 'ABC Tip', company_id: @company_1.id, fee: 10.00, fire_ant_risk_level: 'High')
 Tip.create!( name: 'XYZ Tip', company_id: @company_2.id, fee: 5.00, fire_ant_risk_level: 'Low')
 
+
+#load_equipment
+# load_equipment.rb -- Load default list of equipment for Account
+def equipment_list
+  [
+    "Backhoe",
+    "Bobcat",
+    "Bobcat",
+    "Compactor",
+    "Compactor 815",
+    "Compactor 815F",
+    "Compactor 825G",
+    "Compactor 825H",
+    "Crane",
+    "Dozer-D3",
+    "Dozer-D6",
+    "Dozer D6M Swamp",
+    "Dozer D6R Swamp",
+    "Dozer D6T XL",
+    "Dozer-D6H",
+    "Dozer-D65",
+    "Dozer - D6C",
+    "Dozer - D6R",
+    "Dozer - D6R Xl",
+    "Dozer - D7",
+    "Dozer - D7H",
+    "Dozer - D8",
+    "Dozer - D9T",
+    "Dozer R -D9",
+    "Dump Truck 25T",
+    "Dump Truck 30T",
+    "Dump Truck 40T",
+    "Dump Truck 50T",
+    "Drott 9T",
+    "Drott 8T",
+    "Drott",
+    "Excavator",
+    "EXC 8T",
+    "EXC 12-22T ",
+    "EXC 12T",
+    "EXC 13T",
+    "EXC13.5T",
+    "EXC 14T",
+    "EXC 15T",
+    "EXC 17T WHEELED",
+    "EXC 18T",
+    "EXC 20-29T",
+    "EXC 20T WHEELED",
+    "EXC 20T",
+    "EXC 20T ",
+    "EXC 20T 8T 12",
+    "EXC 22T",
+    "EXC 24T",
+    "EXC 25T",
+    "EXC 30T",
+    "EXC 35T",
+    "EXC 40T",
+    "EXC 45T",
+    "EXC 60T",
+    "EXC 4.5T ",
+    "EXC 4T",
+    "EXC 3.5T",
+    "EXC 3T COMBO",
+    "EXC 3T",
+    "EXC 5T",
+    "EXC 5T COMBO",
+    "EXC 5T ",
+    "EXC 5.5T",
+    "EXC 5-10T",
+    "EXC 5-30T",
+    "EXC 5T & 6T",
+    "EXC 6T",
+    "EXC 6T ",
+    "EXC 7.5T",
+    "EXC 7.5T ",
+    "EXC 8T ",
+    "Float",
+    "Grader 12G 140H",
+    "Grader",
+    "IT Loader",
+    "Loader",
+    "Moxy Dump",
+    "Moxy Dump 20T",
+    "Moxy Dump 25T",
+    "Moxy Dump 30T",
+    "Posi Track",
+    "Pug Mill",
+    "Roller Pad SF",
+    "Roller Smooth",
+    "Roller 12T",
+    "Roller",
+    "Roller 14T",
+    "Roller Smooth 12T",
+    "Roller Pad SF 12T",
+    "Roller Pad",
+    "Roller Pad SF 16T",
+    "Scraper 633",
+    "Scraper 623E",
+    "Scraper",
+    "Screening Plant",
+    "Semi",
+    "Semi/T & T",
+    "Semi Tipper",
+    "Sweeper",
+    "Tilt Tray",
+    "Truck",
+    "Truck & 3 Axle Trailer",
+    "Truck & 4 Axle Trailer",
+    "Truck & Dog",
+    "Watercart"
+    ]
+  end
+
+equipment_list.each do |name|
+  Equipment.create!( name: name)
+end
 
 # Material types  
 [
