@@ -97,7 +97,15 @@ ActiveAdmin.register Job do
     active_admin_comments
   end
 
+#
+# W H I T E L I S T  M A N A G E M E N T
+#
 controller do
+
+  def update
+    params.permit!
+    super
+  end
 
   def create
     params.permit!

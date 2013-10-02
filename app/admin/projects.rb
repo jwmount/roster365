@@ -148,7 +148,9 @@ ActiveAdmin.register Project do
     link_to "Quotes", admin_project_quotes_path( project.id )
   end
 
-
+#
+# W H I T E L I S T  M A N A G E M E N T
+#
   controller do
 
     def create
@@ -156,9 +158,27 @@ ActiveAdmin.register Project do
       super
     end
 
+    def update
+      params.permit!
+      super
+    end
+    
     def project_params
-      params.require(:project).permit( :active, :company_id, :name, :project_start_on, :rep_id, 
-                                     :quotes_attributes, :addresses_attributes )
+      params.require(:project).permit( :name, 
+                                       :rep_id, 
+                                       :company_id,
+                                       :project_start_on,
+                                       :addresses_attributes [
+                                                              :city,
+                                                              :state,
+                                                              :post_code,
+                                                              :map_reference
+                                                              ],
+                                       :active,
+                                       :commit,
+                                       :id
+
+                                     )
     end
   end
 

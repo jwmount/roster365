@@ -17,20 +17,26 @@ class Schedule < ActiveRecord::Base
   validate :day, :presence => true
   validate :validate_date
   validate :job, presence => true
-
-
-  def set_defaults
-    day = Date.current unless day
-  end
-
   # Modified to work with datepicker and datetime fields --JWM
+
   def validate_date
     if self.day < (Date.yesterday)
       errors.add(:day, "PROBLEM:  Scheduled date cannot be in the past")
     end
   end
 
-  attr_accessor :search
+# C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
+# Best practice in Rails is set defaults here and not in database
+  after_initialize :set_defaults
+
+  def set_defaults
+    unless persisted?    
+      day = Date.current unless day
+    end
+  end
+
+
+  # ?? attr_accessor :search
 
   def display_name
     name = self.job.nil? ? 'None' : self.job.display_name
@@ -44,7 +50,9 @@ class Schedule < ActiveRecord::Base
   end
   
   def method_missing(name, *args, &block)
-    puts "Called #{name} with #{args.inspect} and #{block}"
+    whats_missing = "Called #{name} with #{args.inspect} and #{block}"
+    puts whats_missing
+    flash[:warning] = whats_missing
   end
 
   # get Project Rep full name
@@ -71,8 +79,5 @@ class Schedule < ActiveRecord::Base
     'No tip assigned.'
   end
  
-   def method_missing
-    flash[:error] = "something's missing."
-  end
 
 end

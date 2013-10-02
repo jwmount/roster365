@@ -38,7 +38,9 @@ ActiveAdmin.register Engagement do
   filter :do_not_contact_until
     
   index do 
-    column :id
+    column "Project" do |engagement|
+      link_to engagement.schedule.job.solution.quote.project.name, admin_project_path(engagement.schedule.job.solution.quote.project.id)
+    end
 
     # http://stackoverflow.com/questions/1192843/grouped-select-in-rails
     # http://stackoverflow.com/questions/9579402/active-admin-refresh-second-drop-down-based-on-first-drop-down-ruby-on-rails
@@ -126,7 +128,7 @@ ActiveAdmin.register Engagement do
 
   show :title => "Engagement" do |engagement|
     attributes_table do
-      row :id
+      row engagement.schedule.quote.project.name
       row :schedule
       row :person
       row(:onsite_now) { status_tag (engagement.onsite_now ? "YES" : "No"), (engagement.onsite_now ? :ok : :error) }
@@ -175,9 +177,16 @@ ActiveAdmin.register Engagement do
    end  
    
 
+#
+# W H I T E L I S T  M A N A G E M E N T
+#
 controller do
-
   def create
+    params.permit!
+    super
+  end
+
+  def update
     params.permit!
     super
   end

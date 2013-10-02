@@ -398,9 +398,17 @@ form do |f|
 # http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters
 # You can't use require() when calling new since root key does not exist yet.  Duh.  However
 # this approach is DANGEROUS as it defeats the whitelisting altogether.
-  controller do
+#
+# W H I T E L I S T  M A N A G E M E N T
+#
+controller do
 
     def create
+      params.permit!
+      super
+    end
+
+    def update
       params.permit!
       super
     end

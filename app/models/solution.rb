@@ -61,7 +61,6 @@ class Solution < ActiveRecord::Base
   # C O N S T A N T S  &  D E F A U L T S    C O N S T A N T S  &  D E F A U L T S    C O N S T A N T S  &  D E F A U L T S    
   UNITS_OF_MATERIAL = %w[m3 tonne loads]
 
-  # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
   after_initialize :set_defaults
   #before_save :calculate_pay
   

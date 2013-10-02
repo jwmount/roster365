@@ -109,7 +109,7 @@ ActiveAdmin.register Quote do
       row "Address" do |quote|
         @address = Address.where("addressable_id = ? AND addressable_type = ?", quote.project_id, 'Project').limit(1)
         if @address.blank?
-          flash[:error] = "Missing load site address.  Correct this in Project."
+          flash[:error] = "Missing project work site address.  Correct this in Project."
         else
           render @address
         end
@@ -183,14 +183,21 @@ end # show
     render :partial => "print", :layout => "quotes/print", :object => @quote, :target => '_blank'
   end
 
-
-  controller do
+#
+# W H I T E L I S T  M A N A G E M E N T
+#
+controller do
 
     def create
       params.permit!
       super
     end
 
+    def update
+      params.permit!
+      super
+    end
+    
     def quote_params
       params.permit(:quote => [ :name, :rep_id, :quote_to_id, :project_id,    
                                    :council, :duration, :expected_start, :fire_ants, 

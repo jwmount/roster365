@@ -41,7 +41,40 @@
   # section "Membership Summary", :if => :memberships_enabled?
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
 #ActiveAdmin::Dashboards.build do
-ActiveAdmin.register_page "Maintenance Dashboard" do
+ActiveAdmin.register_page "Short Operations Dashboard" do
+
+  content :title => proc{ I18n.t("active_admin.dashboard") } do
+    div :class => "blank_slate_container", :id => "dashboard_default_message" do
+      span :class => "blank_slate" do
+#       span I18n.t("active_admin.dashboard_welcome.welcome")
+#       small I18n.t("active_admin.dashboard_welcome.call_to_action")
+      end
+    end
+
+    section "Active Jobs" do
+
+      jobs = Job.is_active?.by_start_on
+#     jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
+
+      table_for jobs do
+        column :job_name do |job|
+          link_to(job.name, admin_job_path(job))
+        end
+
+        column :start do |job|
+          job.start_on.strftime("%d %b, %Y")
+        end
+
+        column :end do |job|
+          job.finished_on.strftime("%d %b, %Y")
+        end
+
+      end
+    end
+  end
+end
+
+ActiveAdmin.register_page "Dashboard" do
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     div :class => "blank_slate_container", :id => "dashboard_default_message" do

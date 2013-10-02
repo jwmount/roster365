@@ -165,7 +165,25 @@ ActiveAdmin.register Schedule do
 
   end
 
-  
+  form do |f|
+    error_panel f
+
+    f.inputs "Daily Roster (Schedule)" do
+      f.input :day,
+              :as => :string,
+              :input_html => {:class => 'datepicker'},
+              :required => true, 
+              :label=>"Day", 
+              :hint => "Day being scheduled.",
+              :placeholder => "Schedule for day."  
+      f.input :job,
+              :hint => 'Job being scheduled.'
+      f.input :equipment_units_today,
+              :hint => 'Units needed on site this date for job.'
+    end
+    f.buttons
+  end
+
   show :title => 'Schedule' do |schedule|
     h3 schedule.day.strftime("%b %m, %Y")
     attributes_table_for(schedule) do
@@ -198,16 +216,26 @@ ActiveAdmin.register Schedule do
 #    render @companies, :layout => 'application'
 #  end    
 
-
+#
+# W H I T E L I S T  M A N A G E M E N T
+#
   controller do
 
-  def create
-    params.permit!
-    super
-  end
+    def create
+      params.permit!
+      super
+    end
+
+    def update
+      params.permit!
+      super
+    end
 
     def schedule_params
-      params.permit(:schedule => [ :day, :equipment_id, :equipment_units_today, :job_id ] )
+      params.require(:schedule).permit( :day, 
+                                        :equipment_id, 
+                                        :equipment_units_today, 
+                                        :job_id  )
     end
   end
 
