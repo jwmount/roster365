@@ -20,11 +20,16 @@ class Company < ActiveRecord::Base
 
   # We do not use :dependent => :destroy as tips survive company owners.  OK?
   has_many :tips
-
+#
+# S C O P E  D E F I N I T I O N S
+#
+  # Everyone who works for the Company: company.people
   scope :people, where(addressable_type: "Person")
-  scope :company, where(addressable_type: "Company")
-  scope :alphabetically, order("name ASC")
-
+  # scope :company, where(addressable_type: "Company")
+  # scope :alphabetically, order("name ASC")
+#
+# V A L I D A T I O N S
+#
   validates_presence_of :name
   validates_uniqueness_of :name
 

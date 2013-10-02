@@ -97,6 +97,8 @@ ActiveAdmin.register Company do
       end
     end
 
+=begin
+  Assign people to companies using People, this way is confusing.
     f.inputs "People" do
       if company.people.empty?
         "NOTE:  Company has no people.  Use the People menu to identify them."
@@ -106,7 +108,8 @@ ActiveAdmin.register Company do
                            :include_blank => false
       end
     end
-    
+=end
+
     f.inputs "Addresses" do
       f.has_many :addresses do |a|
           a.input :street_address
@@ -161,7 +164,8 @@ ActiveAdmin.register Company do
         unless company.people.any?
           h4 'WARNING:  No people defined for this company.  You must create at least one contact before you create the company.'
         else
-          company.people.alphabetically.all.each do |contact|
+#          company.people.alphabetically.all.each do |contact|
+          company.people.each do |contact|
             row ('Name') {link_to (contact.first_name + ' ' + contact.last_name + ', ' + contact.title),
               admin_person_path(contact)}
           end
@@ -257,9 +261,14 @@ controller do
     params.permit!
     super
   end
+  
+  def update
+    params.permit!
+    super
+  end
 
-    def company_params
-      params.permit!
+  def company_params
+    params.permit!
 =begin
       with full parameter list get Unpermitted parameters utf8, commit, ... ???
       params.permit(:company => [  :active,

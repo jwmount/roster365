@@ -174,9 +174,12 @@ controller do
     super
   end
 
-    def people_params
-      params.permit!
-=begin
+  def update
+    params.permit!
+    super
+  end
+
+  def people_params
       params.permit(:person => [ 
                                  :available, 
                                  :available_on, 
@@ -210,8 +213,6 @@ controller do
                                                        ]
                                 ]
                    )
-=end                                
-                   
     end
   end
 
