@@ -39,7 +39,7 @@ ActiveAdmin.register Company do
     column :projects do |company|
       project_count = company.projects.size
       if project_count == 0
-        nil
+        'None'
       else
         link_to "Projects (#{project_count})", admin_company_projects_path(company)
 #         project_count.to_s
@@ -63,7 +63,11 @@ ActiveAdmin.register Company do
         person_count.to_s
       end
     end
-    column :MYOB_number
+    
+    column "Bookkeeping No." do |company|
+      company.MYOB_number
+    end
+
     column :credit_terms
     column :PO_required do |company|
       status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error)
@@ -99,9 +103,10 @@ ActiveAdmin.register Company do
       if company.equipment.all.empty?
         "NOTE:  Company has no Equipment.  Use the Equipment menu to identify it."
       else
-        f.input :equipment, :as => :select, 
-                            :collection => company.equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
-                            :include_blank => false
+        "NOTE:  Equipment is now an 'owned' resource instead of a generic, e.g. 'Truck'.  So at best we list them here?"
+        #f.input :equipment, :as => :select, 
+        #                    :collection => company.equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
+        #                    :include_blank => false
       end
     end
 

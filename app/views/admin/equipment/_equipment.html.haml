@@ -1,2 +1,3 @@
 /= "#{equipment.name}: #{equipment.company}"
-= equipment.name + ', '
+= link_to equipment.name, admin_company_equipment_path(equipment.company.id, equipment.id)
+%p

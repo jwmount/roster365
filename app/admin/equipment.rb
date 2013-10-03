@@ -1,12 +1,14 @@
-require 'debugger'
+#require 'debugger'
 
 ActiveAdmin.register Equipment do
 
   menu :parent => "Admin"
   #menu :parent => "Admin", :if => lambda{|tabs_renderer|
-  #  controller.current_ability.can?(:manage, Role) #&& !Company.all.empty?
+  #  controller.current_ability.can?(:manage, Role) && !Company.all.empty?
   #  }
-
+  
+  belongs_to :company
+  
   index do
     
     column :name do |equipment|
@@ -34,11 +36,7 @@ ActiveAdmin.register Equipment do
     error_panel f
 
     f.inputs "Equipment" do
-      f.input :name, :as => :select, 
-                     :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]},
-                     :include_blank => false,
-                     :required => true,
-                     :hint => "Select one."
+      f.input :name
 
       f.input :company, :label => "Owner", :as => :select, 
                         :collection => Company.alphabetically.all.map {|u| [u.name, u.id]}, 
