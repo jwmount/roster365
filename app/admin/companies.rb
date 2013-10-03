@@ -209,7 +209,7 @@ ActiveAdmin.register Company do
     panel "Certifications" do
       attributes_table_for(:company) do
         unless company.certs.any?
-          h4 'Empty'
+          h4 'None'
         else
           certs = company.certs.all.each do |cert|
             row("#{cert.certificate.name}") {cert.certificate.description}
@@ -233,24 +233,15 @@ ActiveAdmin.register Company do
         end
       end
     end
-        
+
     panel "Equipment" do
-      attributes_table_for( :company ) do
-        if company.equipment.empty?
-          h4 'There is no equipment for this company.'
-        else
-          company.equipment.alphabetically.all.each do |equipment|
-            certs = []
-            equipment.certs.each do |cert|
-              certs << cert.certificate.name
-            end
-            certs_list = certs.join(", ")
-            row ("#{equipment.name}") {certs_list}
-          end
-        end
+      if company.equipment.size > 0
+        render company.equipment
+      else
+        link_to 'None', new_admin_company_equipment_path( company.id )
       end
     end
-                  
+
 
   end
 
