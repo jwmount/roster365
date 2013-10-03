@@ -177,7 +177,6 @@ ActiveAdmin.register Project do
                                        :active,
                                        :commit,
                                        :id
-
                                      )
     end
   end

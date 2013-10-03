@@ -199,10 +199,18 @@ controller do
     end
     
     def quote_params
-      params.permit(:quote => [ :name, :rep_id, :quote_to_id, :project_id,    
-                                   :council, :duration, :expected_start, :fire_ants, 
-                                   :fire_ants_verified_by, :inclusions,
-                                   :addresses_attributes ] )
+      params.permit(:quote => [ :name, 
+                                :rep_id, 
+                                :quote_to_id, 
+                                :project_id,    
+                                :council, 
+                                :duration, 
+                                :expected_start, 
+                                :fire_ants, 
+                                :fire_ants_verified_by, 
+                                :inclusions,
+                                :updated_at,
+                                :addresses_attributes ] )
     end
   end
 

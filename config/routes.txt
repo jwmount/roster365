@@ -100,7 +100,6 @@ batch_action_admin_schedule_engagements POST       /admin/schedules/:schedule_id
                                         PATCH      /admin/equipment/:id(.:format)                                                              admin/equipment#update
                                         PUT        /admin/equipment/:id(.:format)                                                              admin/equipment#update
                                         DELETE     /admin/equipment/:id(.:format)                                                              admin/equipment#destroy
-            admin_maintenance_dashboard GET        /admin/maintenance_dashboard(.:format)                                                      admin/maintenance_dashboard#index
          batch_action_admin_identifiers POST       /admin/identifiers/batch_action(.:format)                                                   admin/identifiers#batch_action
                       admin_identifiers GET        /admin/identifiers(.:format)                                                                admin/identifiers#index
                                         POST       /admin/identifiers(.:format)                                                                admin/identifiers#create
@@ -126,7 +125,6 @@ batch_action_admin_schedule_engagements POST       /admin/schedules/:schedule_id
                                         PATCH      /admin/materials/:id(.:format)                                                              admin/materials#update
                                         PUT        /admin/materials/:id(.:format)                                                              admin/materials#update
                                         DELETE     /admin/materials/:id(.:format)                                                              admin/materials#destroy
-                                        GET        /admin/maintenance_dashboard(.:format)                                                      admin/maintenance_dashboard#index
               batch_action_admin_people POST       /admin/people/batch_action(.:format)                                                        admin/people#batch_action
                            admin_people GET        /admin/people(.:format)                                                                     admin/people#index
                                         POST       /admin/people(.:format)                                                                     admin/people#create
@@ -202,15 +200,6 @@ batch_action_admin_schedule_engagements POST       /admin/schedules/:schedule_id
                                         PATCH      /admin/tips/:id(.:format)                                                                   admin/tips#update
                                         PUT        /admin/tips/:id(.:format)                                                                   admin/tips#update
                                         DELETE     /admin/tips/:id(.:format)                                                                   admin/tips#destroy
-                                        POST       /admin/admin_users/batch_action(.:format)                                                   admin/admin_users#batch_action
-                                        GET        /admin/admin_users(.:format)                                                                admin/admin_users#index
-                                        POST       /admin/admin_users(.:format)                                                                admin/admin_users#create
-                                        GET        /admin/admin_users/new(.:format)                                                            admin/admin_users#new
-                                        GET        /admin/admin_users/:id/edit(.:format)                                                       admin/admin_users#edit
-                                        GET        /admin/admin_users/:id(.:format)                                                            admin/admin_users#show
-                                        PATCH      /admin/admin_users/:id(.:format)                                                            admin/admin_users#update
-                                        PUT        /admin/admin_users/:id(.:format)                                                            admin/admin_users#update
-                                        DELETE     /admin/admin_users/:id(.:format)                                                            admin/admin_users#destroy
             batch_action_admin_comments POST       /admin/comments/batch_action(.:format)                                                      admin/comments#batch_action
                          admin_comments GET        /admin/comments(.:format)                                                                   admin/comments#index
                                         POST       /admin/comments(.:format)                                                                   admin/comments#create
@@ -455,6 +444,22 @@ batch_action_admin_schedule_engagements POST       /admin/schedules/:schedule_id
                                         PATCH      /admin/companies/:company_id/projects/:id(.:format)                                         admin/projects#update
                                         PUT        /admin/companies/:company_id/projects/:id(.:format)                                         admin/projects#update
                                         DELETE     /admin/companies/:company_id/projects/:id(.:format)                                         admin/projects#destroy
+                                        GET        /admin/companies(.:format)                                                                  admin/companies#index
+                                        POST       /admin/companies(.:format)                                                                  admin/companies#create
+                                        GET        /admin/companies/new(.:format)                                                              admin/companies#new
+                                        GET        /admin/companies/:id/edit(.:format)                                                         admin/companies#edit
+                                        GET        /admin/companies/:id(.:format)                                                              admin/companies#show
+                                        PATCH      /admin/companies/:id(.:format)                                                              admin/companies#update
+                                        PUT        /admin/companies/:id(.:format)                                                              admin/companies#update
+                                        DELETE     /admin/companies/:id(.:format)                                                              admin/companies#destroy
+                                        GET        /admin/companies/:company_id/equipment(.:format)                                            admin/equipment#index
+                                        POST       /admin/companies/:company_id/equipment(.:format)                                            admin/equipment#create
+                                        GET        /admin/companies/:company_id/equipment/new(.:format)                                        admin/equipment#new
+                                        GET        /admin/companies/:company_id/equipment/:id/edit(.:format)                                   admin/equipment#edit
+                                        GET        /admin/companies/:company_id/equipment/:id(.:format)                                        admin/equipment#show
+                                        PATCH      /admin/companies/:company_id/equipment/:id(.:format)                                        admin/equipment#update
+                                        PUT        /admin/companies/:company_id/equipment/:id(.:format)                                        admin/equipment#update
+                                        DELETE     /admin/companies/:company_id/equipment/:id(.:format)                                        admin/equipment#destroy
                                         GET        /admin/companies(.:format)                                                                  admin/companies#index
                                         POST       /admin/companies(.:format)                                                                  admin/companies#create
                                         GET        /admin/companies/new(.:format)                                                              admin/companies#new

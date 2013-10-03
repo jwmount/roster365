@@ -44,7 +44,10 @@ Roster365::Application.routes.draw do
     resources :companies do
       resources :projects
     end
-    
+
+    resources :companies do
+      resources :equipment
+    end
 
     resources :dockets do
       member do

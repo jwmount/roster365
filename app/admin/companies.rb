@@ -41,8 +41,16 @@ ActiveAdmin.register Company do
       if project_count == 0
         nil
       else
-#        link_to "Projects (#{project_count})", admin_company_projects_path(company)
-         project_count.to_s
+        link_to "Projects (#{project_count})", admin_company_projects_path(company)
+#         project_count.to_s
+      end
+    end
+
+    column :equipment do |company|
+      if company.equipment.size > 0 
+        render company.equipment
+      else
+        link_to "None", new_admin_company_equipment_path(company)
       end
     end
     
@@ -249,6 +257,7 @@ ActiveAdmin.register Company do
     @company = Company.find(params[:id])
     @revision = params    render "print", :layout => "print"
   end  
+
 
   sidebar :context do
     h4 link_to "Projects", admin_projects_path

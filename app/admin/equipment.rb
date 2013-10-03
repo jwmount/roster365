@@ -10,10 +10,10 @@ ActiveAdmin.register Equipment do
   index do
     
     column :name do |equipment|
-      link_to equipment.name, admin_equipment_path(equipment)
+      link_to equipment.name, admin_company_equipment_path(equipment.company.id, equipment.id), :class => "member_link"
     end
 
-    column :company do |equipment|
+    column :company, :selectable_column do |equipment|
       begin
         h5 equipment.company.display_name
         @people = equipment.company.people
@@ -35,16 +35,17 @@ ActiveAdmin.register Equipment do
 
     f.inputs "Equipment" do
       f.input :name, :as => :select, 
-                     :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
+                     :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]},
                      :include_blank => false,
                      :required => true,
                      :hint => "Select one."
-                     
+
       f.input :company, :label => "Owner", :as => :select, 
                         :collection => Company.alphabetically.all.map {|u| [u.name, u.id]}, 
                         :include_blank => false,
                         :hint => "Select one."
       end                  
+      
       f.inputs do
         f.has_many :certs do |f|
           f.input :certificate
@@ -91,7 +92,7 @@ controller do
   end
 
   def equipment_params
-    params.require(:equipment).permit(  :utf8, :authenticity_token, :equipment, :company_id, :commit,
+    params.require(:equipment).permit(  :utf8, :authenticity_token, :equipment, :commit,
                                         :id,
                                         :name, 
                                         :company_id,

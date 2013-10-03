@@ -26,7 +26,7 @@ class Company < ActiveRecord::Base
   # Everyone who works for the Company: company.people
   scope :people, where(addressable_type: "Person")
   # scope :company, where(addressable_type: "Company")
-  # scope :alphabetically, order("name ASC")
+  scope :alphabetically, order("name ASC")
 #
 # V A L I D A T I O N S
 #
