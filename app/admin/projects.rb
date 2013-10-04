@@ -36,7 +36,8 @@ ActiveAdmin.register Project do
     end
 
     column :intend_to_bid
-
+    column :requirements
+    
     column "Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
       render project.addresses
@@ -117,7 +118,7 @@ ActiveAdmin.register Project do
       end
 
       f.input :active, :as => :radio, :hint => "Check if the customer has given us a definite start work order."
-      
+
     end      
     f.buttons
   end
@@ -143,7 +144,20 @@ ActiveAdmin.register Project do
           render project.addresses
         end
      end
-        row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
+
+    #panel "Work Site Address" do
+      attributes_table_for project do
+        row "Requirements" do |project|
+          begin
+            @requirements = Requirement.where("requireable_id = ? AND requireable_type = ?", self.id, 'Project')
+            render project.requirements
+          rescue
+            flash[:info] = 'No requirements have been specified for this project.'
+          end
+        end
+     end
+     
+     row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
       end
       active_admin_comments
     end
