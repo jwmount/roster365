@@ -24,11 +24,18 @@ ActiveAdmin.register Project do
     projects.where ({rep_id: !nil})
   end
 
+  filter :company
+  filter :name
+  filter :people
+  filter :project_start_on
+  filter :intend_to_bid
 
   index do
     column 'Project Name' do |project|
       link_to project.name, admin_project_path(project)
     end
+
+    column :intend_to_bid
 
     column "Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
@@ -98,6 +105,9 @@ ActiveAdmin.register Project do
               :input_html => {:class => 'datepicker'},
               :hint => 'Best estimate of when project will start.'
 
+      f.input :intend_to_bid,
+              :hint => 'Check if we plan to bid this project.'
+
       f.has_many :addresses do |a|
         a.input :street_address
         a.input :city
@@ -107,8 +117,8 @@ ActiveAdmin.register Project do
       end
 
       f.input :active, :as => :radio, :hint => "Check if the customer has given us a definite start work order."
-      end
-          
+      
+    end      
     f.buttons
   end
   
@@ -164,7 +174,9 @@ ActiveAdmin.register Project do
     end
     
     def project_params
-      params.require(:project).permit( :name, 
+      params.require(:project).permit( :active,
+                                       :commit, 
+                                       :name, 
                                        :rep_id, 
                                        :company_id,
                                        :project_start_on,
@@ -173,10 +185,7 @@ ActiveAdmin.register Project do
                                                               :state,
                                                               :post_code,
                                                               :map_reference
-                                                              ],
-                                       :active,
-                                       :commit,
-                                       :id
+                                                              ]
                                      )
     end
   end

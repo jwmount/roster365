@@ -55,7 +55,8 @@ ActiveAdmin.register Person do
     error_panel f
 
     f.inputs "Person Details" do
-      f.input :company
+      f.input :company,
+              :include_blank => false
       f.input :first_name,
       :placeholder => "First name"
       f.input :last_name,

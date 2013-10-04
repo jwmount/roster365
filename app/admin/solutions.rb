@@ -113,9 +113,14 @@ form do |f|
   error_panel f
 
     f.inputs "Approvals" do
-      f.input :approved, :as => :radio, :hint => 'Once approved solutions cannot be changed.'
-      f.input :client_approved, :as => :radio, :hint => 'Once approved solutions cannot be changed.'
-      f.input :updated_at, :disabled => true, :hint => "Last updated timestamp; blank if New Solution."
+      f.input :approved, 
+              :as => :radio, 
+              :hint => 'Once approved solutions cannot be changed.'
+
+      f.input :client_approved, 
+              :as => :radio, 
+              :hint => 'Once approved solutions cannot be changed.'
+              
     end
     
     f.inputs "Solution Details" do 
@@ -187,7 +192,8 @@ form do |f|
 
     f.inputs "Required Equipment Certificates and Characteristics" do
       f.has_many :requirements do |f|
-        f.input :certificate, :hint => "If the requirement is not listed, use the Certificate menu to create it."
+        f.input :certificate, 
+                :hint => "If the requirement is not listed, use the Certificate menu to create it."
       end
     end
     
@@ -449,7 +455,13 @@ controller do
                                         :tip_ids,
                                         :unit_of_material, 
                                         :unload_time,
-                                        :updated_at
+                                        :updated_at,
+                                        :requirements_attributes => [ :requireable_id,
+                                                                      :requireable_type, 
+                                                                      :certificate_id, 
+                                                                      :description, 
+                                                                      :updated_at
+                                                                    ]
           ])
     end
     rescue

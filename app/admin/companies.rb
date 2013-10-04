@@ -18,6 +18,11 @@ ActiveAdmin.register Company do
     companies.where ({PO_required: false})
   end
 
+  filter :name
+  filter :people
+  filter :equipment
+  filter :certs
+  filter :MYOB_number
   
   index do
     column :name do |company|

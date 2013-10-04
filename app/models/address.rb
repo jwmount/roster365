@@ -6,7 +6,7 @@ class Address < ActiveRecord::Base
   # audited, not on Rails 4 yet
   
   def display_name
-    'some name'
+    'some name ??'
   end
   
   def entity_name
