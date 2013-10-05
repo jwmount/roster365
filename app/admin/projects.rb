@@ -36,11 +36,15 @@ ActiveAdmin.register Project do
     end
 
     column :intend_to_bid
-    column :requirements
-    
+
     column "Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
       render project.addresses
+    end
+
+    column "Requirements" do |project|
+      @requirements = project.requirements
+      render @requirements
     end
 
     column :company_id do |project|
@@ -109,17 +113,30 @@ ActiveAdmin.register Project do
       f.input :intend_to_bid,
               :hint => 'Check if we plan to bid this project.'
 
-      f.has_many :addresses do |a|
-        a.input :street_address
-        a.input :city
-        a.input :state
-        a.input :post_code
-        a.input :map_reference
+      f.input :active, 
+              :as => :radio, 
+              :hint => "Check if the customer has given us a definite start work order."
+
+    end
+
+    f.inputs "Project Work Site Address" do
+        f.has_many :addresses do |a|
+          a.input :street_address
+          a.input :city
+          a.input :state
+          a.input :post_code
+          a.input :map_reference
+        end
+    end
+
+    f.inputs "Requirements" do 
+      f.has_many :requirements do |r|
+        r.input :certificate
+        r.input :description
       end
+    end
+    
 
-      f.input :active, :as => :radio, :hint => "Check if the customer has given us a definite start work order."
-
-    end      
     f.buttons
   end
   
@@ -198,8 +215,14 @@ ActiveAdmin.register Project do
                                                               :city,
                                                               :state,
                                                               :post_code,
-                                                              :map_reference
-                                                              ]
+                                                              :map_reference,
+                                                              :updated_at
+                                                              ],
+                                       :requirements_attributes [
+                                                              :certificate_id,
+                                                              :description,
+                                                              :updated_at
+                                                            ]
                                      )
     end
   end

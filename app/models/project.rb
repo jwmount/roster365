@@ -13,12 +13,27 @@ class Project < ActiveRecord::Base
 #  has_one  :rep
   has_many  :people
 
-  # polymorphs
-  has_many  :addresses,     :as => :addressable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :addresses
-  has_many :requirements
+#
+# P O L Y M O R P H I C  A S S O C I A T I O N S
+#
+  has_many  :addresses,     
+            :as => :addressable, 
+            :autosave => true, 
+            :dependent => :destroy
+
+  has_many :requirements,
+           :as => :requireable,
+           :autosave => true,
+           :dependent => :destroy
+
+# polymorpth classes are updated directly from the parent            
+  accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :requirements
 
 
+#
+# V A L I D A T I O N S
+#
   validates_presence_of :name
   validates_presence_of :company_id
 
@@ -27,7 +42,9 @@ class Project < ActiveRecord::Base
   scope :bidding, where(:intend_to_bid => true)
   scope :alphabetically, order("name ASC")
 
+  #
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
+  #
   after_initialize :set_defaults
   
   # Best practice in Rails is set defaults here and not in database

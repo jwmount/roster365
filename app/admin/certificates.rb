@@ -85,5 +85,32 @@ end
     active_admin_comments
   end          
 
+#
+# W H I T E  L I S T  M A N A G E M E N T
+#
+controller do
+
+    def create
+      params.permit!
+      super
+    end
+
+    def update
+      params.permit!
+      super
+    end
+
+    def certificate_params
+      params.require(:certificate).permit( :id,
+                                           :name,
+                                           :description,
+                                           :for_person,
+                                           :for_company,
+                                           :for_equipment,
+                                           :active,
+                                           :updated_on
+                                         )
+    end
+  end
 
 end

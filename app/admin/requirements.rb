@@ -32,7 +32,7 @@ ActiveAdmin.register Requirement do
   index do
     column :certificate
     column :requireable_type
-    column :material do |req|
+    column "Project" do |req|
       name = req.requireable_type.to_s.camelize.constantize.find(req.requireable_id).name
     end
     column :description

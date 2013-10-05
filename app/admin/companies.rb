@@ -264,7 +264,9 @@ ActiveAdmin.register Company do
     h4 link_to "Projects", admin_projects_path
   end
 
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+#
+# W H I T E   L I S T   M A N A G E M E N T
+# 
 controller do
 
   def create
