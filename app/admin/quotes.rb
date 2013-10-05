@@ -29,8 +29,16 @@ ActiveAdmin.register Quote do
     column :solutions do |quote|
       link_to "Solutions (#{quote.solutions.count})", admin_project_quote_solutions_path(quote.project.id, quote.id)
     end      
+    
     column :expected_start
+    
     column :duration
+
+    column "Requirements" do |quote|
+      @requirements = quote.requirements
+      render @requirements
+    end
+
   end
  
   form do |f|
@@ -76,6 +84,13 @@ ActiveAdmin.register Quote do
       f.input :fire_ants_verified_by, label: "Fire Ant Status Verified By:", input_html: {disabled: true}
       f.input :council,
               :hint => "Council with jurisdiction, if known."
+    end
+
+    f.inputs "Requirements" do 
+      f.has_many :requirements do |r|
+        r.input :certificate
+        r.input :description
+      end
     end
 
     f.buttons :commit
@@ -124,6 +139,20 @@ ActiveAdmin.register Quote do
       end
     end
   end
+
+  panel :Requirements do
+    attributes_table_for quote do
+      row "Requirements" do |quote|
+        begin
+          @quotes = Requirement.where("requireable_id = ? AND requireable_type = ?", self.id, 'Quote')
+          render quote.requirements
+        rescue
+          render "None"
+        end
+      end
+    end
+  end
+
   #active_admin_comments
   
 end # show

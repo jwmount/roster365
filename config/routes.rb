@@ -62,6 +62,10 @@ Roster365::Application.routes.draw do
         end
       end
     end
+
+    resources :projects do
+      resources :requirements
+    end
     
     resources :solutions do
       member do

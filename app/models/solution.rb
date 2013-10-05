@@ -11,34 +11,34 @@ class Solution < ActiveRecord::Base
   belongs_to :equipment
   belongs_to :quote
   belongs_to :material
-  belongs_to :vendor, :class_name => 'Company', :foreign_key => :vendor_id
-  has_many :jobs, :dependent => :destroy
+  belongs_to :vendor, 
+             :class_name => 'Company', 
+             :foreign_key => :vendor_id
+  has_many :jobs, 
+           :dependent => :destroy
   has_and_belongs_to_many :tips
   
-  # polymophic associations
-  has_one :address,       :as => :addressable, :autosave => true, :dependent => :destroy
+  #
+  # P O L Y M O R P H I C  A S S O C I A T I O N S
+  #
+  has_one :address,       
+          :as => :addressable, 
+          :autosave => true, 
+          :dependent => :destroy
+  has_many :requirements, 
+           :as => :requireable, 
+           :autosave => true, 
+           :dependent => :destroy
+  # NESTED -- Polys are managed from the parent           
     accepts_nested_attributes_for :address
-  has_many :requirements, :as => :requireable, :autosave => true, :dependent => :destroy
     accepts_nested_attributes_for :requirements
 
-
+  #
   # V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S
-  # presence
-  #validates_presence_of :name, :material_id, :solution_type, :unit_of_material, :total_material
-  # We Do not require details, even solution_type in order to print worksheets when these are not given.
-  # If this trial is adopted, probably need to prevent approval when these attributes are blank.
+  #
   validates_presence_of :name
   validates_presence_of :quote_id, :equipment_id
 
-  # Warning:  Do not validate or cannot use .dup to copy solutions to make new ones.  See Copy 
-  # command in solutions.rb.
-  # validates_presence_of :tip_ids
-  
-  # attr value
-  #validates :kms_one_way, :loads_per_day, :drive_time_into_site, :load_time, :drive_time_out_of_site,
-  #          :drive_time_from_load_to_tip, :drive_time_tip_to_load, :drive_time_into_tip, :unload_time, 
-  #          :drive_time_out_of_tip_site, 
-  #          :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :less_than => 540}
   validates :invoice_load_client, :pay_load_client, :numericality => {:greater_than_or_equal_to => 0}
   validates :invoice_tip_client, :pay_tip_client, :numericality => {:greater_than_or_equal_to => 0}
 
@@ -47,8 +47,9 @@ class Solution < ActiveRecord::Base
   validate :PO_required?
 
 
-  # I N C O M P L E T E
+  # C O N T R A C T  T Y P E  V A L I D A T I O N S  --  I N C O M P L E T E
   # CONTRACT TYPE conditional validations -- given contract type, do we have what we need?
+  #
   with_options :if => :export? do |s|
     s.validates :total_material, 
       :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than => 500001}

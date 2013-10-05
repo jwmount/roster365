@@ -37,7 +37,7 @@ ActiveAdmin.register Project do
 
     column :intend_to_bid
 
-    column "Address" do |project|
+    column "Work Site Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
       render project.addresses
     end
@@ -169,7 +169,7 @@ ActiveAdmin.register Project do
             @requirements = Requirement.where("requireable_id = ? AND requireable_type = ?", self.id, 'Project')
             render project.requirements
           rescue
-            flash[:info] = 'No requirements have been specified for this project.'
+            render "None"
           end
         end
      end

@@ -7,26 +7,29 @@ require 'active_support/core_ext/object/blank.rb'
 class Quote < ActiveRecord::Base
   include Sluggable
 
-  belongs_to :project
-  
+  belongs_to :project  
   has_many :solutions, :dependent => :destroy
   has_many :jobs, :through => :solutions
-
-  has_many :requirements
-  has_many :certificates, :through => :requirements
 
   # This follows association used for Project, however it's not what we want exactly
   # There is a single rep, if any.  We need a scope :rep to refer to is, or?
   #has_one  :rep,          :as => :person
   has_many :people
 
-  # polymorphs
+#
+# P O L Y M O R P H I C  A S S O C I A T I O N S
+#
+  has_many :requirements,
+           :as => :requireable,
+           :autosave => true,
+           :dependent => :destroy
+# polymorpth classes are updated directly from the parent            
+  accepts_nested_attributes_for :requirements
   
 
   # Do not :scope => :project, this will cause arel to ROLLBACK with 'Cannot visit Project'
   # :name does not have to be unique to allow deep copy of quote with its solutions.
   # Doing this means new_quote will have solutions S01 and S02 if basis of copy had them.
-  # validates_uniqueness_of :name #, :scope => :project
   validates_presence_of :project_id, :quote_to_id, :duration
   validates_presence_of :fire_ants_verified_by #, :inclusions
 

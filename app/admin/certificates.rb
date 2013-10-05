@@ -1,15 +1,5 @@
 ActiveAdmin.register Certificate do
 
-controller do
-  def create
-    params.permit!
-   super
-  end
-
-  def certificate_params
-    params.permit admin_user: [ :active, :description, :for_company, :for_person, :for_equipment, :name ]
-  end
-end
 
   menu parent: "Compliance"
 
@@ -61,11 +51,7 @@ end
               :placeholder => "Description"
       f.input :active, 
               :as => :radio
-      f.input :for_person,  
-              :as => :radio, :collection => ["Person", "Equipment", "Company", "Project", "Site"]
-      f.input :for_person
-      f.input :for_equipment
-      f.input :for_company
+
     end
     f.buttons
   end
