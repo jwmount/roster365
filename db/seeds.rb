@@ -23,13 +23,13 @@ end
 
 # load certificates
 certificate_list = [
-  [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, true ],
-  [ 'ISO 9000', 'May be required.', false, true, false, true ],
-  [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true ]
+  [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, false, true ],
+  [ 'ISO 9000', 'May be required.', false, true, false, false, true ],
+  [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true, true ]
 ]
-certificate_list.each do |name, description, for_person, for_company, for_equipment, active |
+certificate_list.each do |name, description, for_person, for_company, for_equipment, for_place, active |
   Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
-                       for_equipment: for_equipment, active: active )
+                       for_equipment: for_equipment, :for_place for_place, active: active )
   certificate = Certificate.where(name: name)
   case 
     when certificate[0].for_person
@@ -38,6 +38,8 @@ certificate_list.each do |name, description, for_person, for_company, for_equipm
       Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Company', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
     when certificate[0].for_equipment
       Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Equipment', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
+    when certificate[0].for_place
+      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Place', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
   end
 end
 

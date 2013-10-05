@@ -131,13 +131,16 @@ ActiveAdmin.register Person do
     # Cert model is polymorphic
     # certifiable_id == who owns it, e.g. Person, Company, Vehicle...
     # certificate_id == what is it, e.g. Driving License, Birth Certificate...
-    panel 'Certificates' do
+    panel 'Certifications and Qualifications' do
       attributes_table_for(person) do
         unless person.certs.any?
           h4 'Empty'
         else
           certs = person.certs.all.each do |cert|
-            row("#{cert.certificate.name}") {cert.certificate.description}
+            row("#{cert.certificate.name}") {  cert.certificate.description +
+            (cert.active ? ' Current '  : ' Lapsed or pending').to_s + ', ' +
+            (cert.permanent ? ' Permanent ' : ' Temporary ').to_s + ',' +  
+            ' Serial_number: ' + cert.serial_number }
           end
         end
       end

@@ -36,7 +36,7 @@ ActiveAdmin.register Quote do
 
     column "Requirements" do |quote|
       @requirements = quote.requirements
-      render @requirements
+      render @requirements unless @requirements.nil?
     end
 
   end

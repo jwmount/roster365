@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
     t.boolean  "for_person"
     t.boolean  "for_company"
     t.boolean  "for_equipment"
+    t.boolean  "for_place"
     t.boolean  "active"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false

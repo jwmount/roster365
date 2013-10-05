@@ -81,9 +81,17 @@ ActiveAdmin.register Cert do
     active_admin_comments
   end #show
 
+#
+# W H I T E L I S T  M A N A G E M E N T
+#
 controller do
 
   def create
+    params.permit!
+    super
+  end
+
+  def update
     params.permit!
     super
   end

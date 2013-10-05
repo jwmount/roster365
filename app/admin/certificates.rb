@@ -66,6 +66,7 @@ ActiveAdmin.register Certificate do
         row("For Person") { status_tag (certificate.for_person ? "YES" : "No"), (certificate.for_person ? :ok : :error) }
         row("For Equipment") { status_tag (certificate.for_equipment ? "YES" : "No"), (certificate.for_equipment ? :ok : :error) }
         row("For Company") { status_tag (certificate.for_company ? "YES" : "No"), (certificate.for_company ? :ok : :error) }
+        row("For Place") { status_tag (certificate.for_place ? "YES" : "No"), (certificate.for_place ? :ok : :error) }
       end
     end
     active_admin_comments
@@ -93,6 +94,7 @@ controller do
                                            :for_person,
                                            :for_company,
                                            :for_equipment,
+                                           :for_place,
                                            :active,
                                            :updated_on
                                          )
