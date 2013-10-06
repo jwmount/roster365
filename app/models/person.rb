@@ -20,19 +20,28 @@ class Person < ActiveRecord::Base
   belongs_to :company
   has_many :dockets
   has_many :engagements
+  has_and_belongs_to_many :schedules
   
-  # polymorphs
+  #
+  # P O L I M O R P H I C  A S S O C I A T I O N S
+  #
   has_many  :addresses,     :as => :addressable, :autosave => true, :dependent => :destroy
     accepts_nested_attributes_for :addresses
 
-  has_many :certificates, :through => :certs
-  has_many :certs, :as => :certifiable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :certs
+  has_many :certs, 
+           :as => :certifiable, 
+           :autosave => true, 
+           :dependent => :destroy
 
-  has_many :identifiers, :as => :identifiable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :identifiers
+  has_many :identifiers, 
+           :as => :identifiable, 
+           :autosave => true, 
+           :dependent => :destroy
+
+  # NESTING           
+  accepts_nested_attributes_for :certs
+  accepts_nested_attributes_for :identifiers
   
-  has_and_belongs_to_many :schedules
 
   scope :alphabetically, order("last_name DESC")
   scope :personally, where("certifiable_type = 'Person'")

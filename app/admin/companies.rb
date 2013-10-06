@@ -106,17 +106,15 @@ ActiveAdmin.register Company do
 
     f.inputs "Equipment" do
       if company.equipment.all.empty?
-        "NOTE:  Company has no Equipment.  Use the Equipment menu to identify it."
+        "NONE.  Use the Equipment menu to identify it."
       else
-        "NOTE:  Equipment is now an 'owned' resource instead of a generic, e.g. 'Truck'.  So at best we list them here?"
-        #f.input :equipment, :as => :select, 
-        #                    :collection => company.equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
-        #                    :include_blank => false
+        f.input :equipment, :as => :select, 
+                            :collection => company.equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
+                            :include_blank => false
       end
     end
 
-=begin
-  Assign people to companies using People, this way is confusing.
+  #Assign people to companies using People, this way is confusing.
     f.inputs "People" do
       if company.people.empty?
         "NOTE:  Company has no people.  Use the People menu to identify them."
@@ -126,7 +124,6 @@ ActiveAdmin.register Company do
                            :include_blank => false
       end
     end
-=end
 
     f.inputs "Addresses" do
       f.has_many :addresses do |a|
@@ -211,13 +208,16 @@ ActiveAdmin.register Company do
     # Cert model is polymorphic
     # certifiable_id == who owns it, e.g. Person, Company, Vehicle...
     # certificate_id == what is it, e.g. Driving License, Birth Certificate...
-    panel "Certifications" do
+    panel "Certifications & Qualification" do
       attributes_table_for(:company) do
         unless company.certs.any?
           h4 'None'
         else
           certs = company.certs.all.each do |cert|
-            row("#{cert.certificate.name}") {cert.certificate.description}
+            row("#{cert.certificate.name}") { cert.certificate.description  +
+            (cert.active ? ' Current '  : ' Lapsed or pending').to_s + ', ' +
+            (cert.permanent ? ' Permanent ' : ' Temporary ').to_s + ','     +  
+            ' Serial_number: ' + cert.serial_number }
           end
         end
       end

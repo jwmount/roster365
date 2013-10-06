@@ -2,9 +2,6 @@ class Identifier < ActiveRecord::Base
   
   # audited, not on Rails 4 yet
 
-  belongs_to :addressable, :polymorphic => true
-  belongs_to :personable, :polymorphic => true
-
   # removed, prevents @contact.save operations if present
   #  validates_presence_of :identifiable_id, :identifiable_type, :name, :value
   # trial:  see if having all defaults handles this.  Cleaner than trinary tests in people.rb etc.

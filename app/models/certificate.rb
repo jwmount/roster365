@@ -4,7 +4,6 @@ class Certificate < ActiveRecord::Base
   # audited, not on Rails 4 yet
   
   has_many :certs
-  has_many :requirements
 
   scope :alphabetically, order("name ASC")
     

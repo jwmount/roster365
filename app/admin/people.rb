@@ -128,18 +128,19 @@ ActiveAdmin.register Person do
       end
     end
 
-    # Cert model is polymorphic
+    # Cert is polymorphic
     # certifiable_id == who owns it, e.g. Person, Company, Vehicle...
     # certificate_id == what is it, e.g. Driving License, Birth Certificate...
-    panel 'Certifications and Qualifications' do
+    # Each instance makes the Certificate specific, for example 'this' vehicle's insurance policy
+    panel 'Certifications & Qualifications' do
       attributes_table_for(person) do
         unless person.certs.any?
-          h4 'Empty'
+          h4 'None'
         else
           certs = person.certs.all.each do |cert|
             row("#{cert.certificate.name}") {  cert.certificate.description +
             (cert.active ? ' Current '  : ' Lapsed or pending').to_s + ', ' +
-            (cert.permanent ? ' Permanent ' : ' Temporary ').to_s + ',' +  
+            (cert.permanent ? ' Permanent ' : ' Temporary ').to_s + ','     +  
             ' Serial_number: ' + cert.serial_number }
           end
         end
@@ -152,17 +153,12 @@ ActiveAdmin.register Person do
       end
     end
 
-    # HACK?  Here we use a trinary assignment to catch item.name being nil.
-    # Should prevent this via defaults and verifications,  ??.
-    # In identifier.rb with defaults enforced validations seem to work fine.  Line marked
-    # as trial below can be removed if no further problems.  Sept. 27, 2013.
     panel 'Rollodex' do
       attributes_table_for(person) do
         person.identifiers.order(:rank).each do |item|
           if item.name.include?("email")
             row("#{item.name}") {mail_to "#{item.value}"}
           else
- #trial           item.name = item.name.nil? ? 'unknown' : item.name
             row("#{item.name}") {item.value} 
           end
         end
