@@ -2,17 +2,25 @@
 
 class Equipment < ActiveRecord::Base
 
-  
   # audited, not on Rails 4 yet
 
   belongs_to :company
   has_many :solutions, :dependent => :destroy
 
-  # polymorphs
-  has_many :certificates, :through => :certs
-  has_many :certs, :as => :certifiable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :certs
+  #
+  # P O L Y M O R P H I C  A S S O C I A T I O N S
+  #
+  #has_many :certificates, :through => :certs
+  has_many :certs, 
+           :as => :certifiable, 
+           :autosave => true, 
+           :dependent => :destroy
+  # NESTING
+  accepts_nested_attributes_for :certs
 
+#
+# V A L I D A T I O N S
+#
   validates :name, :presence => true
 
   scope :alphabetically, order("name ASC")

@@ -151,6 +151,9 @@ ActiveAdmin.register Person do
       attributes_table_for person do
         row :address
       end
+
+        active_admin_comments
+  
     end
 
     panel 'Rollodex' do
