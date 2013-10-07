@@ -1,5 +1,4 @@
 #require 'debugger'
-
 ActiveAdmin.register Company do
   
   menu parent: "Admin"
@@ -161,7 +160,6 @@ ActiveAdmin.register Company do
         f.input :active
       end
     end
-    
     f.buttons
   end
     
@@ -246,6 +244,7 @@ ActiveAdmin.register Company do
         link_to 'None', new_admin_company_equipment_path( company.id )
       end
     end
+    active_admin_comments
 
 
   end
@@ -280,28 +279,26 @@ controller do
   end
 
   def company_params
-    params.permit!
-=begin
-      with full parameter list get Unpermitted parameters utf8, commit, ... ???
-      params.permit(:company => [  :active,
-                                   :credit_terms, 
-                                   :id,
-                                   :MYOB_number, 
-                                   :name, 
-                                   :PO_required, 
-                                   :updated_at,
-                                   addresses_attributes: [:addressable_id, 
+    params(company).permit( :active,
+                            :credit_terms, 
+                            :id,
+                            :MYOB_number, 
+                            :name, 
+                            :PO_required, 
+                            :updated_at,
+                            addresses_attributes: [:addressable_id, 
                                                           :addressable_type, 
                                                           :state, 
                                                           :street_address, 
                                                           :city,
                                                           :post_code, 
                                                           :map_reference
-                                                         ]
-
-                                ]
-                   )   
-=end                   
+                                                         ],
+                            active_admin_comments: [ :resource_type,
+                                                     :body,
+                                                     :commit
+                                                   ]
+                    )                      
     end
   end
 end

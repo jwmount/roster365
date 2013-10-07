@@ -60,7 +60,6 @@ module ActiveAdmin
       
       private
 
-      
       def add_default_action_items
         add_action_item :except => [:new, :show] do
           if controller.current_ability.can?(:create, active_admin_config.resource_name)

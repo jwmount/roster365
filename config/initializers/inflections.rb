@@ -12,7 +12,7 @@
 # These inflection rules are supported but not enabled by default:
  ActiveSupport::Inflector.inflections do |inflect|
 #   inflect.acronym 'RESTful'
-#   inflect.uncountable( 'equipment' )
+   inflect.uncountable %w( equipment )
    inflect.plural   /^(equipment)$/i, '\1s'
    inflect.singular /^(equipment)/i, '\1'
    inflect.plural   /^(addresses)$/i, '\1es'

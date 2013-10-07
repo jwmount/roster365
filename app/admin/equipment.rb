@@ -12,6 +12,8 @@ ActiveAdmin.register Equipment do
   index do
     
     column :name do |equipment|
+
+  #  column :name do |equipment|
       link_to equipment.name, admin_company_equipment_path(equipment.company.id, equipment.id), :class => "member_link"
     end
 

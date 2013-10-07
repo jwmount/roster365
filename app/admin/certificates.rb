@@ -19,7 +19,7 @@ ActiveAdmin.register Certificate do
   scope :equipment do |certificates|
     certificates.where ({for_equipment: true})
   end
- 
+   
   index do
     column :name do |certificate|
       link_to certificate.name, admin_certificate_path(certificate)
@@ -66,7 +66,6 @@ ActiveAdmin.register Certificate do
         row("For Person") { status_tag (certificate.for_person ? "YES" : "No"), (certificate.for_person ? :ok : :error) }
         row("For Equipment") { status_tag (certificate.for_equipment ? "YES" : "No"), (certificate.for_equipment ? :ok : :error) }
         row("For Company") { status_tag (certificate.for_company ? "YES" : "No"), (certificate.for_company ? :ok : :error) }
-        row("For Place") { status_tag (certificate.for_place ? "YES" : "No"), (certificate.for_place ? :ok : :error) }
       end
     end
     active_admin_comments
