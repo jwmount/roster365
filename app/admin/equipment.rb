@@ -2,12 +2,7 @@
 
 ActiveAdmin.register Equipment do
 
-  menu parent: 'Admin'
-
-  #menu :parent => "Admin", :if => lambda{|tabs_renderer|
-  #  controller.current_ability.can?(:manage, Role) && !Company.all.empty?
-  #  }
-  
+  menu label: "Equipment", parent: "Company"
   belongs_to :company
   
   index do
@@ -89,6 +84,7 @@ controller do
 
   def update
     params.permit!
+    #equipment_params
     super
   end
 

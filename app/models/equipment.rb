@@ -1,4 +1,4 @@
-#require 'debugger'; debugger
+#require 'debugger'
 
 class Equipment < ActiveRecord::Base
 

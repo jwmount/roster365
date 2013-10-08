@@ -3,7 +3,7 @@ class Engagement < ActiveRecord::Base
       
   belongs_to :person
   belongs_to :schedule
-  has_many    :dockets, :dependent => :destroy
+  has_many   :dockets
   
   # audited, not on Rails 4 yet
 
@@ -27,7 +27,10 @@ class Engagement < ActiveRecord::Base
     end
   end
 
-  #validates_uniqueness_of :booking_no #, :scope => :project
+  #
+  # V A L I D A T I O N S
+  #
+  # validates_uniqueness_of :booking_no #, :scope => :project
   validates_presence_of :schedule_id
   validate :has_equipment_required?
   

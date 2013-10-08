@@ -20,7 +20,6 @@ ActiveAdmin.register Company do
   filter :name
   filter :people
   filter :equipment
-  filter :certs
   filter :MYOB_number
   
   index do
@@ -46,15 +45,15 @@ ActiveAdmin.register Company do
         'None'
       else
         link_to "Projects (#{project_count})", admin_company_projects_path(company)
-#         project_count.to_s
       end
     end
 
     column :equipment do |company|
       if company.equipment.size > 0 
+        link_to "Edit", admin_company_equipment_index_path(company.id)
         render company.equipment
       else
-        link_to "None", new_admin_company_equipment_path(company)
+        link_to "Assign", new_admin_company_equipment_path(company.id)
       end
     end
     
@@ -63,7 +62,6 @@ ActiveAdmin.register Company do
       if person_count == 0
         nil
       else
-#        link_to "People (#{person_count})", admin_company_people_path(company)
         person_count.to_s
       end
     end
@@ -103,6 +101,7 @@ ActiveAdmin.register Company do
       f.input :active, :as => :radio
     end
 
+=begin  doing this based on belongs_to :company statement in Equipment now.
     f.inputs "Equipment" do
       if company.equipment.all.empty?
         "NONE.  Use the Equipment menu to identify it."
@@ -112,6 +111,7 @@ ActiveAdmin.register Company do
                             :include_blank => false
       end
     end
+=end
 
   #Assign people to companies using People, this way is confusing.
     f.inputs "People" do
@@ -249,6 +249,9 @@ ActiveAdmin.register Company do
 
   end
 
+#
+# P U S H  B U T T O N S
+#
   action_item :only => [:edit, :show] do
     link_to "New Project", new_admin_company_project_path( company )
   end
@@ -258,7 +261,15 @@ ActiveAdmin.register Company do
     @revision = params    render "print", :layout => "print"
   end  
 
-
+=begin
+  action_item :only => [:edit, :show] do
+    link_to "Equipment", admin_company_equipment_index_path( params[:id] ) 
+  end
+  
+  member_action :equipment, :method => :get do
+    @equipment = Equipment.find(params[:id])
+  end  
+=end
   sidebar :context do
     h4 link_to "Projects", admin_projects_path
   end
@@ -266,38 +277,42 @@ ActiveAdmin.register Company do
 #
 # W H I T E   L I S T   M A N A G E M E N T
 # 
+
 controller do
 
   def create
-    params.permit!
+    params_permit!
     super
   end
   
   def update
     params.permit!
+    #company_params
     super
   end
 
   def company_params
-    params(company).permit( :active,
+    params.permit(:company => [ :id,   #????
+                            :utf8,
+                            :active,
                             :credit_terms, 
-                            :id,
                             :MYOB_number, 
                             :name, 
                             :PO_required, 
                             :updated_at,
                             addresses_attributes: [:addressable_id, 
-                                                          :addressable_type, 
-                                                          :state, 
-                                                          :street_address, 
-                                                          :city,
-                                                          :post_code, 
-                                                          :map_reference
-                                                         ],
+                                                   :addressable_type, 
+                                                   :state, 
+                                                   :street_address, 
+                                                   :city,
+                                                   :post_code, 
+                                                   :map_reference
+                                                  ],
                             active_admin_comments: [ :resource_type,
                                                      :body,
                                                      :commit
                                                    ]
+                            ]
                     )                      
     end
   end
