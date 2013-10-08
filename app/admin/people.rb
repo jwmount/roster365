@@ -27,7 +27,8 @@ ActiveAdmin.register Person do
     people.where ({OK_to_contact: false})
   end
 
-  filter :false
+  filter :full_name
+  filter :title
 
   index do
     column :name do |person|
@@ -62,8 +63,6 @@ ActiveAdmin.register Person do
     error_panel f
 
     f.inputs "Person Details" do
-      f.input :company,
-              :include_blank => false
       f.input :first_name,
       :placeholder => "First name"
       f.input :last_name,
@@ -91,23 +90,27 @@ ActiveAdmin.register Person do
     f.inputs do
       f.has_many :identifiers do |f|
         f.input :name, :collection => %w[Mobile Email Office Truck Pager FAX Skype SMS Twitter Home],
-        :label => 'Type or kind*',
-        :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
+                :label => 'Type or kind*',
+                :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
+
         f.input :value,
-        :label => 'Number, address, etc.',
-        :placeholder => 'phone number, email address, etc.'
+                :label => 'Number, address, etc.',
+                :placeholder => 'phone number, email address, etc.'
+
         f.input :rank, :collection => %w[1 2 3 4 5 6 7 8 9],
-        :label => 'Priority*',
-        :hint => 'Order prefered.',
-        :placeholder => '1 .. 9'
+                :label => 'Priority*',
+                :hint => 'Order prefered.',
+                :placeholder => '1 .. 9'
       end
     end
 
     f.inputs do
       f.has_many :certs do |f|
         f.input :certificate
-        f.input :expires_on, :input_html => {:class => 'datepicker'},
-        :hint => "Expiration date."
+        f.input :expires_on, 
+                :as => :date_picker,
+                #:input_html => {:class => 'datepicker'},
+                :hint => "Expiration date."
         f.input :serial_number, :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
         f.input :permanent
         f.input :active

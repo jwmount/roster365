@@ -150,8 +150,9 @@ ActiveAdmin.register Company do
     f.inputs do
       f.has_many :certs do |f|
         f.input :certificate
-        f.input :expires_on, :input_html => {:class => 'datepicker'},
-                             :hint => "Expiration date."
+        f.input :expires_on, 
+                :as => :date_picker,
+                :hint => "Expiration date."
         f.input :serial_number, :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
         f.input :permanent
         f.input :active

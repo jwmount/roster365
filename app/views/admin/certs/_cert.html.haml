@@ -1,3 +1,3 @@
-/= "#{cert.expires_on}: Serial Number : #{cert.serial_number}"
-= "#{cert.certificate.name}, Expires: #{cert.expires_on.strftime("%d %b, %Y")}"
+%h5 
+  = "#{cert.certificate.name}, Expires: #{cert.expires_on.strftime("%d %b, %Y")}"
 %p

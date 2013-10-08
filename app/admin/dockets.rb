@@ -59,9 +59,8 @@ ActiveAdmin.register Docket do
       f.input :person
       
       f.input :date_worked, 
-              :as => :string, 
               :required => true,
-              :input_html => {:class => 'datepicker'},
+              :as => :date_picker,
               :hint => "Day the work was performed.",
               :placeholder => 'dd-mm-yyyy'
               
@@ -73,13 +72,11 @@ ActiveAdmin.register Docket do
               :hint => "Engagement associated with this docket."
 
       f.input :dated, 
-              :as => :string, 
-              :input_html => {:class => 'datepicker'},
+              :as => :date_picker,
               :hint => "Date docket was marked completed."
               
       f.input :received_on, 
-              :as => :string, 
-              :input_html => {:class => 'datepicker'},
+              :as => :date_picker,
               :hint => "Date docket was received."
               
       f.input :operator_signed, 

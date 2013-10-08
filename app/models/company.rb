@@ -46,8 +46,6 @@ class Company < ActiveRecord::Base
 
   after_initialize :defaults
 
-  # self.assoc = [OtherModel.find_by_name('special')]
-  # self.address ||= build_address #let's you set a default association
   def defaults
      unless persisted?
        self.MYOB_number||='00000'

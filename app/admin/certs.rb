@@ -57,8 +57,7 @@ ActiveAdmin.register Cert do
               :hint => "ID number, license number or value that makes this document unique."
 
       f.input :expires_on, 
-              :as => :string, 
-              :input_html => {:class => 'datepicker'}, 
+              :as => :date_picker,              
               :hint => "When the certificate or license expires.  Leave blank if document or status is permanent."  
 
       f.input :permanent do |cert|

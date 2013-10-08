@@ -5,9 +5,11 @@ class Person < ActiveRecord::Base
   # self.address ||= build_address #let's you set a default association
   def defaults
      unless persisted?
-       self.OK_to_contact    ||=true
-       self.available        ||=true
-       self.available_on     ||=Date.today
+       self.active           ||= true
+       self.OK_to_contact    ||= true
+       self.available        ||= true
+       self.OK_to_contact    ||= true
+       self.available_on     ||= Date.today
     end
   end
 

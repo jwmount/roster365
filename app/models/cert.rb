@@ -16,4 +16,13 @@ class Cert < ActiveRecord::Base
   
   # audited, not on Rails 4 yet
   
+  def defaults
+    unless persisted?
+      self.active ||= true
+      self.permanent ||= false
+      self.expires_on ||= Date.today
+      self.serial_number ||= '000000'
+    end
+  end
+
 end
