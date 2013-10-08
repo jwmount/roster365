@@ -33,10 +33,6 @@ ActiveAdmin.register Company do
         @certs = company.certs
         @certs.each {|cert| render cert.certificate}
       end
-      if company.people.count > 0
-        @people = company.people
-        render @people
-      end
     end
 
     column :projects do |company|
@@ -58,11 +54,11 @@ ActiveAdmin.register Company do
     end
     
     column :people do |company|
-      person_count = company.people.size
-      if person_count == 0
-        nil
+      if company.people.count > 0
+        @people = company.people
+        render @people
       else
-        person_count.to_s
+        link_to "Assign", new_admin_company_equipment_path(company.id)
       end
     end
     
@@ -71,6 +67,7 @@ ActiveAdmin.register Company do
     end
 
     column :credit_terms
+    
     column :PO_required do |company|
       status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error)
     end      
@@ -177,11 +174,7 @@ ActiveAdmin.register Company do
         unless company.people.any?
           h4 'WARNING:  No people defined for this company.  You must create at least one contact before you create the company.'
         else
-#          company.people.alphabetically.all.each do |contact|
-          company.people.each do |contact|
-            row ('Name') {link_to (contact.first_name + ' ' + contact.last_name + ', ' + contact.title),
-              admin_person_path(contact)}
-          end
+          render company.people
         end
       end
     end

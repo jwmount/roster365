@@ -34,6 +34,10 @@ Roster365::Application.routes.draw do
     resources :solutions_tips
     resources :tip
 
+    resources :certificates do
+      resources :certs
+    end
+    
     resources :companies do
       resource :address
       resources :people

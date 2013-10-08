@@ -9,7 +9,7 @@ ActiveAdmin.register Person do
   #  !Company.all.empty?
   #}
 
-  menu :parent => "Admin/Company"
+  menu :parent => "Company"
   belongs_to :company
 
 
@@ -27,11 +27,12 @@ ActiveAdmin.register Person do
     people.where ({OK_to_contact: false})
   end
 
+  filter :false
 
   index do
     column :name do |person|
       if person.identifiers.count > 0
-        h5 link_to "#{person.display_name + ', ' + person.title}", admin_person_path(person.id)
+        h5 link_to "#{person.display_name + ', ' + person.title}", admin_company_person_path(person.company_id, person.id)
         @identifiers = person.identifiers.order(:rank)
         render @identifiers
       else
@@ -39,16 +40,22 @@ ActiveAdmin.register Person do
       end
     end
 
-    column :company
     column :available do |person|
       status_tag (person.available ? "YES" : "No"), (person.available ? :ok : :error)
     end
+
     column :OK_to_contact  do |person|
       status_tag (person.OK_to_contact ? "YES" : "No"), (person.OK_to_contact ? :ok : :error)
     end
+
     column :active  do |person|
       status_tag (person.active ? "YES" : "No"), (person.active ? :ok : :error)
     end
+
+    column :certs do |person|
+      render person.certs
+    end
+
   end
 
   form do |f|
