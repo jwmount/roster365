@@ -71,6 +71,9 @@ Roster365::Application.routes.draw do
       member do
         patch 'costing'
       end
+      member do
+        patch 'approve'
+      end
     end
     
     resources :quotes do

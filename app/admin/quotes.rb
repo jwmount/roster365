@@ -9,6 +9,7 @@ ActiveAdmin.register Quote do
   filter :project
   filter :duration
 
+  # NOT OPTIONAL, effect is to scope quotes to project, apparently is NOT same effect as same statement in quote.rb.
   belongs_to :project
   
   index do

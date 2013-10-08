@@ -3,7 +3,7 @@ class Engagement < ActiveRecord::Base
       
   belongs_to :person
   belongs_to :schedule
-  has_one    :docket, :dependent => :destroy
+  has_many    :dockets, :dependent => :destroy
   
   # audited, not on Rails 4 yet
 

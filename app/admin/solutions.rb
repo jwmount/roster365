@@ -316,6 +316,26 @@ form do |f|
       end
     end
   end
+
+# 
+# P U S H  B U T T O N S
+#
+  # APPROVE
+  # Approve sets BOTH types of approval for now.  Elaborate later.
+  # Aside from the obvious need to do one or the other and perhaps toggle them
+  # this operation should be silently logged for audit purposes.
+  action_item :only => [:edit, :show] do
+    link_to 'Approve', approve_admin_solution_path( solution.id )
+  end
+
+  member_action :approve, :method => :get do
+    @solution = Solution.find(params[:id])
+    @solution.client_approved = true
+    @solution.approved = true
+    @solution.save
+    flash[:notice] = "Solution was approved."
+    redirect_to admin_project_quote_solutions_path(@solution.quote.project.id,@solution.quote.id)
+  end
   
   action_item :only => [:edit, :show] do
     link_to 'Costing', costing_admin_solution_path( solution.id ),
@@ -325,7 +345,7 @@ form do |f|
 
   member_action :costing, :method => :get do
     @solution = Solution.find(params[:id])
-    flash[:notice] = "Costing was popped."
+    flash[:notice] = "Costing was popped (not really)."
     flash[:notice] << " Price was $1250.00."
     redirect_to admin_project_quote_solutions_path(@solution.quote.project.id,@solution.quote.id)
   end
@@ -365,7 +385,6 @@ form do |f|
   # needed because you have to create a Job in the context of its solution.
   # do not allow New operation in jobs.rb.
   action_item :only => [:edit, :show] do
-   # link_to 'Jobs', admin_project_quote_solution_jobs_path( solution.quote.project.id, solution.quote.id, solution.id ) 
     link_to 'New Job', jobify_admin_solution_path(solution.id)
   end
 
