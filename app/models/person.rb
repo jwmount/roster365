@@ -20,15 +20,14 @@ class Person < ActiveRecord::Base
   # end # the configuration block is optional
 
   belongs_to :company
-  has_many :dockets
-  has_many :engagements
+  has_many :dockets, :dependent => :destroy
+  has_many :engagements, :dependent => :destroy
   has_and_belongs_to_many :schedules
   
   #
   # P O L I M O R P H I C  A S S O C I A T I O N S
   #
-  has_many  :addresses,     :as => :addressable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :addresses
+  has_many  :addresses, :as => :addressable, :autosave => true, :dependent => :destroy
 
   has_many :certs, 
            :as => :certifiable, 
@@ -41,6 +40,7 @@ class Person < ActiveRecord::Base
            :dependent => :destroy
 
   # NESTING           
+  accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :certs
   accepts_nested_attributes_for :identifiers
   

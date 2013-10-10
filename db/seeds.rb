@@ -29,7 +29,7 @@ certificate_list = [
 ]
 certificate_list.each do |name, description, for_person, for_company, for_equipment, for_place, active |
   Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
-                       for_equipment: for_equipment, :for_place for_place, active: active )
+                       for_equipment: for_equipment, for_place: for_place, active: active )
   certificate = Certificate.where(name: name)
   case 
     when certificate[0].for_person
@@ -61,30 +61,21 @@ end
 # now put some people in each company
 company_relation = Company.where ({name: 'Roster365'})
 @company = company_relation[0]
-@person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep')
-@person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.')
+@person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep', available_on: Date.today)
+@person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.', available_on: Date.today)
 
 company_relation = Company.where ({name: 'Projects-r-us'})
 @company_1 = company_relation[0]
-@person_3 = Person.create!(company_id: @company_1.id, first_name: 'William', last_name: 'Wellsmore', title: 'Mr.')
-@person_4 = Person.create!(company_id: @company_1.id, first_name: 'Peter', last_name: 'Petersen', title: 'Project Mgr')
+@person_3 = Person.create!(company_id: @company_1.id, first_name: 'William', last_name: 'Wellsmore', title: 'Mr.', available_on: Date.today)
+@person_4 = Person.create!(company_id: @company_1.id, first_name: 'Peter', last_name: 'Petersen', title: 'Project Mgr', available_on: Date.today)
 
 company_relation = Company.where ({name: 'Trucks-r-us'})
 @company_2 = company_relation[0]
-@person_5 = Person.create!(company_id: @company_2.id, first_name: 'Vance', last_name: 'Smith', title: 'Owner')
-@person_6 = Person.create!(company_id: @company_2.id, first_name: 'Sam', last_name: 'Jones', title: 'Driver')
+@person_5 = Person.create!(company_id: @company_2.id, first_name: 'Vance', last_name: 'Smith', title: 'Owner', available_on: Date.today)
+@person_6 = Person.create!(company_id: @company_2.id, first_name: 'Sam', last_name: 'Jones', title: 'Driver', available_on: Date.today)
 
 Address.create!( addressable_id: @company.id, addressable_type: 'Company', street_address: '7 Strathaird Road',
                  city: 'Bundall', state: 'QLD', post_code: '4217' )
-
-# Equipment:  The company that has equipment has one or more of these kinds.
-equipment_list = [
-  'Semi', 'Semi Tipper', 'Truck', 'Truck & Dog', 'Watercart'
-  ]
-equipment_list.each do |name|
-  Equipment.create!( name: name, company_id: @company_2.id )
-end
-
 
 
 
@@ -129,7 +120,7 @@ project_list.each do |name|
   @project = project_relation[0]
 
     10.times do 
-      Quote.create!( project_id: @project.id, quote_to_id: 1, fire_ants_verified_by: 'No One' )
+      Quote.create!( project_id: @project.id, quote_to_id: 1, rep_id: 1, fire_ants_verified_by: 'No One' )
     end
 end
 # now retrieve the first quote and create some solutions for it, one for each contract type
@@ -147,10 +138,6 @@ Tip.create!( name: 'ABC Tip', company_id: @company_1.id, fee: 10.00, fire_ant_ri
 Tip.create!( name: 'XYZ Tip', company_id: @company_2.id, fee: 5.00, fire_ant_risk_level: 'Low')
 
 
-
-equipment_list.each do |name|
-  Equipment.create!( name: name)
-end
 
 # Material types  
 [
@@ -318,5 +305,5 @@ end
    "COD, Credit Card Accounts"
  ],
 ].each do |condition|
-  Condition.create!(:name => condition[0], :verbiage => condition[1], :indication => condition[2] )
+  Condition.create!(:name => condition[0], :verbiage => condition[1], :indication => condition[2], change_approved_at: Date.today)
 end

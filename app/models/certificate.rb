@@ -3,7 +3,7 @@ class Certificate < ActiveRecord::Base
 
   # audited, not on Rails 4 yet
   
-  has_many :certs
+  has_many :certs, dependent: :destroy
 
   scope :alphabetically, order("name ASC")
     

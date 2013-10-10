@@ -14,6 +14,9 @@ gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
 
 gem 'mysql2'
 gem 'pg'
+# Allows the use of foreign keys used to protect data integrity (per Xavier Shay)
+gem 'foreigner'
+
 gem 'taps'  #needed by Heroku
 
 # Needed for Rails 4.0 on Heroku
@@ -48,3 +51,18 @@ end
 
 # To use debugger
 gem 'debugger'
+# Use jquery as the JavaScript library
+
+gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+

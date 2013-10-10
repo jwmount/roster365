@@ -37,7 +37,7 @@ ActiveAdmin.register Person do
         @identifiers = person.identifiers.order(:rank)
         render @identifiers
       else
-        h5 link_to "#{person.display_name}", admin_person_path(person.id)
+        h5 link_to "#{person.display_name}", admin_company_person_path(person.company_id, person.id)
       end
     end
 

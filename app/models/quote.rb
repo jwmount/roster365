@@ -9,7 +9,7 @@ class Quote < ActiveRecord::Base
 
   belongs_to :project  
   has_many :solutions, :dependent => :destroy
-  has_many :jobs, :through => :solutions
+  has_many :jobs, :through => :solutions, :dependent => :destroy
 
   # This follows association used for Project, however it's not what we want exactly
   # There is a single rep, if any.  We need a scope :rep to refer to is, or?

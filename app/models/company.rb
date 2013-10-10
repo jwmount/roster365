@@ -3,10 +3,10 @@ class Company < ActiveRecord::Base
   ActiveRecord::Base.send(:include, ActiveModel::ForbiddenAttributesProtection)
   # audited, not on Rails 4 yet
 
-  has_many :people
-  has_many :equipment
-  has_many :projects
-  has_many :solutions
+  has_many :people, :dependent => :destroy
+  has_many :equipment, :dependent => :destroy
+  has_many :projects, :dependent => :destroy
+  has_many :solutions, :dependent => :destroy
   
   # polymorphs
   has_many  :addresses, :as => :addressable, :autosave => true, :dependent => :destroy
