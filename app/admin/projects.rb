@@ -129,14 +129,16 @@ ActiveAdmin.register Project do
         end
     end
 
-    f.inputs "Requirements" do 
+    f.inputs "Requirements -- trucks have, people have, sites have" do 
       f.has_many :requirements do |r|
+        r.input :requireable_type, 
+                :as => :check_boxes,
+                :collection => %w[Company Person Equipment Site Material]
         r.input :certificate
         r.input :description
       end
     end
     
-
     f.buttons
   end
   
@@ -199,18 +201,21 @@ ActiveAdmin.register Project do
       super
     end
 
-    def update
-      params.permit!
-      super
-    end
-    
+#    def update
+#      params.permit!
+#      super
+#    end
+
     def project_params
-      params.require(:project).permit( :active,
+      params.require(:project).permit( 
+                                       :id,
+                                       :active,
                                        :commit, 
                                        :name, 
                                        :rep_id, 
                                        :company_id,
                                        :project_start_on,
+                                       :intend_to_bid,
                                        :addresses_attributes [
                                                               :city,
                                                               :state,
@@ -219,6 +224,8 @@ ActiveAdmin.register Project do
                                                               :updated_at
                                                               ],
                                        :requirements_attributes [
+                                                              :id,
+                                                              :requireable_type,
                                                               :certificate_id,
                                                               :description,
                                                               :updated_at
@@ -226,5 +233,6 @@ ActiveAdmin.register Project do
                                      )
     end
   end
+
 
 end

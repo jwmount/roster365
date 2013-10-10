@@ -25,6 +25,16 @@ class Equipment < ActiveRecord::Base
 
   scope :alphabetically, order("name ASC")
 
+# D E F A U L T S
+
+  after_initialize :defaults
+
+  def defaults
+     unless persisted?
+       # list default values here
+    end
+  end
+
   def certificate_list
     certificates = self.certs  #[0].certificate.name
     list = certificates.collect! {|x| x.certificate.name + "; " }

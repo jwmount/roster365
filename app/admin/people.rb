@@ -3,13 +3,13 @@ ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
 ActiveAdmin.register Person do
 
-  actions :all, :except => [:destroy]
+  actions :all # , :except => [:destroy]
   #menu :parent => "Admin", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Company.all.empty?
   #}
 
-  menu :parent => "Company"
+  #menu :parent => "Admin"
   belongs_to :company
 
 

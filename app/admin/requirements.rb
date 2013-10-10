@@ -14,7 +14,7 @@ ActiveAdmin.register Requirement do
     requirements.where({requireable_type: 'Company'})
   end
   scope :people do |requirements|
-    requirements.where({requireable_type: 'Persion'})
+    requirements.where({requireable_type: 'Person'})
   end
   scope :equipment do |requirements|
     requirements.where({requireable_type: 'Equipment'})
@@ -22,11 +22,11 @@ ActiveAdmin.register Requirement do
   scope :companies do |requirements|
     requirements.where({requireable_type: 'Material'})
   end
-  scope :project do |requirements|
-    requirements.where({requireable_type: 'Project'})
-  end
   scope :solutions do |requirements|
     requirements.where({requireable_type: 'Solution'})
+  end
+  scope :solutions do |requirements|
+    requirements.where({requireable_type: 'Site'})
   end
    
   index do

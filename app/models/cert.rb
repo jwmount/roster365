@@ -15,6 +15,11 @@ class Cert < ActiveRecord::Base
   belongs_to :certifiable, :polymorphic => true
   
   # audited, not on Rails 4 yet
+
+#
+# D E F A U L T S
+#
+  after_initialize :defaults
   
   def defaults
     unless persisted?

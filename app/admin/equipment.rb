@@ -8,8 +8,6 @@ ActiveAdmin.register Equipment do
   index do
     
     column :name do |equipment|
-
-  #  column :name do |equipment|
       link_to equipment.name, admin_company_equipment_path(equipment.company.id, equipment.id), :class => "member_link"
     end
 
@@ -33,13 +31,12 @@ ActiveAdmin.register Equipment do
   form do |f|
     error_panel f
 
-    f.inputs "Equipment" do
-      f.input :name
-
-      f.input :company, :label => "Owner", :as => :select, 
-                        :collection => Company.alphabetically.all.map {|u| [u.name, u.id]}, 
-                        :include_blank => false,
-                        :hint => "Select one."
+    f.inputs "Equipment for #{self.company.name}" do
+      f.input :name,
+              :as => :select,
+              :collection => equipment.equipment_list, #Equipment.alphabetically.all.map {|u| [u.name, u.id]},               
+              :include_blank => false,
+              :hint => "Select one."
       end                  
       
       f.inputs do

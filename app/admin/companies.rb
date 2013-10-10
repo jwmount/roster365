@@ -46,7 +46,6 @@ ActiveAdmin.register Company do
 
     column :equipment do |company|
       if company.equipment.size > 0 
-        link_to "Edit", admin_company_equipment_index_path(company.id)
         render company.equipment
       else
         link_to "Assign", new_admin_company_equipment_path(company.id)
@@ -58,7 +57,7 @@ ActiveAdmin.register Company do
         @people = company.people
         render @people
       else
-        link_to "Assign", new_admin_company_equipment_path(company.id)
+        link_to "Assign", new_admin_company_person_path(company.id)
       end
     end
     
@@ -185,9 +184,10 @@ ActiveAdmin.register Company do
         unless company.projects.any?
           h4 'There are no projects'
         else
-          company.projects.alphabetically.all.each do |project|
-            row ('Name') {link_to (project.name), admin_project_path(project)}
-          end
+          render company.projects
+          #company.projects.alphabetically.all.each do |project|
+          #  row ('Name') {link_to (project.name), admin_project_path(project)}
+          #end
         end
       end
     end
@@ -254,6 +254,11 @@ ActiveAdmin.register Company do
     @company = Company.find(params[:id])
     @revision = params    render "print", :layout => "print"
   end  
+
+  action_item :only => [:edit, :show] do
+    link_to "People", admin_company_people_path( company )
+  end
+  
 
 =begin
   action_item :only => [:edit, :show] do
