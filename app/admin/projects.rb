@@ -47,7 +47,7 @@ ActiveAdmin.register Project do
       render @requirements
     end
 
-    column :company_id do |project|
+    column "General Contractor" do |project|
       link_to project.company.name, admin_company_path(project.company)
     end
 
@@ -198,6 +198,7 @@ ActiveAdmin.register Project do
 
     def create
       params.permit!
+      self.name = 'Godzilla'
       super
     end
 

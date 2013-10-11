@@ -48,11 +48,9 @@ ActiveAdmin.register Quote do
     f.inputs  do
       f.input :name, 
               :as => :hidden,
-              :hint => "Name is automatically assigned and not edited."
+              :hint => "Name is automatically assigned and not edited.",
+              :disabled => true
               
-      f.input :name, 
-              :required => true, 
-              :input_html => {:disabled => true}
            
       f.input :rep_id,
               label: "Quote Rep",
