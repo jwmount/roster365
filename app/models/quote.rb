@@ -68,7 +68,7 @@ class Quote < ActiveRecord::Base
   end
 
   def generate_name
-    self.name = "Q#{Quote.count+1+5000}" unless self.name
+    self.name = "Q#{Quote.count+1+5000}" if self.name.blank?
   end
 
   def quote_to_name

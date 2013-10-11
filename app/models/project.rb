@@ -37,6 +37,9 @@ class Project < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :company_id
 
+#
+# S C O P E  D E F I N I T I O N S
+#
   scope :active, where(:active => true)
   scope :inactive, where(:active => false)
   scope :bidding, where(:intend_to_bid => true)

@@ -35,6 +35,7 @@ ActiveAdmin.register Company do
       end
     end
 
+=begin
     column :projects do |company|
       project_count = company.projects.size
       if project_count == 0
@@ -43,6 +44,7 @@ ActiveAdmin.register Company do
         link_to "Projects (#{project_count})", admin_company_projects_path(company)
       end
     end
+=end
 
     column :equipment do |company|
       if company.equipment.size > 0 

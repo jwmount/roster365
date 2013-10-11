@@ -33,6 +33,8 @@ class Solution < ActiveRecord::Base
     accepts_nested_attributes_for :address
     accepts_nested_attributes_for :requirements
 
+  scope :alphabetically, order("name ASC")
+  
   #
   # V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S
   #
@@ -160,11 +162,9 @@ class Solution < ActiveRecord::Base
     errors.add(:pay_tolls, "PROBLEM:  Pay Tolls amount must be entered.") if pay_tolls.blank?
     #errors.add(:pay_tip, "PROBLEM:  Pay Tip Client amount must be entered.") if pay_tip.blank?
   end
-  
+
   def generate_name
-    if quote
-      self.name = "S#{quote.solutions.count+1}" unless self.name
-    end
+    self.name = "S#{quote.solutions.count+1}" if self.name.blank?
   end
 
   def display_name

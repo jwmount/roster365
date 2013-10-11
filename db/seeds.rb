@@ -27,9 +27,9 @@ certificate_list = [
   [ 'ISO 9000', 'May be required.', false, true, false, false, true ],
   [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true, true ]
 ]
-certificate_list.each do |name, description, for_person, for_company, for_equipment, for_place, active |
+certificate_list.each do |name, description, for_person, for_company, for_equipment, for_location, active |
   Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
-                       for_equipment: for_equipment, for_place: for_place, active: active )
+                       for_equipment: for_equipment, for_location: for_location, active: active )
   certificate = Certificate.where(name: name)
   case 
     when certificate[0].for_person
@@ -114,7 +114,7 @@ project_list.each do |name|
   Project.create!( name: name, company_id: @company_1.id, 
                    rep_id: 1,
                    project_start_on: Date.today, 
-                   active: true
+                   active: false
                  )   
   project_relation = Project.where( name: name)
   @project = project_relation[0]

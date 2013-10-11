@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.boolean  "for_person",    default: false,                 null: false
     t.boolean  "for_company",   default: false,                 null: false
     t.boolean  "for_equipment", default: false,                 null: false
-    t.boolean  "for_place",     default: false,                 null: false
+    t.boolean  "for_location",  default: false,                 null: false
     t.boolean  "active",        default: false,                 null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false

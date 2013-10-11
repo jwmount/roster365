@@ -18,8 +18,11 @@ ActiveAdmin.register Certificate do
   end
   scope :equipment do |certificates|
     certificates.where ({for_equipment: true})
+  end   
+  scope :location do |certificates|
+    certificates.where ({for_location: true})
   end
-   
+
   index do
     column :name do |certificate|
       link_to certificate.name, admin_certificate_path(certificate)
@@ -35,6 +38,10 @@ ActiveAdmin.register Certificate do
       certificate.for_equipment ? 'YES' : 'No'
       status_tag (certificate.for_equipment ? "YES" : "No"), (certificate.for_equipment ? :ok : :error)      
     end    
+    column :for_location do |certificate|
+      status_tag (certificate.for_location ? 'YES' : 'No'), (certificate.for_location ? :ok : :error)
+    end    
+
     column :active do |certificate|
       status_tag (certificate.active ? "YES" : "No"), (certificate.active ? :ok : :error)      
     end    
@@ -93,7 +100,7 @@ controller do
                                            :for_person,
                                            :for_company,
                                            :for_equipment,
-                                           :for_place,
+                                           :for_location,
                                            :active,
                                            :updated_on
                                          )

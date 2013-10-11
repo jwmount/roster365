@@ -134,14 +134,16 @@ form do |f|
                              :as=>:select, 
                              :include_blank => true,
                              :collection => solution_type_options,
-                             :input_html => {"data-placeholder" => "Solution Type ...", 
-                             :style=> "width:200px", 
-                             :class => "chzn-select"}
+                             :input_html => {
+                                             "data-placeholder"  => "Solution Type ...", 
+                                                          :style => "width:200px", 
+                                                          :class => "chzn-select"}
                              
       f.input :material_id, :as => :select, 
                             :label => 'Material', 
                             :hint => "What kind material will be moved.", 
-                            :collection => Material.all
+                            :collection => Material.all.map {|m| [m.name, m.id]}
+
                             
       f.input :unit_of_material, as:         :select, 
                                  label:      "Unit of Material", 

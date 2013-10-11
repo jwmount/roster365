@@ -119,6 +119,7 @@ ActiveAdmin.register Project do
 
     end
 
+    # NOTE:  if project is active, work address becomes required or will raise an error later in solutions.
     f.inputs "Project Work Site Address" do
         f.has_many :addresses do |a|
           a.input :street_address
@@ -156,15 +157,17 @@ ActiveAdmin.register Project do
           end
         end
 
-    #panel "Address" do
+    panel "Work Site" do
       attributes_table_for project do
         row "Address" do |project|
           @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
           render project.addresses
         end
-     end
+      end
+    end
 
-    #panel "Work Site Address" do
+=begin
+    panel "Work Site Address" do
       attributes_table_for project do
         row "Requirements" do |project|
           begin
@@ -175,7 +178,8 @@ ActiveAdmin.register Project do
           end
         end
      end
-     
+=end
+
      row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
       end
       active_admin_comments
@@ -198,14 +202,13 @@ ActiveAdmin.register Project do
 
     def create
       params.permit!
-      self.name = 'Godzilla'
       super
     end
 
-#    def update
-#      params.permit!
-#      super
-#    end
+    def update
+      params.permit!
+      super
+    end
 
     def project_params
       params.require(:project).permit( 
