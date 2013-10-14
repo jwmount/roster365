@@ -35,7 +35,6 @@ ActiveAdmin.register Engagement do
   
   filter :person
   filter :schedule
-  filter :do_not_contact_until
     
   index do 
     column "Project" do |engagement|
@@ -117,11 +116,6 @@ ActiveAdmin.register Engagement do
       
       f.input :engagement_declined
 
-      f.input :do_not_contact_until, 
-              :as => :string, 
-              :input_html => {:class => 'datepicker'},
-              :hint => "Not available for work/do not contac until this date."
-                    
     end
     f.buttons
   end
@@ -137,9 +131,6 @@ ActiveAdmin.register Engagement do
       row(:no_show) { status_tag (engagement.no_show ? "YES" : "No"), (engagement.no_show ? :ok : :error) }        
       row(:OK_tomorrow) { status_tag (engagement.OK_tomorrow ? "YES" : "No"), (engagement.OK_tomorrow ? :ok : :error) }        
       row(:engagement_declined) { status_tag (engagement.engagement_declined ? "YES" : "No"), (engagement.engagement_declined ? :ok : :error) }        
-      row :do_not_contact_until do |engagement|
-        engagement.do_not_contact_until
-      end
       row :updated_at do |engagement|
         engagement.updated_at
       end

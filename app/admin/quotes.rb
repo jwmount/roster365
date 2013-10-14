@@ -14,7 +14,7 @@ ActiveAdmin.register Quote do
   
   index do
     column :name do |quote|
-      link_to quote.name, admin_project_quote_path(quote.project.id,quote.id), :class => "member_link"
+      link_to quote.name, admin_company_project_quote_path(quote.project.company, quote.project, quote)
     end
 
     column :rep do |quote|
@@ -61,11 +61,13 @@ ActiveAdmin.register Quote do
               include_blank: true
 
       # This select needs to be scoped to employees of this company
-      f.input :quote_to_id, label: "Quote to", hint: "Who we deliver the quote to.",
-                         :required => true,
-                         :as => :select, 
-                         :collection => quote.project.company.people, 
-                         :include_blank => false
+      f.input :quote_to_id, 
+              :label => "Quote to", 
+              :hint => "Who we deliver the quote to.",
+              :required => true,
+              :as => :select, 
+              :collection => quote.project.company.people, 
+              :include_blank => false
     end
     
     f.inputs "Dates" do

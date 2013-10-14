@@ -1,18 +1,5 @@
 class Person < ActiveRecord::Base
 
-
-  # self.assoc = [OtherModel.find_by_name('special')]
-  # self.address ||= build_address #let's you set a default association
-  def defaults
-     unless persisted?
-       self.active           ||= true
-       self.OK_to_contact    ||= true
-       self.available        ||= true
-       self.OK_to_contact    ||= true
-       self.available_on     ||= Date.today
-    end
-  end
-
   # audited, not on Rails 4 yet
 
   # acts_as_authentic do |c|
@@ -49,6 +36,20 @@ class Person < ActiveRecord::Base
   scope :personally, where("certifiable_type = 'Person'")
   
   delegate :post_code, :to => :address
+
+#
+# D E F A U L T S
+#
+  after_initialize :defaults
+  def defaults
+     unless persisted?
+       self.active           ||= true
+       self.OK_to_contact    ||= true
+       self.available        ||= true
+       self.OK_to_contact    ||= true
+       self.available_on     ||= Date.today + 1.day
+    end
+  end
 
 
   def display_name

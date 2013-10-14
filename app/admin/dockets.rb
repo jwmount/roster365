@@ -54,9 +54,11 @@ ActiveAdmin.register Docket do
               #:input_html => {:disabled => true },
               :required => true,
               :hint => "Unique Booking number provided by subbie entered by operations to complete the engagement.",
-              :placeholder => "ssssssss"
+              :placeholder => "nnnnnn"
       
-      f.input :person
+      f.input :person,
+              :required => true,
+              :hint => "Who is submitting this docket, or payee."
       
       f.input :date_worked, 
               :required => true,
@@ -73,26 +75,23 @@ ActiveAdmin.register Docket do
 
       f.input :dated, 
               :as => :date_picker,
+              :required => true,
               :hint => "Date docket was marked completed."
               
       f.input :received_on, 
               :as => :date_picker,
+              :required => true,
               :hint => "Date docket was received."
               
       f.input :operator_signed, 
+              :required => true,
               :as => :radio
       
       f.input :client_signed, 
-              :as => :radio
-              
+              :required => true,
+              :as => :radio              
     end
 
-    f.inputs "Approvals" do
-      f.input :approved, :as => :radio
-      f.input :approved_by
-      f.input :approved_on, :as => :string, :input_html => {:class => 'datepicker'},
-                    :hint => "Date we approved docket."
-    end
     
     f.inputs "Payable Amounts" do
       f.input :a_inv_pay, 

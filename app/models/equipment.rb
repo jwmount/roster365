@@ -56,7 +56,6 @@ def equipment_list
   [
     "Backhoe",
     "Bobcat",
-    "Bobcat",
     "Compactor",
     "Compactor 815",
     "Compactor 815F",

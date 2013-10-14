@@ -1,16 +1,19 @@
 #require 'debugger'
 ActiveAdmin.register Project do
 
-  menu parent: "Sales"  
+  menu label: "Projects", parent: "Company"
+
   #menu :parent => "Sales", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Company.all.empty? &&
   #  !Person.all.empty?
   #}
   
-  
-#  Causes nesting correctly but cannot list all projects!
-#  belongs_to :company, :optional=>false
+# Projects must be created from Company
+#  actions :all, :except => [:new]  
+
+#  Next statement causes nesting correctly but cannot list all projects!
+  belongs_to :company, :optional=>false
 
   scope :all, :default => true 
   scope :active do |projects|
@@ -24,7 +27,6 @@ ActiveAdmin.register Project do
     projects.where ({rep_id: !nil})
   end
 
-  filter :company
   filter :name
   filter :people
   filter :project_start_on
@@ -32,10 +34,8 @@ ActiveAdmin.register Project do
 
   index do
     column 'Project Name' do |project|
-      link_to project.name, admin_project_path(project)
+      link_to project.name, admin_company_project_path(company,project)
     end
-
-    column :intend_to_bid
 
     column "Work Site Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
@@ -63,11 +63,6 @@ ActiveAdmin.register Project do
       end
     end
 
-    column 'Quotes(#)' do |project|
-      quote_count = project.quotes.size
-      link_to "Quotes (#{quote_count})", admin_project_quotes_path(project.id)
-    end
-
     column 'Start Date' do |project|
       project.project_start_on.strftime("%m %b, %Y")
     end
@@ -81,7 +76,7 @@ ActiveAdmin.register Project do
   form do |f|
     error_panel f
     
-    f.inputs do
+    f.inputs "#{company.name}" do
       f.input :name, 
               :required => true, 
               :label => 'Project Name', 
@@ -91,19 +86,13 @@ ActiveAdmin.register Project do
       # Scope this collection to employees with title 'Rep'
       # Roster365 is company = Company.where({:name => 'Roster365'})
       # Cleanup:  need a scheme to identify primary company, here 'Roster365' -- in a config file?
-      f.input :rep_id, :as => :select,
+      f.input :rep_id, 
+              :as => :select,
               collection: Person.alphabetically.where({:company_id => Company.where({:name => 'Roster365'})} && {:title => 'Rep'}), 
               hint: "Our Rep on this project.",
               placeholder: "Person",
-              include_blank: true
+              :style=> "width:200px"
 
-      f.input :company, 
-              :required => true,
-              :hint => "Our customer name as it appears on our statements. If the name does not appear in this list, create the company and then define the project.", 
-              :input_html => {"data-placeholder" => "Select a Company...", :style=> "width:500px", 
-              :class => "chzn-select"},
-              :placeholder => "Company"
- 
       f.input :project_start_on, 
               :label => 'Expected start date',
               :as => :string, 
@@ -157,28 +146,10 @@ ActiveAdmin.register Project do
           end
         end
 
-    panel "Work Site" do
-      attributes_table_for project do
-        row "Address" do |project|
-          @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
+      row "Work Site" do |project|
           render project.addresses
-        end
-      end
     end
-
-=begin
-    panel "Work Site Address" do
-      attributes_table_for project do
-        row "Requirements" do |project|
-          begin
-            @requirements = Requirement.where("requireable_id = ? AND requireable_type = ?", self.id, 'Project')
-            render project.requirements
-          rescue
-            render "None"
-          end
-        end
-     end
-=end
+      
 
      row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
       end
@@ -186,13 +157,16 @@ ActiveAdmin.register Project do
     end
   end
 
-#  Incompatible with nesting via belongs_to :company
-  sidebar :context do
-    h4 link_to "Projects", admin_projects_path
+  action_item :only => [:edit, :show] do
+    link_to "Address", admin_company_project_quotes_path( project.company, project )
   end
 
   action_item :only => [:edit, :show] do
-    link_to "Quotes", admin_project_quotes_path( project.id )
+    link_to "Requirements", admin_company_project_quotes_path( project.company, project )
+  end
+
+  action_item :only => [:edit, :show] do
+    link_to "Quotes", admin_company_project_quotes_path( project.company, project )
   end
 
 #

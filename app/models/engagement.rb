@@ -15,12 +15,11 @@ class Engagement < ActiveRecord::Base
   after_initialize :set_defaults
 
   # Best practice in Rails is set defaults here and not in database
+  # docket_id may default to nil since at engagement time no docket(s) will exist normally.
   def set_defaults
     unless persisted?
       self.OK_tomorrow ||= false
       self.breakdown ||= false
-      self.date_next_available ||= Date.today + 1
-      self.next_available_day ||= Date.today + 1
       self.no_show ||= false
       self.onsite_at ||= false
       self.onsite_now ||= false

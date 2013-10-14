@@ -135,29 +135,24 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.boolean  "operator_signed",                          default: false,                 null: false
     t.boolean  "client_signed",                            default: false,                 null: false
     t.boolean  "approved",                                 default: false,                 null: false
-    t.integer  "approved_by",                                                              null: false
     t.datetime "approved_on",                                                              null: false
     t.decimal  "a_inv_pay",        precision: 7, scale: 2, default: 0.0,                   null: false
     t.decimal  "b_inv_pay",        precision: 7, scale: 2, default: 0.0,                   null: false
     t.decimal  "supplier_inv_pay", precision: 7, scale: 2, default: 0.0,                   null: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
   end
 
   create_table "engagements", force: true do |t|
     t.integer  "schedule_id",                                          null: false
     t.integer  "person_id",                                            null: false
-    t.integer  "docket_id",                                            null: false
+    t.integer  "docket_id",                                            null: true  
     t.boolean  "onsite_now",           default: false,                 null: false
     t.boolean  "onsite_at",            default: false,                 null: false
     t.boolean  "breakdown",            default: false,                 null: false
     t.boolean  "no_show",              default: false,                 null: false
     t.boolean  "OK_tomorrow",          default: false,                 null: false
     t.boolean  "engagement_declined",  default: false,                 null: false
-    t.datetime "next_available_day",                                   null: false
-    t.datetime "do_not_contact_until",                                 null: false
-    t.datetime "contacted_at",                                         null: false
-    t.datetime "date_next_available",                                  null: false
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
   end

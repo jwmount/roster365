@@ -60,6 +60,8 @@ class Project < ActiveRecord::Base
   end
 
   def address
+    #@address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
+    self.street_address
   end
 
   # form of find works, see use to scope to employee Reps in projects.rb

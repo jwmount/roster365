@@ -48,10 +48,10 @@ end
 # First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
 # Two methods here, names list and completely specified attributes.
 companies_list = [
+  "American Debris Box Service Inc.",
   "Roster365", 
   'Projects-r-us',
-  'Trucks-r-us',
-  "American Debris Box Service Inc."
+  'Trucks-r-us'
 ]
 companies_list.each do |name|
   Company.create!( name: name)
@@ -59,10 +59,12 @@ end
 
 
 # now put some people in each company
-company_relation = Company.where ({name: 'Roster365'})
+company_relation = Company.where ({name: "American Debris Box Service Inc."})
 @company = company_relation[0]
 @person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep', available_on: Date.today)
 @person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.', available_on: Date.today)
+@equipment = Equipment.new({name: 'Crane', company_id: @company.id})
+@equipment.save!
 
 company_relation = Company.where ({name: 'Projects-r-us'})
 @company_1 = company_relation[0]

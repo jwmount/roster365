@@ -5,27 +5,18 @@ ActiveAdmin.register Equipment do
   menu label: "Equipment", parent: "Company"
   belongs_to :company
   
+  filter :name
+  
   index do
     
     column :name do |equipment|
       link_to equipment.name, admin_company_equipment_path(equipment.company.id, equipment.id), :class => "member_link"
     end
 
-    column :company, :selectable_column do |equipment|
-      begin
-        h5 equipment.company.display_name
-        @people = equipment.company.people
-        render @people
-      rescue NameError
-        company = Company.new
-        company.name = "Equipment.id #{equipment.id} has an unknown company, delete it."
-      end
-
+    column :certs do |equipment|
+      render equipment.certs
     end
 
-    column :certificates do |equipment|
-      certificates = equipment.certificate_list
-    end
   end  
 
   form do |f|

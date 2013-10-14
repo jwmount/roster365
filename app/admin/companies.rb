@@ -1,6 +1,6 @@
 #require 'debugger'
 ActiveAdmin.register Company do
-  
+
   menu parent: "Admin"
   
   scope :all, :default => true 
@@ -23,7 +23,7 @@ ActiveAdmin.register Company do
   filter :MYOB_number
   
   index do
-    column :name do |company|
+    column "Name (click for details)", :sortable => 'name' do |company|
       h5 link_to company.name, admin_company_path(company)
       if company.identifiers.count > 0
         @identifiers = company.identifiers
@@ -249,13 +249,8 @@ ActiveAdmin.register Company do
 # P U S H  B U T T O N S
 #
   action_item :only => [:edit, :show] do
-    link_to "New Project", new_admin_company_project_path( company )
+    link_to "Projects", admin_company_projects_path( company )
   end
-  
-  member_action :print, :method => :get do
-    @company = Company.find(params[:id])
-    @revision = params    render "print", :layout => "print"
-  end  
 
   action_item :only => [:edit, :show] do
     link_to "People", admin_company_people_path( company )

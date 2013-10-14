@@ -20,13 +20,7 @@ class Company < ActiveRecord::Base
 
   # We do not use :dependent => :destroy as tips survive company owners.  OK?
   has_many :tips
-#
-# S C O P E  D E F I N I T I O N S
-#
-  # Everyone who works for the Company: company.people
-  scope :people, where(addressable_type: "Person")
-  # scope :company, where(addressable_type: "Company")
-  scope :alphabetically, order("name ASC")
+
 #
 # V A L I D A T I O N S
 #
@@ -42,8 +36,9 @@ class Company < ActiveRecord::Base
                         :less_than_or_equal_to => '99999', :equal_to => '00000' }
   end
 
+#
 # D E F A U L T S
-
+#
   after_initialize :defaults
 
   def defaults

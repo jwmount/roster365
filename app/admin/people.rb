@@ -9,7 +9,7 @@ ActiveAdmin.register Person do
   #  !Company.all.empty?
   #}
 
-  #menu :parent => "Admin"
+  menu :parent => "Company"
   belongs_to :company
 
 
@@ -121,9 +121,10 @@ ActiveAdmin.register Person do
 
 
   show :title => 'Person' do
-    panel "Name" do
+    panel "Name #{person.full_name}, #{person.title}" do
       attributes_table_for(person) do
-        rows :last_name, :first_name, :title, :company
+        row :company
+        row :address
         row("active") { status_tag (person.active ? "YES" : "No"), (person.active ? :ok : :error) }
       end
     end
@@ -160,10 +161,7 @@ ActiveAdmin.register Person do
     panel "Address" do
       attributes_table_for person do
         row :address
-      end
-
-        active_admin_comments
-  
+      end  
     end
 
     panel 'Rollodex' do

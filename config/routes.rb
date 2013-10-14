@@ -47,6 +47,17 @@ Roster365::Application.routes.draw do
 
     resources :companies do
       resources :projects
+      member do
+        patch 'project'
+      end
+    end
+
+    resources :companies do
+      resources :projects do
+        resources :quotes do
+          resources :solutions
+        end
+      end
     end
 
     resources :companies do
@@ -56,6 +67,7 @@ Roster365::Application.routes.draw do
       end
     end
 
+    
     resources :dockets do
       member do
         patch 'print'
