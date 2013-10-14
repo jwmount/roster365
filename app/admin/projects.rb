@@ -9,10 +9,7 @@ ActiveAdmin.register Project do
   #  !Person.all.empty?
   #}
   
-# Projects must be created from Company
-#  actions :all, :except => [:new]  
-
-#  Next statement causes nesting correctly but cannot list all projects!
+  #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
   belongs_to :company, :optional=>false
 
   scope :all, :default => true 
@@ -22,15 +19,18 @@ ActiveAdmin.register Project do
   scope :in_active do |projects|
     projects.where ({active: false})
   end
-  # No effect at this point, need to work on this if singleton rep is not adequate (can we have 2?)
-  scope :rep do |projects|
-    projects.where ({rep_id: !nil})
+  scope :intend_to_bid do |projects|
+    projects.where ({intend_to_bid: true})
+  end
+  scope :submitted_bid do |projects|
+    projects.where ({submitted_bid: true})
   end
 
   filter :name
-  filter :people
   filter :project_start_on
   filter :intend_to_bid
+  filter :submitted_bid
+  filter :active
 
   index do
     column 'Project Name' do |project|
@@ -47,16 +47,16 @@ ActiveAdmin.register Project do
       render @requirements
     end
 
-    column "General Contractor" do |project|
-      link_to project.company.name, admin_company_path(project.company)
-    end
-
     # Project may have no rep, or some rep (one); multiple reps not supported so far.
+    # Rep is 'us', that is not from the company.project set.  Hence not clear how to link to it.
     column "Rep" do |project|
       flash[:WARNING] = nil
       begin
         @rep = Person.find project.rep_id
-        link_to @rep.full_name, admin_person_path(@rep.id)
+        #link_to @rep.full_name, admin_company_person_path(@rep.id)
+        render  "#{@rep.full_name}"
+        @identifiers = @rep.identifiers.order(:rank)
+        render :partial => 'identifier', :collection => @identifiers
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:project_missing_rep), "WARNING:")
         'None'
@@ -67,6 +67,14 @@ ActiveAdmin.register Project do
       project.project_start_on.strftime("%m %b, %Y")
     end
         
+    column :intend_to_bid do |project|
+      status_tag (project.intend_to_bid ? "YES" : "No"), (project.intend_to_bid ? :ok : :error)      
+    end     
+
+    column :submitted_bid do |project|
+      status_tag (project.submitted_bid ? "YES" : "No"), (project.submitted_bid ? :ok : :error)      
+    end     
+
     column :active do |project|
       status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error)      
     end     
@@ -99,12 +107,9 @@ ActiveAdmin.register Project do
               :input_html => {:class => 'datepicker'},
               :hint => 'Best estimate of when project will start.'
 
-      f.input :intend_to_bid,
-              :hint => 'Check if we plan to bid this project.'
-
-      f.input :active, 
-              :as => :radio, 
-              :hint => "Check if the customer has given us a definite start work order."
+      f.input :intend_to_bid
+      f.input :submitted_bid
+      f.input :active
 
     end
 
@@ -123,7 +128,7 @@ ActiveAdmin.register Project do
       f.has_many :requirements do |r|
         r.input :requireable_type, 
                 :as => :check_boxes,
-                :collection => %w[Company Person Equipment Site Material]
+                :collection => %w[Company Person Equipment Location]
         r.input :certificate
         r.input :description
       end
@@ -148,23 +153,18 @@ ActiveAdmin.register Project do
 
       row "Work Site" do |project|
           render project.addresses
-    end
+      end
       
 
-     row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
-      end
-      active_admin_comments
+      row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
+    end
+    active_admin_comments
     end
   end
 
-  action_item :only => [:edit, :show] do
-    link_to "Address", admin_company_project_quotes_path( project.company, project )
-  end
-
-  action_item :only => [:edit, :show] do
-    link_to "Requirements", admin_company_project_quotes_path( project.company, project )
-  end
-
+#
+# P U S H B U T T O N S
+#
   action_item :only => [:edit, :show] do
     link_to "Quotes", admin_company_project_quotes_path( project.company, project )
   end

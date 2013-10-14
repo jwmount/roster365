@@ -37,24 +37,15 @@ class Project < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :company_id
 
-#
-# S C O P E  D E F I N I T I O N S
-#
-  scope :active, where(:active => true)
-  scope :inactive, where(:active => false)
-  scope :bidding, where(:intend_to_bid => true)
-  scope :alphabetically, order("name ASC")
-
   #
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
   #
   after_initialize :set_defaults
   
-  # Best practice in Rails is set defaults here and not in database
+  # Best practice in Rails is set defaults here and not in database; however
+  # Xavier Shay disagrees, going with his approach.  Thus set defaults in schema.
   def set_defaults
     unless persisted?
-      self.active ||= true 
-      self.rep_id ||= nil
       self.project_start_on  ||= Time.now
     end
   end

@@ -54,6 +54,7 @@ Roster365::Application.routes.draw do
 
     resources :companies do
       resources :projects do
+        resources :requirements
         resources :quotes do
           resources :solutions
         end
