@@ -7,6 +7,7 @@ class Person < ActiveRecord::Base
   # end # the configuration block is optional
 
   belongs_to :company
+  
   has_many :dockets, :dependent => :destroy
   has_many :engagements, :dependent => :destroy
   has_and_belongs_to_many :schedules

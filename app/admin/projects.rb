@@ -42,25 +42,24 @@ ActiveAdmin.register Project do
       render project.addresses
     end
 
-    column "Requirements" do |project|
-      @requirements = project.requirements
-      render @requirements
-    end
-
     # Project may have no rep, or some rep (one); multiple reps not supported so far.
     # Rep is 'us', that is not from the company.project set.  Hence not clear how to link to it.
     column "Rep" do |project|
       flash[:WARNING] = nil
       begin
-        @rep = Person.find project.rep_id
-        #link_to @rep.full_name, admin_company_person_path(@rep.id)
-        render  "#{@rep.full_name}"
+        @rep  = Person.find project.rep_id
+        render :partial => 'person', :locals => {:rep => @rep }
         @identifiers = @rep.identifiers.order(:rank)
         render :partial => 'identifier', :collection => @identifiers
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:project_missing_rep), "WARNING:")
         'None'
       end
+    end
+
+    column "Requirements" do |project|
+      @requirements = project.requirements
+      render @requirements
     end
 
     column 'Start Date' do |project|
