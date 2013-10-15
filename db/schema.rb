@@ -262,7 +262,8 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end
-
+  
+  # Solutions attributes are in alpha order to simplify finding them.
   create_table "solutions", force: true do |t|
     t.boolean  "approved",                                                 default: false,                 null: false
     t.boolean  "client_approved",                                          default: false,                 null: false

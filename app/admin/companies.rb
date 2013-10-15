@@ -242,12 +242,15 @@ ActiveAdmin.register Company do
     end
     active_admin_comments
 
-
   end
 
 #
 # P U S H  B U T T O N S
 #
+  action_item :only => [:edit, :show] do
+    link_to "Equipment", admin_company_equipment_index_path( company )
+  end
+
   action_item :only => [:edit, :show] do
     link_to "Projects", admin_company_projects_path( company )
   end

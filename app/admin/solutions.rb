@@ -3,13 +3,22 @@
 # SolutionTips is HABTM join, action_on_permitted_parameters allows this to work 
 # Not entirely clear on this!  Also this probably applies to all models, take care.
 # Reference: http://api.rubyonrails.org/classes/ActionController/Parameters.html 
-ActionController::Parameters.action_on_unpermitted_parameters = :raise
+#ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
 ActiveAdmin.register Solution do
    
-   menu false 
+  menu label: "Solutions", parent: "Quote"
+  belongs_to :quote
 
-  
+#
+# C A L L  B A C K S
+#
+  after_build do |solution|
+     solution.generate_name
+   end
+#
+# S C O P E S
+#
    scope :all, :default => true
    scope :approved do |solutions|
      solutions.where ({approved: true})
@@ -24,40 +33,18 @@ ActiveAdmin.register Solution do
   # Interesting note
   # "Total is %<total>.02f" % {:total => 43.1}  # => Total is 43.10
 
-  controller do
-    # Breadcrumbs for CRUD ops, e.g. Edit does not generate complete paths without nested_belongs_to :project
-    nested_belongs_to :project
-    nested_belongs_to :quote
-
-    before_action :check_approval, :only => [:edit, :update]
-          
-    # Remember:  redirect_to include admin_project_*_path or breadcrumbs will be invalid.  
-    def check_approval
-       solution = Solution.find params[:id]
-       if solution
-         if solution.approved
-           flash[:warning] = "Solution cannot be changed because it has final approval.  You can Copy it and edit that one."
-           redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
-         end
-       end
-    end
-   
-   end #controller
-
-   after_build do |solution|
-     solution.generate_name
-   end
 
   index do 
 
     column :name do |solution|
-      link_to "Solution #{solution.name}", admin_project_quote_solution_path(solution.quote.project.id, solution.quote.id, solution.id),
-               :class => "member_link"
+      link_to "Solution #{solution.name}", 
+          edit_admin_company_project_quote_solution_path(solution.quote.project.company, solution.quote.project, solution.quote, solution )
     end
 
     column :solution_type
     
     #HACK -- singleton site enforced in a posssibly risky way!  Are there ever more than one?
+    # Sure, why not?  remove the limit(1)
     column "Tip Site" do |solution|
       if solution.tips.count == 0
         status_tag( "No tip site assigned.", :error)
@@ -95,17 +82,6 @@ ActiveAdmin.register Solution do
   
   end #index
 
-
-#  sidebar :calculate, :only => [:new, :edit]
-  sidebar :Solutions do |solution|
-    h4 link_to "Solutions", admin_project_quote_solutions_path(solution.quote.project.id,solution.quote.id)
-  end
-  sidebar :Quote do |solution|
-    h4 link_to "#{solution.quote.name}", admin_project_quote_path(solution.quote.project.id,solution.quote)
-  end
-  sidebar :Project do |solution|
-    h4 link_to "Project: #{solution.quote.project.display_name}", admin_project_path(solution.quote.project.id)
-  end
 
 # Use conditional validations to determine if input is complete for a given contract type.
 # At this time if contract type is not given, nothing is required.
@@ -336,7 +312,7 @@ form do |f|
     @solution.approved = true
     @solution.save
     flash[:notice] = "Solution was approved."
-    redirect_to admin_project_quote_solutions_path(@solution.quote.project.id,@solution.quote.id)
+    redirect_to admin_company_project_quote_solutions_path(@solution.quote.project.company, @solution.quote.project, @solution.quote)
   end
   
   action_item :only => [:edit, :show] do
@@ -349,11 +325,12 @@ form do |f|
     @solution = Solution.find(params[:id])
     flash[:notice] = "Costing was popped (not really)."
     flash[:notice] << " Price was $1250.00."
-    redirect_to admin_project_quote_solutions_path(@solution.quote.project.id,@solution.quote.id)
+    redirect_to admin_company_project_quote_solutions_path(@solution.quote.project.company, @solution.quote.project, @solution.quote)
   end
 
+=begin
   action_item :only => [:show] do
-    link_to 'Copy', duplicate_admin_solution_path( solution.id )
+    link_to 'Copy', duplicate_admin_company_project_quote_solution_path( @solution.quote.project.company, @solution.quote.project, @solution.quote, @solution )
   end
 
   # Copy solution to new one
@@ -381,15 +358,32 @@ form do |f|
       flash[:error] = "A copy of solution could NOT be created."
     end
 
-    redirect_to admin_quote_solutions_path(@solution_new.quote.id)
+    redirect_to admin_company_project_quote_solutions_path(
+                  solution.quote.project.company, solution.quote.project, solution.quote, @solution_new.quote
+                  )
   end    
+=end
+          
+    # Remember:  redirect_to include admin_project_*_path or breadcrumbs will be invalid.  
+    def check_approval
+       solution = Solution.find params[:id]
+       if solution
+         if solution.approved
+           flash[:warning] = "Solution cannot be changed because it has final approval.  You can Copy it and edit that one."
+           redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
+         end
+       end
+    end
   
+
   # needed because you have to create a Job in the context of its solution.
   # do not allow New operation in jobs.rb.
   action_item :only => [:edit, :show] do
-    link_to 'New Job', jobify_admin_solution_path(solution.id)
+    link_to 'Jobs', 
+      admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
   end
 
+=begin
   member_action :jobify, :method => :get do
     @solution = Solution.find(params[:id])
     name = "#{@solution.quote.project.name} - #{@solution.quote.name} - #{@solution.name} - J#{@solution.jobs.count+1}"
@@ -413,12 +407,13 @@ form do |f|
       end
       flash[:notice] = "Job was successfully created"
       #redirect_to admin_project_quote_solution_job_path(@solution.quote.project.id, @solution.quote.id, @solution, @job)
-      redirect_to admin_project_quote_solutions_path(@solution.quote.project.id, @solution.quote.id)
+      redirect_to admin_company_project_quote_solutions_path(@solution.quote.project.company, @solution.quote.project, @solution.quote)
     else
       flash[:alert] = "Solution needs to be approved before a job can be created"
-      redirect_to admin_project_quote_solution_path(@solution.quote.project, @solution.quote, @solution)
+      redirect_to admin_company_project_quote_solution_path(@solution.quote.project.company, @solution.quote.project, @solution.quote, @solution)
     end
   end
+=end
 
 # http://api.rubyonrails.org/classes/ActionController/Parameters.html
 # http://guides.rubyonrails.org/action_controller_overview.html#more-examples
@@ -429,6 +424,8 @@ form do |f|
 # W H I T E L I S T  M A N A G E M E N T
 #
 controller do
+
+  before_action :check_approval, :only => [:edit, :update]
 
     def create
       params.permit!

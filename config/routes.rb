@@ -52,11 +52,23 @@ Roster365::Application.routes.draw do
       end
     end
 
+    resources :company do
+      resources :project do
+        resources :quote do
+          resources :solution do
+            resources :job
+          end
+        end
+      end
+    end
+
     resources :companies do
       resources :projects do
         resources :requirements
         resources :quotes do
-          resources :solutions
+          resources :solutions do
+            resources :jobs
+          end
         end
       end
     end
@@ -75,13 +87,6 @@ Roster365::Application.routes.draw do
       end
     end          
 
-    resources :projects do
-      resources :quotes do
-        resources :solutions do
-          resources :jobs
-        end
-      end
-    end
 
     resources :projects do
       resources :requirements

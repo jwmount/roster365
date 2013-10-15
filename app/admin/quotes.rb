@@ -28,7 +28,7 @@ ActiveAdmin.register Quote do
     end
 
     column :solutions do |quote|
-      link_to "Solutions (#{quote.solutions.count})", admin_project_quote_solutions_path(quote.project.id, quote.id)
+      link_to "Solutions (#{quote.solutions.count})", admin_company_project_quote_solutions_path(quote.project.company, quote.project, quote)
     end      
     
     column :expected_start
@@ -117,52 +117,45 @@ ActiveAdmin.register Quote do
     end
   
   
-  panel 'Load Site' do
-    attributes_table_for(quote) do
-      row("Fire Ants Present") { status_tag (quote.fire_ants ? "YES" : "No"), (quote.fire_ants ? :present : :no) }
-      row :fire_ants_verified_by
-      row :council
-      row "Address" do |quote|
-        @address = Address.where("addressable_id = ? AND addressable_type = ?", quote.project_id, 'Project').limit(1)
-        if @address.blank?
-          flash[:error] = "Missing project work site address.  Correct this in Project."
-        else
-          render @address
+    panel 'Load Site' do
+      attributes_table_for(quote) do
+        row("Fire Ants Present") { status_tag (quote.fire_ants ? "YES" : "No"), (quote.fire_ants ? :present : :no) }
+        row :fire_ants_verified_by
+        row :council
+        row "Address" do |quote|
+          @address = Address.where("addressable_id = ? AND addressable_type = ?", quote.project_id, 'Project').limit(1)
+          if @address.blank?
+            flash[:error] = "Missing project work site address.  Correct this in Project."
+          else
+            render @address
+          end
         end
-      end
-    end   
+      end   
   end
 
-  panel :Conditions do
-    attributes_table_for(quote) do
-      quote.inclusions.each do |inclusion|
-        row (inclusion.name) {inclusion.verbiage}
-      end
-    end
-  end
-
-  panel :Requirements do
-    attributes_table_for quote do
-      row "Requirements" do |quote|
-        begin
-          @quotes = Requirement.where("requireable_id = ? AND requireable_type = ?", self.id, 'Quote')
-          render quote.requirements
-        rescue
-          render "None"
+    panel :Conditions do
+      attributes_table_for(quote) do
+        quote.inclusions.each do |inclusion|
+          row (inclusion.name) {inclusion.verbiage}
         end
       end
     end
-  end
 
-  #active_admin_comments
+    panel :Requirements do
+      attributes_table_for quote do
+        row "Requirements" do |quote|
+          begin
+            @quotes = Requirement.where("requireable_id = ? AND requireable_type = ?", self.id, 'Quote')
+            render quote.requirements
+          rescue
+            render "None"
+          end
+        end
+      end
+    end
   
-end # show
+  end # show
   
-
-  sidebar :context do
-    h4 link_to 'Projects', admin_projects_path
-  end
-   
     
   after_build do |quote|
     quote.generate_name
@@ -200,7 +193,7 @@ end # show
 
   # Appears on Quotes page but needs qualification
   action_item :only => [:edit, :show] do
-    link_to 'Solutions', admin_project_quote_solutions_path( params[:project_id], params[:id] ) 
+    link_to 'Solutions', admin_company_project_quote_solutions_path( params[:company_id], params[:project_id], params[:id] ) 
   end
 
   action_item :only => [:edit, :show ] do

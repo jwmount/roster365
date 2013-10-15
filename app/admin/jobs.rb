@@ -4,12 +4,9 @@ ActiveAdmin.register Job do
   # remove all default actions, e.g. [:new, :edit, :show etc]
   config.clear_action_items!
 
-# JOBS can only be made from a solution.  Once a Job is created the User can edit it directly.
-  menu parent: "Operations"
-  #menu :parent => "Operations", :if => lambda{|tabs_renderer|
-  #  controller.current_ability.can?(:manage, Role) &&
-  #  !Solution.all.empty?
-  #}
+# JOBS can only be made from a solution.
+  menu label: "Jobs", parent: "Solution"
+  belongs_to :solution
 
   scope :all
   scope :is_active?
@@ -17,15 +14,15 @@ ActiveAdmin.register Job do
   
        
   # Use Jobify method to force context of given solution.
-  actions :all, :except => [:new]
+  #actions :all, :except => [:new]
 
   index do
     
     # By the time Jobs are created the one or more reps should be assigned.
     # Currently its not fatal if no rep is on Project or Quote.  Warnings are given separately.
     column :job_name do |job|
-      h5 link_to job.name, edit_admin_project_quote_solution_job_path(job.solution.quote.project.id, job.solution.quote.id, job.solution.id, job.id),
-                 :class => "member_link"
+      h5 link_to job.name, 
+          edit_admin_company_project_quote_solution_job_path(job.solution.quote.project.company, job.solution.quote.project, job.solution.quote, job.solution, job)
       begin
         @prep = Person.find(job.solution.quote.project.rep_id)
         render @prep if @prep
