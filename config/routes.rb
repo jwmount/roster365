@@ -5,7 +5,8 @@ Roster365::Application.routes.draw do
   # Generate all routes in Admin namespace
   ActiveAdmin.routes(self)
 
-  root :to => "companies#index"
+  # set namespace root in active_admin.rb
+  # root :to => "companies#index"
 
   resources :company do
   	resource :equipment

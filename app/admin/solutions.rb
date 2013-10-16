@@ -7,8 +7,8 @@
 
 ActiveAdmin.register Solution do
    
-  menu label: "Solutions", parent: "Quote"
-  belongs_to :quote
+  menu label: "Solutions", parent: "Operations"
+ # belongs_to :quote
 #
 # C A L L  B A C K S
 #

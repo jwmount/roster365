@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Company do
 
-  menu parent: "Companies"
+  menu parent: "Customers"
     
 #
 # W H I T E   L I S T   M A N A G E M E N T
@@ -261,9 +261,9 @@ ActiveAdmin.register Company do
     link_to "Equipment", admin_company_equipment_index_path( company )
   end
 
-  action_item :only => [:edit, :show] do
-    link_to "Projects", admin_company_projects_path( company )
-  end
+  #action_item :only => [:edit, :show] do
+  #  link_to "Projects", admin_company_projects_path( company )
+  #end
 
   action_item :only => [:edit, :show] do
     link_to "People", admin_company_people_path( company )

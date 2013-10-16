@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Project do
 
-  menu label: "Projects", parent: "Company"
+  menu label: "Projects", :parent => "Sales"
 
   #menu :parent => "Sales", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
@@ -10,7 +10,7 @@ ActiveAdmin.register Project do
   #}
   
   #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
-  belongs_to :company, :optional=>false
+  # belongs_to :company
 
   scope :all, :default => true 
   scope :active do |projects|
@@ -26,6 +26,7 @@ ActiveAdmin.register Project do
     projects.where ({submitted_bid: true})
   end
 
+  filter :company
   filter :name
   filter :project_start_on
   filter :intend_to_bid
@@ -33,8 +34,10 @@ ActiveAdmin.register Project do
   filter :active
 
   index do
+    column :company
+
     column 'Project Name' do |project|
-      link_to project.name, admin_company_project_path(company, project)
+      link_to project.name, admin_project_path(project)
     end
 
     column "Work Site Address" do |project|

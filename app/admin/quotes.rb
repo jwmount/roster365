@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Quote do
       
-  menu label: "Quotes", parent: "Project"
+  menu label: "Quotes", parent: "Sales"
 
   filter :name
   filter :rep
@@ -10,7 +10,8 @@ ActiveAdmin.register Quote do
   filter :duration
 
   # NOT OPTIONAL, effect is to scope quotes to project, apparently is NOT same effect as same statement in quote.rb.
-  belongs_to :project
+  # In shallow version is not used.
+  # belongs_to :project
 
   after_build do |quote|
     quote.generate_name
@@ -18,8 +19,14 @@ ActiveAdmin.register Quote do
   end
   
   index do
+
     column :name, :sortable => 'name' do |quote|
-      link_to quote.name, admin_project_quote_path(quote.project, quote)
+      link_to quote.name, admin_quote_path(quote)
+    end
+
+    column "Project" do |quote|
+      @project = quote.project
+      render @project unless @project.nil?
     end
 
     column :rep do |quote|
@@ -99,6 +106,11 @@ ActiveAdmin.register Quote do
     panel :Names do
       attributes_table_for(quote) do
         row :name
+        row :project
+        row ("Company") do
+          @company = quote.project.company
+          render @company
+        end
         row (:quote_to_id) {quote.quote_to_name} 
         row ("Project Rep") {quote.prep_name}        
         row ("Quote Rep") {quote.qrep_name}        
@@ -159,7 +171,7 @@ ActiveAdmin.register Quote do
   # Express Quote - Create from Deep copy of this quote
   #
   action_item :only => [:edit, :show] do
-    link_to 'Express Quote', express_admin_project_quote_path( params[:project_id], params[:id] ) 
+    link_to 'Express Quote', express_admin_quote_path( quote ) 
   end
   # Express Quote
   # Deep copy quote with its solutions, if any.  Solution names no longer 
@@ -185,12 +197,12 @@ ActiveAdmin.register Quote do
   end
 
   # Appears on Quotes page but needs qualification
-  action_item :only => [:edit, :show] do
-    link_to 'Solutions', admin_quote_solutions_path( quote ) 
-  end
+ # action_item :only => [:edit, :show] do
+  #  link_to 'Solutions', admin_quote_solutions_path( quote ) 
+  #end
 
   action_item :only => [:edit, :show ] do
-    link_to "Print", print_admin_project_quote_path( params[:project_id], params[:id] )
+    link_to "Print", print_admin_quote_path( quote )
   end
 
   # In partials the local variable 'print' refers to @quote

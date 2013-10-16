@@ -6,7 +6,7 @@ ActiveAdmin.register Job do
 
 # JOBS can only be made from a solution.
   menu label: "Jobs", parent: "Operations"
-  belongs_to :solution
+  #belongs_to :solution
 #
 # C A L L  B A C K S
 #

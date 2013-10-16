@@ -11,9 +11,10 @@ ActiveAdmin.register Schedule do
   #  !Job.all.empty?
   #}
   
+  filter :equipment
   filter :day, :label => "Date Range", :as => :date_range
   filter :job
-#  filter :equipment_units_today
+  filter :equipment_units_today
 
 
   # View with spreadsheet like extensions 
@@ -201,9 +202,9 @@ ActiveAdmin.register Schedule do
     h4 link_to "Dashboard", admin_dashboard_path
   end
     
-  action_item :only => [:index] do 
-    link_to "Engagements",  admin_schedule_engagements_path(schedule)
-  end
+  #action_item :only => [:index] do 
+  #  link_to "Engagements",  admin_schedule_engagements_path(schedule)
+  #end
 
 #
 # W H I T E L I S T  M A N A G E M E N T
