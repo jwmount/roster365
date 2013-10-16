@@ -57,8 +57,9 @@ ActiveAdmin.register_page "Dashboard" do
 #     jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
 
       table_for jobs do
-        column :job_name do |job|
-          link_to(job.name, admin_job_path(job))
+        column :name do |job|
+          job.name
+          #link_to job.name, admin_solution_job_path( solution, job )
         end
 
         column :start do |job|
@@ -89,8 +90,7 @@ ActiveAdmin.register_page "Dashboard" do
           end
 
           column :day do |schedule|
-            # link_to(job.display_name, admin_job_path(job))
-            link_to schedule.day.strftime("%d %b, %Y"), admin_job_schedule_path(schedule.job.id, schedule.id)
+            schedule.day.strftime("%d %b, %Y")
           end
  
           column "Plan" do |schedule|

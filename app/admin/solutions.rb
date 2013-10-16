@@ -15,8 +15,8 @@ ActiveAdmin.register Solution do
   after_build do |solution|
      solution.generate_name
    end
-  before_build do |solution|
-    solution.check_approval
+  after_build do |solution|
+    solution.isApproved?
   end
 
   #before_action :ensure_permission, only: [ :edit, :update ]    
@@ -40,7 +40,7 @@ ActiveAdmin.register Solution do
 
   index do 
 
-    column :name do |solution|
+    column :name, :sortable => 'name' do |solution|
       link_to "Solution #{solution.name}", edit_admin_quote_solution_path( quote, solution )
       #link_to "Solution #{solution.name}",
        #   edit_admin_company_project_quote_solution_path(company, solution.quote.project, solution.quote, solution )
@@ -373,15 +373,20 @@ form do |f|
   # do not allow New operation in jobs.rb.
   # fully qualified path is --> admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
   action_item :only => [:edit, :show] do
-    link_to 'Jobs',
-      admin_solution_jobs_path( solution )
+    link_to 'Jobs', admin_solution_jobs_path( solution )
   end
 
+=begin
+
+  action_item :only => [:edit, :show] do
+    job = Job.create!([:name => 'soljob'])
+    link_to "New Job", new_admin_solution_job_path( solution )
+  end
   member_action :jobify, :method => :get do
-    @solution = Solution.find(params[:id])
+    solution = Solution.find(params[:id])
     name = "#{@solution.quote.project.name} - #{@solution.quote.name} - #{@solution.name} - J#{@solution.jobs.count+1}"
-    if @solution.has_final_approval?
-      if @solution.purchase_order_required == true
+    if solution.has_final_approval?
+      if solution.purchase_order_required == true
         @job = Job.create!(
           :name => name, 
           :solution_id => @solution.id, 
@@ -398,15 +403,15 @@ form do |f|
           :time => '06:30'
           )
       end
+    if @job.exists?
       flash[:notice] = "Job was successfully created"
-      #redirect_to admin_project_quote_solution_job_path(@solution.quote.project.id, @solution.quote.id, @solution, @job)
-      redirect_to admin_company_project_quote_solutions_path(@solution.quote.project.company, @solution.quote.project, @solution.quote)
+      redirect_to admin_solution_jobs_path(solution)
     else
       flash[:alert] = "Solution needs to be approved before a job can be created"
-      redirect_to admin_company_project_quote_solution_path(@solution.quote.project.company, @solution.quote.project, @solution.quote, @solution)
+      redirect_to admin_quote_solution_path(solution.quote, solution)
     end
   end
-
+=end
 
 # http://api.rubyonrails.org/classes/ActionController/Parameters.html
 # http://guides.rubyonrails.org/action_controller_overview.html#more-examples

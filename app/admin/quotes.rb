@@ -18,7 +18,7 @@ ActiveAdmin.register Quote do
   end
   
   index do
-    column :name do |quote|
+    column :name, :sortable => 'name' do |quote|
       link_to quote.name, admin_project_quote_path(quote.project, quote)
     end
 

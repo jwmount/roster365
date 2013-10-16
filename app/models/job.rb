@@ -18,7 +18,7 @@ class Job < ActiveRecord::Base
 
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
   after_initialize :set_defaults
-  
+
   # Best practice in Rails is set defaults here and not in database
   def set_defaults
     unless persisted?    

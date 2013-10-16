@@ -5,7 +5,7 @@ require 'active_support/all'
 
 ActiveAdmin.register Schedule do
 
-  menu parent: "Operations"
+  menu label: "Schedules", parent: "Operations"
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Job.all.empty?
@@ -113,7 +113,7 @@ ActiveAdmin.register Schedule do
       begin
         link_to "#{schedule.job.solution.equipment.name}", admin_equipment_path(schedule.job.solution.equipment)
       rescue
-        'unknown'
+        'Not specified'
       end
     end
 
@@ -134,7 +134,7 @@ ActiveAdmin.register Schedule do
           :invoice_tip_client => invoice_tip_client
         }
       rescue NoMethodError
-        'unknown'
+        'Not specified'
       end
     end
 
@@ -148,7 +148,7 @@ ActiveAdmin.register Schedule do
     end
 
     column 'Subcontractors' do |schedule|
-      h5 link_to "Roster", admin_schedule_engagements_path(schedule)
+      #h5 link_to "Roster", admin_schedule_engagements_path(schedule)
       @engagements = schedule.engagements
       @engagements.each do |engagement|
 
@@ -189,9 +189,9 @@ ActiveAdmin.register Schedule do
     attributes_table_for(schedule) do
       row :day
       row :job
-      row :equipment_units_today
       row ('Equipment') {link_to "#{schedule.job.solution.equipment.name}", 
-                                    admin_equipment_path(schedule.job.solution.equipment)}
+                                    admin_company_equipment_path(schedule.job.solution.equipment)}
+      row :equipment_units_today                                    
       row :updated_at
     end
     active_admin_comments
@@ -200,21 +200,10 @@ ActiveAdmin.register Schedule do
   sidebar :context do
     h4 link_to "Dashboard", admin_dashboard_path
   end
-  
-  sidebar :job, :except => [:index, :new] do |job|
-    job = Job.find schedule.job
-    #link_to "#{job.name}",
-        #admin_project_quote_solution_path(job.solution.quote.project.id, job.solution.quote.id, job.solution.id)
+    
+  action_item :only => [:index] do 
+    link_to "Engagements",  admin_schedule_engagements_path(schedule)
   end
-  
-#  action_item :only => [:index] do
-#    link_to "Manage Rosters",  roster_admin_schedule_path(1)
-#  end
-
-#  member_action :roster, :method => :get do
-#    @companies = Company.all
-#    render @companies, :layout => 'application'
-#  end    
 
 #
 # W H I T E L I S T  M A N A G E M E N T

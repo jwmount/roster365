@@ -10,5 +10,6 @@ Roster365::Application.routes.draw do
   resources :company do
   	resource :equipment
   end
-  
+
+
 end #routes

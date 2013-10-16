@@ -183,7 +183,6 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
               approve_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/approve(.:format)           admin/solutions#approve
               costing_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/costing(.:format)           admin/solutions#costing
             duplicate_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/duplicate(.:format)         admin/solutions#duplicate
-               jobify_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/jobify(.:format)            admin/solutions#jobify
         batch_action_admin_quote_solutions POST       /admin/quotes/:quote_id/solutions/batch_action(.:format)          admin/solutions#batch_action
                      admin_quote_solutions GET        /admin/quotes/:quote_id/solutions(.:format)                       admin/solutions#index
                                            POST       /admin/quotes/:quote_id/solutions(.:format)                       admin/solutions#create
@@ -222,3 +221,18 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                                            PATCH      /company/:id(.:format)                                            company#update
                                            PUT        /company/:id(.:format)                                            company#update
                                            DELETE     /company/:id(.:format)                                            company#destroy
+                             job_schedules GET        /job/schedules(.:format)                                          schedules#index
+                                           POST       /job/schedules(.:format)                                          schedules#create
+                          new_job_schedule GET        /job/schedules/new(.:format)                                      schedules#new
+                         edit_job_schedule GET        /job/schedules/:id/edit(.:format)                                 schedules#edit
+                              job_schedule GET        /job/schedules/:id(.:format)                                      schedules#show
+                                           PATCH      /job/schedules/:id(.:format)                                      schedules#update
+                                           PUT        /job/schedules/:id(.:format)                                      schedules#update
+                                           DELETE     /job/schedules/:id(.:format)                                      schedules#destroy
+                                       job POST       /job(.:format)                                                    jobs#create
+                                   new_job GET        /job/new(.:format)                                                jobs#new
+                                  edit_job GET        /job/edit(.:format)                                               jobs#edit
+                                           GET        /job(.:format)                                                    jobs#show
+                                           PATCH      /job(.:format)                                                    jobs#update
+                                           PUT        /job(.:format)                                                    jobs#update
+                                           DELETE     /job(.:format)                                                    jobs#destroy

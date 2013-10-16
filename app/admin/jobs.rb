@@ -2,12 +2,24 @@
 
 ActiveAdmin.register Job do
   # remove all default actions, e.g. [:new, :edit, :show etc]
-  config.clear_action_items!
+  # config.clear_action_items!
 
 # JOBS can only be made from a solution.
-  menu label: "Jobs", parent: "Solution"
+  menu label: "Jobs", parent: "Operations"
   belongs_to :solution
+#
+# C A L L  B A C K S
+#
+  after_build do |job|
+     job.name = "#{job.solution.quote.project.name} - #{job.solution.quote.name} - #{job.solution.name} - J#{job.solution.jobs.count+1}"
+     job.purchase_order = job.solution.purchase_order_required ? 'PO required' : 'PO Not Required'
+   end
 
+  #before_action :ensure_permission, only: [ :edit, :update ]    
+#
+# S C O P E S
+#
+  
   scope :all
   scope :is_active?
   scope :is_not_active?
@@ -20,9 +32,9 @@ ActiveAdmin.register Job do
     
     # By the time Jobs are created the one or more reps should be assigned.
     # Currently its not fatal if no rep is on Project or Quote.  Warnings are given separately.
-    column :job_name do |job|
+    column :job_name, :sortable => 'name' do |job|
       h5 link_to job.name, 
-          edit_admin_company_project_quote_solution_job_path(job.solution.quote.project.company, job.solution.quote.project, job.solution.quote, job.solution, job)
+          edit_admin_solution_job_path(solution, job)
       begin
         @prep = Person.find(job.solution.quote.project.rep_id)
         render @prep if @prep

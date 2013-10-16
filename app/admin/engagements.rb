@@ -6,14 +6,15 @@ require 'active_support/all'
 
 ActiveAdmin.register Engagement do
   
-  menu :parent => "Operations"
+  menu label: "Engagements", parent: "Operations"
+  belongs_to :schedule
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Schedule.all.empty?
   #}
   
   belongs_to :person, :optional=>true
-  belongs_to :schedule, :optional=>true
+  belongs_to :schedule, :optional=>false
 
   scope :all, :default => true
   scope :onsite_now do |engagements|
@@ -138,11 +139,6 @@ ActiveAdmin.register Engagement do
     active_admin_comments
   end #show
 
-   sidebar :context do
-     h4 link_to "Dashboard", admin_dashboard_path
-     h4 link_to "Dockets", admin_dockets_path
-     h4 link_to "Schedules", admin_schedules_path
-   end
 
 
    # Action to create the docket.  The Scheduler or User needs to edit the booking_no default given here.
