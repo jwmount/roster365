@@ -34,7 +34,7 @@ ActiveAdmin.register Project do
 
   index do
     column 'Project Name' do |project|
-      link_to project.name, admin_company_project_path(company,project)
+      link_to project.name, admin_company_project_path(company, project)
     end
 
     column "Work Site Address" do |project|
@@ -145,7 +145,7 @@ ActiveAdmin.register Project do
           begin
             rep = Person.find project.rep_id
             link_to rep.full_name, admin_person_path(rep)
-          rescue ActiveRecord::RecordNotFound
+          rescue
             flash["Error:  No Rep assigned to this project."]
           end
         end
@@ -165,7 +165,7 @@ ActiveAdmin.register Project do
 # P U S H B U T T O N S
 #
   action_item :only => [:edit, :show] do
-    link_to "Quotes", admin_company_project_quotes_path( project.company, project )
+    link_to "Quotes", admin_project_quotes_path( project )
   end
 
 #

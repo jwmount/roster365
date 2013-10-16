@@ -1,8 +1,8 @@
 #require 'debugger'
 ActiveAdmin.register Quote do
       
-  menu parent: 'Sales'
-  
+  menu label: "Quotes", parent: "Project"
+
   filter :name
   filter :rep
   filter :expected_start
@@ -11,25 +11,22 @@ ActiveAdmin.register Quote do
 
   # NOT OPTIONAL, effect is to scope quotes to project, apparently is NOT same effect as same statement in quote.rb.
   belongs_to :project
+
+  after_build do |quote|
+    quote.generate_name
+    quote.fire_ants_verified_by = current_user.email
+  end
   
   index do
     column :name do |quote|
-      link_to quote.name, admin_company_project_quote_path(quote.project.company, quote.project, quote)
+      link_to quote.name, admin_project_quote_path(quote.project, quote)
     end
 
     column :rep do |quote|
-      begin
-        @rep = Person.find quote.rep_id
-        link_to @rep.full_name, admin_person_path(@rep.id)
-      rescue ActiveRecord::RecordNotFound
-        flash[:WARNING] = highlight(t(:quote_missing_rep), "WARNING:")
-       'None'
-      end
+      @rep  = Person.find quote.rep_id
+      render @rep
     end
 
-    column :solutions do |quote|
-      link_to "Solutions (#{quote.solutions.count})", admin_company_project_quote_solutions_path(quote.project.company, quote.project, quote)
-    end      
     
     column :expected_start
     
@@ -157,10 +154,6 @@ ActiveAdmin.register Quote do
   end # show
   
     
-  after_build do |quote|
-    quote.generate_name
-    quote.fire_ants_verified_by = current_user.email
-  end
 
   #
   # Express Quote - Create from Deep copy of this quote
@@ -193,7 +186,7 @@ ActiveAdmin.register Quote do
 
   # Appears on Quotes page but needs qualification
   action_item :only => [:edit, :show] do
-    link_to 'Solutions', admin_company_project_quote_solutions_path( params[:company_id], params[:project_id], params[:id] ) 
+    link_to 'Solutions', admin_quote_solutions_path( quote ) 
   end
 
   action_item :only => [:edit, :show ] do
@@ -205,6 +198,7 @@ ActiveAdmin.register Quote do
     @quote = Quote.find(params[:id])
     render :partial => "print", :layout => "quotes/print", :object => @quote, :target => '_blank'
   end
+
 
 #
 # W H I T E L I S T  M A N A G E M E N T

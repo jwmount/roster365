@@ -1,8 +1,11 @@
 #require 'debugger'
 ActiveAdmin.register Company do
 
-  menu parent: "Admin"
-  
+  menu parent: "Companies"
+    
+#
+# W H I T E   L I S T   M A N A G E M E N T
+# 
   scope :all, :default => true 
   scope :active do |companies|
     companies.where ({active: true})
@@ -41,16 +44,21 @@ ActiveAdmin.register Company do
       if project_count == 0
         'None'
       else
-        link_to "Projects (#{project_count})", admin_company_projects_path(company)
+        link_to "Projects (#{project_count})", admin_company_project_path(company)
       end
     end
 =end
+
+    column :projects do |company|
+      @projects = company.projects
+      render company.projects
+    end
 
     column :equipment do |company|
       if company.equipment.size > 0 
         render company.equipment
       else
-        link_to "Assign", new_admin_company_equipment_path(company.id)
+        link_to "Assign", new_admin_company_equipment_path(company)
       end
     end
     
@@ -59,7 +67,7 @@ ActiveAdmin.register Company do
         @people = company.people
         render @people
       else
-        link_to "Assign", new_admin_company_person_path(company.id)
+        link_to "Assign", new_admin_company_person_path(company)
       end
     end
     
@@ -244,6 +252,8 @@ ActiveAdmin.register Company do
 
   end
 
+# GOOD Down from here
+
 #
 # P U S H  B U T T O N S
 #
@@ -258,25 +268,10 @@ ActiveAdmin.register Company do
   action_item :only => [:edit, :show] do
     link_to "People", admin_company_people_path( company )
   end
+
+
   
-
-=begin
-  action_item :only => [:edit, :show] do
-    link_to "Equipment", admin_company_equipment_index_path( params[:id] ) 
-  end
   
-  member_action :equipment, :method => :get do
-    @equipment = Equipment.find(params[:id])
-  end  
-=end
-  sidebar :context do
-    h4 link_to "Projects", admin_projects_path
-  end
-
-#
-# W H I T E   L I S T   M A N A G E M E N T
-# 
-
 controller do
 
   def create
@@ -286,7 +281,6 @@ controller do
   
   def update
     params.permit!
-    #company_params
     super
   end
 

@@ -14,7 +14,7 @@ class Quote < ActiveRecord::Base
   # This follows association used for Project, however it's not what we want exactly
   # There is a single rep, if any.  We need a scope :rep to refer to is, or?
   #has_one  :rep,          :as => :person
-  has_many :people
+  #has_many :people
 
 #
 # P O L Y M O R P H I C  A S S O C I A T I O N S
@@ -35,9 +35,8 @@ class Quote < ActiveRecord::Base
 
   # audited, not on Rails 4 yet
   after_initialize :set_defaults
+  # :inclusions are used for conditions
   serialize :inclusions
-
-#  scope :quote_to_id, where("company_id = ?", 1)
 
 
   QUOTE_UPDATE_OK = "Quote updated."

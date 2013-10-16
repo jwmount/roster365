@@ -66,6 +66,7 @@ class Solution < ActiveRecord::Base
 
   after_initialize :set_defaults
   #before_save :calculate_pay
+
   
 
   # Best practice in Rails is set defaults here and not in database
@@ -109,6 +110,17 @@ class Solution < ActiveRecord::Base
     end
   end
   
+    # Remember:  redirect_to include admin_project_*_path or breadcrumbs will be invalid.  
+  def check_approval
+    solution = Solution.find params[:id]
+      if solution
+        if solution.approved
+           flash[:warning] = "Solution cannot be changed because it has final approval.  You can Copy it and edit that one."
+           redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
+        end
+      end
+  end
+
   def printed_quote
     s = 'Description of Works:  '
     case

@@ -9,13 +9,17 @@ ActiveAdmin.register Solution do
    
   menu label: "Solutions", parent: "Quote"
   belongs_to :quote
-
 #
 # C A L L  B A C K S
 #
   after_build do |solution|
      solution.generate_name
    end
+  before_build do |solution|
+    solution.check_approval
+  end
+
+  #before_action :ensure_permission, only: [ :edit, :update ]    
 #
 # S C O P E S
 #
@@ -37,8 +41,9 @@ ActiveAdmin.register Solution do
   index do 
 
     column :name do |solution|
-      link_to "Solution #{solution.name}", 
-          edit_admin_company_project_quote_solution_path(solution.quote.project.company, solution.quote.project, solution.quote, solution )
+      link_to "Solution #{solution.name}", edit_admin_quote_solution_path( quote, solution )
+      #link_to "Solution #{solution.name}",
+       #   edit_admin_company_project_quote_solution_path(company, solution.quote.project, solution.quote, solution )
     end
 
     column :solution_type
@@ -295,6 +300,7 @@ form do |f|
     end
   end
 
+
 # 
 # P U S H  B U T T O N S
 #
@@ -303,7 +309,7 @@ form do |f|
   # Aside from the obvious need to do one or the other and perhaps toggle them
   # this operation should be silently logged for audit purposes.
   action_item :only => [:edit, :show] do
-    link_to 'Approve', approve_admin_solution_path( solution.id )
+    link_to 'Approve', approve_admin_quote_solution_path( quote, solution )
   end
 
   member_action :approve, :method => :get do
@@ -312,25 +318,24 @@ form do |f|
     @solution.approved = true
     @solution.save
     flash[:notice] = "Solution was approved."
-    redirect_to admin_company_project_quote_solutions_path(@solution.quote.project.company, @solution.quote.project, @solution.quote)
+    redirect_to admin_quote_solution_path(@solution.quote, @solution)
   end
   
   action_item :only => [:edit, :show] do
-    link_to 'Costing', costing_admin_solution_path( solution.id ),
+    link_to 'Costing', costing_admin_quote_solution_path( quote, solution ),
       :confirm => 'question?',
       :popup => ['Costing','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']
   end
 
   member_action :costing, :method => :get do
     @solution = Solution.find(params[:id])
-    flash[:notice] = "Costing was popped (not really)."
+    flash[:notice] = "Costing was popped (simulated, not really computed)."
     flash[:notice] << " Price was $1250.00."
-    redirect_to admin_company_project_quote_solutions_path(@solution.quote.project.company, @solution.quote.project, @solution.quote)
+    redirect_to admin_quote_solutions_path(quote, @solution ) 
   end
 
-=begin
   action_item :only => [:show] do
-    link_to 'Copy', duplicate_admin_company_project_quote_solution_path( @solution.quote.project.company, @solution.quote.project, @solution.quote, @solution )
+    link_to 'Copy', duplicate_admin_quote_solution_path( quote, @solution )
   end
 
   # Copy solution to new one
@@ -362,28 +367,16 @@ form do |f|
                   solution.quote.project.company, solution.quote.project, solution.quote, @solution_new.quote
                   )
   end    
-=end
-          
-    # Remember:  redirect_to include admin_project_*_path or breadcrumbs will be invalid.  
-    def check_approval
-       solution = Solution.find params[:id]
-       if solution
-         if solution.approved
-           flash[:warning] = "Solution cannot be changed because it has final approval.  You can Copy it and edit that one."
-           redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
-         end
-       end
-    end
-  
 
+          
   # needed because you have to create a Job in the context of its solution.
   # do not allow New operation in jobs.rb.
+  # fully qualified path is --> admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
   action_item :only => [:edit, :show] do
-    link_to 'Jobs', 
-      admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
+    link_to 'Jobs',
+      admin_solution_jobs_path( solution )
   end
 
-=begin
   member_action :jobify, :method => :get do
     @solution = Solution.find(params[:id])
     name = "#{@solution.quote.project.name} - #{@solution.quote.name} - #{@solution.name} - J#{@solution.jobs.count+1}"
@@ -413,7 +406,7 @@ form do |f|
       redirect_to admin_company_project_quote_solution_path(@solution.quote.project.company, @solution.quote.project, @solution.quote, @solution)
     end
   end
-=end
+
 
 # http://api.rubyonrails.org/classes/ActionController/Parameters.html
 # http://guides.rubyonrails.org/action_controller_overview.html#more-examples
@@ -424,22 +417,20 @@ form do |f|
 # W H I T E L I S T  M A N A G E M E N T
 #
 controller do
-
-  before_action :check_approval, :only => [:edit, :update]
-
-    def create
+  
+  def create
       params.permit!
       super
-    end
+  end
 
-    def update
-      params.permit!
-      super
-    end
+  def update
+    params.permit!
+    super
+  end
 
-    def solution_params
-      begin
-        params.permit(:solution => [
+  def solution_params
+    begin
+      params.permit(:solution => [
                                         :approved,
                                         :client_approved,
                                         :drive_time_from_load_to_tip,

@@ -149,7 +149,7 @@ ActiveAdmin.register_page "Dashboard" do
     section "Recent People" do
       ul do
         Person.order("updated_at DESC").limit(15).collect do |person|
-          li link_to(person.display_name, admin_person_path(person))
+          li link_to(person.display_name, admin_company_person_path(person.company, person))
         end
       end
     end
