@@ -24,7 +24,7 @@ ActiveAdmin.register Quote do
       link_to quote.name, admin_quote_path(quote)
     end
 
-    column "Project" do |quote|
+    column "Project", :sortable => 'name' do |quote|
       @project = quote.project
       render @project unless @project.nil?
     end
@@ -164,9 +164,14 @@ ActiveAdmin.register Quote do
     end
   
   end # show
-  
-    
+      
 
+  #
+  # Jobs -- Jobs for this quote
+  #
+  action_item :only => [:edit, :show] do
+    link_to 'Jobs', admin_jobs_path
+  end
   #
   # Express Quote - Create from Deep copy of this quote
   #

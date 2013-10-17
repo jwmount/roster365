@@ -24,6 +24,7 @@ ActiveAdmin.register Job do
   scope :is_active?
   scope :is_not_active?
   
+  filter :name
        
   # Use Jobify method to force context of given solution.
   #actions :all, :except => [:new]
@@ -34,7 +35,7 @@ ActiveAdmin.register Job do
     # Currently its not fatal if no rep is on Project or Quote.  Warnings are given separately.
     column :job_name, :sortable => 'name' do |job|
       h5 link_to job.name, 
-          edit_admin_solution_job_path(solution, job)
+          edit_admin_job_path(job)
       begin
         @prep = Person.find(job.solution.quote.project.rep_id)
         render @prep if @prep
