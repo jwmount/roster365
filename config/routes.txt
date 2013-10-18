@@ -61,15 +61,14 @@
                                            PUT        /admin/conditions/:id(.:format)                                   admin/conditions#update
                                            DELETE     /admin/conditions/:id(.:format)                                   admin/conditions#destroy
                            admin_dashboard GET        /admin/dashboard(.:format)                                        admin/dashboard#index
-     batch_action_admin_engagement_dockets POST       /admin/engagements/:engagement_id/dockets/batch_action(.:format)  admin/dockets#batch_action
-                  admin_engagement_dockets GET        /admin/engagements/:engagement_id/dockets(.:format)               admin/dockets#index
-                                           POST       /admin/engagements/:engagement_id/dockets(.:format)               admin/dockets#create
-               new_admin_engagement_docket GET        /admin/engagements/:engagement_id/dockets/new(.:format)           admin/dockets#new
-              edit_admin_engagement_docket GET        /admin/engagements/:engagement_id/dockets/:id/edit(.:format)      admin/dockets#edit
-                   admin_engagement_docket GET        /admin/engagements/:engagement_id/dockets/:id(.:format)           admin/dockets#show
-                                           PATCH      /admin/engagements/:engagement_id/dockets/:id(.:format)           admin/dockets#update
-                                           PUT        /admin/engagements/:engagement_id/dockets/:id(.:format)           admin/dockets#update
-                                           DELETE     /admin/engagements/:engagement_id/dockets/:id(.:format)           admin/dockets#destroy
+                batch_action_admin_dockets POST       /admin/dockets/batch_action(.:format)                             admin/dockets#batch_action
+                             admin_dockets GET        /admin/dockets(.:format)                                          admin/dockets#index
+                                           POST       /admin/dockets(.:format)                                          admin/dockets#create
+                         edit_admin_docket GET        /admin/dockets/:id/edit(.:format)                                 admin/dockets#edit
+                              admin_docket GET        /admin/dockets/:id(.:format)                                      admin/dockets#show
+                                           PATCH      /admin/dockets/:id(.:format)                                      admin/dockets#update
+                                           PUT        /admin/dockets/:id(.:format)                                      admin/dockets#update
+                                           DELETE     /admin/dockets/:id(.:format)                                      admin/dockets#destroy
        docketify_admin_schedule_engagement GET        /admin/schedules/:schedule_id/engagements/:id/docketify(.:format) admin/engagements#docketify
    batch_action_admin_schedule_engagements POST       /admin/schedules/:schedule_id/engagements/batch_action(.:format)  admin/engagements#batch_action
                 admin_schedule_engagements GET        /admin/schedules/:schedule_id/engagements(.:format)               admin/engagements#index
@@ -195,18 +194,34 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                             admin_comments GET        /admin/comments(.:format)                                         admin/comments#index
                                            POST       /admin/comments(.:format)                                         admin/comments#create
                              admin_comment GET        /admin/comments/:id(.:format)                                     admin/comments#show
-                         company_equipment POST       /company/:company_id/equipment(.:format)                          equipment#create
-                     new_company_equipment GET        /company/:company_id/equipment/new(.:format)                      equipment#new
-                    edit_company_equipment GET        /company/:company_id/equipment/edit(.:format)                     equipment#edit
-                                           GET        /company/:company_id/equipment(.:format)                          equipment#show
-                                           PATCH      /company/:company_id/equipment(.:format)                          equipment#update
-                                           PUT        /company/:company_id/equipment(.:format)                          equipment#update
-                                           DELETE     /company/:company_id/equipment(.:format)                          equipment#destroy
-                             company_index GET        /company(.:format)                                                company#index
-                                           POST       /company(.:format)                                                company#create
-                               new_company GET        /company/new(.:format)                                            company#new
-                              edit_company GET        /company/:id/edit(.:format)                                       company#edit
-                                   company GET        /company/:id(.:format)                                            company#show
-                                           PATCH      /company/:id(.:format)                                            company#update
-                                           PUT        /company/:id(.:format)                                            company#update
-                                           DELETE     /company/:id(.:format)                                            company#destroy
+                                           POST       /admin/company/:company_id/equipment(.:format)                    admin/equipment#create
+                                           GET        /admin/company/:company_id/equipment/new(.:format)                admin/equipment#new
+                                           GET        /admin/company/:company_id/equipment/edit(.:format)               admin/equipment#edit
+                                           GET        /admin/company/:company_id/equipment(.:format)                    admin/equipment#show
+                                           PATCH      /admin/company/:company_id/equipment(.:format)                    admin/equipment#update
+                                           PUT        /admin/company/:company_id/equipment(.:format)                    admin/equipment#update
+                                           DELETE     /admin/company/:company_id/equipment(.:format)                    admin/equipment#destroy
+                       admin_company_index GET        /admin/company(.:format)                                          admin/company#index
+                                           POST       /admin/company(.:format)                                          admin/company#create
+                                           GET        /admin/company/new(.:format)                                      admin/company#new
+                                           GET        /admin/company/:id/edit(.:format)                                 admin/company#edit
+                                           GET        /admin/company/:id(.:format)                                      admin/company#show
+                                           PATCH      /admin/company/:id(.:format)                                      admin/company#update
+                                           PUT        /admin/company/:id(.:format)                                      admin/company#update
+                                           DELETE     /admin/company/:id(.:format)                                      admin/company#destroy
+                    admin_company_projects GET        /admin/company/:company_id/projects(.:format)                     admin/projects#index
+                                           POST       /admin/company/:company_id/projects(.:format)                     admin/projects#create
+                 new_admin_company_project GET        /admin/company/:company_id/projects/new(.:format)                 admin/projects#new
+                edit_admin_company_project GET        /admin/company/:company_id/projects/:id/edit(.:format)            admin/projects#edit
+                     admin_company_project GET        /admin/company/:company_id/projects/:id(.:format)                 admin/projects#show
+                                           PATCH      /admin/company/:company_id/projects/:id(.:format)                 admin/projects#update
+                                           PUT        /admin/company/:company_id/projects/:id(.:format)                 admin/projects#update
+                                           DELETE     /admin/company/:company_id/projects/:id(.:format)                 admin/projects#destroy
+                                           GET        /admin/company(.:format)                                          admin/company#index
+                                           POST       /admin/company(.:format)                                          admin/company#create
+                                           GET        /admin/company/new(.:format)                                      admin/company#new
+                                           GET        /admin/company/:id/edit(.:format)                                 admin/company#edit
+                                           GET        /admin/company/:id(.:format)                                      admin/company#show
+                                           PATCH      /admin/company/:id(.:format)                                      admin/company#update
+                                           PUT        /admin/company/:id(.:format)                                      admin/company#update
+                                           DELETE     /admin/company/:id(.:format)                                      admin/company#destroy

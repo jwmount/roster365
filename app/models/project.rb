@@ -1,7 +1,7 @@
 #require 'debugger'
 
 class Project < ActiveRecord::Base
-  include Sluggable
+  #include Sluggable
 
   # audited, not on Rails 4 yet
 

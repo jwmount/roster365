@@ -8,9 +8,15 @@ Roster365::Application.routes.draw do
   # set namespace root in active_admin.rb
   # root :to => "companies#index"
 
-  resources :company do
-  	resource :equipment
+  namespace :admin do
+
+    resources :company do
+  	  resource :equipment
+    end
+
+    resources :company do
+  	  resources :projects
+    end
+
   end
-
-
 end #routes

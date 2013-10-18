@@ -261,9 +261,9 @@ ActiveAdmin.register Company do
     link_to "Equipment", admin_company_equipment_index_path( company )
   end
 
-  #action_item :only => [:edit, :show] do
-  #  link_to "Projects", admin_company_projects_path( company )
-  #end
+  action_item :only => [:show] do
+    link_to "Projects", admin_company_projects_path( company )
+  end
 
   action_item :only => [:edit, :show] do
     link_to "People", admin_company_people_path( company )
