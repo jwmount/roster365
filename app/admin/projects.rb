@@ -2,12 +2,6 @@
 ActiveAdmin.register Project do
 
   menu label: "Projects", :parent => "Sales"
-
-  #menu :parent => "Sales", :if => lambda{|tabs_renderer|
-  #  controller.current_ability.can?(:manage, Role) &&
-  #  !Company.all.empty? &&
-  #  !Person.all.empty?
-  #}
   
   #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
   # belongs_to :company
@@ -167,7 +161,7 @@ ActiveAdmin.register Project do
 #
 # P U S H B U T T O N S
 #
-  action_item :only => [:edit, :show] do
+  action_item :only => [:show] do
     link_to "Quotes", admin_project_quotes_path( project )
   end
 
