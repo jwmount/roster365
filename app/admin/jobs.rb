@@ -108,6 +108,17 @@ ActiveAdmin.register Job do
   end
 
 #
+# P U S H  B U T T O N S
+#
+
+  #
+  # Schedules -- Schedules for this job
+  #
+  action_item :only => [:edit, :show] do
+    link_to 'Schedules', admin_schedules_path
+  end
+
+#
 # W H I T E L I S T  M A N A G E M E N T
 #
 controller do

@@ -17,6 +17,7 @@ class Docket < ActiveRecord::Base
       self.operator_signed ||= false
       self.client_signed ||= false
       self.approved ||= false
+      self.approved_on ||= Date.today
     end
   end
   

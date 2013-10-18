@@ -1,7 +1,7 @@
 require "csv"
 ActiveAdmin.register Docket do
 
-  menu label: "Dockets", parent: "Engagements"
+  menu label: "Dockets", parent: "Bookeeping"
 
   scope :all, :default => true
   scope :operator_signed do |solutions|
@@ -23,14 +23,12 @@ ActiveAdmin.register Docket do
     solutions.where ({approved: false})
   end
 
-  belongs_to :engagement
-  
-  #actions :all, :except => :new
+  #belongs_to :engagement
+
+  actions :all, :except => :new
   
   index do
-    column :booking_no do |docket|
-      link_to docket.booking_no, admin_engagement_docket_path(docket.engagement_id, docket.id)
-    end
+    column :booking_no
     column :date_worked
     column :person, :label => "Subcontractor"
     column :operator_signed do |docket|

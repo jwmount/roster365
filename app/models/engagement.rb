@@ -13,16 +13,13 @@ class Engagement < ActiveRecord::Base
 
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
   after_initialize :set_defaults
+  after_initialize :has_equipment_required?
 
   # Best practice in Rails is set defaults here and not in database
   # docket_id may default to nil since at engagement time no docket(s) will exist normally.
+  # At this time, all default values are set in the DB.  See schema.rb.
   def set_defaults
     unless persisted?
-      self.OK_tomorrow ||= false
-      self.breakdown ||= false
-      self.no_show ||= false
-      self.onsite_at ||= false
-      self.onsite_now ||= false
     end
   end
 
@@ -31,8 +28,8 @@ class Engagement < ActiveRecord::Base
   #
   # validates_uniqueness_of :booking_no #, :scope => :project
   validates_presence_of :schedule_id
-  validate :has_equipment_required?
-  
+  validates_presence_of :person_id
+
   # Validation:  Does the company of the driver selected actually have the equipment required?
   def has_equipment_required?
     # Do we know what the required equipment is?
@@ -44,7 +41,7 @@ class Engagement < ActiveRecord::Base
       errors.add(:person, "PROBLEM: Person selected is with a company that does not have equipment required.")
       return false
     end    
-    
+    return true
     #does the subbie work for a company that has what's required for the solution?
     # want the equipment list of person.company.equipment to contain :equipment
     equipment_list = self.person.company.equipment.where("name = ?", equipment_name)

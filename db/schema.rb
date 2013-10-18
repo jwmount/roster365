@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.boolean  "client_signed",                            default: false,                 null: false
     t.boolean  "approved",                                 default: false,                 null: false
     t.datetime "approved_on",                                                              null: false
+    t.string   "approved_by",                              default: '',                    null: false
     t.decimal  "a_inv_pay",        precision: 7, scale: 2, default: 0.0,                   null: false
     t.decimal  "b_inv_pay",        precision: 7, scale: 2, default: 0.0,                   null: false
     t.decimal  "supplier_inv_pay", precision: 7, scale: 2, default: 0.0,                   null: false

@@ -7,7 +7,7 @@ require 'active_support/all'
 ActiveAdmin.register Engagement do
   
   menu label: "Engagements", parent: "Operations"
-  belongs_to :schedule
+  # belongs_to :schedule
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Schedule.all.empty?
@@ -33,13 +33,13 @@ ActiveAdmin.register Engagement do
     engagements.where ({engagement_declined: true})
   end    
 
-  
   filter :person
   filter :schedule
-    
+  
+
   index do 
     column "Project" do |engagement|
-      link_to engagement.schedule.job.solution.quote.project.name, admin_project_path(engagement.schedule.job.solution.quote.project.id)
+      render engagement.schedule.job.solution.quote.project
     end
 
     # http://stackoverflow.com/questions/1192843/grouped-select-in-rails
@@ -54,15 +54,15 @@ ActiveAdmin.register Engagement do
     end
 
     column "Job" do |engagement|
-      link_to engagement.schedule.job.name, admin_engagement_path(engagement.id)
+      engagement.schedule.job.name
     end
 
     column "Day" do |engagement|
       engagement.schedule.day.strftime("%d %b, %Y")
     end
 
-    column "Docket" do |engagement|
-      link_to "New Docket", new_admin_engagement_docket_path(engagement.id)
+    column "Docket(s)" do |engagement|
+      render engagement.dockets
     end   
 
     column :onsite_now do |engagement|
@@ -123,8 +123,8 @@ ActiveAdmin.register Engagement do
 
   show :title => "Engagement" do |engagement|
     attributes_table do
-      row engagement.schedule.quote.project.name
-      row :schedule
+      row("Day") { engagement.schedule.day }
+      row("Project") { schedule.job.solution.quote.project.name }
       row :person
       row(:onsite_now) { status_tag (engagement.onsite_now ? "YES" : "No"), (engagement.onsite_now ? :ok : :error) }
       row(:onsite_at)  { status_tag (engagement.onsite_at ? "YES" : "No"), (engagement.onsite_at ? :ok : :error) }
@@ -132,14 +132,18 @@ ActiveAdmin.register Engagement do
       row(:no_show) { status_tag (engagement.no_show ? "YES" : "No"), (engagement.no_show ? :ok : :error) }        
       row(:OK_tomorrow) { status_tag (engagement.OK_tomorrow ? "YES" : "No"), (engagement.OK_tomorrow ? :ok : :error) }        
       row(:engagement_declined) { status_tag (engagement.engagement_declined ? "YES" : "No"), (engagement.engagement_declined ? :ok : :error) }        
-      row :updated_at do |engagement|
-        engagement.updated_at
-      end
+      row :updated_at
     end
     active_admin_comments
   end #show
 
 
+#
+# P U S H B U T T O N S
+#
+  action_item :only => [:index, :edit, :show] do
+    link_to "Dockets", admin_dockets_path
+  end
 
    # Action to create the docket.  The Scheduler or User needs to edit the booking_no default given here.
    # Consequently nav goes to edit_admin_engagement_docket_path to support this.

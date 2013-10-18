@@ -139,15 +139,6 @@ ActiveAdmin.register Schedule do
       end
     end
 
-    column 'Dockets' do |schedule|      
-      @dockets = []
-      engagements = schedule.engagements
-      engagements.each do |e|
-        @dockets << Docket.where("engagement_id = ?", e.id)
-      end
-      @dockets.each { |docket| render docket }
-    end
-
     column 'Subcontractors' do |schedule|
       #h5 link_to "Roster", admin_schedule_engagements_path(schedule)
       @engagements = schedule.engagements
@@ -201,10 +192,13 @@ ActiveAdmin.register Schedule do
   sidebar :context do
     h4 link_to "Dashboard", admin_dashboard_path
   end
-    
-  #action_item :only => [:index] do 
-  #  link_to "Engagements",  admin_schedule_engagements_path(schedule)
-  #end
+
+#
+# P U S H  B U T T O N S
+#    
+  action_item :only => [:edit, :show] do 
+    link_to "Engagements",  admin_schedule_engagements_path(schedule)
+  end
 
 #
 # W H I T E L I S T  M A N A G E M E N T
