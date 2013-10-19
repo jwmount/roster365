@@ -123,15 +123,15 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                                            PATCH      /admin/companies/:company_id/people/:id(.:format)                 admin/people#update
                                            PUT        /admin/companies/:company_id/people/:id(.:format)                 admin/people#update
                                            DELETE     /admin/companies/:company_id/people/:id(.:format)                 admin/people#destroy
-               batch_action_admin_projects POST       /admin/projects/batch_action(.:format)                            admin/projects#batch_action
-                            admin_projects GET        /admin/projects(.:format)                                         admin/projects#index
-                                           POST       /admin/projects(.:format)                                         admin/projects#create
-                         new_admin_project GET        /admin/projects/new(.:format)                                     admin/projects#new
-                        edit_admin_project GET        /admin/projects/:id/edit(.:format)                                admin/projects#edit
-                             admin_project GET        /admin/projects/:id(.:format)                                     admin/projects#show
-                                           PATCH      /admin/projects/:id(.:format)                                     admin/projects#update
-                                           PUT        /admin/projects/:id(.:format)                                     admin/projects#update
-                                           DELETE     /admin/projects/:id(.:format)                                     admin/projects#destroy
+       batch_action_admin_company_projects POST       /admin/companies/:company_id/projects/batch_action(.:format)      admin/projects#batch_action
+                    admin_company_projects GET        /admin/companies/:company_id/projects(.:format)                   admin/projects#index
+                                           POST       /admin/companies/:company_id/projects(.:format)                   admin/projects#create
+                 new_admin_company_project GET        /admin/companies/:company_id/projects/new(.:format)               admin/projects#new
+                edit_admin_company_project GET        /admin/companies/:company_id/projects/:id/edit(.:format)          admin/projects#edit
+                     admin_company_project GET        /admin/companies/:company_id/projects/:id(.:format)               admin/projects#show
+                                           PATCH      /admin/companies/:company_id/projects/:id(.:format)               admin/projects#update
+                                           PUT        /admin/companies/:company_id/projects/:id(.:format)               admin/projects#update
+                                           DELETE     /admin/companies/:company_id/projects/:id(.:format)               admin/projects#destroy
                        express_admin_quote GET        /admin/quotes/:id/express(.:format)                               admin/quotes#express
                          print_admin_quote GET        /admin/quotes/:id/print(.:format)                                 admin/quotes#print
                  batch_action_admin_quotes POST       /admin/quotes/batch_action(.:format)                              admin/quotes#batch_action
@@ -194,34 +194,3 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                             admin_comments GET        /admin/comments(.:format)                                         admin/comments#index
                                            POST       /admin/comments(.:format)                                         admin/comments#create
                              admin_comment GET        /admin/comments/:id(.:format)                                     admin/comments#show
-                                           POST       /admin/company/:company_id/equipment(.:format)                    admin/equipment#create
-                                           GET        /admin/company/:company_id/equipment/new(.:format)                admin/equipment#new
-                                           GET        /admin/company/:company_id/equipment/edit(.:format)               admin/equipment#edit
-                                           GET        /admin/company/:company_id/equipment(.:format)                    admin/equipment#show
-                                           PATCH      /admin/company/:company_id/equipment(.:format)                    admin/equipment#update
-                                           PUT        /admin/company/:company_id/equipment(.:format)                    admin/equipment#update
-                                           DELETE     /admin/company/:company_id/equipment(.:format)                    admin/equipment#destroy
-                       admin_company_index GET        /admin/company(.:format)                                          admin/company#index
-                                           POST       /admin/company(.:format)                                          admin/company#create
-                                           GET        /admin/company/new(.:format)                                      admin/company#new
-                                           GET        /admin/company/:id/edit(.:format)                                 admin/company#edit
-                                           GET        /admin/company/:id(.:format)                                      admin/company#show
-                                           PATCH      /admin/company/:id(.:format)                                      admin/company#update
-                                           PUT        /admin/company/:id(.:format)                                      admin/company#update
-                                           DELETE     /admin/company/:id(.:format)                                      admin/company#destroy
-                    admin_company_projects GET        /admin/company/:company_id/projects(.:format)                     admin/projects#index
-                                           POST       /admin/company/:company_id/projects(.:format)                     admin/projects#create
-                 new_admin_company_project GET        /admin/company/:company_id/projects/new(.:format)                 admin/projects#new
-                edit_admin_company_project GET        /admin/company/:company_id/projects/:id/edit(.:format)            admin/projects#edit
-                     admin_company_project GET        /admin/company/:company_id/projects/:id(.:format)                 admin/projects#show
-                                           PATCH      /admin/company/:company_id/projects/:id(.:format)                 admin/projects#update
-                                           PUT        /admin/company/:company_id/projects/:id(.:format)                 admin/projects#update
-                                           DELETE     /admin/company/:company_id/projects/:id(.:format)                 admin/projects#destroy
-                                           GET        /admin/company(.:format)                                          admin/company#index
-                                           POST       /admin/company(.:format)                                          admin/company#create
-                                           GET        /admin/company/new(.:format)                                      admin/company#new
-                                           GET        /admin/company/:id/edit(.:format)                                 admin/company#edit
-                                           GET        /admin/company/:id(.:format)                                      admin/company#show
-                                           PATCH      /admin/company/:id(.:format)                                      admin/company#update
-                                           PUT        /admin/company/:id(.:format)                                      admin/company#update
-                                           DELETE     /admin/company/:id(.:format)                                      admin/company#destroy

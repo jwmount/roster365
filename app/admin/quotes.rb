@@ -10,8 +10,7 @@ ActiveAdmin.register Quote do
   filter :duration
 
   # NOT OPTIONAL, effect is to scope quotes to project, apparently is NOT same effect as same statement in quote.rb.
-  # In shallow version is not used.
-  # belongs_to :project
+  belongs_to :project
 
   after_build do |quote|
     quote.generate_name
@@ -21,7 +20,7 @@ ActiveAdmin.register Quote do
   index do
 
     column :name, :sortable => 'name' do |quote|
-      link_to quote.name, admin_quote_path(quote)
+      link_to quote.name, admin_project_quote_path( project, quote )
     end
 
     column "Project", :sortable => 'name' do |quote|
@@ -167,16 +166,10 @@ ActiveAdmin.register Quote do
       
 
   #
-  # Jobs -- Jobs for this quote
-  #
-  action_item :only => [:edit, :show] do
-    link_to 'Jobs', admin_jobs_path
-  end
-  #
   # Express Quote - Create from Deep copy of this quote
   #
   action_item :only => [:edit, :show] do
-    link_to 'Express Quote', express_admin_quote_path( quote ) 
+    link_to 'Express Quote', express_admin_project_quote_path( quote.project, quote ) 
   end
   # Express Quote
   # Deep copy quote with its solutions, if any.  Solution names no longer 
@@ -202,12 +195,12 @@ ActiveAdmin.register Quote do
   end
 
   # Appears on Quotes page but needs qualification
- # action_item :only => [:edit, :show] do
-  #  link_to 'Solutions', admin_quote_solutions_path( quote ) 
-  #end
-
+  action_item :only => [:edit, :show] do
+    link_to 'Solutions', admin_quote_solutions_path( quote ) 
+  end
+  
   action_item :only => [:edit, :show ] do
-    link_to "Print", print_admin_quote_path( quote )
+    link_to "Print", print_admin_project_quote_path( quote.project, quote )
   end
 
   # In partials the local variable 'print' refers to @quote

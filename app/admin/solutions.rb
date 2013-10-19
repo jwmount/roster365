@@ -8,7 +8,7 @@
 ActiveAdmin.register Solution do
    
   menu label: "Solutions", parent: "Operations"
- # belongs_to :quote
+  belongs_to :quote
 #
 # C A L L  B A C K S
 #
@@ -41,7 +41,7 @@ ActiveAdmin.register Solution do
   index do 
 
     column :name, :sortable => 'name' do |solution|
-      link_to "Solution #{solution.name}", edit_admin_quote_solution_path( quote, solution )
+      link_to "Solution #{solution.name}", edit_admin_quote_solution_path( solution.quote, solution )
       #link_to "Solution #{solution.name}",
        #   edit_admin_company_project_quote_solution_path(company, solution.quote.project, solution.quote, solution )
     end
@@ -81,7 +81,7 @@ ActiveAdmin.register Solution do
         if solution.purchase_order_required
           status_tag("Purchase Order: #{job.purchase_order}", :warning) 
         end
-        simple_format("<hr/>")
+        simple_format("<br/>")
       end
     end
   
@@ -371,7 +371,7 @@ form do |f|
           
   # needed because you have to create a Job in the context of its solution.
   # do not allow New operation in jobs.rb.
-  # fully qualified path is --> admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
+  # fully qualified path is: admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
   action_item :only => [:edit, :show] do
     link_to 'Jobs', admin_solution_jobs_path( solution )
   end

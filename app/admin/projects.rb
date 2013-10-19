@@ -4,7 +4,7 @@ ActiveAdmin.register Project do
   menu label: "Projects", :parent => "Sales"
   
   #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
-  # belongs_to :company
+  belongs_to :company
 
   scope :all, :default => true 
   scope :active do |projects|
@@ -30,9 +30,12 @@ ActiveAdmin.register Project do
   index do
     column :company
 
-    column 'Project Name' do |project|
-      link_to project.name, admin_project_path(project)
+    column "Name" do |project|
+      link_to project.name, admin_company_project_path( project.company, project )
     end
+    #column 'Project Name' do |project|
+    #  link_to project.name, admin_project_path(project)
+    #end
 
     column "Work Site Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)

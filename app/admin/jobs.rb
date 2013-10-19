@@ -5,13 +5,15 @@ ActiveAdmin.register Job do
   # config.clear_action_items!
 
 # JOBS can only be made from a solution.
+# NOTE:  Path problems arise if the ActiveAdmin association chain does NOT MATCH the Actrive Record chain.
+# It was happening here (for how long?) with quotes, solutions and jobs.  
   menu label: "Jobs", parent: "Operations"
-  #belongs_to :solution
+  belongs_to :solution
 #
 # C A L L  B A C K S
 #
   after_build do |job|
-     job.name = "#{job.solution.quote.project.name} - #{job.solution.quote.name} - #{job.solution.name} - J#{job.solution.jobs.count+1}"
+     job.name = "#{job.solution.quote.project.name}-#{job.solution.quote.name}-#{job.solution.name}-J#{job.solution.jobs.count+1}"
      job.purchase_order = job.solution.purchase_order_required ? 'PO required' : 'PO Not Required'
    end
 
@@ -35,7 +37,7 @@ ActiveAdmin.register Job do
     # Currently its not fatal if no rep is on Project or Quote.  Warnings are given separately.
     column :job_name, :sortable => 'name' do |job|
       h5 link_to job.name, 
-          edit_admin_job_path(job)
+          edit_admin_solution_job_path( job.solution, job )
       begin
         @prep = Person.find(job.solution.quote.project.rep_id)
         render @prep if @prep
