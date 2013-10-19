@@ -50,7 +50,6 @@ ActiveAdmin.register Company do
 =end
 
     column :projects do |company|
-      @projects = company.projects
       render company.projects
     end
 

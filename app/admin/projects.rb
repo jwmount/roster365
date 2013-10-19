@@ -28,7 +28,6 @@ ActiveAdmin.register Project do
   filter :active
 
   index do
-    column :company
 
     column "Name" do |project|
       link_to project.name, admin_company_project_path( project.company, project )
@@ -36,6 +35,8 @@ ActiveAdmin.register Project do
     #column 'Project Name' do |project|
     #  link_to project.name, admin_project_path(project)
     #end
+
+    column :company
 
     column "Work Site Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)

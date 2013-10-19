@@ -24,8 +24,7 @@ ActiveAdmin.register Quote do
     end
 
     column "Project", :sortable => 'name' do |quote|
-      @project = quote.project
-      render @project unless @project.nil?
+      render quote.project
     end
 
     column :rep do |quote|
