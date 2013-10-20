@@ -162,11 +162,23 @@ ActiveAdmin.register Quote do
     end
   
   end # show
-      
 
-  #
-  # Express Quote - Create from Deep copy of this quote
-  #
+#
+# C O N T E X T
+#
+  sidebar :context do |quote|
+    link_to "Dashboard", admin_dashboard_path
+  end
+#
+# P U S H  B U T T O N S
+#
+  action_item do |quote|
+    link_to 'Parent Project', admin_company_project_path( quote.project.company, quote.project ) 
+  end
+
+#
+# Express Quote - Create from Deep copy of this quote
+#
   action_item :only => [:edit, :show] do
     link_to 'Express Quote', express_admin_project_quote_path( quote.project, quote ) 
   end

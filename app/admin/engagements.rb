@@ -137,6 +137,12 @@ ActiveAdmin.register Engagement do
     active_admin_comments
   end #show
 
+#
+# C O N T E X T  -  GIVE USER WAY BACK
+#
+  sidebar :context do
+    link_to "Dashboard", admin_dashboard_path
+  end
 
 #
 # P U S H B U T T O N S

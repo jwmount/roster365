@@ -173,7 +173,6 @@ ActiveAdmin.setup do |config|
      config.namespace :admin do |admin|
       admin.build_menu :default do |menu|
         menu.add label: "Operations", url: "admin/schedules#index", html_options: { target: :blank }
-        menu.add label: "Sales", url: "admin/projects#index", html_options: { target: :blank }        
        end
       end
 

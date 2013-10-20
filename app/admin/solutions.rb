@@ -300,6 +300,12 @@ form do |f|
     end
   end
 
+#
+# C O N T E X T  -  GIVE USER WAY BACK
+#
+  sidebar :context do
+    link_to "Dashboard", admin_dashboard_path
+  end
 
 # 
 # P U S H  B U T T O N S

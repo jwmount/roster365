@@ -1,4 +1,5 @@
 #require 'debugger'
+require 'active_support/all'
 
 ActiveAdmin.register Job do
   # remove all default actions, e.g. [:new, :edit, :show etc]
@@ -65,7 +66,7 @@ ActiveAdmin.register Job do
   form do |f|
     error_panel f
 
-    f.inputs "Define Job" do
+    f.inputs "Job Details" do
       f.input :name, 
               :required => true, 
               :label=>"Job Name", 
@@ -113,12 +114,9 @@ ActiveAdmin.register Job do
 # P U S H  B U T T O N S
 #
 
-  #
-  # Schedules -- Schedules for this job
-  #
-  action_item :only => [:edit, :show] do
-    link_to 'Schedules', admin_schedules_path
-  end
+#
+# Schedules -- Schedules for this job
+#
 
 #
 # W H I T E L I S T  M A N A G E M E N T

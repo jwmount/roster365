@@ -163,8 +163,19 @@ ActiveAdmin.register Project do
   end
 
 #
+# C O N T E X T  -  GIVE USER WAY BACK
+#
+  sidebar :context do
+    link_to "Dashboard", admin_dashboard_path
+  end
+
+#
 # P U S H B U T T O N S
 #
+  action_item do |project|
+    link_to 'Parent Company', admin_company_path( project.company ) 
+  end
+
   action_item :only => [:show] do
     link_to "Quotes", admin_project_quotes_path( project )
   end

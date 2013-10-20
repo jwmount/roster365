@@ -5,14 +5,15 @@ require 'active_support/all'
 
 ActiveAdmin.register Schedule do
 
-  menu label: "Schedules", parent: "Operations"
+  menu label: "Schedules", parent: "Jobs"
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Job.all.empty?
   #}
+  belongs_to :job
   
-  filter :equipment
   filter :day, :label => "Date Range", :as => :date_range
+  filter :equipment
   filter :job
   filter :equipment_units_today
 
@@ -189,8 +190,11 @@ ActiveAdmin.register Schedule do
     active_admin_comments
   end
 
+#
+# C O N T E X T  -  GIVE USER WAY BACK
+#
   sidebar :context do
-    h4 link_to "Dashboard", admin_dashboard_path
+    link_to "Dashboard", admin_dashboard_path
   end
 
 #

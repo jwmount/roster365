@@ -4,8 +4,8 @@ class Job < ActiveRecord::Base
   
   belongs_to :solution
 
-  has_one :company
-  has_many :dockets, :dependent => :destroy
+  has_one :company, :dependent => :destroy
+  has_many :dockets
   has_many :schedules, :dependent => :destroy
 
   # audited, not on Rails 4 yet
@@ -14,7 +14,7 @@ class Job < ActiveRecord::Base
   validate :is_solution_approved?
   validate :purchase_order_required?
 
-  delegate :equipment_units_required_per_day, :to => :solution, :allow_nil => true
+  delegate :equipment_units_required_per_day, :to => :solution
 
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
   after_initialize :set_defaults
