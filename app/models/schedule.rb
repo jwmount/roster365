@@ -14,13 +14,14 @@ class Schedule < ActiveRecord::Base
 #  scope :ongoing, where("DATE(day) <= DATE(NOW() + INTERVAL 3 DAY)")
   scope :by_start_on, order("day DESC")
   
-  validate :day, :presence => true
+  validates_presence_of :day
   validate :validate_date
   validate :job, presence => true
+  validate :equipment_units_today, :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than => 100}
   # Modified to work with datepicker and datetime fields --JWM
 
   def validate_date
-    if self.day < (Date.yesterday)
+    if day.nil? or day < Date.yesterday
       errors.add(:day, "PROBLEM:  Scheduled date cannot be in the past")
     end
   end
@@ -31,7 +32,7 @@ class Schedule < ActiveRecord::Base
 
   def set_defaults
     unless persisted?    
-      day = Date.current unless day
+      day = Date.current + 1.day unless day
     end
   end
 
@@ -49,11 +50,6 @@ class Schedule < ActiveRecord::Base
     identifiers = person.identifiers.order(:rank)
   end
   
-  def method_missing(name, *args, &block)
-    whats_missing = "Called #{name} with #{args.inspect} and #{block}"
-    puts whats_missing
-    flash[:warning] = whats_missing
-  end
 
   # get Project Rep full name
   # Clearly this needs some work to let the user continue or to observe missing rep 

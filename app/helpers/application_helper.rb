@@ -1,6 +1,11 @@
 module ApplicationHelper
 
-
+  # Do not call flash here!  will get Stack Level Too Deep on flash (which is indeed missing)!
+  def method_missing(name, *args, &block)
+    whats_missing = "METHOD MISSING:  Called #{name} from #{self.class} with #{args.inspect} and #{block}"
+    puts whats_missing
+  end
+  
   def metamorphic_path(elements)
     polymorphic_path(elements)
   end

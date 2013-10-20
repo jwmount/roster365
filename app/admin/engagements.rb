@@ -6,7 +6,7 @@ require 'active_support/all'
 
 ActiveAdmin.register Engagement do
   
-  menu label: "Engagements", parent: "Operations"
+  menu label: "Engagements", parent: "Schedules"
   # belongs_to :schedule
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&

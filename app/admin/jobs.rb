@@ -8,7 +8,7 @@ ActiveAdmin.register Job do
 # JOBS can only be made from a solution.
 # NOTE:  Path problems arise if the ActiveAdmin association chain does NOT MATCH the Actrive Record chain.
 # It was happening here (for how long?) with quotes, solutions and jobs.  
-  menu label: "Jobs", parent: "Operations"
+  menu label: "Jobs", parent: "Solutions"
   belongs_to :solution
 #
 # C A L L  B A C K S
@@ -110,13 +110,23 @@ ActiveAdmin.register Job do
     active_admin_comments
   end
 
+# C O N T E X T  -  GIVE USER WAY BACK
+#
+  sidebar :context do
+    link_to "Dashboard", admin_dashboard_path
+  end
+
 #
 # P U S H  B U T T O N S
 #
-
+##
 #
 # Schedules -- Schedules for this job
 #
+#
+  action_item :only => [:edit, :show] do
+    link_to "Schedules", admin_job_schedules_path( job )
+  end
 
 #
 # W H I T E L I S T  M A N A G E M E N T

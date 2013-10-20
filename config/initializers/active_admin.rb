@@ -172,7 +172,8 @@ ActiveAdmin.setup do |config|
   #  end
      config.namespace :admin do |admin|
       admin.build_menu :default do |menu|
-        menu.add label: "Operations", url: "admin/schedules#index", html_options: { target: :blank }
+        menu.add label: "Companies", url: "admin/companies#index", html_options: { target: :blank }
+        admin.add_logout_button_to_menu menu
        end
       end
 

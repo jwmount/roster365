@@ -38,19 +38,12 @@ ActiveAdmin.register Company do
       end
     end
 
-=begin
     column :projects do |company|
-      project_count = company.projects.size
-      if project_count == 0
-        'None'
+      if company.projects.size > 0
+        render company.projects
       else
-        link_to "Projects (#{project_count})", admin_company_project_path(company)
+        link_to "New Project", new_admin_company_project_path( company )
       end
-    end
-=end
-
-    column :projects do |company|
-      render company.projects
     end
 
     column :equipment do |company|

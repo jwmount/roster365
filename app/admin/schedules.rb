@@ -12,9 +12,9 @@ ActiveAdmin.register Schedule do
   #}
   belongs_to :job
   
+  filter :job
   filter :day, :label => "Date Range", :as => :date_range
   filter :equipment
-  filter :job
   filter :equipment_units_today
 
 
@@ -167,12 +167,13 @@ ActiveAdmin.register Schedule do
               :input_html => {:class => 'datepicker'},
               :required => true, 
               :label=>"Day", 
-              :hint => "Day being scheduled.",
-              :placeholder => "Schedule for day."  
+              :hint => "Day you are scheduling.",
+              :placeholder => "Date."  
       f.input :job,
               :hint => 'Job being scheduled.'
       f.input :equipment_units_today,
-              :hint => 'Units needed on site this date for job.'
+              :hint => "Number of #{schedule.job.solution.equipment.name}(s) needed on site this date for job."
+
     end
     f.buttons
   end
@@ -182,8 +183,7 @@ ActiveAdmin.register Schedule do
     attributes_table_for(schedule) do
       row :day
       row :job
-      row ('Equipment') {link_to "#{schedule.job.solution.equipment.name}", 
-                                    admin_company_equipment_path(schedule.job.solution.equipment)}
+      row ("Equipment") {schedule.job.solution.equipment.name}
       row :equipment_units_today                                    
       row :updated_at
     end
