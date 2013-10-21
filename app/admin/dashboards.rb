@@ -53,13 +53,12 @@ ActiveAdmin.register_page "Dashboard" do
 
     section "Active Jobs" do
 
-      jobs = Job.is_active?.by_start_on
+     jobs = Job.is_active?.by_start_on
 #     jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
 
       table_for jobs do
         column :name do |job|
-          job.name
-          #link_to job.name, admin_solution_job_path( solution, job )
+          link_to job.name, admin_solution_job_path( job.solution, job )
         end
 
         column :start do |job|
@@ -85,12 +84,12 @@ ActiveAdmin.register_page "Dashboard" do
       schedules = Schedule.by_start_on
 
         table_for schedules do
-          column :job_name do |schedule|
-            schedule.job.name
+          column :date do |schedule|
+            link_to schedule.day, admin_job_schedule_path( schedule.job, schedule )
           end
 
-          column :day do |schedule|
-            schedule.day.strftime("%d %b, %Y")
+          column :equpment do |schedule|
+            schedule.equipment.name
           end
  
           column "Plan" do |schedule|
@@ -113,7 +112,7 @@ ActiveAdmin.register_page "Dashboard" do
                 'OK'
 #             status_tag (schedule.equipment_units_today == schedule.engagements.size ? "OK" : "No"), (schedule.equipment_units_today == schedule.people.size ? :ok : :error)      
               when schedule.equipment_units_today > schedule.engagements.size
-                link_to "HIRE", new_admin_schedule_engagement_path(schedule)
+                h5 link_to "HIRE", new_admin_schedule_engagement_path(schedule)
               else
                 'Evaluate'
               end

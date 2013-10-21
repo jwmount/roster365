@@ -21,6 +21,7 @@ ActiveAdmin.register Company do
   end
 
   filter :name
+  filter :projects
   filter :people
   filter :equipment
   filter :MYOB_number
