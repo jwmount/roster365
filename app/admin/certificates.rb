@@ -58,6 +58,10 @@ ActiveAdmin.register Certificate do
               :placeholder => "Description"
       f.input :active, 
               :as => :radio
+      f.input :for_company
+      f.input :for_equipment
+      f.input :for_person
+      f.input :for_location
 
     end
     f.buttons
@@ -70,9 +74,10 @@ ActiveAdmin.register Certificate do
         row("Name") { certificate.name }
         row("Active") { status_tag (certificate.active ? "YES" : "No"), (certificate.active ? :ok : :error) }
         row("Description") {certificate.description}
-        row("For Person") { status_tag (certificate.for_person ? "YES" : "No"), (certificate.for_person ? :ok : :error) }
-        row("For Equipment") { status_tag (certificate.for_equipment ? "YES" : "No"), (certificate.for_equipment ? :ok : :error) }
         row("For Company") { status_tag (certificate.for_company ? "YES" : "No"), (certificate.for_company ? :ok : :error) }
+        row("For Equipment") { status_tag (certificate.for_equipment ? "YES" : "No"), (certificate.for_equipment ? :ok : :error) }
+        row("For Location") { status_tag (certificate.for_location ? "YES" : "No"), (certificate.for_location ? :ok : :error) }
+        row("For Person") { status_tag (certificate.for_person ? "YES" : "No"), (certificate.for_person ? :ok : :error) }
       end
     end
     active_admin_comments

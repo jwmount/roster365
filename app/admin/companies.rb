@@ -260,10 +260,9 @@ ActiveAdmin.register Company do
   action_item :only => [:edit, :show] do
     link_to "People", admin_company_people_path( company )
   end
-
-
-  
-  
+#
+#
+# 
 controller do
 
   def create

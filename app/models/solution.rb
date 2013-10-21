@@ -8,7 +8,6 @@ class Solution < ActiveRecord::Base
   # audited, not on Rails 4 yet
   
   # A S S O C I A T I O N S     A S S O C I A T I O N S     A S S O C I A T I O N S     A S S O C I A T I O N S     
-  belongs_to :equipment
   belongs_to :quote
   belongs_to :material
   belongs_to :vendor, 
@@ -16,6 +15,7 @@ class Solution < ActiveRecord::Base
              :foreign_key => :vendor_id
   has_many :jobs, 
            :dependent => :destroy
+  has_many :equipment
   has_and_belongs_to_many :tips
   
   #

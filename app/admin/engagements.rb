@@ -38,6 +38,7 @@ ActiveAdmin.register Engagement do
   
 
   index do 
+
     column "Project" do |engagement|
       render engagement.schedule.job.solution.quote.project
     end
@@ -143,7 +144,9 @@ ActiveAdmin.register Engagement do
   sidebar :context do
     link_to "Dashboard", admin_dashboard_path
   end
-
+  sidebar :context do |engagement|
+    link_to "Customer", admin_company_path( engagement.schedule.job.solution.quote.project.company )
+  end
 #
 # P U S H B U T T O N S
 #

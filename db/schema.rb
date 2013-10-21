@@ -165,6 +165,12 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.datetime "updated_at",                                        null: false
   end
 
+  #create_table "equipment_schedule", id:   false, force: true do |t|
+  #  t.integer "equipment_id",         null: false
+  #  t.integer "schedule_id",          null: false
+  #end
+
+
   create_table "identifiers", force: true do |t|
     t.integer  "identifiable_id",                                   null: false
     t.string   "identifiable_type",                                 null: false
@@ -262,7 +268,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.integer  "equipment_units_today",      default: 0,        null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
-  end
+  end#
   
   # Solutions attributes are in alpha order to simplify finding them.
   create_table "solutions", force: true do |t|

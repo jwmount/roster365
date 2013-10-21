@@ -54,8 +54,8 @@ ActiveAdmin.register Solution do
       if solution.tips.count == 0
         status_tag( "No tip site assigned.", :error)
       else
-        @tip = solution.tips.limit(1)
-        render @tip
+        @tips = solution.tips #.limit(1)
+        render @tips
       end
     end
     
