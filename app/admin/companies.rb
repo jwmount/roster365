@@ -34,7 +34,7 @@ ActiveAdmin.register Company do
       end
       if company.certs.count > 0
         @certs = company.certs
-        @certs.each {|cert| render cert.certificate}
+        @certs.each { |cert| render cert.certificate }
       end
     end
 

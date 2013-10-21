@@ -123,7 +123,8 @@ form do |f|
       f.input :material_id, :as => :select, 
                             :label => 'Material', 
                             :hint => "What kind material will be moved.", 
-                            :collection => Material.all.map {|m| [m.name, m.id]}
+                            :collection => Material.all.map {|m| [m.name, m.id]},
+                            :include_blank => false
 
                             
       f.input :unit_of_material, as:         :select, 
@@ -136,7 +137,9 @@ form do |f|
     end
     
     f.inputs "Tip Site (Choose one)" do
-      f.input :tips, :as => :check_boxes, :collection => Tip.alphabetically.all.map {|u| [u.name, u.id]}
+      f.input :tips, 
+              :as => :check_boxes, 
+              :collection => Tip.alphabetically.all.map {|u| [u.name, u.id]}
 
        end
 

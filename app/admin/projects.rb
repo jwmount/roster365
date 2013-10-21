@@ -99,7 +99,7 @@ ActiveAdmin.register Project do
               collection: Person.alphabetically.where({:company_id => Company.where({:name => 'Roster365'})} && {:title => 'Rep'}), 
               hint: "Our Rep on this project.",
               placeholder: "Person",
-              :style=> "width:200px"
+              include_blank: false
 
       f.input :project_start_on, 
               :label => 'Expected start date',

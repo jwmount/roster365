@@ -173,6 +173,11 @@ ActiveAdmin.register Schedule do
               :hint => 'Job being scheduled.'
       f.input :equipment_units_today,
               :hint => "Number of #{schedule.job.solution.equipment.name}(s) needed on site this date for job."
+      f.input :equipment_id, 
+              :as => :select, 
+              :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
+              :include_blank => false,
+              :hint => "Equipment needed for day you are scheduling."
 
     end
     f.buttons
@@ -183,8 +188,11 @@ ActiveAdmin.register Schedule do
     attributes_table_for(schedule) do
       row :day
       row :job
-      row ("Equipment") {schedule.job.solution.equipment.name}
       row :equipment_units_today                                    
+      row ("Equipment") do |schedule|
+        puts "***** EQUIPMENT: #{schedule.equipment.name}"
+        schedule.equipment.name
+      end
       row :updated_at
     end
     active_admin_comments

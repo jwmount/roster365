@@ -96,15 +96,15 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                                            PATCH      /admin/identifiers/:id(.:format)                                  admin/identifiers#update
                                            PUT        /admin/identifiers/:id(.:format)                                  admin/identifiers#update
                                            DELETE     /admin/identifiers/:id(.:format)                                  admin/identifiers#destroy
-                   batch_action_admin_jobs POST       /admin/jobs/batch_action(.:format)                                admin/jobs#batch_action
-                                admin_jobs GET        /admin/jobs(.:format)                                             admin/jobs#index
-                                           POST       /admin/jobs(.:format)                                             admin/jobs#create
-                             new_admin_job GET        /admin/jobs/new(.:format)                                         admin/jobs#new
-                            edit_admin_job GET        /admin/jobs/:id/edit(.:format)                                    admin/jobs#edit
-                                 admin_job GET        /admin/jobs/:id(.:format)                                         admin/jobs#show
-                                           PATCH      /admin/jobs/:id(.:format)                                         admin/jobs#update
-                                           PUT        /admin/jobs/:id(.:format)                                         admin/jobs#update
-                                           DELETE     /admin/jobs/:id(.:format)                                         admin/jobs#destroy
+          batch_action_admin_solution_jobs POST       /admin/solutions/:solution_id/jobs/batch_action(.:format)         admin/jobs#batch_action
+                       admin_solution_jobs GET        /admin/solutions/:solution_id/jobs(.:format)                      admin/jobs#index
+                                           POST       /admin/solutions/:solution_id/jobs(.:format)                      admin/jobs#create
+                    new_admin_solution_job GET        /admin/solutions/:solution_id/jobs/new(.:format)                  admin/jobs#new
+                   edit_admin_solution_job GET        /admin/solutions/:solution_id/jobs/:id/edit(.:format)             admin/jobs#edit
+                        admin_solution_job GET        /admin/solutions/:solution_id/jobs/:id(.:format)                  admin/jobs#show
+                                           PATCH      /admin/solutions/:solution_id/jobs/:id(.:format)                  admin/jobs#update
+                                           PUT        /admin/solutions/:solution_id/jobs/:id(.:format)                  admin/jobs#update
+                                           DELETE     /admin/solutions/:solution_id/jobs/:id(.:format)                  admin/jobs#destroy
               batch_action_admin_materials POST       /admin/materials/batch_action(.:format)                           admin/materials#batch_action
                            admin_materials GET        /admin/materials(.:format)                                        admin/materials#index
                                            POST       /admin/materials(.:format)                                        admin/materials#create
@@ -132,17 +132,17 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                                            PATCH      /admin/companies/:company_id/projects/:id(.:format)               admin/projects#update
                                            PUT        /admin/companies/:company_id/projects/:id(.:format)               admin/projects#update
                                            DELETE     /admin/companies/:company_id/projects/:id(.:format)               admin/projects#destroy
-                       express_admin_quote GET        /admin/quotes/:id/express(.:format)                               admin/quotes#express
-                         print_admin_quote GET        /admin/quotes/:id/print(.:format)                                 admin/quotes#print
-                 batch_action_admin_quotes POST       /admin/quotes/batch_action(.:format)                              admin/quotes#batch_action
-                              admin_quotes GET        /admin/quotes(.:format)                                           admin/quotes#index
-                                           POST       /admin/quotes(.:format)                                           admin/quotes#create
-                           new_admin_quote GET        /admin/quotes/new(.:format)                                       admin/quotes#new
-                          edit_admin_quote GET        /admin/quotes/:id/edit(.:format)                                  admin/quotes#edit
-                               admin_quote GET        /admin/quotes/:id(.:format)                                       admin/quotes#show
-                                           PATCH      /admin/quotes/:id(.:format)                                       admin/quotes#update
-                                           PUT        /admin/quotes/:id(.:format)                                       admin/quotes#update
-                                           DELETE     /admin/quotes/:id(.:format)                                       admin/quotes#destroy
+               express_admin_project_quote GET        /admin/projects/:project_id/quotes/:id/express(.:format)          admin/quotes#express
+                 print_admin_project_quote GET        /admin/projects/:project_id/quotes/:id/print(.:format)            admin/quotes#print
+         batch_action_admin_project_quotes POST       /admin/projects/:project_id/quotes/batch_action(.:format)         admin/quotes#batch_action
+                      admin_project_quotes GET        /admin/projects/:project_id/quotes(.:format)                      admin/quotes#index
+                                           POST       /admin/projects/:project_id/quotes(.:format)                      admin/quotes#create
+                   new_admin_project_quote GET        /admin/projects/:project_id/quotes/new(.:format)                  admin/quotes#new
+                  edit_admin_project_quote GET        /admin/projects/:project_id/quotes/:id/edit(.:format)             admin/quotes#edit
+                       admin_project_quote GET        /admin/projects/:project_id/quotes/:id(.:format)                  admin/quotes#show
+                                           PATCH      /admin/projects/:project_id/quotes/:id(.:format)                  admin/quotes#update
+                                           PUT        /admin/projects/:project_id/quotes/:id(.:format)                  admin/quotes#update
+                                           DELETE     /admin/projects/:project_id/quotes/:id(.:format)                  admin/quotes#destroy
            batch_action_admin_requirements POST       /admin/requirements/batch_action(.:format)                        admin/requirements#batch_action
                         admin_requirements GET        /admin/requirements(.:format)                                     admin/requirements#index
                                            POST       /admin/requirements(.:format)                                     admin/requirements#create
@@ -160,27 +160,27 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                                            PATCH      /admin/roles/:id(.:format)                                        admin/roles#update
                                            PUT        /admin/roles/:id(.:format)                                        admin/roles#update
                                            DELETE     /admin/roles/:id(.:format)                                        admin/roles#destroy
-              batch_action_admin_schedules POST       /admin/schedules/batch_action(.:format)                           admin/schedules#batch_action
-                           admin_schedules GET        /admin/schedules(.:format)                                        admin/schedules#index
-                                           POST       /admin/schedules(.:format)                                        admin/schedules#create
-                        new_admin_schedule GET        /admin/schedules/new(.:format)                                    admin/schedules#new
-                       edit_admin_schedule GET        /admin/schedules/:id/edit(.:format)                               admin/schedules#edit
-                            admin_schedule GET        /admin/schedules/:id(.:format)                                    admin/schedules#show
-                                           PATCH      /admin/schedules/:id(.:format)                                    admin/schedules#update
-                                           PUT        /admin/schedules/:id(.:format)                                    admin/schedules#update
-                                           DELETE     /admin/schedules/:id(.:format)                                    admin/schedules#destroy
-                    approve_admin_solution GET        /admin/solutions/:id/approve(.:format)                            admin/solutions#approve
-                    costing_admin_solution GET        /admin/solutions/:id/costing(.:format)                            admin/solutions#costing
-                  duplicate_admin_solution GET        /admin/solutions/:id/duplicate(.:format)                          admin/solutions#duplicate
-              batch_action_admin_solutions POST       /admin/solutions/batch_action(.:format)                           admin/solutions#batch_action
-                           admin_solutions GET        /admin/solutions(.:format)                                        admin/solutions#index
-                                           POST       /admin/solutions(.:format)                                        admin/solutions#create
-                        new_admin_solution GET        /admin/solutions/new(.:format)                                    admin/solutions#new
-                       edit_admin_solution GET        /admin/solutions/:id/edit(.:format)                               admin/solutions#edit
-                            admin_solution GET        /admin/solutions/:id(.:format)                                    admin/solutions#show
-                                           PATCH      /admin/solutions/:id(.:format)                                    admin/solutions#update
-                                           PUT        /admin/solutions/:id(.:format)                                    admin/solutions#update
-                                           DELETE     /admin/solutions/:id(.:format)                                    admin/solutions#destroy
+          batch_action_admin_job_schedules POST       /admin/jobs/:job_id/schedules/batch_action(.:format)              admin/schedules#batch_action
+                       admin_job_schedules GET        /admin/jobs/:job_id/schedules(.:format)                           admin/schedules#index
+                                           POST       /admin/jobs/:job_id/schedules(.:format)                           admin/schedules#create
+                    new_admin_job_schedule GET        /admin/jobs/:job_id/schedules/new(.:format)                       admin/schedules#new
+                   edit_admin_job_schedule GET        /admin/jobs/:job_id/schedules/:id/edit(.:format)                  admin/schedules#edit
+                        admin_job_schedule GET        /admin/jobs/:job_id/schedules/:id(.:format)                       admin/schedules#show
+                                           PATCH      /admin/jobs/:job_id/schedules/:id(.:format)                       admin/schedules#update
+                                           PUT        /admin/jobs/:job_id/schedules/:id(.:format)                       admin/schedules#update
+                                           DELETE     /admin/jobs/:job_id/schedules/:id(.:format)                       admin/schedules#destroy
+              approve_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/approve(.:format)           admin/solutions#approve
+              costing_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/costing(.:format)           admin/solutions#costing
+            duplicate_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/duplicate(.:format)         admin/solutions#duplicate
+        batch_action_admin_quote_solutions POST       /admin/quotes/:quote_id/solutions/batch_action(.:format)          admin/solutions#batch_action
+                     admin_quote_solutions GET        /admin/quotes/:quote_id/solutions(.:format)                       admin/solutions#index
+                                           POST       /admin/quotes/:quote_id/solutions(.:format)                       admin/solutions#create
+                  new_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/new(.:format)                   admin/solutions#new
+                 edit_admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id/edit(.:format)              admin/solutions#edit
+                      admin_quote_solution GET        /admin/quotes/:quote_id/solutions/:id(.:format)                   admin/solutions#show
+                                           PATCH      /admin/quotes/:quote_id/solutions/:id(.:format)                   admin/solutions#update
+                                           PUT        /admin/quotes/:quote_id/solutions/:id(.:format)                   admin/solutions#update
+                                           DELETE     /admin/quotes/:quote_id/solutions/:id(.:format)                   admin/solutions#destroy
                    batch_action_admin_tips POST       /admin/tips/batch_action(.:format)                                admin/tips#batch_action
                                 admin_tips GET        /admin/tips(.:format)                                             admin/tips#index
                                            POST       /admin/tips(.:format)                                             admin/tips#create

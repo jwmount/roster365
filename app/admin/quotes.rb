@@ -60,7 +60,7 @@ ActiveAdmin.register Quote do
               as: :select,
               #collection: roster365.people,  #company.people.where("name = ?", "Roster365"),
               collection: Person.alphabetically.where({:company_id => Company.where({name: 'Roster365'})} && {title: 'Rep'}), 
-              include_blank: true
+              include_blank: false
 
       # This select needs to be scoped to employees of this company
       f.input :quote_to_id, 

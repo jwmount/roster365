@@ -6,7 +6,7 @@ class Schedule < ActiveRecord::Base
   has_many :engagements, :dependent => :destroy
   has_many :equipment
   has_and_belongs_to_many :people
-  #has_and_belongs_to_many :equipment
+  has_and_belongs_to_many :equipment
 
   # audited, not on Rails 4 yet
   after_initialize :set_defaults

@@ -31,6 +31,6 @@ class Cert < ActiveRecord::Base
   end
 
   def display_name
-    self.name
+    "self.name"
   end
 end

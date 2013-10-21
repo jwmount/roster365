@@ -32,7 +32,8 @@ ActiveAdmin.register Equipment do
       
       f.inputs do
         f.has_many :certs do |f|
-          f.input :certificate
+          f.input :certificate,
+                  :include_blank => false
           f.input :expires_on, 
                   :as => :date_picker,
                   :hint => "Expiration date.  Leave blank if certification is permanent."

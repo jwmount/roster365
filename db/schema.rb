@@ -165,10 +165,10 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.datetime "updated_at",                                        null: false
   end
 
-  #create_table "equipment_schedule", id:   false, force: true do |t|
-  #  t.integer "equipment_id",         null: false
-  #  t.integer "schedule_id",          null: false
-  #end
+  create_table "equipment_schedules", id:   false, force: true do |t|
+    t.integer "equipment_id",         null: false
+    t.integer "schedule_id",          null: false
+  end
 
 
   create_table "identifiers", force: true do |t|
