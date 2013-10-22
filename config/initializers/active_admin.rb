@@ -211,4 +211,6 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
+  # Have schema dumps & loads in SQL per Xavier Shay
+  # config.active_record.schema_format = :sql
 end

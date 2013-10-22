@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.string   "addressable_type"
     t.string   "street_address",   default: "",                    null: false
     t.string   "city",             default: "",                    null: false
-    t.string   "state",            default: "",                    null: false
+    t.string   "state",            default: "", limit: 2,          null: false
     t.string   "post_code",        default: "",                    null: false
     t.string   "map_reference",    default: "",                    null: false
     t.datetime "created_at",       default: '2013-10-08 00:00:00', null: false

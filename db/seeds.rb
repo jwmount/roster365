@@ -77,7 +77,7 @@ company_relation = Company.where ({name: 'Trucks-r-us'})
 @person_6 = Person.create!(company_id: @company_2.id, first_name: 'Sam', last_name: 'Jones', title: 'Driver', available_on: Date.today)
 
 Address.create!( addressable_id: @company.id, addressable_type: 'Company', street_address: '7 Strathaird Road',
-                 city: 'Bundall', state: 'QLD', post_code: '4217' )
+                 city: 'Bundall', state: 'QL', post_code: '4217' )
 
 
 
