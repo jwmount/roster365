@@ -6,15 +6,11 @@ class Address < ActiveRecord::Base
   # audited, not on Rails 4 yet
   
   def display_name
-    'some name ??'
+    'Address'
   end
   
-  def entity_name
-    "Who's address this is"
-  end
-
   def to_s
-    "#{street_address}, #{city}, #{state}, #{post_code}"
+    "#{street_address}, #{city}, #{state}, #{post_code}, #{map_reference}"
   end
 
 end

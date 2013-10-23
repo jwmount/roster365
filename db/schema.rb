@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20130212041557) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id", using: :btree
 
   create_table "addresses", force: true do |t|
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
+    t.integer  "addressable_id",                                   null: false
+    t.string   "addressable_type",                                 null: false
     t.string   "street_address",   default: "",                    null: false
     t.string   "city",             default: "",                    null: false
     t.string   "state",            default: "", limit: 2,          null: false

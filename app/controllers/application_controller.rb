@@ -95,7 +95,10 @@ module ActiveAdmin
              # end
               link_to(I18n.t('active_admin.delete_model', :model => active_admin_config.resource_name),
                 path,
-                :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'))
+                # Rails 4.0.0 :confirm deprecated
+                #:method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'))
+                # Rails 4.1 version here OK
+                :method => :delete, data: { confirm: I18n.t('active_admin.delete_confirmation') } )
             end
           end
         end

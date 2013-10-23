@@ -8,6 +8,7 @@ ActiveAdmin.register Project do
     navigation_menu :company
 
   scope :all, :default => true 
+#  scope :active, -> { where(active: true) }
   scope :active do |projects|
     projects.where ({active: true})
   end
@@ -21,6 +22,7 @@ ActiveAdmin.register Project do
     projects.where ({submitted_bid: true})
   end
 
+  filter :name
 
   index do
 

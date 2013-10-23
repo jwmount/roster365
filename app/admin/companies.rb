@@ -26,13 +26,13 @@ ActiveAdmin.register Company do
   filter :equipment
   filter :MYOB_number
   
-    sidebar "Company Details", only: [:show, :edit] do
-      ul do
-        li link_to( "Equipment", admin_company_equipment_index_path( company ) )
-        li link_to( "People", admin_company_people_path( company ) )
-        li link_to( "Projects", admin_company_projects_path(company))
-      end
+  sidebar "Company Details", only: [:show, :edit] do 
+    ul do
+      li link_to( "Equipment", admin_company_equipment_index_path( company ) )
+      li link_to( "People", admin_company_people_path( company ) )
+      li link_to( "Projects", admin_company_projects_path( company ) )
     end
+  end
 
   index do
     column "Name (click for details)", :sortable => 'name' do |company|
@@ -118,7 +118,6 @@ ActiveAdmin.register Company do
                             :include_blank => false
       end
     end
-=end
 
   #Assign people to companies using People, this way is confusing.
     f.inputs "People" do
@@ -130,6 +129,7 @@ ActiveAdmin.register Company do
                            :include_blank => false
       end
     end
+=end
 
     f.inputs "Addresses" do
       f.has_many :addresses do |a|
@@ -178,36 +178,21 @@ ActiveAdmin.register Company do
       row("PO_required") { status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error) }        
       row("active") { status_tag (company.active ? "YES" : "No"), (company.active ? :ok : :error) }
       row :MYOB_number
+      row ("People") {render company.people}
+      row ("Projects") { render company.projects}
+      row ("Equipment") { render company.equipment}
+      row ("Address") { render company.addresses}
+      row ("Certifications") { render company.certs}
+      row ("Rollodex") { render company.identifiers}
     end
 
-    panel "People" do
-      attributes_table_for( :company ) do
-        unless company.people.any?
-          h4 'WARNING:  No people defined for this company.  You must create at least one contact before you create the company.'
-        else
-          render company.people
-        end
-      end
-    end
-
-    panel 'Projects' do
-      attributes_table_for(:company) do
-        unless company.projects.any?
-          h4 'There are no projects'
-        else
-          render company.projects
-          #company.projects.alphabetically.all.each do |project|
-          #  row ('Name') {link_to (project.name), admin_project_path(project)}
-          #end
-        end
-      end
-    end
+=begin
+    
     panel "Address" do
       attributes_table_for company do
         row :address
      end
    end
-
     # Cert model is polymorphic
     # certifiable_id == who owns it, e.g. Person, Company, Vehicle...
     # certificate_id == what is it, e.g. Driving License, Birth Certificate...
@@ -241,14 +226,7 @@ ActiveAdmin.register Company do
         end
       end
     end
-
-    panel "Equipment" do
-      if company.equipment.size > 0
-        render company.equipment
-      else
-        link_to 'None', new_admin_company_equipment_path( company.id )
-      end
-    end
+=end
     active_admin_comments
 
   end
@@ -258,6 +236,9 @@ ActiveAdmin.register Company do
 #
 # P U S H  B U T T O N S
 #
+=begin
+  Removed to prefer to use Context definitions
+
   action_item :only => [:edit, :show] do
     link_to "Equipment", admin_company_equipment_index_path( company )
   end
@@ -269,10 +250,14 @@ ActiveAdmin.register Company do
   action_item :only => [:edit, :show] do
     link_to "People", admin_company_people_path( company )
   end
-
+=end
 #
 # W H I T E  L I S T  M A N A G E M E N T
 # 
+# R E M O V E D, U N W O R K A B L E!  At least in 4.0.0
+# http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters/14511396#14511396
+#
+=begin
 controller do
   
   def new
@@ -281,7 +266,8 @@ controller do
 
   def create
     @company = Company.new(new_company_params)
-    unless !Company.where(:name => @company.name).blank?
+    debugger
+    unless Company.where(:name => @company.name).blank?
       if @company.save!
         respond_to do |format|
           format.html { redirect_to admin_companies_path, notice: "Company created successfully." }
@@ -294,11 +280,28 @@ controller do
     end
   end
 
+  # Update must manage updates to nested models now.  Not nice.  Is this really the way?
+  # Need to generalize this to do each nested model as well:
+  # -Addresses
+  # -Certs
+  # -Identifiers
+  # -Requirements.
   def update
+    unless params[:company][:addresses_attributes].nil?
+      @address = Address.find   params[:company][:addresses_attributes]["0"][:id]
+      @address.street_address = params[:company][:addresses_attributes]["0"][:street_address]
+      @address.city           = params[:company][:addresses_attributes]["0"][:city]
+      @address.state          = params[:company][:addresses_attributes]["0"][:state]
+      @address.post_code      = params[:company][:addresses_attributes]["0"][:post_code]
+      @address.map_reference  = params[:company][:addresses_attributes]["0"][:map_reference]
+      @address.save!
+    end
+
     @company = Company.find(params[:id])
+    @company.PO_required = params[:company][:PO_required]
     if @company.save!
       respond_to do |format|
-        format.html { redirect_to admin_companies_path, notice: "Company edited successfully." }
+        format.html { redirect_to admin_company_path( @company ), notice: "Company edited successfully." }
       end
     else
       respond_to do |format|
@@ -311,6 +314,28 @@ controller do
   private
 
   def new_company_params
+    params.require(:company).permit( [
+                                           :id,
+                                           :name,
+                                           :MYOB_number,
+                                           :PO_required,
+                                           :credit_terms,
+                                           :active,
+                                           :addresses_attributes [
+                                                                  :street_address,
+                                                                  :city,
+                                                                  :state,
+                                                                  :post_code,
+                                                                  :map_reference
+                                                                ]
+                                      ]
+                                    )
+  end
+
+  def company_params
+    params.permit!
+    return
+
     params.require(:company).permit(
                    :utf8, 
                    :authenticity_token, 
@@ -322,8 +347,17 @@ controller do
                    :MYOB_number, 
                    :name, 
                    :PO_required, 
-                   :commit
+                   :commit,
+                                      :addresses_attributes [ 
+                                                              :id,
+                                                              :street_address,
+                                                              :city,
+                                                              :state,
+                                                              :post_code,
+                                                              :map_reference
+                                                            ]
                  )
     end
   end
+=end
 end

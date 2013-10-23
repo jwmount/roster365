@@ -6,19 +6,29 @@ class Company < ActiveRecord::Base
   has_many :people, :dependent => :destroy
   has_many :equipment, :dependent => :destroy
   has_many :projects, :dependent => :destroy
-  
-  # polymorphs
-  has_many  :addresses, :as => :addressable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :addresses
-
-  has_many :certs, :as => :certifiable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :certs
-
-  has_many :identifiers, :as => :identifiable, :autosave => true, :dependent => :destroy
-    accepts_nested_attributes_for :identifiers
-
   # We do not use :dependent => :destroy as tips survive company owners.  OK?
   has_many :tips
+
+  # polymorphs
+  has_many  :addresses, 
+            :as => :addressable, 
+            :autosave => true, 
+            :dependent => :destroy
+
+  has_many :certs, 
+           :as => :certifiable, 
+           :autosave => true, 
+           :dependent => :destroy
+
+  has_many :identifiers, 
+           :as => :identifiable, 
+           :autosave => true, 
+           :dependent => :destroy
+
+  accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :certs
+  accepts_nested_attributes_for :identifiers
+
 
 #
 # V A L I D A T I O N S

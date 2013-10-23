@@ -213,4 +213,10 @@ ActiveAdmin.setup do |config|
 
   # Have schema dumps & loads in SQL per Xavier Shay
   # config.active_record.schema_format = :sql
+
+  # Strong parameter briar patch, unworkable.
+  # http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters/14511396#14511396
+    config.before_filter do
+      params.permit!
+    end
 end
