@@ -200,10 +200,14 @@ ActiveAdmin.register Schedule do
   end
 
 #
-# C O N T E X T  -  GIVE USER WAY BACK
+# C O N T E X T -- Places you can go
 #
-  sidebar :context do
-    link_to "Dashboard", admin_dashboard_path
+  sidebar "Schedule Context", only: [:show, :edit] do 
+    ul
+      li link_to "Return to #{schedule.job.display_name} Schedule", admin_job_schedule_path( schedule.job, job ) 
+      li link_to 'Prepare Engagements', admin_schedule_engagements_path( schedule )   
+      hr
+      li link_to "View Dashboard", admin_dashboard_path
   end
 
 #
@@ -212,7 +216,7 @@ ActiveAdmin.register Schedule do
   action_item :only => [:edit, :show] do 
     link_to "Engagements",  admin_schedule_engagements_path(schedule)
   end
-
+=begin
 #
 # W H I T E L I S T  M A N A G E M E N T
 #
@@ -235,5 +239,5 @@ ActiveAdmin.register Schedule do
                                         :job_id  )
     end
   end
-
+=end
 end

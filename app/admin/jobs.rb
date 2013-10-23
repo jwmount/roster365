@@ -111,10 +111,15 @@ ActiveAdmin.register Job do
     active_admin_comments
   end
 
-# C O N T E X T  -  GIVE USER WAY BACK
 #
-  sidebar :context do
-    link_to "Dashboard", admin_dashboard_path
+# C O N T E X T -- Places you can go
+#
+  sidebar "Job Context", only: [:show, :edit] do 
+    ul
+      li link_to "Return to #{job.solution.generate_name} Solution", admin_quote_solution_path( job.solution, job ) 
+      li link_to 'Prepare Schedules', admin_job_schedules_path( job )   
+      hr
+      li link_to "View Dashboard", admin_dashboard_path
   end
 
 #
@@ -129,6 +134,7 @@ ActiveAdmin.register Job do
     link_to "Schedules", admin_job_schedules_path( job )
   end
 
+=begin
 #
 # W H I T E L I S T  M A N A G E M E N T
 #
@@ -150,5 +156,6 @@ controller do
                                      ])
     end
   end
+=end
 
 end

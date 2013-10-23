@@ -167,15 +167,19 @@ ActiveAdmin.register Quote do
 #
 # C O N T E X T
 #
-  sidebar :context do |quote|
-    link_to "Dashboard", admin_dashboard_path
+  sidebar "Quote Context", only: [:show, :edit] do 
+    ul
+      li link_to "Return to #{quote.project.name} Project", admin_company_project_path( quote.project.company, quote.project ) 
+      li link_to 'Prepare Solutions', admin_quote_solutions_path( quote )     
+      hr
+      li link_to "View Dashboard", admin_dashboard_path
   end
 #
 # P U S H  B U T T O N S
 #
-  action_item do |quote|
-    link_to 'Parent Project', admin_company_project_path( quote.project.company, quote.project ) 
-  end
+#  action_item do |quote|
+#   link_to 'Back ( --> Parent Project', admin_company_project_path( quote.project.company, quote.project ) 
+#  end
 
 #
 # Express Quote - Create from Deep copy of this quote
@@ -207,9 +211,10 @@ ActiveAdmin.register Quote do
   end
 
   # Appears on Quotes page but needs qualification
-  action_item :only => [:edit, :show] do
-    link_to 'Solutions', admin_quote_solutions_path( quote ) 
-  end
+  # Is navigation, no longer a pbutton
+  #action_item :only => [:edit, :show] do
+  #  link_to 'Solutions', admin_quote_solutions_path( quote ) 
+  #end
   
   action_item :only => [:edit, :show ] do
     link_to "Print", print_admin_project_quote_path( quote.project, quote )

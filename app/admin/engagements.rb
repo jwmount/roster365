@@ -143,8 +143,12 @@ ActiveAdmin.register Engagement do
 #
 # C O N T E X T  -  GIVE USER WAY BACK
 #
-  sidebar :context do
-    link_to "Dashboard", admin_dashboard_path
+  sidebar "Engagement Context", only: [:show, :edit] do 
+    ul
+      li link_to "Return to #{engagement.schedule.display_name} Schedule", admin_schedule_engagement_path( engagement.schedule, engagement ) 
+      hr
+      li link_to "Dockets", admin_dockets_path
+      li link_to "Dashboard", admin_dashboard_path
   end
   sidebar :context do |engagement|
     link_to "Customer", admin_company_path( engagement.schedule.job.solution.quote.project.company )
@@ -178,7 +182,7 @@ ActiveAdmin.register Engagement do
      end
    end  
    
-
+=begin
 #
 # W H I T E L I S T  M A N A G E M E N T
 #
@@ -211,5 +215,5 @@ controller do
                    )
     end
   end
- 
+=end 
 end

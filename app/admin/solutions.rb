@@ -305,10 +305,14 @@ form do |f|
   end
 
 #
-# C O N T E X T  -  GIVE USER WAY BACK
+# C O N T E X T
 #
-  sidebar :context do
-    link_to "Dashboard", admin_dashboard_path
+  sidebar "Solution Context", only: [:show, :edit] do 
+    ul
+      li link_to "Return to #{solution.quote.generate_name} Quote", admin_project_quote_path( quote.project, quote ) 
+      li link_to 'Prepare Jobs', admin_solution_jobs_path( solution )   
+      hr
+      li link_to "View Dashboard", admin_dashboard_path
   end
 
 # 
@@ -382,9 +386,9 @@ form do |f|
   # needed because you have to create a Job in the context of its solution.
   # do not allow New operation in jobs.rb.
   # fully qualified path is: admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
-  action_item :only => [:edit, :show] do
-    link_to 'Jobs', admin_solution_jobs_path( solution )
-  end
+  # action_item :only => [:edit, :show] do
+  #   link_to 'Jobs', admin_solution_jobs_path( solution )
+  # end
 
 =begin
 
@@ -423,6 +427,7 @@ form do |f|
   end
 =end
 
+=begin
 # http://api.rubyonrails.org/classes/ActionController/Parameters.html
 # http://guides.rubyonrails.org/action_controller_overview.html#more-examples
 # http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters
@@ -492,6 +497,6 @@ controller do
       params.permit!
     end
   end
-
+=end
 
 end

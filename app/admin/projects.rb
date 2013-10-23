@@ -86,7 +86,7 @@ ActiveAdmin.register Project do
               :required => true, 
               :label => 'Project Name', 
               :hint => "Working name of project. NOTE:  if you change a project name, existing resources such as quotes, solutions, jobs etc., continue to use the old name.",
-              :placeholder => "Project Name"
+              :placeholder => "Required"
 
       # Scope this collection to employees with title 'Rep'
       # Roster365 is company = Company.where({:name => 'Roster365'})
@@ -162,24 +162,32 @@ ActiveAdmin.register Project do
 #
 # C O N T E X T  -  GIVE USER WAY BACK
 #
-  sidebar :context do
-    link_to "Dashboard", admin_dashboard_path
+
+  sidebar "Project Details", only: [:show, :edit] do 
+    ul do
+      li link_to( "Quotes", admin_project_quotes_path( project ) )
+      li link_to 'Back (Parent Company)', admin_company_path( project.company ) 
+      hr
+      li link_to "Dashboard", admin_dashboard_path
+    end
   end
+
 
 #
 # P U S H B U T T O N S
 #
-  action_item do |project|
-    link_to 'Parent Company', admin_company_path( project.company ) 
-  end
+#  action_item do |project|
+#    link_to 'Parent Company', admin_company_path( project.company ) 
+#  end
 
-  action_item :only => [:show] do
-    link_to "Quotes", admin_project_quotes_path( project )
-  end
+ # action_item :only => [:show] do
+ #   link_to "Quotes", admin_project_quotes_path( project )
+ # end
 
 #
 # W H I T E L I S T  M A N A G E M E N T
 #
+=begin
   controller do
 
     def create
@@ -219,6 +227,6 @@ ActiveAdmin.register Project do
                                      )
     end
   end
-
+=end
 
 end
