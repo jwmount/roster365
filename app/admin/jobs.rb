@@ -10,6 +10,7 @@ ActiveAdmin.register Job do
 # It was happening here (for how long?) with quotes, solutions and jobs.  
   menu label: "Jobs", parent: "Solutions"
   belongs_to :solution
+    navigation_menu :solution
 #
 # C A L L  B A C K S
 #

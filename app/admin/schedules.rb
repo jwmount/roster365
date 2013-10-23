@@ -11,6 +11,7 @@ ActiveAdmin.register Schedule do
   #  !Job.all.empty?
   #}
   belongs_to :job
+    navigation_menu :job
   
   filter :job
   filter :day, :label => "Date Range", :as => :date_range

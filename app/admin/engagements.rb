@@ -14,7 +14,9 @@ ActiveAdmin.register Engagement do
   #}
   
   belongs_to :person, :optional=>true
+    navigation_menu :schedule
   belongs_to :schedule, :optional=>false
+    navigation_menu :schedule
 
   scope :all, :default => true
   scope :onsite_now do |engagements|

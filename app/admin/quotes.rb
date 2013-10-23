@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Quote do
       
-  menu label: "Quotes", parent: "Sales"
+  menu label: "Quotes"
 
   filter :name
   filter :rep
@@ -11,6 +11,7 @@ ActiveAdmin.register Quote do
 
   # NOT OPTIONAL, effect is to scope quotes to project, apparently is NOT same effect as same statement in quote.rb.
   belongs_to :project
+    navigation_menu :project
 
   after_build do |quote|
     quote.generate_name

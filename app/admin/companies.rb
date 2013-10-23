@@ -271,7 +271,7 @@ ActiveAdmin.register Company do
   end
 
 #
-#
+# W H I T E  L I S T  M A N A G E M E N T
 # 
 controller do
   
@@ -315,7 +315,6 @@ controller do
                    :utf8, 
                    :authenticity_token, 
                    :commit,
-                   #:controller,
                    :name,
                    :id,
                    :active,
@@ -323,33 +322,8 @@ controller do
                    :MYOB_number, 
                    :name, 
                    :PO_required, 
-                   #:updated_at,
                    :commit
                  )
-=begin
-    params.require(:company).permit( [
-                            :name,
-                            :active,
-                            :credit_terms, 
-                            :MYOB_number, 
-                            :name, 
-                            :PO_required, 
-                            :updated_at,
-                            addresses_attributes: [:addressable_id, 
-                                                   :addressable_type, 
-                                                   :state, 
-                                                   :street_address, 
-                                                   :city,
-                                                   :post_code, 
-                                                   :map_reference
-                                                  ],
-                            active_admin_comments: [ :resource_type,
-                                                     :body,
-                                                     :commit
-                                                   ]
-                            ]
-                    )                      
-=end
     end
   end
 end
