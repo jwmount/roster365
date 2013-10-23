@@ -1,10 +1,11 @@
 #require 'debugger'
 ActiveAdmin.register Project do
 
-  menu label: "Projects", :parent => "Sales"
+  #menu label: "Projects", :parent => "Company"
   
   #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
   belongs_to :company
+    navigation_menu :company
 
   scope :all, :default => true 
   scope :active do |projects|
@@ -20,12 +21,6 @@ ActiveAdmin.register Project do
     projects.where ({submitted_bid: true})
   end
 
-  filter :company
-  filter :name
-  filter :project_start_on
-  filter :intend_to_bid
-  filter :submitted_bid
-  filter :active
 
   index do
 
@@ -186,7 +181,7 @@ ActiveAdmin.register Project do
   controller do
 
     def create
-      params.permit!
+      project_permit
       super
     end
 

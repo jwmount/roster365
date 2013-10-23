@@ -6,7 +6,6 @@ class Company < ActiveRecord::Base
   has_many :people, :dependent => :destroy
   has_many :equipment, :dependent => :destroy
   has_many :projects, :dependent => :destroy
-  has_many :solutions, :dependent => :destroy
   
   # polymorphs
   has_many  :addresses, :as => :addressable, :autosave => true, :dependent => :destroy

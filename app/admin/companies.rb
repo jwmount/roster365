@@ -26,6 +26,14 @@ ActiveAdmin.register Company do
   filter :equipment
   filter :MYOB_number
   
+    sidebar "Company Details", only: [:show, :edit] do
+      ul do
+        li link_to( "Equipment", admin_company_equipment_index_path( company ) )
+        li link_to( "People", admin_company_people_path( company ) )
+        li link_to( "Projects", admin_company_projects_path(company))
+      end
+    end
+
   index do
     column "Name (click for details)", :sortable => 'name' do |company|
       h5 link_to company.name, admin_company_path(company)
@@ -261,24 +269,66 @@ ActiveAdmin.register Company do
   action_item :only => [:edit, :show] do
     link_to "People", admin_company_people_path( company )
   end
+
 #
 #
 # 
 controller do
+  
+  def new
+    @company = Company.new
+  end
 
   def create
-    params_permit!
-    super
-  end
-  
-  def update
-    params.permit!
-    super
+    @company = Company.new(new_company_params)
+    unless !Company.where(:name => @company.name).blank?
+      if @company.save!
+        respond_to do |format|
+          format.html { redirect_to admin_companies_path, notice: "Company created successfully." }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to new_admin_company_path, notice: "Company with that name already exists." }  
+      end
+    end
   end
 
-  def company_params
-    params.permit(:company => [ :id,   #????
-                            :utf8,
+  def update
+    @company = Company.find(params[:id])
+    if @company.save!
+      respond_to do |format|
+        format.html { redirect_to admin_companies_path, notice: "Company edited successfully." }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to new_admin_company_path, notice: "Company was not updated." }  
+      end
+    end
+  end
+
+
+  private
+
+  def new_company_params
+    params.require(:company).permit(
+                   :utf8, 
+                   :authenticity_token, 
+                   :commit,
+                   #:controller,
+                   :name,
+                   :id,
+                   :active,
+                   :credit_terms, 
+                   :MYOB_number, 
+                   :name, 
+                   :PO_required, 
+                   #:updated_at,
+                   :commit
+                 )
+=begin
+    params.require(:company).permit( [
+                            :name,
                             :active,
                             :credit_terms, 
                             :MYOB_number, 
@@ -299,6 +349,7 @@ controller do
                                                    ]
                             ]
                     )                      
+=end
     end
   end
 end

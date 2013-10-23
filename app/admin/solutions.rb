@@ -132,7 +132,7 @@ form do |f|
                                  hint:       "Unit that is basis for our price.", 
                                  collection: %w[m3 tonne 'hourly hire' loads]
 
-      f.input :total_material, hint:     "How much material will be moved in this solution."
+      f.input :total_material, hint:  "How much material will be moved in this solution."
 
     end
     

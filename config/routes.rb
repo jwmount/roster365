@@ -6,6 +6,6 @@ Roster365::Application.routes.draw do
   ActiveAdmin.routes(self)
   
   # set namespace root in active_admin.rb
-  #root :to => "companies#index"
+  root :to => "companies#index"
 
 end #routes
