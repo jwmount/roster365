@@ -38,7 +38,7 @@ ActiveAdmin.register Company do
   #
 # I N D E X / L I S T  C O N T E X T
 #
-  sidebar "Projects Context", only: [:index] do 
+  sidebar "Companies Context", only: [:index] do 
     ul
 
       li link_to "Dashboard", admin_dashboard_path

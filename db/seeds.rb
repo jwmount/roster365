@@ -20,8 +20,6 @@ user_list = [
 user_list.each do |email, role|  
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
 end
-return
-
 
 # load certificates
 certificate_list = [
@@ -50,16 +48,15 @@ end
 # First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
 # Two methods here, names list and completely specified attributes.
 companies_list = [
-  "American Debris Box Service Inc.",
-  "Roster365", 
-  'Projects-r-us',
-  'Trucks-r-us'
-]
-companies_list.each do |name|
-  Company.create!( name: name)
+  ["American Debris Box Service Inc.", 30, false, false, "00000"],
+  ["Roster365", 30, false, false, "00000"], 
+  ['Projects-r-us', 30, false, false, "00000"],
+  ['Trucks-r-us', 30, false, false, "00000"]
+  ]
+companies_list.each do |c| #name, credit_terms, PO_required, active, MYOB_number|
+  Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], MYOB_number: c[4])
 end
-
-
+  
 # now put some people in each company
 company_relation = Company.where ({name: "American Debris Box Service Inc."})
 @company = company_relation[0]

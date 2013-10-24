@@ -138,14 +138,13 @@ ActiveAdmin.register Project do
   show title: 'Project' do
     panel project.name do
       attributes_table_for(project) do
-        rows :company_id,  :project_start_on
-        row("Project Rep") do |project|
-          begin
-            rep = Person.find project.rep_id
-            link_to rep.full_name, admin_person_path(rep)
-          rescue
-            flash["Error:  No Rep assigned to this project."]
-          end
+        row :company_id
+        row :project_start_on
+        row("Project Rep") do |project|   #NOTE:  not DRY, same as for :index column.
+          @rep  = Person.find project.rep_id
+          render :partial => 'person', :locals => {:rep => @rep }
+          @identifiers = @rep.identifiers.order(:rank)
+          render :partial => 'identifier', :collection => @identifiers
         end
 
       row "Work Site" do |project|
