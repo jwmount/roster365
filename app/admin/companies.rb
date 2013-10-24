@@ -32,7 +32,6 @@ ActiveAdmin.register Company do
       li link_to( "People", admin_company_people_path( company ) )
       li link_to( "Projects", admin_company_projects_path( company ) )
       hr
-      li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
     end
   end
