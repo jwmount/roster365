@@ -112,26 +112,31 @@ ActiveAdmin.register Job do
   end
 
 #
-# C O N T E X T -- Places you can go
+# P U S H  B U T T O N S
 #
-  sidebar "Job Context", only: [:show, :edit] do 
+#
+
+#
+# I N D E X / L I S T  C O N T E X T
+#
+  sidebar "Job Context", only: [:index] do 
     ul
-      li link_to "Return to #{job.solution.generate_name} Solution", admin_quote_solution_path( job.solution, job ) 
-      li link_to 'Prepare Schedules', admin_job_schedules_path( job )   
+      li link_to "Solutions", admin_quote_solutions_path( solution.quote )
       hr
-      li link_to "View Dashboard", admin_dashboard_path
+      li link_to "Dockets", admin_dockets_path
+      li link_to "Dashboard", admin_dashboard_path
   end
 
 #
-# P U S H  B U T T O N S
+# C O N T E X T -- Places you can go
 #
-##
-#
-# Schedules -- Schedules for this job
-#
-#
-  action_item :only => [:edit, :show] do
-    link_to "Schedules", admin_job_schedules_path( job )
+  sidebar "Jobs Context", only: [:show, :edit] do 
+    ul
+      li link_to "Jobs",        admin_solution_jobs_path(        job.solution )
+      li link_to "Solutions",   admin_quote_solutions_path(      job.solution.quote )
+      li link_to "Quotes",      admin_project_quotes_path(       job.solution.quote.project )
+      li link_to "Projects",    admin_company_projects_path(     job.solution.quote.project.company )
+      li link_to "Companies",   admin_companies_path
   end
 
 =begin

@@ -305,14 +305,25 @@ form do |f|
   end
 
 #
-# C O N T E X T
+# I N D E X / L I S T  C O N T E X T
 #
-  sidebar "Solution Context", only: [:show, :edit] do 
+  sidebar "Solution Context", only: [:index] do 
     ul
-      li link_to "Return to #{solution.quote.generate_name} Quote", admin_project_quote_path( quote.project, quote ) 
+      li link_to "Dockets", admin_dockets_path
+      li link_to "Dashboard", admin_dashboard_path
+  end
+
+#
+# C O N T E X T -- Places you can go
+#
+  sidebar "Solutions Context", only: [:show, :edit] do 
+    ul
       li link_to 'Prepare Jobs', admin_solution_jobs_path( solution )   
       hr
-      li link_to "View Dashboard", admin_dashboard_path
+      li link_to 'Solutions',   admin_quote_solutions_path(      solution.quote )   
+      li link_to "Quotes",      admin_project_quotes_path(       solution.quote.project )
+      li link_to "Projects",    admin_company_projects_path(     solution.quote.project.company )
+      li link_to "Companies",   admin_companies_path
   end
 
 # 

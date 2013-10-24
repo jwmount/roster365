@@ -31,8 +31,20 @@ ActiveAdmin.register Company do
       li link_to( "Equipment", admin_company_equipment_index_path( company ) )
       li link_to( "People", admin_company_people_path( company ) )
       li link_to( "Projects", admin_company_projects_path( company ) )
+      hr
+      li link_to "Dockets", admin_dockets_path
+      li link_to "Dashboard", admin_dashboard_path
     end
   end
+  #
+# I N D E X / L I S T  C O N T E X T
+#
+  sidebar "Projects Context", only: [:index] do 
+    ul
+      li link_to "Dockets", admin_dockets_path
+      li link_to "Dashboard", admin_dashboard_path
+  end
+
 
   index do
     column "Name (click for details)", :sortable => 'name' do |company|
@@ -43,7 +55,7 @@ ActiveAdmin.register Company do
       end
       if company.certs.count > 0
         @certs = company.certs
-        @certs.each { |cert| render cert.certificate }
+        render @certs
       end
     end
 

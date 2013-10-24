@@ -174,6 +174,30 @@ ActiveAdmin.register Quote do
       hr
       li link_to "View Dashboard", admin_dashboard_path
   end
+
+#
+# I N D E X / L I S T  C O N T E X T
+#
+  sidebar "Quotes Context", only: [:index] do 
+    ul
+      li link_to "Projects",          admin_company_projects_path(     project.company )
+      hr
+      li link_to "Dockets", admin_dockets_path
+      li link_to "Dashboard", admin_dashboard_path
+  end
+
+#
+# C O N T E X T -- Places you can go
+#
+  sidebar "Quote Context", only: [:show, :edit] do 
+    ul
+      li link_to 'Prepare Solutions', admin_quote_solutions_path(      quote )     
+      hr
+      li link_to "Quotes",            admin_project_quotes_path(       quote.project )
+      li link_to "Projects",          admin_company_projects_path(     quote.project.company )
+      li link_to "Companies",         admin_companies_path
+  end
+
 #
 # P U S H  B U T T O N S
 #
@@ -226,7 +250,7 @@ ActiveAdmin.register Quote do
     render :partial => "print", :layout => "quotes/print", :object => @quote, :target => '_blank'
   end
 
-
+=begin
 #
 # W H I T E L I S T  M A N A G E M E N T
 #
@@ -257,5 +281,5 @@ controller do
                                 :addresses_attributes ] )
     end
   end
-
+=end
 end

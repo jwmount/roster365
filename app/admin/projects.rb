@@ -160,18 +160,27 @@ ActiveAdmin.register Project do
   end
 
 #
-# C O N T E X T  -  GIVE USER WAY BACK
+# I N D E X / L I S T  C O N T E X T
 #
-
-  sidebar "Project Details", only: [:show, :edit] do 
-    ul do
-      li link_to( "Quotes", admin_project_quotes_path( project ) )
-      li link_to 'Back (Parent Company)', admin_company_path( project.company ) 
+  sidebar "Projects Context", only: [:index] do 
+    ul
+      li link_to "Companies",         admin_companies_path
       hr
+      li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
-    end
   end
 
+#
+# C O N T E X T -- Places you can go
+#
+  sidebar "Quote Context", only: [:show, :edit] do 
+    ul
+      li link_to 'Back (Parent Company)', admin_company_path( project.company ) 
+      hr
+      li link_to 'Prepare Quotes', admin_project_quotes_path(       project )     
+      li link_to "Projects",          admin_company_projects_path(     quote.project.company )
+      li link_to "Companies",         admin_companies_path
+  end
 
 #
 # P U S H B U T T O N S

@@ -23,15 +23,11 @@ ActiveAdmin.register Schedule do
   index do
 
     column :day do |schedule|
-      schedule.day.strftime("%a %d %b, %Y")
+      schedule.day.strftime("%a,%d%b")
     end
 
     column "Schedule" do |schedule|
-      begin
-        link_to schedule.job.name, edit_admin_schedule_path(schedule.id)
-      rescue Exception
-        flash[:error] = "ERROR:  Job does not exist!"
-      end
+      link_to schedule.job.name, edit_admin_job_schedule_path(schedule.job, schedule)
     end
 
     column "Rep(s)" do |schedule|
@@ -162,7 +158,7 @@ ActiveAdmin.register Schedule do
   form do |f|
     error_panel f
 
-    f.inputs "Daily Roster (Schedule)" do
+    f.inputs "#{schedule.job.solution.quote.project.company.display_name}. Project #{schedule.job.solution.quote.project.name}.  Schedule details." do
       f.input :day,
               :as => :string,
               :input_html => {:class => 'datepicker'},
@@ -200,12 +196,26 @@ ActiveAdmin.register Schedule do
   end
 
 #
+# I N D E X / L I S T  C O N T E X T
+#
+  sidebar "Schedule Context", only: [:index] do 
+    ul
+      li link_to "Dashboard", admin_dashboard_path
+  end
+
+#
 # C O N T E X T -- Places you can go
 #
   sidebar "Schedule Context", only: [:show, :edit] do 
     ul
       li link_to "Return to #{schedule.job.display_name} Schedule", admin_job_schedule_path( schedule.job, job ) 
-      li link_to 'Prepare Engagements', admin_schedule_engagements_path( schedule )   
+      li link_to 'Engagements', admin_schedule_engagements_path( schedule )   
+      li link_to "Schedules",   admin_schedule_jobs_path(        schedule.job ) 
+      li link_to "Jobs",        admin_solution_jobs_path(        schedule.job.solution )
+      li link_to "Solutions",   admin_quote_solutions_path(      schedule.job.solution.quote )
+      li link_to "Quotes",      admin_project_quotes_path(       schedule.job.solution.quote.project )
+      li link_to "Projects",    admin_company_projects_path(     schedule.job.solution.quote.project.company )
+      li link_to "Companies",   admin_companies_path
       hr
       li link_to "View Dashboard", admin_dashboard_path
   end
@@ -213,9 +223,9 @@ ActiveAdmin.register Schedule do
 #
 # P U S H  B U T T O N S
 #    
-  action_item :only => [:edit, :show] do 
-    link_to "Engagements",  admin_schedule_engagements_path(schedule)
-  end
+  #action_item :only => [:edit, :show] do 
+  #  link_to "Engagements",  admin_schedule_engagements_path(schedule)
+  #end
 =begin
 #
 # W H I T E L I S T  M A N A G E M E N T

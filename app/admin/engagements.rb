@@ -35,16 +35,10 @@ ActiveAdmin.register Engagement do
     engagements.where ({engagement_declined: true})
   end    
 
-  filter :person
-  filter :schedule
-  
 
   index do 
 
-    column "Project" do |engagement|
-      render engagement.schedule.job.solution.quote.project
-    end
-
+   
     # http://stackoverflow.com/questions/1192843/grouped-select-in-rails
     # http://stackoverflow.com/questions/9579402/active-admin-refresh-second-drop-down-based-on-first-drop-down-ruby-on-rails
     # http://apidock.com/rails/ActionView/Helpers/FormTagHelper/select_tag
@@ -52,10 +46,23 @@ ActiveAdmin.register Engagement do
     #            :onchange => "$.post('#{admin_person_path(engagement.contact.id)}', 
     #            {'_method':'put', 'engagement[:person]':this.value} );"
 
-    column "Subbie" do |engagement|
-      render engagement
+    column "Engagement", :sortable => :id do |engagement|
+      link_to engagement.id, admin_schedule_engagement_path( engagement.schedule, engagement )
     end
 
+    column "Subbie" do |engagement|
+      render engagement.person
+      if engagement.person.identifiers.count > 0
+        @identifiers = engagement.person.identifiers
+        render @identifiers 
+      end
+      if engagement.person.certs.count > 0
+        @certs = engagement.person.certs
+        render @certs
+      end
+
+    end
+=begin
     column "Job" do |engagement|
       engagement.schedule.job.name
     end
@@ -63,7 +70,7 @@ ActiveAdmin.register Engagement do
     column "Day" do |engagement|
       engagement.schedule.day.strftime("%d %b, %Y")
     end
-
+=end
     column "Docket(s)" do |engagement|
       render engagement.dockets
     end   
@@ -141,23 +148,36 @@ ActiveAdmin.register Engagement do
   end #show
 
 #
-# C O N T E X T  -  GIVE USER WAY BACK
+# I N D E X / L I S T  C O N T E X T
 #
-  sidebar "Engagement Context", only: [:show, :edit] do 
+  sidebar "Engagement Context", only: [:index] do 
     ul
-      li link_to "Return to #{engagement.schedule.display_name} Schedule", admin_schedule_engagement_path( engagement.schedule, engagement ) 
-      hr
-      li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
+      li link_to "Dockets", admin_dockets_path
   end
-  sidebar :context do |engagement|
-    link_to "Customer", admin_company_path( engagement.schedule.job.solution.quote.project.company )
+
+#
+# C O N T E X T -- Places you can go
+#
+  sidebar "Engagements Context", only: [:show, :edit] do 
+    ul
+      li link_to "Engagements", admin_schedule_engagements_path( engagement.schedule )
+      li link_to "Schedules",   admin_job_schedules_path(        engagement.schedule.job )
+      li link_to "Jobs",        admin_solution_jobs_path(        engagement.schedule.job.solution )
+      li link_to "Solutions",   admin_quote_solutions_path(      engagement.schedule.job.solution.quote )
+      li link_to "Quotes",      admin_project_quotes_path(       engagement.schedule.job.solution.quote.project )
+      li link_to "Projects",    admin_company_projects_path(     engagement.schedule.job.solution.quote.project.company )
+      li link_to "Companies",   admin_companies_path
+      hr
+      li link_to "View Dashboard", admin_dashboard_path
+      li link_to "Dockets", admin_dockets_path
   end
+
 #
 # P U S H B U T T O N S
 #
   action_item :only => [:index, :edit, :show] do
-    link_to "Dockets", admin_dockets_path
+    link_to "Create Docket", admin_dockets_path
   end
 
    # Action to create the docket.  The Scheduler or User needs to edit the booking_no default given here.
