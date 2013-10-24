@@ -20,6 +20,8 @@ user_list = [
 user_list.each do |email, role|  
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
 end
+return
+
 
 # load certificates
 certificate_list = [
