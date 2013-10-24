@@ -40,7 +40,8 @@ ActiveAdmin.register Company do
 #
   sidebar "Projects Context", only: [:index] do 
     ul
-      li link_to "Dockets", admin_dockets_path
+      li link_to 'Prepare Projects', admin_company_projects_path( company )     
+
       li link_to "Dashboard", admin_dashboard_path
   end
 
