@@ -89,7 +89,8 @@ ActiveAdmin.register Person do
 
     f.inputs do
       f.has_many :identifiers do |f|
-        f.input :name, :collection => %w[Mobile Email Office Truck Pager FAX Skype SMS Twitter Home],
+        f.input :name, 
+                :collection => %w[Mobile Email Office Truck Pager FAX Skype SMS Twitter Home URL],
                 :label => 'Type or kind*',
                 :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
 

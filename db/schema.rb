@@ -104,13 +104,14 @@ ActiveRecord::Schema.define(version: 20130212041557) do
   end
 
   create_table "companies", force: true do |t|
-    t.string   "name",         default: "",                    null: false
-    t.integer  "credit_terms", default: 30,                    null: false
-    t.boolean  "PO_required",  default: false,                 null: false
-    t.boolean  "active",       default: false,                 null: false
-    t.string   "MYOB_number",  default: "00000",               null: false
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.string   "name",             default: "",                    null: false
+    t.integer  "credit_terms",     default: 30,                    null: false
+    t.boolean  "PO_required",      default: false,                 null: false
+    t.boolean  "active",           default: false,                 null: false
+    t.string   "MYOB_number",      default: "00000",               null: false
+    t.string   "line_of_business", default: "",                    null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   create_table "conditions", force: true do |t|

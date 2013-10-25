@@ -185,6 +185,7 @@ ActiveAdmin.register Company do
   show :title => :display_name do
     attributes_table do
       row :name
+      row :line_of_business
       row :credit_terms
       row("PO_required") { status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error) }        
       row("active") { status_tag (company.active ? "YES" : "No"), (company.active ? :ok : :error) }

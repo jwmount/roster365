@@ -48,13 +48,25 @@ end
 # First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
 # Two methods here, names list and completely specified attributes.
 companies_list = [
-  ["American Debris Box Service Inc.", 30, false, false, "00000"],
-  ["Roster365", 30, false, false, "00000"], 
-  ['Projects-r-us', 30, false, false, "00000"],
-  ['Trucks-r-us', 30, false, false, "00000"]
+  ["American Debris Box Service Inc.", 30, false, false, "00000", "Containers delivered and removed"],
+  ["Roster365", 30, false, false, "00000", "Licensee"], 
+  ["Lawson Drayage, Inc.", 30, false, false, "00000", "Cartage, Local Houl Freight Carrying Service"],
+  ["Waste Management, Inc.", 30, false, false, "00000", "Waste Disposal & Removal Service"],
+  ["Reliable Crane & Rigging", 30, false, false, "00000", "Carting, Hoist Service & REntal, Machinery Moving & Erecting Service"],
+  ["Foothill Disposal Co. Inc.", 30, false, false, "00000", "Cartages Service"],
+  ["BWRS", 30, false, false, "00000", "Debris box, compactors, recycling"],
+  ["Pleasanton Garbage Serivice, Inc.", 30, false, false, "00000", "Waste Transport Service"],
+  ["Dillard Trucking, Inc.", 30, false, false, "00000", "Hazardous Waste Transport"],
+  ["Blue Line Transfer", 30, false, false, "00000", "Cartage, waste removal & recycling service"],
+  ["Gan-Tran Ltd.", 30, false, false, "00000", "Cartage Services"],
+  ["Precision Crane Service", 30, false, false, "00000", "Crane & Freight Carrier Service"],
+  ["East Bay Sanitary Co., Inc.", 30, false, false, "00000", "Cartage, Waste Disposal & Removing Service"],
+  ["Vallejo Garbage Service", 30, false, false, "00000", "Cartages Service"],
+  ["Fred Haines & Company", 30, false, false, "00000", "Cartage Service"],
+  ["Specialty Solid Waste & Recycling", 30, false, false, "00000", "Waste Handling, Cartage, Waste Disposal Service"]
   ]
-companies_list.each do |c| #name, credit_terms, PO_required, active, MYOB_number|
-  Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], MYOB_number: c[4])
+companies_list.each do |c| #name, credit_terms, PO_required, active, MYOB_number, lob|
+  Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], MYOB_number: c[4], line_of_business: c[5])
 end
   
 # now put some people in each company
@@ -65,12 +77,12 @@ company_relation = Company.where ({name: "American Debris Box Service Inc."})
 @equipment = Equipment.new({name: 'Crane', company_id: @company.id})
 @equipment.save!
 
-company_relation = Company.where ({name: 'Projects-r-us'})
+company_relation = Company.where ({name: companies_list[2][0]})
 @company_1 = company_relation[0]
 @person_3 = Person.create!(company_id: @company_1.id, first_name: 'William', last_name: 'Wellsmore', title: 'Mr.', available_on: Date.today)
 @person_4 = Person.create!(company_id: @company_1.id, first_name: 'Peter', last_name: 'Petersen', title: 'Project Mgr', available_on: Date.today)
 
-company_relation = Company.where ({name: 'Trucks-r-us'})
+company_relation = Company.where ({name: companies_list[2][0]})
 @company_2 = company_relation[0]
 @person_5 = Person.create!(company_id: @company_2.id, first_name: 'Vance', last_name: 'Smith', title: 'Owner', available_on: Date.today)
 @person_6 = Person.create!(company_id: @company_2.id, first_name: 'Sam', last_name: 'Jones', title: 'Driver', available_on: Date.today)
