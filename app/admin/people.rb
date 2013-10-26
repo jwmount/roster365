@@ -179,55 +179,5 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-controller do
-  def create
-    params.permit!
-    super
-  end
-
-  def update
-    params.permit!
-    super
-  end
-
-  def people_params
-      params.permit(:person => [ 
-                                 :available, 
-                                 :available_on, 
-                                 :company_id, 
-                                 :OK_to_contact, 
-                                 :first_name, 
-                                 :last_name, 
-                                 :title, 
-                                 :active,
-                                 :updated_at,
-                                 addresses_attributes:[:addressable_id, 
-                                                      :addressable_type, 
-                                                      :state, 
-                                                      :street_address, 
-                                                      :city,
-                                                      :post_code, 
-                                                      :map_reference
-                                                     ], 
-                                 certs_attributes: [:active,
-                                                    :certifiable_id,
-                                                    :certifiable_type,
-                                                    :certificate_id,
-                                                    :permanent,
-                                                    :serial_number
-                                                   ],
-                                 identifiers_attributes:[:identifiable_id, 
-                                                        :identifiable_type, 
-                                                        :name, 
-                                                        :rank, 
-                                                        :value
-                                                       ]
-                                ]
-                   )
-    end
-  end
 
 end

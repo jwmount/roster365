@@ -73,22 +73,4 @@ ActiveAdmin.register Tip do
     end
   end
 
-=begin
-controller do
-
-  def create
-    params.permit!
-    super
-  end
-
-  def tip_params
-      params.permit(:tip => [ :name, 
-                              :company_id, 
-                              :fee, 
-                              :fire_ant_risk_level
-                            ]
-                   )
-    end
-  end
-=end
 end

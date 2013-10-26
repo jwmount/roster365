@@ -63,24 +63,5 @@ ActiveAdmin.register Identifier do
     end
   end
 
-
-controller do
-
-  def create
-    params.permit!
-    super
-  end
-  
-  def identifier_params
-    params.permit(:identifier => [ :identifiable_id, 
-                                   :identifiable_type, 
-                                   :name, 
-                                   :rank,
-                                   :updated_at, 
-                                   :value
-                                ]
-                 )
-    end
-  end
   
 end

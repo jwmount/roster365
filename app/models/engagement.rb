@@ -45,7 +45,7 @@ class Engagement < ActiveRecord::Base
     #does the subbie work for a company that has what's required for the solution?
     # want the equipment list of person.company.equipment to contain :equipment
     equipment_list = self.person.company.equipment.where("name = ?", equipment_name)
-    if equipment_list.count == 0
+    if equipment_list.all.empty?
       errors.add(:person, "WARNING:  The person selected is from a company that does not have the equipment required.  " +
         "Suggestion:  Use Equipment list and filter with name = #{equipment_name}." +
         "It is also possible the Equipment inventory of the company involved needs to be updated.")

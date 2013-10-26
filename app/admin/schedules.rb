@@ -5,7 +5,7 @@ require 'active_support/all'
 
 ActiveAdmin.register Schedule do
 
-  menu label: "Schedules", parent: "Jobs"
+  menu label: "Schedules", parent: "Job"
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Job.all.empty?
@@ -225,31 +225,4 @@ ActiveAdmin.register Schedule do
 #
 # P U S H  B U T T O N S
 #    
-  #action_item :only => [:edit, :show] do 
-  #  link_to "Engagements",  admin_schedule_engagements_path(schedule)
-  #end
-=begin
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-  controller do
-
-    def create
-      params.permit!
-      super
-    end
-
-    def update
-      params.permit!
-      super
-    end
-
-    def schedule_params
-      params.require(:schedule).permit( :day, 
-                                        :equipment_id, 
-                                        :equipment_units_today, 
-                                        :job_id  )
-    end
-  end
-=end
 end

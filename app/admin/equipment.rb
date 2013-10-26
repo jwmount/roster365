@@ -64,36 +64,4 @@ ActiveAdmin.register Equipment do
     active_admin_comments
   end          
 
-
-controller do
-
-  def create
-    params.permit!
-    super
-  end
-
-  def update
-    params.permit!
-    #equipment_params
-    super
-  end
-
-  def equipment_params
-    params.require(:equipment).permit(  :utf8, :authenticity_token, :equipment, :commit,
-                                        :id,
-                                        :name, 
-                                        :company_id,
-                                        :certs_attributes => [:id,
-                                                               :certifiable_id,
-                                                               :certifiable_type,
-                                                               :certificate_id,
-                                                               :expires_on,
-                                                               :serial_number,
-                                                               :permanent,
-                                                               :active]
-                                       )
-    end
-  end  
-
-
 end

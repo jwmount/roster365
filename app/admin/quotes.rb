@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Quote do
       
-  menu label: "Quotes"
+  menu label: "Quotes", parent: "Project"
 
   filter :name
   filter :rep
@@ -243,36 +243,4 @@ ActiveAdmin.register Quote do
     render :partial => "print", :layout => "quotes/print", :object => @quote, :target => '_blank'
   end
 
-=begin
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-controller do
-
-    def create
-      params.permit!
-      super
-    end
-
-    def update
-      params.permit!
-      super
-    end
-    
-    def quote_params
-      params.permit(:quote => [ :name, 
-                                :rep_id, 
-                                :quote_to_id, 
-                                :project_id,    
-                                :council, 
-                                :duration, 
-                                :expected_start, 
-                                :fire_ants, 
-                                :fire_ants_verified_by, 
-                                :inclusions,
-                                :updated_at,
-                                :addresses_attributes ] )
-    end
-  end
-=end
 end

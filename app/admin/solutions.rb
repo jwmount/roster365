@@ -7,7 +7,7 @@
 
 ActiveAdmin.register Solution do
    
-  menu label: "Solutions"
+  menu label: "Solutions", parent: "Quote"
   belongs_to :quote
     navigation_menu :quote
 #
@@ -51,8 +51,8 @@ ActiveAdmin.register Solution do
     
     #HACK -- singleton site enforced in a posssibly risky way!  Are there ever more than one?
     # Sure, why not?  remove the limit(1)
-    column "Tip Site" do |solution|
-      if solution.tips.count == 0
+    column "Tip Sites" do |solution|
+      if solution.tips.all.empty?
         status_tag( "No tip site assigned.", :error)
       else
         @tips = solution.tips #.limit(1)
@@ -438,76 +438,5 @@ form do |f|
   end
 =end
 
-=begin
-# http://api.rubyonrails.org/classes/ActionController/Parameters.html
-# http://guides.rubyonrails.org/action_controller_overview.html#more-examples
-# http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters
-# You can't use require() when calling new since root key does not exist yet.  Duh.  However
-# this approach is DANGEROUS as it defeats the whitelisting altogether.
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-controller do
-  
-  def create
-      params.permit!
-      super
-  end
-
-  def update
-    params.permit!
-    super
-  end
-
-  def solution_params
-    begin
-      params.permit(:solution => [
-                                        :approved,
-                                        :client_approved,
-                                        :drive_time_from_load_to_tip,
-                                        :drive_time_into_site, 
-                                        :drive_time_into_tip, 
-                                        :drive_time_out_of_site,
-                                        :drive_time_out_of_tip_site,
-                                        :drive_time_tip_to_load,
-                                        :equipment_dollars_per_day, 
-                                        :equipment_id, 
-                                        :equipment_units_required_per_day,
-                                        :hourly_hire_rate, 
-                                        :invoice_load_client, 
-                                        :invoice_tip_client, 
-                                        :kms_one_way, 
-                                        :load_time, 
-                                        :loads_per_day, 
-                                        :material_id, 
-                                        :name, 
-                                        :pay_equipment_per_unit, 
-                                        :pay_load_client,
-                                        :pay_tip_client,
-                                        :pay_tip, 
-                                        :pay_tolls,   
-                                        :project_id,                                     
-                                        :purchase_order_required, 
-                                        :quote_id, 
-                                        :solution_type,  
-                                        :semis_permitted, 
-                                        :total_material, 
-                                        :tip_ids,
-                                        :unit_of_material, 
-                                        :unload_time,
-                                        :updated_at,
-                                        :requirements_attributes => [ :requireable_id,
-                                                                      :requireable_type, 
-                                                                      :certificate_id, 
-                                                                      :description, 
-                                                                      :updated_at
-                                                                    ]
-          ])
-    end
-    rescue
-      params.permit!
-    end
-  end
-=end
 
 end

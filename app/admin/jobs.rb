@@ -2,13 +2,14 @@
 require 'active_support/all'
 
 ActiveAdmin.register Job do
-  # remove all default actions, e.g. [:new, :edit, :show etc]
-  # config.clear_action_items!
+# remove all default actions, e.g. [:new, :edit, :show etc]
+# config.clear_action_items!
 
 # JOBS can only be made from a solution.
 # NOTE:  Path problems arise if the ActiveAdmin association chain does NOT MATCH the Actrive Record chain.
 # It was happening here (for how long?) with quotes, solutions and jobs.  
-  menu label: "Jobs", parent: "Solutions"
+  menu label: "Jobs", parent: "Solution"
+
   belongs_to :solution
     navigation_menu :solution
 #
@@ -141,28 +142,5 @@ ActiveAdmin.register Job do
       li link_to "Companies",   admin_companies_path
   end
 
-=begin
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-controller do
-
-  def update
-    params.permit!
-    super
-  end
-
-  def create
-    params.permit!
-    super
-  end
-
-  def job_params
-    params.permit(:job => [ :active, :complete, :name, :solution_id, :start_on, :time, :finished_on, 
-                                     :purchase_order, :solution_ids 
-                                     ])
-    end
-  end
-=end
 
 end

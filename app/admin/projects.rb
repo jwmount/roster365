@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Project do
 
-  #menu label: "Projects", :parent => "Company"
+  menu label: "Projects", :parent => "Company"
   
   #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
   belongs_to :company
@@ -181,61 +181,5 @@ ActiveAdmin.register Project do
       li link_to "Projects",          admin_company_projects_path(  project.company )
       li link_to "Companies",         admin_companies_path
   end
-
-#
-# P U S H B U T T O N S
-#
-#  action_item do |project|
-#    link_to 'Parent Company', admin_company_path( project.company ) 
-#  end
-
- # action_item :only => [:show] do
- #   link_to "Quotes", admin_project_quotes_path( project )
- # end
-
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-=begin
-  controller do
-
-    def create
-      project_permit
-      super
-    end
-
-    def update
-      params.permit!
-      super
-    end
-
-    def project_params
-      params.require(:project).permit( 
-                                       :id,
-                                       :active,
-                                       :commit, 
-                                       :name, 
-                                       :rep_id, 
-                                       :company_id,
-                                       :project_start_on,
-                                       :intend_to_bid,
-                                       :addresses_attributes [
-                                                              :city,
-                                                              :state,
-                                                              :post_code,
-                                                              :map_reference,
-                                                              :updated_at
-                                                              ],
-                                       :requirements_attributes [
-                                                              :id,
-                                                              :requireable_type,
-                                                              :certificate_id,
-                                                              :description,
-                                                              :updated_at
-                                                            ]
-                                     )
-    end
-  end
-=end
 
 end

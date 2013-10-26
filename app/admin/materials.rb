@@ -38,17 +38,4 @@ ActiveAdmin.register Material do
     active_admin_comments
   end          
 
-
-  controller do
-
-  def create
-    params.permit!
-    super
-  end
-
-  def material_params
-      params.require(:identifier).permit( :description, :name )
-    end
-  end
-
 end

@@ -6,8 +6,8 @@ require 'active_support/all'
 
 ActiveAdmin.register Engagement do
   
-  menu label: "Engagements", parent: "Schedules"
-  # belongs_to :schedule
+  menu label: "Engagements", parent: "Schedule"
+
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Schedule.all.empty?
@@ -202,38 +202,4 @@ ActiveAdmin.register Engagement do
      end
    end  
    
-=begin
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-controller do
-  def create
-    params.permit!
-    super
-  end
-
-  def update
-    params.permit!
-    super
-  end
-
-  def engagement_params
-      params.permit(:engagement => [ :schedule_id,
-                                     :person_id,
-                                     :onsite_now,
-                                     :onsite_at,
-                                     :breakdown,
-                                     :no_show,
-                                     :OK_tomorrow,
-                                     :engagement_declined,
-                                     :next_available_day,
-                                     :do_not_contact_until,
-                                     :contacted_at,
-                                     :date_next_available,
-                                     :docket_id
-                                   ]
-                   )
-    end
-  end
-=end 
 end

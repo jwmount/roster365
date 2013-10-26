@@ -191,37 +191,6 @@ ActiveAdmin.register Docket do
 #     @docket = Docket.find(params[:id])
 #     render "print", :layout => "print"
 #   end
-
-controller do
-
-  def create
-    params.permit!
-    super
-  end
-
-  def update
-    params.permit!
-    super
-  end
-
-  def docket_params
-    params.(:docket).permit( :booking_no, 
-                             :date_worked, 
-                             :dated, 
-                             :received_on, 
-                             :operator_signed, 
-                             :client_signed,
-                             :approved, 
-                             :approved_by, 
-                             :approved_on,
-                             :a_inv_pay, 
-                             :b_inv_pay, 
-                             :supplier_inv_pay,
-                             :engagement_id, 
-                             :person_id 
-                            )
-    end
-  end
  
   
 end

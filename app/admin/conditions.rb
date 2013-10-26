@@ -65,17 +65,4 @@ ActiveAdmin.register Condition do
     active_admin_comments
   end
 
- controller do
-
-  def create
-    params.permit!
-    super
-  end
-
-    def condition_params
-      params.require(:condition).permit( :approved, :change_approved_at, :change_approved_by, 
-                                       :indication, :name, :status, :verbiage )
-    end
-  end
-  
 end

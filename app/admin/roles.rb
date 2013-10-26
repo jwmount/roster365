@@ -46,16 +46,4 @@ ActiveAdmin.register Role do
   end
 
 
-controller do
-
-  def create
-    params.permit!
-    super
-  end
-  
-    def role_params
-      params.require(:role).permit( :user_ids, :name ) 
-    end
-  end
-
 end

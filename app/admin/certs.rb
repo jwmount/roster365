@@ -84,31 +84,4 @@ ActiveAdmin.register Cert do
     active_admin_comments
   end #show
 
-#
-# W H I T E L I S T  M A N A G E M E N T
-#
-controller do
-
-  def create
-    params.permit!
-    super
-  end
-
-  def update
-    params.permit!
-    super
-  end
-
-  def cert_params
-    params.permit(:cert => [ :id,
-                             :certifiable_id,
-                             :certifiable_type,
-                             :certificate_id,
-                             :expires_on,
-                             :serial_number,
-                             :permanent,
-                             :active
-                           ])
-    end
-  end
 end

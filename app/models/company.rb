@@ -94,7 +94,7 @@ class Company < ActiveRecord::Base
     self.equipment.each do |e|
       list << "#{e.name}, "
     end
-    return nil if list.length == 0  
+    return nil if list.all.empty?  
     list.rstrip.chop!
   end
   
