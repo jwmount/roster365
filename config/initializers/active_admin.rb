@@ -101,7 +101,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  # config.allow_comments = false
+  config.allow_comments = true
   #
   # You can disable the menu item for the comments index page:
   # config.show_comments_in_menu = false
@@ -214,7 +214,7 @@ ActiveAdmin.setup do |config|
   # Have schema dumps & loads in SQL per Xavier Shay
   # config.active_record.schema_format = :sql
 
-  # Strong parameter briar patch, unworkable.
+  # Strong parameters is a briar patch, unworkable.
   # http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters/14511396#14511396
     config.before_filter do
       params.permit!
