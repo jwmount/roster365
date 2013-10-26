@@ -33,6 +33,7 @@ ActiveAdmin.register Quote do
       render @rep
     end
 
+    column :rep
     
     column :expected_start
     
@@ -54,21 +55,21 @@ ActiveAdmin.register Quote do
               :hint => "Name is automatically assigned and not edited.",
               :disabled => true
               
-      # rep is 'our' rep who manages projects     
+      # rep is 'our' or LICENSEE rep who manages projects     
       f.input :rep_id,
               label: "Quote Rep",
               hint:  "Quote and Project Reps may be same person.",
               as: :select,
-              collection: Person.alphabetically.where({:company_id => Company.where({line_of_business: 'Licensee'})} && {title: 'Rep'}), 
+              collection: list_of_reps,
               include_blank: false
 
       # This select needs to be scoped to employees of this company
       f.input :quote_to_id, 
               :label => "Quote to", 
-              :hint => "Who we deliver the quote to.",
+              :hint => "Person at #{quote.project.company.name} who gets quote from us.",
               :required => true,
               :as => :select, 
-              :collection => quote.project.company.people, 
+              :collection => list_of_reps,
               :include_blank => false
     end
     
@@ -110,8 +111,8 @@ ActiveAdmin.register Quote do
           render @company
         end
         row (:quote_to_id) {quote.quote_to_name} 
-        row ("Project Rep") {quote.prep_name}        
-        row ("Quote Rep") {quote.qrep_name}        
+        row ("#{ENV['LICENSEE']} Project Rep") {quote.prep_name}        
+        row ("#{ENV['LICENSEE']} Quote Rep") {quote.qrep_name}        
       end
     end
   

@@ -200,7 +200,7 @@ ActiveAdmin.register Schedule do
 #
   sidebar "Schedules Context", only: [:index] do 
     ul
-      li link_to "Jobs",        admin_solution_jobs_path(        schedule.job.solution )
+      li link_to "Jobs",        admin_solution_jobs_path(        job.solution )
       hr
       li link_to "Dashboard", admin_dashboard_path
   end

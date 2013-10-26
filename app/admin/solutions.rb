@@ -205,7 +205,7 @@ form do |f|
               :hint => "ALERT:  #{solution.quote.project.company.name} may require a purchase order before a job is activated."                                 
 
       f.input :equipment_units_required_per_day,
-              :hint => "How many we expect to have on site each day."
+              :hint => "Equipment units #{solution.quote.project.company.name} commits to have on site each day."
 
       f.input :equipment_dollars_per_day,
               :precision => 8, 
