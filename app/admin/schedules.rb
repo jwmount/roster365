@@ -198,8 +198,10 @@ ActiveAdmin.register Schedule do
 #
 # I N D E X / L I S T  C O N T E X T
 #
-  sidebar "Schedule Context", only: [:index] do 
+  sidebar "Schedules Context", only: [:index] do 
     ul
+      li link_to "Jobs",        admin_solution_jobs_path(        schedule.job.solution )
+      hr
       li link_to "Dashboard", admin_dashboard_path
   end
 
@@ -208,9 +210,9 @@ ActiveAdmin.register Schedule do
 #
   sidebar "Schedule Context", only: [:show, :edit] do 
     ul
+      li link_to 'Prepare Engagements', admin_schedule_engagements_path( schedule )   
+      hr
       li link_to "Return to #{schedule.job.display_name} Schedule", admin_job_schedule_path( schedule.job, job ) 
-      li link_to 'Engagements', admin_schedule_engagements_path( schedule )   
-      li link_to "Schedules",   admin_schedule_jobs_path(        schedule.job ) 
       li link_to "Jobs",        admin_solution_jobs_path(        schedule.job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      schedule.job.solution.quote )
       li link_to "Quotes",      admin_project_quotes_path(       schedule.job.solution.quote.project )

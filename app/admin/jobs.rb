@@ -119,7 +119,7 @@ ActiveAdmin.register Job do
 #
 # I N D E X / L I S T  C O N T E X T
 #
-  sidebar "Job Context", only: [:index] do 
+  sidebar "Jobs Context", only: [:index] do 
     ul
       li link_to "Solutions", admin_quote_solutions_path( solution.quote )
       hr
@@ -132,6 +132,8 @@ ActiveAdmin.register Job do
 #
   sidebar "Jobs Context", only: [:show, :edit] do 
     ul
+      li link_to "Prepare Schedules", admin_job_schedules_path( job )
+      hr
       li link_to "Jobs",        admin_solution_jobs_path(        job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      job.solution.quote )
       li link_to "Quotes",      admin_project_quotes_path(       job.solution.quote.project )

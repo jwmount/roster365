@@ -12,9 +12,7 @@ ActiveAdmin.register Tip do
       number_to_currency(tip.fee)
     end
 
-    column :fire_ant_risk_level do |tip|
-      tip.fire_ant_risk_level
-    end
+    column :fire_ant_risk_level
 
     column :address do |tip|
       @address = tip.addresses.limit(1)
@@ -39,10 +37,10 @@ ActiveAdmin.register Tip do
         :hint => "Customary tip fee.  May be negotiated by reps.",
         :placeholder => "0.00"
 
-      f.input :fire_ant_risk_level_name,
+      f.input :fire_ant_risk_level,
         :as => :select,
-        :collection => fire_ant_risk_levels,
-        :placeholder => "None",
+        :collection => %w[ High Medium Low None],
+        :include_blank => false,
         :required => true,
         :hint => "High, medium or none.  Do not move material from high to medium or none, or from medium to none."
 
@@ -65,7 +63,8 @@ ActiveAdmin.register Tip do
         row :name
         row :company
         row :fee
-        row (:fire_ant_risk_level) {fire_ant_risk_levels[t.fire_ant_risk_level]}
+        row :fire_ant_risk_level
+        #row (:fire_ant_risk_level) {fire_ant_risk_levels[t.fire_ant_risk_level]}
         row :address do |tip|
           @address = tip.addresses.limit(1)
           render @address
@@ -74,6 +73,7 @@ ActiveAdmin.register Tip do
     end
   end
 
+=begin
 controller do
 
   def create
@@ -85,10 +85,10 @@ controller do
       params.permit(:tip => [ :name, 
                               :company_id, 
                               :fee, 
-                              :fire_ant_risk_level 
+                              :fire_ant_risk_level
                             ]
                    )
     end
   end
-
+=end
 end

@@ -54,13 +54,12 @@ ActiveAdmin.register Quote do
               :hint => "Name is automatically assigned and not edited.",
               :disabled => true
               
-           
+      # rep is 'our' rep who manages projects     
       f.input :rep_id,
               label: "Quote Rep",
               hint:  "Quote and Project Reps may be same person.",
               as: :select,
-              #collection: roster365.people,  #company.people.where("name = ?", "Roster365"),
-              collection: Person.alphabetically.where({:company_id => Company.where({name: 'Roster365'})} && {title: 'Rep'}), 
+              collection: Person.alphabetically.where({:company_id => Company.where({line_of_business: 'Licensee'})} && {title: 'Rep'}), 
               include_blank: false
 
       # This select needs to be scoped to employees of this company
@@ -164,16 +163,6 @@ ActiveAdmin.register Quote do
   
   end # show
 
-#
-# C O N T E X T
-#
-  sidebar "Quote Context", only: [:show, :edit] do 
-    ul
-      li link_to "Return to #{quote.project.name} Project", admin_company_project_path( quote.project.company, quote.project ) 
-      li link_to 'Prepare Solutions', admin_quote_solutions_path( quote )     
-      hr
-      li link_to "View Dashboard", admin_dashboard_path
-  end
 
 #
 # I N D E X / L I S T  C O N T E X T
@@ -192,10 +181,14 @@ ActiveAdmin.register Quote do
   sidebar "Quote Context", only: [:show, :edit] do 
     ul
       li link_to 'Prepare Solutions', admin_quote_solutions_path(      quote )     
+      li link_to "Return to #{quote.project.name} Project", 
+                                      admin_company_project_path(      quote.project.company, quote.project ) 
       hr
       li link_to "Quotes",            admin_project_quotes_path(       quote.project )
       li link_to "Projects",          admin_company_projects_path(     quote.project.company )
       li link_to "Companies",         admin_companies_path
+      hr
+      li link_to "View Dashboard", admin_dashboard_path
   end
 
 #

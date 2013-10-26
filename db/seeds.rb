@@ -146,9 +146,6 @@ end
     solution.save!
   end
 
-# Tip Sites
-Tip.create!( name: 'ABC Tip', company_id: @company_1.id, fee: 10.00, fire_ant_risk_level: 'High')
-Tip.create!( name: 'XYZ Tip', company_id: @company_2.id, fee: 5.00, fire_ant_risk_level: 'Low')
 
 
 
@@ -320,3 +317,15 @@ end
 ].each do |condition|
   Condition.create!(:name => condition[0], :verbiage => condition[1], :indication => condition[2], change_approved_at: Date.today)
 end
+
+#
+# T I P  S I T E S
+#
+[
+  [ "ABC Tip", 1, 10.00, 'High'],
+  [ "Marin Recycling Center", 2, 15.00, 'None'],
+  [ "XYC Tip", 2, 15.00, 'Low']
+].each do |t|
+  Tip.create!( :name => t[0], :company_id => t[1], :fee => t[2], :fire_ant_risk_level => t[3]  )
+end
+

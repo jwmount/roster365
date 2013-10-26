@@ -68,14 +68,7 @@ module ApplicationHelper
     links.to_html
   end
 
-  # use to create select drop down for tips
-  def fire_ant_risk_levels
-    [
-      ['None', 0],
-      ['Medium', 1],
-      ['High', 2]
-    ]
-  end
+  
 
 
 end

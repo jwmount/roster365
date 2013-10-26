@@ -154,7 +154,7 @@ ActiveAdmin.register Company do
     
     f.inputs "Rollodex Items for Company (formerly Identifiers)" do
       f.has_many :identifiers do |f|
-          f.input :name, :collection => %w[Mobile Office Truck Pager FAX Skype SMS Twitter],
+          f.input :name, :collection => %w[Mobile Office Truck Pager FAX Email Skype SMS Twitter URL],
                   :label => 'Type or kind*',
                   :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
           f.input :value,

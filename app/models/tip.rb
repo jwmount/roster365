@@ -20,10 +20,11 @@ class Tip < ActiveRecord::Base
 
   def defaults
      unless persisted?
-       self.fire_ant_risk_level ||= 0
+       self.fire_ant_risk_level ||= 'None'
     end
   end  
-  # use to create select drop down for tips
+ 
+  # UNUSED for a moment.  Use to create select drop down for tips
   def fire_ant_risk_levels
     [
       ['None', 0],

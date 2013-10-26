@@ -309,15 +309,15 @@ ActiveRecord::Schema.define(version: 20130212041557) do
   end
 
   create_table "solutions_tips", id: false, force: true do |t|
-    t.integer "solution_id", null: false
-    t.integer "tip_id",      null: false
+    t.integer "solution_id",                                    null: false
+    t.integer "tip_id",                                         null: false
   end
 
   create_table "tips", force: true do |t|
-    t.string   "name",                                        default: "",                    null: false
-    t.integer  "company_id",                                                                  null: false
-    t.decimal  "fee",                 precision: 7, scale: 2, default: 0.0,                   null: false
-    t.integer  "fire_ant_risk_level",                         default: 1,                     null: false
+    t.string   "name",                                          default: "",                    null: false
+    t.integer  "company_id",                                                                    null: false
+    t.decimal  "fee",                   precision: 7, scale: 2, default: 0.0,                   null: false
+    t.string   "fire_ant_risk_level",                           default: "",                    null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end
