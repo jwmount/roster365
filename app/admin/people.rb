@@ -41,6 +41,8 @@ ActiveAdmin.register Person do
       end
     end
 
+    column :title
+    
     column :available do |person|
       status_tag (person.available ? "YES" : "No"), (person.available ? :ok : :error)
     end

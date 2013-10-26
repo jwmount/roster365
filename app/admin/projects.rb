@@ -29,9 +29,6 @@ ActiveAdmin.register Project do
     column "Name" do |project|
       link_to project.name, admin_company_project_path( project.company, project )
     end
-    #column 'Project Name' do |project|
-    #  link_to project.name, admin_project_path(project)
-    #end
 
     column :company
 
@@ -88,13 +85,11 @@ ActiveAdmin.register Project do
               :hint => "Working name of project. NOTE:  if you change a project name, existing resources such as quotes, solutions, jobs etc., continue to use the old name.",
               :placeholder => "Required"
 
-      # Scope this collection to employees with title 'Rep'
-      # Roster365 is company = Company.where({:name => 'Roster365'})
-      # Cleanup:  need a scheme to identify primary company, here 'Roster365' -- in a config file?
+      # Scope this collection to LICENSEE company employees with title 'Rep'
       f.input :rep_id, 
               :as => :select,
-              collection: Person.alphabetically.where({:company_id => Company.where({:name => 'Roster365'})} && {:title => 'Rep'}), 
-              hint: "Our Rep on this project.",
+              collection: list_of_reps,
+              hint: "#{ENV['LICENSEE']} Rep on this project.",
               placeholder: "Person",
               include_blank: false
 
