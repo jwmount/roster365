@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Company do
 
-  menu parent: "Customers"
+  menu label: "Customers", parent: "Companies"
     
 #
 # W H I T E   L I S T   M A N A G E M E N T
@@ -43,8 +43,8 @@ ActiveAdmin.register Company do
       li link_to "Dashboard", admin_dashboard_path
   end
 
-
   index do
+
     column "Name (click for details)", :sortable => 'name' do |company|
       h5 link_to company.name, admin_company_path(company)
       if company.identifiers.count > 0

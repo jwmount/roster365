@@ -19,6 +19,7 @@ ActiveAdmin.register Equipment do
 
   end  
 
+
   form do |f|
     error_panel f
 

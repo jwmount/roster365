@@ -58,7 +58,7 @@ class Company < ActiveRecord::Base
        self.credit_terms||=0
     end
   end
-
+  
   def is_MYOB_number?
     !self.MYOB_number.blank?
   end

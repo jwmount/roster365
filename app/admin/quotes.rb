@@ -17,8 +17,18 @@ ActiveAdmin.register Quote do
     quote.generate_name
     quote.fire_ants_verified_by = current_user.email
   end
-  
+
+=begin  
+     batch_action :flag do |selection|
+      Company.find(selection).each do |company|
+        company.name = 'XXX'
+        company.save!
+      end
+    end
+=end
+
   index do
+    selectable_column
 
     column :name, :sortable => 'name' do |quote|
       link_to quote.name, admin_project_quote_path( project, quote )
@@ -32,8 +42,6 @@ ActiveAdmin.register Quote do
       @rep  = Person.find quote.rep_id
       render @rep
     end
-
-    column :rep
     
     column :expected_start
     

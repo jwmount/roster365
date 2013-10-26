@@ -10,7 +10,6 @@ module ApplicationHelper
     polymorphic_path(elements)
   end
 
-
   def set_resource(resource)
     @resource = resource
   end
