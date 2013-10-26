@@ -176,6 +176,7 @@ ActiveAdmin.register Project do
     ul
       li link_to 'Back (Parent Company)', admin_company_path(       project.company ) 
       hr
+      status_tag('Actions')
       li link_to 'Prepare Quotes', admin_project_quotes_path(       project )     
       li link_to "Projects",          admin_company_projects_path(  project.company )
       li link_to "Companies",         admin_companies_path

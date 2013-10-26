@@ -40,7 +40,6 @@ ActiveAdmin.register Company do
 #
   sidebar "Companies Context", only: [:index] do 
     ul
-
       li link_to "Dashboard", admin_dashboard_path
   end
 
