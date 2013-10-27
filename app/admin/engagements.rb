@@ -46,8 +46,12 @@ ActiveAdmin.register Engagement do
     #            :onchange => "$.post('#{admin_person_path(engagement.contact.id)}', 
     #            {'_method':'put', 'engagement[:person]':this.value} );"
 
-    column "Engagement", :sortable => :id do |engagement|
-      link_to engagement.id, admin_schedule_engagement_path( engagement.schedule, engagement )
+    #column "Engagement", :sortable => :id do |engagement|
+    #  link_to engagement.id, admin_schedule_engagement_path( engagement.schedule, engagement )
+    #end
+
+    column "Engagement Day", :sortable => :id do |engagement|
+      link_to engagement.schedule.day.strftime("%d %b, %Y"), admin_schedule_engagement_path( engagement.schedule, engagement )
     end
 
     column "Subbie" do |engagement|
@@ -62,15 +66,11 @@ ActiveAdmin.register Engagement do
       end
 
     end
-=begin
+
     column "Job" do |engagement|
       engagement.schedule.job.name
     end
 
-    column "Day" do |engagement|
-      engagement.schedule.day.strftime("%d %b, %Y")
-    end
-=end
     column "Docket(s)" do |engagement|
       render engagement.dockets
     end   
