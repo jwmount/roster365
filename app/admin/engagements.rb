@@ -154,7 +154,6 @@ ActiveAdmin.register Engagement do
   sidebar "Engagement Context", only: [:index] do 
     ul
       li link_to "Dashboard", admin_dashboard_path
-      li link_to "Dockets", admin_engagement_dockets_path(engagement)
   end
 
 #
