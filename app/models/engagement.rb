@@ -26,7 +26,6 @@ class Engagement < ActiveRecord::Base
   #
   # V A L I D A T I O N S
   #
-  # validates_uniqueness_of :booking_no #, :scope => :project
   validates_presence_of :schedule_id
   validates_presence_of :person_id
 

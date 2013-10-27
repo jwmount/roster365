@@ -1,3 +1,4 @@
+#require 'debugger'
 require "csv"
 ActiveAdmin.register Docket do
 
@@ -23,17 +24,33 @@ ActiveAdmin.register Docket do
     solutions.where ({approved: false})
   end
 
-  #belongs_to :engagement
-
-  actions :all, :except => :new
+  belongs_to :engagement
+#  actions :all, :except => :new
   
+  after_build do |docket|
+     docket.number = docket.engagement.docket_number
+     docket.person = docket.engagement.person
+     docket.date_worked = docket.engagement.schedule.day
+   end
+
   index do
-    column :booking_no
+    column "Number" do |docket|
+      link_to docket.number, admin_engagement_docket_path( docket.engagement, docket )
+    end
+    
     column :date_worked
-    column :person, :label => "Subcontractor"
+    
+    column :person, 
+           :label => "Subcontractor"
+    
+    column "Project" do |docket|
+      docket.engagement.schedule.job.solution.quote.project.name
+    end
+
     column :operator_signed do |docket|
       status_tag (docket.operator_signed ? "YES" : "No"), (docket.operator_signed ? :ok : :error)      
     end      
+    
     column :client_signed do |docket|
       status_tag (docket.client_signed ? "YES" : "No"), (docket.client_signed ? :ok : :error)      
     end      
@@ -48,21 +65,18 @@ ActiveAdmin.register Docket do
 
     #f.inputs "Docket from #{docket.person.display_name} for #{docket.engagement.schedule.job.name}" do      
     f.inputs do
-      f.input :booking_no, 
-              #:input_html => {:disabled => true },
-              :required => true,
+      f.input :number, 
+              :input_html => {:disabled => true },
               :hint => "Unique Booking number provided by subbie entered by operations to complete the engagement.",
               :placeholder => "nnnnnn"
       
       f.input :person,
-              :required => true,
+              :input_html => {:disabled => true },
               :hint => "Who is submitting this docket, or payee."
       
       f.input :date_worked, 
-              :required => true,
-              :as => :date_picker,
-              :hint => "Day the work was performed.",
-              :placeholder => 'dd-mm-yyyy'
+              :input_html => {:disabled => true },
+              :hint => "Day the work was performed."
               
       f.input :engagement,
               :required=>true, 
@@ -112,9 +126,9 @@ ActiveAdmin.register Docket do
   end
 
  show :title => "Docket" do |docket|
-   h3 "Booking Number: #{docket.booking_no}"
+   h3 "Booking Number: #{docket.number}"
     attributes_table do
-      row :booking_no
+      row :number
       row ("Engagement For (Job)") { docket.engagement.schedule.job.name }
       row ("Subcontractor") {docket.person}
     #  "2010-07-27".to_date              # => Tue, 27 Jul 2010
@@ -142,7 +156,7 @@ ActiveAdmin.register Docket do
   
   csv do
     column("Booking No.") { |docket|
-      docket.booking_no
+      docket.number
     }
     column("Job No.") { |docket|
       docket.job.display_name

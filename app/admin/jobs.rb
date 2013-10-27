@@ -124,7 +124,6 @@ ActiveAdmin.register Job do
     ul
       li link_to "Solutions", admin_quote_solutions_path( solution.quote )
       hr
-      li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
   end
 

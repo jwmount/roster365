@@ -128,7 +128,7 @@ ActiveAdmin.register_page "Dashboard" do
 #      column "Dockets" do |schedule|
 #        @docket = Docket.new
 #        render 'new_docket' 
-#        @docket.booking_no = 12345
+#        @docket.number = 12345
 #        @docket.date_worked = Date.today
 #        @docket.save!
 #      end

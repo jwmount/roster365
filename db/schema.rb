@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
   create_table "dockets", force: true do |t|
     t.integer  "engagement_id",                                                            null: false
     t.integer  "person_id",                                                                null: false
-    t.string   "booking_no",                               default: "",                    null: false
+    t.string   "number",                                   default: "",                    null: false
     t.datetime "date_worked",                                                              null: false
     t.datetime "dated",                                                                    null: false
     t.datetime "received_on",                                                              null: false
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.integer  "schedule_id",                                          null: false
     t.integer  "person_id",                                            null: false
     t.integer  "docket_id",                                            null: true  
+    t.string   "docket_number",        default: "",                    null: false
     t.boolean  "onsite_now",           default: false,                 null: false
     t.boolean  "onsite_at",            default: false,                 null: false
     t.boolean  "breakdown",            default: false,                 null: false

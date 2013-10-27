@@ -3,7 +3,7 @@ class Docket < ActiveRecord::Base
   belongs_to :person
   belongs_to :engagement
   
-  validates_uniqueness_of :booking_no
+  validates_uniqueness_of :number
   
   # audited, not on Rails 4 yet
 
@@ -13,11 +13,13 @@ class Docket < ActiveRecord::Base
   # Best practice in Rails is set defaults here and not in database
   def set_defaults
     unless persisted?
-      self.booking_no ||= nil
+      self.number ||= ""
       self.operator_signed ||= false
       self.client_signed ||= false
       self.approved ||= false
       self.approved_on ||= Date.today
+      self.dated ||= Date.today
+      self.received_on ||= Date.today
     end
   end
   

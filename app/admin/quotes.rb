@@ -77,7 +77,7 @@ ActiveAdmin.register Quote do
               :hint => "Person at #{quote.project.company.name} who gets quote from us.",
               :required => true,
               :as => :select, 
-              :collection => list_of_reps,
+              :collection => quote.project.company.people,
               :include_blank => false
     end
     
@@ -180,7 +180,6 @@ ActiveAdmin.register Quote do
     ul
       li link_to "Projects",          admin_company_projects_path(     project.company )
       hr
-      li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
   end
 

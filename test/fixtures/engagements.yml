@@ -4,7 +4,7 @@ one:
   schedule_id: 1
   person_id: 1
   day: 2012-05-25 08:02:00
-  booking_no: 1
+  number: 1
   onsite_now: false
   onsite_at: false
   breakdown: false
@@ -20,7 +20,7 @@ two:
   schedule_id: 1
   person_id: 1
   day: 2012-05-25 08:02:00
-  booking_no: 1
+  number: 1
   onsite_now: false
   onsite_at: false
   breakdown: false

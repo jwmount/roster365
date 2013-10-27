@@ -309,7 +309,6 @@ form do |f|
 #
   sidebar "Solutions Context", only: [:index] do 
     ul
-      li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
   end
 

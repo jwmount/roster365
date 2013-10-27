@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(:version => 20130212041557) do
   create_table "dockets", :force => true do |t|
     t.integer  "engagement_id"
     t.integer  "person_id"
-    t.string   "booking_no"
+    t.string   "number"
     t.datetime "date_worked"
     t.datetime "dated"
     t.datetime "received_on"

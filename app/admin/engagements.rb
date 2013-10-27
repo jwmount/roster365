@@ -107,9 +107,9 @@ ActiveAdmin.register Engagement do
       f.input :schedule, 
               :hint => "Schedule this person will be on."
               
-      #f.input :docket,
-      #        :hint => "Booking number from docket. GET THIS WHEN THE DRIVER TELLS YOU THEY ARE ON SITE.",
-      #        :placeholder => "00000"
+      f.input :docket_number,
+              :hint => "Docket number from docket. GET THIS WHEN THE DRIVER TELLS YOU THEY ARE ON SITE.",
+              :placeholder => "00000"
     end
     
     f.inputs "Status" do
@@ -136,6 +136,7 @@ ActiveAdmin.register Engagement do
       row("Day") { engagement.schedule.day }
       row("Project") { schedule.job.solution.quote.project.name }
       row :person
+      row :docket_number
       row(:onsite_now) { status_tag (engagement.onsite_now ? "YES" : "No"), (engagement.onsite_now ? :ok : :error) }
       row(:onsite_at)  { status_tag (engagement.onsite_at ? "YES" : "No"), (engagement.onsite_at ? :ok : :error) }
       row(:breakdown) { status_tag (engagement.breakdown ? "YES" : "No"), (engagement.breakdown ? :ok : :error) }        
@@ -153,7 +154,7 @@ ActiveAdmin.register Engagement do
   sidebar "Engagement Context", only: [:index] do 
     ul
       li link_to "Dashboard", admin_dashboard_path
-      li link_to "Dockets", admin_dockets_path
+      li link_to "Dockets", admin_engagement_dockets_path(engagement)
   end
 
 #
@@ -170,24 +171,25 @@ ActiveAdmin.register Engagement do
       li link_to "Companies",   admin_companies_path
       hr
       li link_to "View Dashboard", admin_dashboard_path
-      li link_to "Dockets", admin_dockets_path
+      li link_to "Dockets", admin_engagement_dockets_path(engagement)
   end
 
 #
 # P U S H B U T T O N S
 #
-  action_item :only => [:index, :edit, :show] do
-    link_to "Create Docket", admin_dockets_path
+  action_item :only => [:edit, :show] do
+    link_to "Create Docket", admin_engagement_dockets_path( engagement )  
   end
 
-   # Action to create the docket.  The Scheduler or User needs to edit the booking_no default given here.
+=begin
+   # Action to create the docket.  The Scheduler or User needs to edit the :number default given here.
    # Consequently nav goes to edit_admin_engagement_docket_path to support this.
    member_action :docketify, :method => :get do
      engagement = Engagement.find params[:id]
      docket = Docket.new
-     docket.booking_no = 'To be Supplied'
+     docket.number = engagement.docket_number
      docket.engagement_id = params[:id]
-     docket.date_worked = Date.current
+     docket.date_worked = engagement.date_worked
      docket.person_id = docket.engagement.person_id
      begin
        docket.save
@@ -201,5 +203,6 @@ ActiveAdmin.register Engagement do
        redirect_to admin_engagement_path(engagement)
      end
    end  
-   
+=end  
+
 end

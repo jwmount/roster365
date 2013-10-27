@@ -160,7 +160,6 @@ ActiveAdmin.register Project do
     ul
       li link_to "Companies",         admin_companies_path
       hr
-      li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
   end
 
