@@ -307,7 +307,7 @@ form do |f|
 #
 # I N D E X / L I S T  C O N T E X T
 #
-  sidebar "Solution Context", only: [:index] do 
+  sidebar "Solutions Context", only: [:index] do 
     ul
       li link_to "Dockets", admin_dockets_path
       li link_to "Dashboard", admin_dashboard_path
@@ -316,9 +316,14 @@ form do |f|
 #
 # C O N T E X T -- Places you can go
 #
-  sidebar "Solutions Context", only: [:show, :edit] do 
+  sidebar "Solution Context", only: [:show, :edit] do 
     ul
-      li link_to 'Prepare Jobs', admin_solution_jobs_path( solution )   
+      if solution.has_final_approval?
+        li link_to 'Prepare Jobs', admin_solution_jobs_path( solution )   
+      else
+        li link_to 'Prepare Jobs (requires final approval)', admin_quote_solution_path( solution.quote, solution )   
+        flash[:warning] = "Solution MUST be approved before Jobs can be created."
+      end
       hr
       li link_to 'Solutions',   admin_quote_solutions_path(      solution.quote )   
       li link_to "Quotes",      admin_project_quotes_path(       solution.quote.project )
@@ -392,51 +397,6 @@ form do |f|
                   solution.quote.project.company, solution.quote.project, solution.quote, @solution_new.quote
                   )
   end    
-
-          
-  # needed because you have to create a Job in the context of its solution.
-  # do not allow New operation in jobs.rb.
-  # fully qualified path is: admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote )
-  # action_item :only => [:edit, :show] do
-  #   link_to 'Jobs', admin_solution_jobs_path( solution )
-  # end
-
-=begin
-
-  action_item :only => [:edit, :show] do
-    job = Job.create!([:name => 'soljob'])
-    link_to "New Job", new_admin_solution_job_path( solution )
-  end
-  member_action :jobify, :method => :get do
-    solution = Solution.find(params[:id])
-    name = "#{@solution.quote.project.name} - #{@solution.quote.name} - #{@solution.name} - J#{@solution.jobs.count+1}"
-    if solution.has_final_approval?
-      if solution.purchase_order_required == true
-        @job = Job.create!(
-          :name => name, 
-          :solution_id => @solution.id, 
-          :purchase_order => 'PO required',
-          :start_on => Date.today,
-          :time => '06:30'
-          )
-      else
-        @job = Job.create!(
-          :name => name, 
-          :solution_id => @solution.id,
-          :purchase_order => 'Not required',
-          :start_on => Date.today,
-          :time => '06:30'
-          )
-      end
-    if @job.exists?
-      flash[:notice] = "Job was successfully created"
-      redirect_to admin_solution_jobs_path(solution)
-    else
-      flash[:alert] = "Solution needs to be approved before a job can be created"
-      redirect_to admin_quote_solution_path(solution.quote, solution)
-    end
-  end
-=end
 
 
 end

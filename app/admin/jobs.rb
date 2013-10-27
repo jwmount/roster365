@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 require 'active_support/all'
 
 ActiveAdmin.register Job do
@@ -15,12 +15,12 @@ ActiveAdmin.register Job do
 #
 # C A L L  B A C K S
 #
+
   after_build do |job|
      job.name = "#{job.solution.quote.project.name}-#{job.solution.quote.name}-#{job.solution.name}-J#{job.solution.jobs.count+1}"
      job.purchase_order = job.solution.purchase_order_required ? 'PO required' : 'PO Not Required'
    end
 
-  #before_action :ensure_permission, only: [ :edit, :update ]    
 #
 # S C O P E S
 #
