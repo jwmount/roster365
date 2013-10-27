@@ -108,7 +108,7 @@ ActiveAdmin.register Engagement do
               :hint => "Schedule this person will be on."
               
       f.input :docket_number,
-              :hint => "Docket number from docket. GET THIS WHEN THE DRIVER TELLS YOU THEY ARE ON SITE.",
+              :hint => "Docket number from docket provided by driver. GET THIS FROM THE DRIVER AS EARLY IN THE DAY AS POSSIBLE.",
               :placeholder => "00000"
     end
     
@@ -180,28 +180,5 @@ ActiveAdmin.register Engagement do
     link_to "Create Docket", admin_engagement_dockets_path( engagement )  
   end
 
-=begin
-   # Action to create the docket.  The Scheduler or User needs to edit the :number default given here.
-   # Consequently nav goes to edit_admin_engagement_docket_path to support this.
-   member_action :docketify, :method => :get do
-     engagement = Engagement.find params[:id]
-     docket = Docket.new
-     docket.number = engagement.docket_number
-     docket.engagement_id = params[:id]
-     docket.date_worked = engagement.date_worked
-     docket.person_id = docket.engagement.person_id
-     begin
-       docket.save
-       flash[:notice] = "Docket has been created."
-       redirect_to edit_admin_engagement_docket_path(docket.engagement.id, docket.id) 
-     rescue ActiveRecord::RecordNotUnique
-       flash[:error] = "Booking number has been taken.  Booking numbers must be unique."
-       redirect_to admin_engagement_path(engagement)
-     rescue ActiveRecord::StatementInvalid
-       flash[:error] = "Docket could not be updated.  You may be missing booking number. Wait until you have it to create a docket."
-       redirect_to admin_engagement_path(engagement)
-     end
-   end  
-=end  
 
 end

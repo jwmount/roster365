@@ -328,6 +328,8 @@ form do |f|
       li link_to "Quotes",      admin_project_quotes_path(       solution.quote.project )
       li link_to "Projects",    admin_company_projects_path(     solution.quote.project.company )
       li link_to "Companies",   admin_companies_path
+      hr
+      li link_to "Dashboard", admin_dashboard_path
   end
 
 # 

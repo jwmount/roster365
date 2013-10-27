@@ -11,7 +11,7 @@ ActiveAdmin.register Quote do
 
   # NOT OPTIONAL, effect is to scope quotes to project, apparently is NOT same effect as same statement in quote.rb.
   belongs_to :project
-    navigation_menu :project
+  navigation_menu :projects
 
   after_build do |quote|
     quote.generate_name
@@ -188,15 +188,26 @@ ActiveAdmin.register Quote do
 #
   sidebar "Quote Context", only: [:show, :edit] do 
     ul
-      li link_to 'Prepare Solutions', admin_quote_solutions_path(      quote )     
-      li link_to "Return to #{quote.project.name} Project", 
-                                      admin_company_project_path(      quote.project.company, quote.project ) 
+      status_tag('Now you can:')
       hr
-      li link_to "Quotes",            admin_project_quotes_path(       quote.project )
-      li link_to "Projects",          admin_company_projects_path(     quote.project.company )
-      li link_to "Companies",         admin_companies_path
+      li link_to 'Prepare Solutions',   admin_quote_solutions_path(      quote )   
+      hr  
+      li link_to "Return to #{quote.project.name} Project",  
+                                        admin_company_project_path(      quote.project.company, quote.project )
+      li link_to "Return to #{quote.project.company.name}",    
+                                        admin_company_path(              quote.project.company)
       hr
-      li link_to "View Dashboard", admin_dashboard_path
+      li link_to "Review Quotes",       admin_project_quotes_path(       quote.project )
+      li link_to "Review Projects",     admin_company_projects_path(     quote.project.company )
+      li link_to "Review Companies",    admin_companies_path
+      hr
+      status_tag('Other things you can do:')
+      hr
+      li link_to "Visit the Dashboard", admin_dashboard_path
+      li link_to "Manage Conditions",   admin_conditions_path
+      li link_to "Manage Materials",    admin_materials_path
+      li link_to "Manage Tip Sites",    admin_tips_path
+
   end
 
 #

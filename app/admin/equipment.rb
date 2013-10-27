@@ -7,6 +7,13 @@ ActiveAdmin.register Equipment do
   
   filter :name
   
+  sidebar "Equipment Context", only: [:show, :edit] do 
+    ul do
+      li link_to "Dashboard", admin_dashboard_path
+    end
+  end  
+
+
   index do
     
     column :name do |equipment|

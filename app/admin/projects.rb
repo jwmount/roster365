@@ -5,7 +5,6 @@ ActiveAdmin.register Project do
   
   #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
   belongs_to :company
-    navigation_menu :company
 
   scope :all, :default => true 
 #  scope :active, -> { where(active: true) }
@@ -168,12 +167,14 @@ ActiveAdmin.register Project do
 #
   sidebar "Project Context", only: [:show, :edit] do 
     ul
-      li link_to 'Back (Parent Company)', admin_company_path(       project.company ) 
+      status_tag('Now you can:')
+      li link_to 'Prepare Quotes', admin_project_quotes_path( project )     
       hr
-      status_tag('Actions')
-      li link_to 'Prepare Quotes', admin_project_quotes_path(       project )     
-      li link_to "Projects",          admin_company_projects_path(  project.company )
-      li link_to "Companies",         admin_companies_path
+      status_tag('Other things you can do:')
+      li link_to "Visit the Dashboard", admin_dashboard_path
+      li link_to "Manage Conditions", admin_conditions_path
+      li link_to "Manage Materials", admin_materials_path
+      li link_to "Manage Tip Sites", admin_tips_path
   end
 
 end

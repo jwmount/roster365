@@ -65,6 +65,7 @@
      batch_action_admin_engagement_dockets POST       /admin/engagements/:engagement_id/dockets/batch_action(.:format) admin/dockets#batch_action
                   admin_engagement_dockets GET        /admin/engagements/:engagement_id/dockets(.:format)              admin/dockets#index
                                            POST       /admin/engagements/:engagement_id/dockets(.:format)              admin/dockets#create
+               new_admin_engagement_docket GET        /admin/engagements/:engagement_id/dockets/new(.:format)          admin/dockets#new
               edit_admin_engagement_docket GET        /admin/engagements/:engagement_id/dockets/:id/edit(.:format)     admin/dockets#edit
                    admin_engagement_docket GET        /admin/engagements/:engagement_id/dockets/:id(.:format)          admin/dockets#show
                                            PATCH      /admin/engagements/:engagement_id/dockets/:id(.:format)          admin/dockets#update
@@ -194,4 +195,12 @@ batch_action_admin_company_equipment_index POST       /admin/companies/:company_
                             admin_comments GET        /admin/comments(.:format)                                        admin/comments#index
                                            POST       /admin/comments(.:format)                                        admin/comments#create
                              admin_comment GET        /admin/comments/:id(.:format)                                    admin/comments#show
+                                   dockets GET        /dockets(.:format)                                               dockets#index
+                                           POST       /dockets(.:format)                                               dockets#create
+                                new_docket GET        /dockets/new(.:format)                                           dockets#new
+                               edit_docket GET        /dockets/:id/edit(.:format)                                      dockets#edit
+                                    docket GET        /dockets/:id(.:format)                                           dockets#show
+                                           PATCH      /dockets/:id(.:format)                                           dockets#update
+                                           PUT        /dockets/:id(.:format)                                           dockets#update
+                                           DELETE     /dockets/:id(.:format)                                           dockets#destroy
                                       root GET        /                                                                companies#index

@@ -27,9 +27,32 @@ ActiveAdmin.register Person do
     people.where ({OK_to_contact: false})
   end
 
-  filter :full_name
-  filter :title
 
+#
+# I N D E X / L I S T  C O N T E X T
+#
+  sidebar "Current Choices", only: [:index] do 
+    ul
+      li link_to "Companies", admin_companies_path
+      hr
+      li link_to "Dashboard", admin_dashboard_path
+  end
+
+#
+# C O N T E X T -- Places you can go
+#
+  sidebar "Current Choices", only: [:show, :edit] do 
+    ul
+      status_tag('Now you can:')
+      li link_to "Manage people for #{person.company.name}", admin_company_people_path( company )     
+      hr
+      status_tag('Other things you can do:')
+      li link_to "Visit the Dashboard", admin_dashboard_path
+      li link_to "Manage Conditions", admin_conditions_path
+      li link_to "Manage Materials", admin_materials_path
+      li link_to "Manage Tip Sites", admin_tips_path
+  end
+  
   index do
     column :name do |person|
       if person.identifiers.count > 0

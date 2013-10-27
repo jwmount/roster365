@@ -2,7 +2,7 @@
 require "csv"
 ActiveAdmin.register Docket do
 
-  menu label: "Dockets", parent: "Bookeeping"
+  menu parent: "Admin"
 
   scope :all, :default => true
   scope :operator_signed do |solutions|
