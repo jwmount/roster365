@@ -16,6 +16,11 @@ ActiveAdmin.register Quote do
   after_build do |quote|
     quote.generate_name
     quote.fire_ants_verified_by = current_user.email
+    # Precondition for a new Quote -- nobody home?  Cannot complete :quote_to.  
+    if quote.project.company.people.empty?
+      flash[:warning] = "WARNING:  #{quote.project.company.name} has no staff!  You will not be able to complete a quote. " + 
+        "if no one's there to give it to.  "
+    end
   end
 
 =begin  

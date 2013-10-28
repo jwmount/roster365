@@ -31,9 +31,9 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :requirements
 
 
-#
-# V A L I D A T I O N S
-#
+  #
+  # V A L I D A T I O N S
+  #
   validates_presence_of :name
   validates_presence_of :company_id
 
@@ -52,7 +52,11 @@ class Project < ActiveRecord::Base
 
   def address
     #@address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
-    self.street_address
+    if self.address.empty?
+      'No address'
+    else
+      self.street_address
+    end
   end
 
   # form of find works, see use to scope to employee Reps in projects.rb

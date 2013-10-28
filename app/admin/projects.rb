@@ -21,6 +21,7 @@ ActiveAdmin.register Project do
     projects.where ({submitted_bid: true})
   end
 
+  filter :name
 
   index do
 

@@ -39,7 +39,7 @@ class Solution < ActiveRecord::Base
   # V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S
   #
   validates_presence_of :name
-  validates_presence_of :quote_id, :equipment_id
+  validates_presence_of :quote_id, :equipment_id, :tip_site
 
   validates :invoice_load_client, :pay_load_client, :numericality => {:greater_than_or_equal_to => 0}
   validates :invoice_tip_client, :pay_tip_client, :numericality => {:greater_than_or_equal_to => 0}

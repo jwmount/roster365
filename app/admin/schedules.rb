@@ -158,16 +158,16 @@ ActiveAdmin.register Schedule do
   form do |f|
     error_panel f
 
-    f.inputs "#{schedule.job.solution.quote.project.company.display_name}. Project #{schedule.job.solution.quote.project.name}.  Schedule details." do
+    f.inputs "Schedule details.  Equipment for #{schedule.job.solution.quote.project.company.name}, #{schedule.job.solution.quote.project.name} project." do
+      f.input :job,
+              :hint => 'Job being scheduled.'
       f.input :day,
               :as => :string,
               :input_html => {:class => 'datepicker'},
               :required => true, 
               :label=>"Day", 
-              :hint => "Day you are scheduling.",
+              :hint => "Day you are scheduling to have the equipment on site.",
               :placeholder => "Date."  
-      f.input :job,
-              :hint => 'Job being scheduled.'
       f.input :equipment_units_today,
               :hint => "Number of #{schedule.job.solution.equipment.name}(s) needed on site this date for job."
       f.input :equipment_id, 
@@ -175,22 +175,20 @@ ActiveAdmin.register Schedule do
               :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
               :include_blank => false,
               :hint => "Equipment needed for day you are scheduling."
+      end      
 
-    end
     f.buttons
   end
 
-  show :title => 'Schedule' do |schedule|
-    h3 schedule.day.strftime("%b %m, %Y")
-    attributes_table_for(schedule) do
-      row :day
-      row :job
-      row :equipment_units_today                                    
-      row ("Equipment") do |schedule|
-        puts "***** EQUIPMENT: #{schedule.equipment.name}"
-        schedule.equipment.name
+  show :title => "Details -- #{solution.equipment.name}" do |schedule|
+    panel "Details" do
+      attributes_table_for(schedule) do
+        row :day
+        row :job
+        row :equipment_units_today                                    
+        row ("Equipment") {render schedule.equipment}
+        row :updated_at
       end
-      row :updated_at
     end
     active_admin_comments
   end

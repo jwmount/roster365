@@ -136,13 +136,19 @@ ActiveAdmin.register Job do
       hr
       li link_to "Prepare Schedules", admin_job_schedules_path( job )
       hr
-      status_tag('Other things you can do:')
-      hr      
       li link_to "Jobs",        admin_solution_jobs_path(        job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      job.solution.quote )
       li link_to "Quotes",      admin_project_quotes_path(       job.solution.quote.project )
       li link_to "Projects",    admin_company_projects_path(     job.solution.quote.project.company )
       li link_to "Companies",   admin_companies_path
+      hr
+      status_tag('Other things you can do:')
+      hr
+      li link_to "Manage Conditions", admin_conditions_path
+      li link_to "Manage Materials", admin_materials_path
+      li link_to "Manage Tip Sites", admin_tips_path
+      hr
+      li link_to "Dashboard", admin_dashboard_path
   end
 
 

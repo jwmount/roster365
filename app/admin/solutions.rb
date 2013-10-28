@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 
 # SolutionTips is HABTM join, action_on_permitted_parameters allows this to work 
 # Not entirely clear on this!  Also this probably applies to all models, take care.
@@ -137,14 +137,13 @@ form do |f|
 
     end
     
-    f.inputs "Tip Site (Choose one)" do
+    f.inputs "Tip Site for this solution" do
       f.input :tips, 
-              :as => :check_boxes, 
+              :as => :radio, 
               :collection => Tip.alphabetically.all.map {|u| [u.name, u.id]}
-
        end
 
-    f.inputs "Time & Distance" do
+    f.inputs "Time & Distance -- #{solution.quote.project.addresses[0].to_s} to tip site" do
       f.input :kms_one_way,
               :placeholder => "distance"    
               
@@ -205,7 +204,7 @@ form do |f|
               :hint => "ALERT:  #{solution.quote.project.company.name} may require a purchase order before a job is activated."                                 
 
       f.input :equipment_units_required_per_day,
-              :hint => "Equipment units #{solution.quote.project.company.name} commits to have on site each day."
+              :hint => "Number of units needed or allowed on site on a given day.  A guideline."
 
       f.input :equipment_dollars_per_day,
               :precision => 8, 
@@ -331,11 +330,10 @@ form do |f|
       li link_to "Review Companies",    admin_companies_path   
       hr
       status_tag('Other things you can do:')
-      hr      
-      li link_to 'Solutions',   admin_quote_solutions_path(      solution.quote )   
-      li link_to "Quotes",      admin_project_quotes_path(       solution.quote.project )
-      li link_to "Projects",    admin_company_projects_path(     solution.quote.project.company )
-      li link_to "Companies",   admin_companies_path
+      hr
+      li link_to "Manage Conditions", admin_conditions_path
+      li link_to "Manage Materials", admin_materials_path
+      li link_to "Manage Tip Sites", admin_tips_path
       hr
       li link_to "Dashboard", admin_dashboard_path
   end
