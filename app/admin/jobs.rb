@@ -132,8 +132,12 @@ ActiveAdmin.register Job do
 #
   sidebar "Jobs Context", only: [:show, :edit] do 
     ul
+      status_tag('Now you can:')
+      hr
       li link_to "Prepare Schedules", admin_job_schedules_path( job )
       hr
+      status_tag('Other things you can do:')
+      hr      
       li link_to "Jobs",        admin_solution_jobs_path(        job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      job.solution.quote )
       li link_to "Quotes",      admin_project_quotes_path(       job.solution.quote.project )

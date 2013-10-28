@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Equipment do
 
-  menu label: "Equipment", parent: "Company"
+  menu parent: "Company"
   belongs_to :company
   
   filter :name

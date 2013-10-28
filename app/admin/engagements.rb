@@ -5,8 +5,10 @@ require 'active_support/all'
 
 
 ActiveAdmin.register Engagement do
+
+  navigation_menu :operations_navigation
   
-  menu label: "Engagements", parent: "Schedule"
+  menu parent: "Schedule"
 
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
@@ -14,9 +16,7 @@ ActiveAdmin.register Engagement do
   #}
   
   belongs_to :person, :optional=>true
-    navigation_menu :schedule
   belongs_to :schedule, :optional=>false
-    navigation_menu :schedule
 
   scope :all, :default => true
   scope :onsite_now do |engagements|
@@ -161,6 +161,8 @@ ActiveAdmin.register Engagement do
 #
   sidebar "Engagements Context", only: [:show, :edit] do 
     ul
+      status_tag('Now you can:')
+      br
       li link_to "Engagements", admin_schedule_engagements_path( engagement.schedule )
       li link_to "Schedules",   admin_job_schedules_path(        engagement.schedule.job )
       li link_to "Jobs",        admin_solution_jobs_path(        engagement.schedule.job.solution )
@@ -169,8 +171,10 @@ ActiveAdmin.register Engagement do
       li link_to "Projects",    admin_company_projects_path(     engagement.schedule.job.solution.quote.project.company )
       li link_to "Companies",   admin_companies_path
       hr
-      li link_to "View Dashboard", admin_dashboard_path
+      status_tag('Other things you can do:')
+      br
       li link_to "Dockets", admin_engagement_dockets_path(engagement)
+      li link_to "View Dashboard", admin_dashboard_path
   end
 
 #

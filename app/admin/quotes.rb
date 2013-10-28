@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Quote do
       
-  menu label: "Quotes", parent: "Project"
+  menu parent: "Sales"
 
   filter :name
   filter :rep

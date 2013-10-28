@@ -210,9 +210,12 @@ ActiveAdmin.register Schedule do
 #
   sidebar "Schedule Context", only: [:show, :edit] do 
     ul
+      status_tag('Now you can:')
+      hr
       li link_to 'Prepare Engagements', admin_schedule_engagements_path( schedule )   
       hr
-      li link_to "Return to #{schedule.job.display_name} Schedule", admin_job_schedule_path( schedule.job, job ) 
+      status_tag('Other things you can do:')
+      hr      
       li link_to "Jobs",        admin_solution_jobs_path(        schedule.job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      schedule.job.solution.quote )
       li link_to "Quotes",      admin_project_quotes_path(       schedule.job.solution.quote.project )

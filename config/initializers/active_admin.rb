@@ -156,12 +156,12 @@ ActiveAdmin.setup do |config|
   #
   # To change the default utility navigation to show a link to your website & a logout btn
   #
-  #  config.namespace :admin do |admin|
-  #    admin.build_menu :utility_navigation do |menu|
-  #      menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #      admin.add_logout_button_to_menu menu
-  #    end
-  #  end
+  # config.namespace :admin do |admin|
+  #   admin.build_menu :utility_navigation do |menu|
+  #     menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
+  #     admin.add_logout_button_to_menu menu
+  #   end
+  # end
   #
   # If you wanted to add a static menu item to the default menu provided:
   #
@@ -170,12 +170,6 @@ ActiveAdmin.setup do |config|
   #      menu.add label: "mygreatwebsite", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
   #   end
   #  end
-     config.namespace :admin do |admin|
-      admin.build_menu :default do |menu|
-        menu.add label: "Projects", path: "projects#index", html_options: { target: :blank }
-        admin.add_logout_button_to_menu menu
-       end
-      end
 
   # == Download Links
   #

@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Project do
 
-  menu label: "Projects", :parent => "Company"
+  menu :parent => "Company"
   
   #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
   belongs_to :company
@@ -21,7 +21,6 @@ ActiveAdmin.register Project do
     projects.where ({submitted_bid: true})
   end
 
-  filter :name
 
   index do
 
@@ -168,9 +167,11 @@ ActiveAdmin.register Project do
   sidebar "Project Context", only: [:show, :edit] do 
     ul
       status_tag('Now you can:')
+      hr
       li link_to 'Prepare Quotes', admin_project_quotes_path( project )     
       hr
       status_tag('Other things you can do:')
+      hr
       li link_to "Visit the Dashboard", admin_dashboard_path
       li link_to "Manage Conditions", admin_conditions_path
       li link_to "Manage Materials", admin_materials_path

@@ -317,6 +317,8 @@ form do |f|
 #
   sidebar "Solution Context", only: [:show, :edit] do 
     ul
+      status_tag('Now you can:')
+      hr
       if solution.has_final_approval?
         li link_to 'Prepare Jobs', admin_solution_jobs_path( solution )   
       else
@@ -324,6 +326,12 @@ form do |f|
         flash[:warning] = "Solution MUST be approved before Jobs can be created."
       end
       hr
+      li link_to "Review Quotes",       admin_project_quotes_path(       quote.project )
+      li link_to "Review Projects",     admin_company_projects_path(     quote.project.company )
+      li link_to "Review Companies",    admin_companies_path   
+      hr
+      status_tag('Other things you can do:')
+      hr      
       li link_to 'Solutions',   admin_quote_solutions_path(      solution.quote )   
       li link_to "Quotes",      admin_project_quotes_path(       solution.quote.project )
       li link_to "Projects",    admin_company_projects_path(     solution.quote.project.company )

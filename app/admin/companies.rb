@@ -2,7 +2,7 @@
 ActiveAdmin.register Company do
 
   menu label: "Customers", parent: "Companies"
-    
+  
 #
 # W H I T E   L I S T   M A N A G E M E N T
 # 
