@@ -15,7 +15,7 @@ class Solution < ActiveRecord::Base
              :foreign_key => :vendor_id
   has_many :jobs, 
            :dependent => :destroy
-  has_many :equipment
+  #has_many :equipment
   has_and_belongs_to_many :tips
   
   #
@@ -39,7 +39,7 @@ class Solution < ActiveRecord::Base
   # V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S
   #
   validates_presence_of :name
-  validates_presence_of :quote_id, :equipment_id
+  validates_presence_of :quote_id, :equipment
 
   validates :invoice_load_client, :pay_load_client, :numericality => {:greater_than_or_equal_to => 0}
   validates :invoice_tip_client, :pay_tip_client, :numericality => {:greater_than_or_equal_to => 0}

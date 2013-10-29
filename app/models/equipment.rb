@@ -5,7 +5,7 @@ class Equipment < ActiveRecord::Base
   # audited, not on Rails 4 yet
 
   belongs_to :company
-  belongs_to :solution
+  #belongs_to :solution
   has_many :solutions, :dependent => :destroy
   has_and_belongs_to_many :schedules
 

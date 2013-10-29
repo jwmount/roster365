@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 #require 'active_support/core_ext/object/include_blank.rb'
 #require 'active_support/core_ext/string/filters'
 require 'active_support/all'
@@ -100,7 +100,7 @@ ActiveAdmin.register Engagement do
       f.input :person, 
               :required=>true, 
               :as => :select, 
-              :collection => Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
+              :collection => has_equipment_required?,  #Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
               :include_blank => false,
               :hint => "Person you are engaging to work.  Must work for vendor with required equipment."
                         

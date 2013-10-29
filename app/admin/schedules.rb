@@ -158,37 +158,34 @@ ActiveAdmin.register Schedule do
   form do |f|
     error_panel f
 
-    f.inputs "#{schedule.job.solution.quote.project.company.display_name}. Project #{schedule.job.solution.quote.project.name}.  Schedule details." do
-      f.input :day,
+      f.inputs "#{schedule.job.solution.quote.project.company.display_name}. Project #{schedule.job.solution.quote.project.name}.  Schedule details." do
+        f.input :day,
               :as => :string,
               :input_html => {:class => 'datepicker'},
               :required => true, 
               :label=>"Day", 
               :hint => "Day you are scheduling.",
               :placeholder => "Date."  
-      f.input :job,
+        f.input :job,
               :hint => 'Job being scheduled.'
-      f.input :equipment_units_today,
-              :hint => "Number of #{schedule.job.solution.equipment.name}(s) needed on site this date for job."
-      f.input :equipment_id, 
+        f.input :equipment_units_today,
+              :hint => "Number of #{schedule.job.solution.equipment}(s) needed on site this date for job."
+        f.input :equipment_id, 
               :as => :select, 
               :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
               :include_blank => false,
               :hint => "Equipment needed for day you are scheduling."
-
     end
     f.buttons
   end
 
   show :title => 'Schedule' do |schedule|
-    h3 schedule.day.strftime("%b %m, %Y")
     attributes_table_for(schedule) do
       row :day
       row :job
       row :equipment_units_today                                    
       row ("Equipment") do |schedule|
-        puts "***** EQUIPMENT: #{schedule.equipment.name}"
-        schedule.equipment.name
+        schedule.job.solution.equipment
       end
       row :updated_at
     end

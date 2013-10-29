@@ -1,4 +1,3 @@
-#require 'debugger'
 class Engagement < ActiveRecord::Base
       
   belongs_to :person
@@ -33,7 +32,7 @@ class Engagement < ActiveRecord::Base
   def has_equipment_required?
     # Do we know what the required equipment is?
     begin
-      equipment_name = self.schedule.job.solution.equipment.name
+      equipment_name = self.schedule.job.solution.equipment_name
     rescue Exception
       # apparently not, normally due to loss of schedule as context since then cannot determine what equipment the 
       # solution stipulates.
