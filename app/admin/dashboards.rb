@@ -85,11 +85,16 @@ ActiveAdmin.register_page "Dashboard" do
 
         table_for schedules do
           column :date do |schedule|
-            link_to schedule.day, admin_job_schedule_path( schedule.job, schedule )
+            link_to schedule.day.strftime("%A, %d %B, %Y"), admin_job_schedule_path( schedule.job, schedule )
+          end
+ 
+          column :project do |schedule|
+            link_to schedule.job.solution.quote.project.name, 
+               admin_company_project_path( schedule.job.solution.quote.project.company, schedule.job.solution.quote.project)
           end
 
           column :equpment do |schedule|
-            schedule.equipment.name
+            schedule.job.solution.equipment_name
           end
  
           column "Plan" do |schedule|

@@ -97,10 +97,12 @@ ActiveAdmin.register Engagement do
     error_panel f
 
     f.inputs "Schedule" do      
+
+      #  STILL NEED TO SCOPE THIS COLLECTION TO PEOPLE IN COMPANIES WITH THE REQUIRED EQUIPMENT
       f.input :person, 
               :required=>true, 
               :as => :select, 
-              :collection => has_equipment_required?,  #Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
+              :collection => Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
               :include_blank => false,
               :hint => "Person you are engaging to work.  Must work for vendor with required equipment."
                         
@@ -162,8 +164,12 @@ ActiveAdmin.register Engagement do
   sidebar "Engagements Context", only: [:show, :edit] do 
     ul
       status_tag('Now you can:')
-      br
+      hr
+      li link_to "New Engagement", new_admin_schedule_engagement_path( engagement.schedule )
       li link_to "Engagements", admin_schedule_engagements_path( engagement.schedule )
+      br
+      status_tag('Other things you can do:')
+      hr
       li link_to "Schedules",   admin_job_schedules_path(        engagement.schedule.job )
       li link_to "Jobs",        admin_solution_jobs_path(        engagement.schedule.job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      engagement.schedule.job.solution.quote )
@@ -171,8 +177,6 @@ ActiveAdmin.register Engagement do
       li link_to "Projects",    admin_company_projects_path(     engagement.schedule.job.solution.quote.project.company )
       li link_to "Companies",   admin_companies_path
       hr
-      status_tag('Other things you can do:')
-      br
       li link_to "Dockets", admin_engagement_dockets_path(engagement)
       li link_to "View Dashboard", admin_dashboard_path
   end

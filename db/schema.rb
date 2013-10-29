@@ -167,11 +167,12 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.datetime "updated_at",                                        null: false
   end
 
+=begin
   create_table "equipment_schedules", id:   false, force: true do |t|
     t.integer "equipment_id",         null: false
     t.integer "schedule_id",          null: false
   end
-
+=end
 
   create_table "identifiers", force: true do |t|
     t.integer  "identifiable_id",                                   null: false

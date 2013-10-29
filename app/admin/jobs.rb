@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 require 'active_support/all'
 
 ActiveAdmin.register Job do

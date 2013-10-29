@@ -39,7 +39,7 @@ class Solution < ActiveRecord::Base
   # V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S
   #
   validates_presence_of :name
-  validates_presence_of :quote_id, :equipment
+  validates_presence_of :quote_id, :equipment_name
 
   validates :invoice_load_client, :pay_load_client, :numericality => {:greater_than_or_equal_to => 0}
   validates :invoice_tip_client, :pay_tip_client, :numericality => {:greater_than_or_equal_to => 0}
@@ -80,6 +80,7 @@ class Solution < ActiveRecord::Base
       self.drive_time_out_of_site ||= 0 
       self.drive_time_tip_to_load ||= 0
       self.drive_time_out_of_tip_site ||= 0
+      self.equipment_name ||= 'Unknown'
       self.invoice_load_client ||= 0.00
       self.pay_load_client ||= 0.00
       self.invoice_tip_client ||= 0.00

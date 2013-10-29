@@ -43,8 +43,6 @@ ActiveAdmin.register Solution do
 
     column :name, :sortable => 'name' do |solution|
       link_to "Solution #{solution.name}", edit_admin_quote_solution_path( solution.quote, solution )
-      #link_to "Solution #{solution.name}",
-       #   edit_admin_company_project_quote_solution_path(company, solution.quote.project, solution.quote, solution )
     end
 
     column :solution_type
@@ -199,9 +197,9 @@ form do |f|
 
       f.input :equipment_name, 
               :as => :select, 
-              :collection => %w[Auto Crane Dozer Truck], #Equipment::equipment_list,
+              :collection => %w[Unknown Crane Dozer Truck], #Equipment::equipment_list,
               :include_blank => false,
-              :hint => "Select one."                           
+              :hint => "Select one type of equipment for this solution.  If you need more than a single type, do a solution for each one."                           
 
       f.input :purchase_order_required, 
               :as => :radio, 

@@ -109,11 +109,7 @@ ActiveAdmin.register Schedule do
     end
 
     column 'Equipment' do |schedule|
-      begin
-        link_to "#{schedule.job.solution.equipment.name}", admin_equipment_path(schedule.job.solution.equipment)
-      rescue
-        'Not specified'
-      end
+      schedule.job.solution.equipment_name
     end
 
     column 'Units' do |schedule|
@@ -159,23 +155,25 @@ ActiveAdmin.register Schedule do
     error_panel f
 
       f.inputs "#{schedule.job.solution.quote.project.company.display_name}. Project #{schedule.job.solution.quote.project.name}.  Schedule details." do
+
         f.input :day,
               :as => :string,
-              :input_html => {:class => 'datepicker'},
+              :as => :date_picker,
               :required => true, 
               :label=>"Day", 
               :hint => "Day you are scheduling.",
               :placeholder => "Date."  
+
         f.input :job,
               :hint => 'Job being scheduled.'
+      end
+
+      f.inputs "Number of #{schedule.job.solution.equipment_name}(s) needed" do
+
         f.input :equipment_units_today,
-              :hint => "Number of #{schedule.job.solution.equipment}(s) needed on site this date for job."
-        f.input :equipment_id, 
-              :as => :select, 
-              :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
-              :include_blank => false,
-              :hint => "Equipment needed for day you are scheduling."
-    end
+                :hint => "Number of #{schedule.job.solution.equipment_name}(s) needed on site this date for job."
+      end
+
     f.buttons
   end
 
@@ -185,7 +183,7 @@ ActiveAdmin.register Schedule do
       row :job
       row :equipment_units_today                                    
       row ("Equipment") do |schedule|
-        schedule.job.solution.equipment
+        schedule.job.solution.equipment_name
       end
       row :updated_at
     end
