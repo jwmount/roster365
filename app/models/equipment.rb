@@ -5,9 +5,9 @@ class Equipment < ActiveRecord::Base
   # audited, not on Rails 4 yet
 
   belongs_to :company
-  belongs_to :solution
-  has_many :solutions, :dependent => :destroy
-  has_and_belongs_to_many :schedules
+  #belongs_to :solution
+  #has_many :solutions, :dependent => :destroy
+  #has_and_belongs_to_many :schedules
 
   #
   # P O L Y M O R P H I C  A S S O C I A T I O N S

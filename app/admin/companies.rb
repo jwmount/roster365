@@ -104,6 +104,8 @@ ActiveAdmin.register Company do
               :hint => 'Company names are unique.', 
               :wrapper_html => { :class => "important" },
               :placeholder => "Company name..."
+      f.input :line_of_business,
+              :hint => "Short statement of company's market focus."
       f.input :MYOB_number,  
               :as => :string, 
               :hint => "Roster365 unique 5 digit account number, or '00000'.",

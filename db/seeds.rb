@@ -14,8 +14,8 @@ user_list = [
   ["admin@example.com", 'demo'],
   ['staff@example.com', 'staff_role'], 
   ['john@venuesoftware.com', 'vendor_support'],
-  ['peta.forbes@roster365.com.au', 'management']
-  #['tgodino@me.com', 'vendor_support']
+  ['peta.forbes@roster365.com.au', 'management'],
+  ['tgodino@me.com', 'vendor_support']
   ]
 user_list.each do |email, role|  
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
@@ -48,8 +48,8 @@ end
 # First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
 # Two methods here, names list and completely specified attributes.
 companies_list = [
+  ["#{ENV['LICENSEE']}", 30, false, false, "00000", "Roster365 Licensee"], 
   ["American Debris Box Service Inc.", 30, false, false, "00000", "Containers delivered and removed"],
-  ["Roster365", 30, false, false, "00000", "Licensee"], 
   ["Lawson Drayage, Inc.", 30, false, false, "00000", "Cartage, Local Houl Freight Carrying Service"],
   ["Waste Management, Inc.", 30, false, false, "00000", "Waste Disposal & Removal Service"],
   ["Reliable Crane & Rigging", 30, false, false, "00000", "Carting, Hoist Service & REntal, Machinery Moving & Erecting Service"],
@@ -70,6 +70,12 @@ companies_list.each do |c| #name, credit_terms, PO_required, active, MYOB_number
 end
   
 # now put some people in each company
+# LICENSEE first
+company_relation = Company.where ({name: "#{ENV['LICENSEE']}"})
+@company = company_relation[0]
+@person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep' )
+@person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.' )
+
 company_relation = Company.where ({name: "American Debris Box Service Inc."})
 @company = company_relation[0]
 @person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep', available_on: Date.today)
@@ -136,17 +142,18 @@ project_list.each do |name|
       Quote.create!( project_id: @project.id, quote_to_id: 1, rep_id: 1, fire_ants_verified_by: 'No One' )
     end
 end
+=begin
+# useful?
 # now retrieve the first quote and create some solutions for it, one for each contract type
 @quote = Quote.first
   solution_options.each do |contract|
-    solution = Solution.new( quote_id: @quote.id, equipment_id: 1, total_material: 1, solution_type: contract )
+    solution = Solution.new( quote_id: @quote.id, equipment_name: "Crane", total_material: 1, solution_type: contract )
     solution.name = "S#{Solution.count+1}"
-    solution.material_id = 1
+    solution.material_name = 'Crane'
     solution.kms_one_way = 1
     solution.save!
   end
-
-
+=end
 
 
 # Material types  

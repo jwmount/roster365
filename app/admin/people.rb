@@ -44,9 +44,11 @@ ActiveAdmin.register Person do
   sidebar "Current Choices", only: [:show, :edit] do 
     ul
       status_tag('Now you can:')
+      hr
       li link_to "Manage people for #{person.company.name}", admin_company_people_path( company )     
       hr
       status_tag('Other things you can do:')
+      hr
       li link_to "Visit the Dashboard", admin_dashboard_path
       li link_to "Manage Conditions", admin_conditions_path
       li link_to "Manage Materials", admin_materials_path

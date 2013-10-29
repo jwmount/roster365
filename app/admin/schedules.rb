@@ -109,11 +109,7 @@ ActiveAdmin.register Schedule do
     end
 
     column 'Equipment' do |schedule|
-      begin
-        link_to "#{schedule.job.solution.equipment.name}", admin_equipment_path(schedule.job.solution.equipment)
-      rescue
-        'Not specified'
-      end
+      schedule.job.solution.equipment_name
     end
 
     column 'Units' do |schedule|
@@ -161,33 +157,35 @@ ActiveAdmin.register Schedule do
     f.inputs "Schedule details.  Equipment for #{schedule.job.solution.quote.project.company.name}, #{schedule.job.solution.quote.project.name} project." do
       f.input :job,
               :hint => 'Job being scheduled.'
+
       f.input :day,
               :as => :string,
-              :input_html => {:class => 'datepicker'},
+              :as => :date_picker,
               :required => true, 
               :label=>"Day", 
               :hint => "Day you are scheduling to have the equipment on site.",
               :placeholder => "Date."  
+
       f.input :equipment_units_today,
               :hint => "Number of #{schedule.job.solution.equipment.name}(s) needed on site this date for job."
-      f.input :equipment_id, 
-              :as => :select, 
-              :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
-              :include_blank => false,
-              :hint => "Equipment needed for day you are scheduling."
       end      
 
+
+      f.inputs "Number of #{schedule.job.solution.equipment_name}(s) needed" do
+
+        f.input :equipment_units_today,
+                :hint => "Number of #{schedule.job.solution.equipment_name}(s) needed on site this date for job."
+      end
     f.buttons
   end
 
-  show :title => "Details -- #{solution.equipment.name}" do |schedule|
-    panel "Details" do
-      attributes_table_for(schedule) do
-        row :day
-        row :job
-        row :equipment_units_today                                    
-        row ("Equipment") {render schedule.equipment}
-        row :updated_at
+  show :title => 'Schedule' do |schedule|
+    attributes_table_for(schedule) do
+      row :day
+      row :job
+      row :equipment_units_today                                    
+      row ("Equipment") do |schedule|
+        schedule.job.solution.equipment_name
       end
     end
     active_admin_comments

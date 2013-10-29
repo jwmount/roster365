@@ -43,8 +43,6 @@ ActiveAdmin.register Solution do
 
     column :name, :sortable => 'name' do |solution|
       link_to "Solution #{solution.name}", edit_admin_quote_solution_path( solution.quote, solution )
-      #link_to "Solution #{solution.name}",
-       #   edit_admin_company_project_quote_solution_path(company, solution.quote.project, solution.quote, solution )
     end
 
     column :solution_type
@@ -60,7 +58,10 @@ ActiveAdmin.register Solution do
       end
     end
     
-    column :equipment_units_required_per_day, :label => 'Units/day'
+    column :equipment_units_required_per_day, 
+           :label => 'Units/day'
+
+    column :equipment_name
     
     column :approved do |solution|
       status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error)      
@@ -193,12 +194,12 @@ form do |f|
       f.input :semis_permitted, 
               :as => :radio
 
-      f.input :equipment_id, 
+      f.input :equipment_name, 
               :as => :select, 
-              :collection => Equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
+              :collection => %w[Unknown Crane Dozer Truck], #Equipment::equipment_list,
               :include_blank => false,
-              :hint => "Equipment for this solution.  To search for equipment use the Equipment menu."
-                           
+              :hint => "Select one type of equipment for this solution.  If you need more than a single type, do a solution for each one."                           
+
       f.input :purchase_order_required, 
               :as => :radio, 
               :hint => "ALERT:  #{solution.quote.project.company.name} may require a purchase order before a job is activated."                                 
@@ -255,6 +256,7 @@ form do |f|
     attributes_table do
       row :name
       row :solution_type
+      row :equipment_name
       row :tip_site
       row :updated_at
       row("Roster365 Approved") { status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error) }        
@@ -274,9 +276,10 @@ form do |f|
 
     panel "Vendor & Equipment" do
       attributes_table_for solution do
-        rows :equipment, :equipment_units_required_per_day
+        row  :equipment_name
+        row  :equipment_units_required_per_day
         row( 'equipment_dollars_per_day') {number_to_currency(solution.equipment_dollars_per_day)}
-        row(:semis_permitted) { status_tag (solution.semis_permitted ? "YES" : "No"), (solution.semis_permitted ? :ok : :error) }        
+        row( :semis_permitted ) { status_tag (solution.semis_permitted ? "YES" : "No"), (solution.semis_permitted ? :ok : :error) }        
       end
     end
 
@@ -297,7 +300,6 @@ form do |f|
         row('pay_equipment_per_unit') {number_to_currency(solution.pay_equipment_per_unit)}
         row('pay_tolls') {number_to_currency(solution.pay_tolls)}
         row('pay_tip') {number_to_currency(solution.pay_tip)}
-        row('PAY EQUIPMENT PER UNIT') {number_to_currency(solution.pay_equipment_per_unit)}
         row('Hourly Hire Rate') {number_to_currency(solution.hourly_hire_rate)}
       end
     end

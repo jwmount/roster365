@@ -167,11 +167,12 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.datetime "updated_at",                                        null: false
   end
 
+=begin
   create_table "equipment_schedules", id:   false, force: true do |t|
     t.integer "equipment_id",         null: false
     t.integer "schedule_id",          null: false
   end
-
+=end
 
   create_table "identifiers", force: true do |t|
     t.integer  "identifiable_id",                                   null: false
@@ -283,7 +284,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.integer  "drive_time_out_of_tip_site",                               default: 0,                     null: false
     t.integer  "drive_time_tip_to_load",                                   default: 0,                     null: false
     t.decimal  "equipment_dollars_per_day",        precision: 7, scale: 2, default: 0.0,                   null: false
-    t.integer  "equipment_id",                                                                             null: false
+    t.string   "equipment_name",                                           default: "",                    null: false
     t.integer  "equipment_units_required_per_day",                         default: 1,                     null: false
     t.decimal  "hourly_hire_rate",                 precision: 7, scale: 2, default: 0.0,                   null: false
     t.decimal  "invoice_load_client",              precision: 7, scale: 2, default: 0.0,                   null: false
