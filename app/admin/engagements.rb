@@ -64,9 +64,12 @@ ActiveAdmin.register Engagement do
         @certs = engagement.person.certs
         render @certs
       end
-
     end
 
+    column "Equipment" do |engagement|
+      engagement.schedule.job.solution.equipment_name
+    end
+    
     column "Job" do |engagement|
       engagement.schedule.job.name
     end

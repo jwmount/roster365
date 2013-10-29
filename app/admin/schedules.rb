@@ -22,12 +22,12 @@ ActiveAdmin.register Schedule do
   # View with spreadsheet like extensions 
   index do
 
-    column :day do |schedule|
-      schedule.day.strftime("%a,%d%b")
+    column "Schedule for" do |schedule|
+      link_to schedule.day.strftime("%a,%d%b"), edit_admin_job_schedule_path(schedule.job, schedule)
     end
 
-    column "Schedule" do |schedule|
-      link_to schedule.job.name, edit_admin_job_schedule_path(schedule.job, schedule)
+    column "Job" do |schedule|
+      link_to schedule.job.name, admin_solution_job_path(schedule.job.solution, schedule.job)
     end
 
     column "Rep(s)" do |schedule|
@@ -204,11 +204,12 @@ ActiveAdmin.register Schedule do
   sidebar "Schedule Context", only: [:show, :edit] do 
     ul
       status_tag('Now you can:')
-      hr
+      br
       li link_to 'Prepare Engagements', admin_schedule_engagements_path( schedule )   
       hr
       status_tag('Other things you can do:')
-      hr      
+      br      
+      li link_to "Schedules",   admin_job_schedules_path(        schedule.job )
       li link_to "Jobs",        admin_solution_jobs_path(        schedule.job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      schedule.job.solution.quote )
       li link_to "Quotes",      admin_project_quotes_path(       schedule.job.solution.quote.project )
