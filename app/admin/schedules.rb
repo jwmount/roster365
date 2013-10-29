@@ -165,9 +165,6 @@ ActiveAdmin.register Schedule do
               :label=>"Day", 
               :hint => "Day you are scheduling to have the equipment on site.",
               :placeholder => "Date."  
-
-      f.input :equipment_units_today,
-              :hint => "Number of #{schedule.job.solution.equipment.name}(s) needed on site this date for job."
       end      
 
 
