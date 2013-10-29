@@ -267,7 +267,6 @@ ActiveRecord::Schema.define(version: 20130212041557) do
   create_table "schedules", force: true do |t|
     t.datetime "day",                                           null: false
     t.integer  "job_id",                                        null: false
-    t.integer  "equipment_id",                                  null: false
     t.integer  "equipment_units_today",      default: 0,        null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
