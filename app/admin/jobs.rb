@@ -86,13 +86,11 @@ ActiveAdmin.register Job do
               :as => :radio
 
       f.input :start_on, 
-              :as => :string, 
-              :input_html => {:class => 'datepicker'}, 
+              :as =>  :date_picker, 
               :required => true
               
       f.input :finished_on, 
-              :as => :string, 
-              :input_html => {:class => 'datepicker'}, 
+              :as => :date_picker,
               :required => true
     end
     f.buttons

@@ -88,8 +88,7 @@ ActiveAdmin.register Quote do
     
     f.inputs "Dates" do
       f.input :expected_start, 
-              :as => :string, 
-              :input_html => {:class => 'datepicker'}, 
+              :as => :date_picker,
               :hint => "When you expect to start.  Estimate."
       f.input :duration, :required => true, 
               :label => "Duration (days)",

@@ -94,8 +94,7 @@ ActiveAdmin.register Project do
 
       f.input :project_start_on, 
               :label => 'Expected start date',
-              :as => :string, 
-              :input_html => {:class => 'datepicker'},
+              :as => :date_picker,
               :hint => 'Best estimate of when project will start.'
 
       f.input :intend_to_bid

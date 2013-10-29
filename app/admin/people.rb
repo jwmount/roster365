@@ -137,7 +137,6 @@ ActiveAdmin.register Person do
         f.input :certificate
         f.input :expires_on, 
                 :as => :date_picker,
-                #:input_html => {:class => 'datepicker'},
                 :hint => "Expiration date."
         f.input :serial_number, :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
         f.input :permanent
