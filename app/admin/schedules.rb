@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 #require 'active_support/core_ext/object/include_blank.rb'
 #require 'active_support/core_ext/string/filters'
 require 'active_support/all'
@@ -134,20 +134,8 @@ ActiveAdmin.register Schedule do
       end
     end
 
-    column 'Subcontractors' do |schedule|
-      #h5 link_to "Roster", admin_schedule_engagements_path(schedule)
-      @engagements = schedule.engagements
-      @engagements.each do |engagement|
-
-        render engagement
-        status_tag('On Site', :ok) if engagement.onsite_now
-        status_tag('NO SHOW', :error) if engagement.no_show
-        status_tag('Breakdown', :warning) if engagement.breakdown
-        status_tag('OK tomorrow', :ok) if engagement.OK_tomorrow
-        br
-      #br link_to 'New Docket', new_admin_docket_path
-      
-      end
+    column "Roster" do |schedule|
+      render schedule.engagements
     end
 
   end

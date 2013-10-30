@@ -1,6 +1,7 @@
 -if engagement.person.nil?
   = 'none'
 -else
-  /= link_to "#{engagement.person.full_name}(#{engagement.person.title})", admin_person_path(engagement.person.id)
+  = link_to "#{engagement.person.full_name}(#{engagement.person.title})", admin_person_path(engagement.person.id)
   = render engagement.person.identifiers.limit(1).order(:rank)
+%p
 
