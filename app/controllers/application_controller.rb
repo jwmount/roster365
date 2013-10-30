@@ -124,9 +124,11 @@ ActiveAdmin::Views::Pages::Base.class_eval do
 
   def build_footer
     div :id => "footer" do
-      footer = "Roster365 #{link_to("Control Center", "http://www.roster365.com.au")} #{ENV['VERSION']};".html_safe
+      footer = "#{ENV['LICENSEE']} #{link_to("Control Center", "http://www.roster365.com.au")} #{ENV['VERSION']};".html_safe
       footer << "  Powered by #{link_to("Active Admin", "http://www.activeadmin.info")} #{ActiveAdmin::VERSION}".html_safe
       para footer
     end
   end
+
+ 
 end

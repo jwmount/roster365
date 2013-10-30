@@ -207,7 +207,7 @@ ActiveAdmin.register Schedule do
       br
       li link_to 'Prepare Engagements', admin_schedule_engagements_path( schedule )   
       hr
-      status_tag('Other things you can do:')
+      status_tag('Other things you can see:')
       br      
       li link_to "Schedules",   admin_job_schedules_path(        schedule.job )
       li link_to "Jobs",        admin_solution_jobs_path(        schedule.job.solution )
