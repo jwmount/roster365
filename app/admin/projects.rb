@@ -24,6 +24,7 @@ ActiveAdmin.register Project do
   filter :name
 
   index do
+    selectable_column
 
     column "Name" do |project|
       link_to project.name, admin_company_project_path( project.company, project )
@@ -168,6 +169,7 @@ ActiveAdmin.register Project do
     ul
       status_tag('Now you can:')
       hr
+      li link_to 'Create a new Quote', new_admin_project_quote_path( project )     
       li link_to 'Prepare Quotes', admin_project_quotes_path( project )     
       hr
       status_tag('Other things you can do:')

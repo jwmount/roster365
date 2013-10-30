@@ -40,6 +40,7 @@ ActiveAdmin.register Solution do
 
 
   index do 
+    selectable_column
 
     column :name, :sortable => 'name' do |solution|
       link_to "Solution #{solution.name}", edit_admin_quote_solution_path( solution.quote, solution )

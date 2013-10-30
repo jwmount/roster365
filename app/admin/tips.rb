@@ -4,6 +4,8 @@ ActiveAdmin.register Tip do
   menu parent: "Admin"
 
   index do
+    selectable_column
+
     column :name do |tip|
       link_to tip.name, admin_tip_path(tip)
     end

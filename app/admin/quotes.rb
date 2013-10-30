@@ -131,8 +131,9 @@ ActiveAdmin.register Quote do
     
     panel :Dates do
       attributes_table_for(quote) do
-        row :expected_start
-        row ("Duration (days)") {quote.duration}
+        row ("Expected Begin Date") {quote.expected_start.strftime("%b %d, %Y")}
+        row ("Duration (days)")     {quote.duration}
+        row ("Expected End Date")   {(quote.expected_start + quote.duration.days).strftime("%b %d, %Y")}
       end
     end
   

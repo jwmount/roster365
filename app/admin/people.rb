@@ -56,6 +56,8 @@ ActiveAdmin.register Person do
   end
   
   index do
+    selectable_column
+
     column :name do |person|
       if person.identifiers.count > 0
         h5 link_to "#{person.display_name + ', ' + person.title}", admin_company_person_path(person.company_id, person.id)

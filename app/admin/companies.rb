@@ -44,6 +44,7 @@ ActiveAdmin.register Company do
   end
 
   index do
+    selectable_column
 
     column "Name (click for details)", :sortable => 'name' do |company|
       h5 link_to company.name, admin_company_path(company)

@@ -35,7 +35,8 @@ ActiveAdmin.register Job do
   #actions :all, :except => [:new]
 
   index do
-    
+    selectable_column
+
     # By the time Jobs are created the one or more reps should be assigned.
     # Currently its not fatal if no rep is on Project or Quote.  Warnings are given separately.
     column :job_name, :sortable => 'name' do |job|

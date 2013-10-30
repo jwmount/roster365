@@ -21,6 +21,7 @@ ActiveAdmin.register Schedule do
 
   # View with spreadsheet like extensions 
   index do
+    selectable_column
 
     column "Schedule for" do |schedule|
       link_to schedule.day.strftime("%a,%d%b"), edit_admin_job_schedule_path(schedule.job, schedule)

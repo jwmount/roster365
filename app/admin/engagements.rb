@@ -37,7 +37,6 @@ ActiveAdmin.register Engagement do
 
 
   index do 
-
    
     # http://stackoverflow.com/questions/1192843/grouped-select-in-rails
     # http://stackoverflow.com/questions/9579402/active-admin-refresh-second-drop-down-based-on-first-drop-down-ruby-on-rails
@@ -53,6 +52,7 @@ ActiveAdmin.register Engagement do
     column "Engagement Day", :sortable => :id do |engagement|
       link_to engagement.schedule.day.strftime("%d %b, %Y"), admin_schedule_engagement_path( engagement.schedule, engagement )
     end
+    selectable_column
 
     column "Subbie" do |engagement|
       render engagement.person

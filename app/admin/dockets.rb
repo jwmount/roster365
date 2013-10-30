@@ -34,6 +34,8 @@ ActiveAdmin.register Docket do
    end
 
   index do
+    selectable_column
+   
     column "Number" do |docket|
       link_to docket.number, admin_engagement_docket_path( docket.engagement, docket )
     end
@@ -76,7 +78,7 @@ ActiveAdmin.register Docket do
       
       f.input :date_worked, 
               :input_html => {:disabled => true },
-              :hint => "Day the work was performed."
+              :hint => "When the work was performed."
               
       f.input :engagement,
               :required=>true, 
