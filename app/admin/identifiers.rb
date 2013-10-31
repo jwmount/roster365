@@ -18,6 +18,8 @@ ActiveAdmin.register Identifier do
   filter :value  
   
   index do
+    selectable_column
+
     column :owner do |id|
       case id.identifiable_type
         when 'Company' 
@@ -35,10 +37,8 @@ ActiveAdmin.register Identifier do
             owner = Person.find  "#{id.identifiable_id}"
             link_to owner.display_name, admin_person_path(owner.id)
           rescue
-            owner = Person.find
-            owner.name = 'Delete: Person not found.'
-            flash[:error] = 'Bad Person (does not exist), address should be deleted.'
-            owner.display_name
+            flash[:error] = 'No such person, address should be deleted.'
+            flash[:error]
           end
         else
           flash[:error] = 'Could not determine identifiable_type.'

@@ -7,7 +7,7 @@ ActiveAdmin.register Address do
   belongs_to :Company
 
   index do
-    column :id
+    selectable_column
 
     column :owner do |id|
       case id.addressable_type

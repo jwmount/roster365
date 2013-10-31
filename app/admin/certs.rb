@@ -20,6 +20,8 @@ ActiveAdmin.register Cert do
   end
    
   index do
+    selectable_column
+
     column :certificate do |cert|
       link_to cert.certificate.name, admin_cert_path(cert.id)
     end
