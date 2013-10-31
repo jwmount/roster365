@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Address do
   
-  #menu parent: "Admin"
+  menu parent: "Admin"
   # Address must be created from parent, e.g. Company, Person, Tip
   # actions :all, :except => :new
   belongs_to :Company
