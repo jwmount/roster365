@@ -1,5 +1,3 @@
 %p
-%h5= "#{cert.certificate.name}"
-%p= "Expires: #{cert.expires_on.strftime("%d %b, %Y")}"
-%p= "Serial Number: #{cert.serial_number}"
+%p.small= "#{cert.certificate.name}--"+"Expires: #{cert.expires_on.strftime("%d %b, %Y")}--" "Serial Number: #{cert.serial_number}"
 %p

@@ -49,22 +49,6 @@ ActiveAdmin.register Schedule do
       end
     end 
 
-    # NOTE:  :partial _address located in views/addresses
-    column 'Load Site' do |schedule|
-      begin
-        @quote = Quote.find schedule.job.solution.quote_id
-        @address = @quote.project.addresses.limit(1)
-        render @address
-      rescue NoMethodError
-        @quote = nil
-        status_tag("No load site.", :warning)
-      end
-      
-      if @address == []
-        flash[:error] = simple_format("At least one schedule has no load site address.")
-      end
-    end
-
     column 'Material' do |schedule|
       begin
         @material = schedule.job.solution.material
@@ -81,6 +65,23 @@ ActiveAdmin.register Schedule do
       end
     end
 
+    # NOTE:  :partial _address located in views/addresses
+    column 'Load Site' do |schedule|
+      begin
+        @quote = Quote.find schedule.job.solution.quote_id
+        @address = @quote.project.addresses.limit(1)
+        render @address
+      rescue NoMethodError
+        @quote = nil
+        status_tag("No load site.", :warning)
+      end
+      
+      if @address == []
+        flash[:error] = simple_format("At least one schedule has no load site address.")
+      end
+    end
+
+
     column "Tip" do |schedule|
       begin
         @solution = Solution.find schedule.job.solution_id
@@ -94,6 +95,23 @@ ActiveAdmin.register Schedule do
         end
       rescue Exception
         @solution = nil
+      end
+    end
+
+    column 'Inv/pay' do |schedule|
+      begin
+        pay_load_client = number_to_currency(schedule.job.solution.pay_load_client)
+        invoice_load_client = number_to_currency(schedule.job.solution.invoice_load_client)
+        pay_tip_client = number_to_currency(schedule.job.solution.pay_tip_client)
+        invoice_tip_client = number_to_currency(schedule.job.solution.invoice_tip_client)
+        render :partial => 'invpay', :locals => {
+          :pay_load_client => pay_load_client,
+          :invoice_load_client => invoice_load_client,
+          :pay_tip_client => pay_tip_client,
+          :invoice_tip_client => invoice_tip_client
+        }
+      rescue NoMethodError
+        'Not specified'
       end
     end
 
@@ -115,23 +133,6 @@ ActiveAdmin.register Schedule do
 
     column 'Units' do |schedule|
       schedule.equipment_units_today
-    end
-
-    column 'Inv/pay' do |schedule|
-      begin
-        pay_load_client = number_to_currency(schedule.job.solution.pay_load_client)
-        invoice_load_client = number_to_currency(schedule.job.solution.invoice_load_client)
-        pay_tip_client = number_to_currency(schedule.job.solution.pay_tip_client)
-        invoice_tip_client = number_to_currency(schedule.job.solution.invoice_tip_client)
-        render :partial => 'invpay', :locals => {
-          :pay_load_client => pay_load_client,
-          :invoice_load_client => invoice_load_client,
-          :pay_tip_client => pay_tip_client,
-          :invoice_tip_client => invoice_tip_client
-        }
-      rescue NoMethodError
-        'Not specified'
-      end
     end
 
     column "Roster" do |schedule|
