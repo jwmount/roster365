@@ -12,6 +12,7 @@ ActiveAdmin.register Address do
     column :owner do |id|
       case id.addressable_type
         # Clugy way to establish if address owner exists and who or what it is
+        # There IS a better way, just need time to find it.
         when 'Company' 
           begin
             owner = Company.find("#{id.addressable_id}")

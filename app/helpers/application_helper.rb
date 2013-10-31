@@ -73,9 +73,6 @@ module ApplicationHelper
     links.to_html
   end
 
-  
-
-
 end
 
 
