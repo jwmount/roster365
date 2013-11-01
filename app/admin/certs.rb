@@ -31,13 +31,17 @@ ActiveAdmin.register Cert do
       @holder = Person.where("id = ?",cert.certifiable_id)
       @holder.empty? ? 'Empty' : @holder[0].display_name
     end
+
     column :type do |cert|
       cert.certifiable_type
     end
+
     column :expires_on
+
     column :permanent do |cert|
       status_tag (cert.permanent ? "YES" : "No"), (cert.permanent ? :ok : :error)            
     end
+
     column :active do |cert|
       status_tag (cert.active ? "YES" : "No"), (cert.active ? :ok : :error)            
     end

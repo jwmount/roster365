@@ -1,7 +1,7 @@
 ActiveAdmin.register AdminUser do
 
   menu parent: "System Administration"
-  
+
   filter :email
   
   index do

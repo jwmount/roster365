@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.boolean  "active",           default: false,                 null: false
     t.string   "MYOB_number",      default: "00000",               null: false
     t.string   "line_of_business", default: "",                    null: false
+    t.string   "url",              default: "",                    null: false
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
   end

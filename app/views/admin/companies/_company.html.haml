@@ -1,2 +1,4 @@
-%h4= "#{company.display_name}"
-= render company.people
+%h4= link_to "#{company.display_name}", admin_company_path( company ), target: '_blank'
+%p.small= "#{company.line_of_business}"
+%p.small
+  = link_to "#{company.url}", href="http://#{company.url}", target: '_blank'

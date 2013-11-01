@@ -47,15 +47,13 @@ ActiveAdmin.register Company do
     selectable_column
 
     column "Name (click for details)", :sortable => 'name' do |company|
-      h5 link_to company.name, admin_company_path(company)
-      if company.identifiers.count > 0
-        @identifiers = company.identifiers
-        render @identifiers 
-      end
+      #h5 link_to company.name, admin_company_path(company)
+      render company
       if company.certs.count > 0
         @certs = company.certs
         render @certs
       end
+      #render :partial => "companies/line_of_business", :locals => { :line_of_business => line_of_business }
     end
 
     column :projects do |company|
@@ -107,6 +105,8 @@ ActiveAdmin.register Company do
               :placeholder => "Company name..."
       f.input :line_of_business,
               :hint => "Short statement of company's market focus."
+      f.input :url,
+              :hint => "Web site or URL"
       f.input :MYOB_number,  
               :as => :string, 
               :hint => "Roster365 unique 5 digit account number, or '00000'.",
@@ -120,29 +120,6 @@ ActiveAdmin.register Company do
               :placeholder => 'Days'
       f.input :active, :as => :radio
     end
-
-=begin  doing this based on belongs_to :company statement in Equipment now.
-    f.inputs "Equipment" do
-      if company.equipment.all.empty?
-        "NONE.  Use the Equipment menu to identify it."
-      else
-        f.input :equipment, :as => :select, 
-                            :collection => company.equipment.alphabetically.all.map {|u| [u.name, u.id]}, 
-                            :include_blank => false
-      end
-    end
-
-  #Assign people to companies using People, this way is confusing.
-    f.inputs "People" do
-      if company.people.empty?
-        "NOTE:  Company has no people.  Use the People menu to identify them."
-      else
-        f.input :people, :as => :select, 
-                           :collection => Person.alphabetically.all.map {|u| [u.full_name, u.id]}, 
-                           :include_blank => false
-      end
-    end
-=end
 
     f.inputs "Addresses" do
       f.has_many :addresses do |a|
@@ -188,6 +165,7 @@ ActiveAdmin.register Company do
     attributes_table do
       row :name
       row :line_of_business
+      row :url
       row :credit_terms
       row("PO_required") { status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error) }        
       row("active") { status_tag (company.active ? "YES" : "No"), (company.active ? :ok : :error) }

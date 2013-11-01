@@ -63,7 +63,10 @@ companies_list = [
   ["East Bay Sanitary Co., Inc.", 30, false, false, "00000", "Cartage, Waste Disposal & Removing Service"],
   ["Vallejo Garbage Service", 30, false, false, "00000", "Cartages Service"],
   ["Fred Haines & Company", 30, false, false, "00000", "Cartage Service"],
-  ["Specialty Solid Waste & Recycling", 30, false, false, "00000", "Waste Handling, Cartage, Waste Disposal Service"]
+  ["Specialty Solid Waste & Recycling", 30, false, false, "00000", "Waste Handling, Cartage, Waste Disposal Service"],
+  ["Tight Access Excavation", 30, false, false, "00000", "Residential - Commercial
+General Engineering Contractor"]
+
   ]
 companies_list.each do |c| #name, credit_terms, PO_required, active, MYOB_number, lob|
   Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], MYOB_number: c[4], line_of_business: c[5])
@@ -336,3 +339,9 @@ end
   Tip.create!( :name => t[0], :company_id => t[1], :fee => t[2], :fire_ant_risk_level => t[3]  )
 end
 
+=begin
+@company = Company.where(name: "Tight Access Excavation")
+@address.create!( addressable_type: 'Company', addressable_id: @company, 
+  street_address: "6504 Orchard Station Road", city: "Sebastopol", state: "CA", postal_code: "95472" )
+@address.save!
+=end
