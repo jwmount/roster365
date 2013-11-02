@@ -28,7 +28,7 @@ ActiveAdmin.register AdminUser do
   
   show :title => :email do
     attributes_table do
-      row :email
+      row ("Email") { mail_to admin_user.email }
       row :reset_password_sent_at
       row :sign_in_count
       row :last_sign_in_at
