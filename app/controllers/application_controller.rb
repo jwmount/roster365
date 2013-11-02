@@ -35,7 +35,6 @@ class ApplicationController < ActionController::Base
 
 end
 
-
 class HomeController < ActionController::Base
 
   def how

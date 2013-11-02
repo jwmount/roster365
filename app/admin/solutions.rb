@@ -1,10 +1,4 @@
 require 'debugger'
-
-# SolutionTips is HABTM join, action_on_permitted_parameters allows this to work 
-# Not entirely clear on this!  Also this probably applies to all models, take care.
-# Reference: http://api.rubyonrails.org/classes/ActionController/Parameters.html 
-#ActionController::Parameters.action_on_unpermitted_parameters = :raise
-
 ActiveAdmin.register Solution do
    
   menu label: "Solutions", parent: "Quote"

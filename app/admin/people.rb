@@ -1,5 +1,4 @@
 #require 'debugger'
-ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
 ActiveAdmin.register Person do
 
