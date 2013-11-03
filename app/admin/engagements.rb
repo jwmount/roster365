@@ -120,6 +120,7 @@ ActiveAdmin.register Engagement do
               :hint => "Schedule this person will be on."
               
       f.input :docket_number,
+              :required=>true, 
               :hint => "Docket number from docket provided by driver. GET THIS FROM THE DRIVER AS EARLY IN THE DAY AS POSSIBLE.",
               :placeholder => "00000"
     end

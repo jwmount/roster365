@@ -39,6 +39,10 @@ ActiveAdmin.register Docket do
       link_to docket.number, admin_engagement_docket_path( docket.engagement, docket )
     end
     
+    column "Gross($)" do |docket|
+      docket.gross_amount
+    end
+
     column :date_worked
     
     column :person, 
@@ -76,8 +80,8 @@ ActiveAdmin.register Docket do
               :hint => "Who is submitting this docket, or payee."
       
       f.input :date_worked, 
-              :input_html => {:disabled => true },
-              :hint => "When the work was performed."
+              :as => :date_picker,
+              :hint => "Day the work was performed."
               
       f.input :engagement,
               :required=>true, 
@@ -130,6 +134,7 @@ ActiveAdmin.register Docket do
    h3 "Booking Number: #{docket.number}"
     attributes_table do
       row :number
+      row :gross_amount
       row ("Engagement For (Job)") { docket.engagement.schedule.job.name }
       row ("Subcontractor") {docket.person}
     #  "2010-07-27".to_date              # => Tue, 27 Jul 2010

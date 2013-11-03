@@ -4,7 +4,9 @@ class Docket < ActiveRecord::Base
   belongs_to :engagement
   
   validates_uniqueness_of :number
-  
+  validates_presence_of :number
+  validate :engagement, presence => true
+
   # audited, not on Rails 4 yet
 
   # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
@@ -23,6 +25,8 @@ class Docket < ActiveRecord::Base
     end
   end
   
-  validate :engagement, presence => true
+  def gross_amount
+    a_inv_pay + b_inv_pay + supplier_inv_pay
+  end
 
 end
