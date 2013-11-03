@@ -1,10 +1,10 @@
 #require 'debugger'
 ActiveAdmin.register Project do
 
-  menu :parent => "Company"
   
-  #  Next statement causes nesting correctly but cannot list all projects!  Put that in Dashboard(s)
+  # NOT OPTIONAL, effect is to scope projects to companies.
   belongs_to :company
+
 
   scope :all, :default => true 
 #  scope :active, -> { where(active: true) }

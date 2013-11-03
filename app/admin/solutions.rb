@@ -1,9 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Solution do
    
-  menu label: "Solutions", parent: "Quote"
   belongs_to :quote
-    navigation_menu :quote
 #
 # C A L L  B A C K S
 #

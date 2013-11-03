@@ -170,7 +170,6 @@ ActiveAdmin.setup do |config|
   #      menu.add label: "mygreatwebsite", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
   #   end
   #  end
-
   # == Download Links
   #
   # You can disable download links on resource listing pages,

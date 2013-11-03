@@ -6,9 +6,6 @@ require 'active_support/all'
 
 ActiveAdmin.register Engagement do
 
-  navigation_menu :operations_navigation
-  
-  menu parent: "Schedule"
 
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
@@ -206,7 +203,16 @@ ActiveAdmin.register Engagement do
 # P U S H B U T T O N S
 #
   action_item :only => [:edit, :show] do
-    link_to "Create Docket", admin_engagement_dockets_path( engagement )  
+    link_to "Create Docket",    
+       new_admin_company_project_quote_solution_job_schedule_engagement_docket_path( 
+            engagement.schedule.job.solution.quote.project.company, 
+            engagement.schedule.job.solution.quote.project, 
+            engagement.schedule.job.solution.quote, 
+            engagement.schedule.job.solution, 
+            engagement.schedule.job, 
+            engagement.schedule, 
+            engagement 
+         )  
   end
 
 

@@ -11,7 +11,6 @@ ActiveAdmin.register Job do
   menu label: "Jobs", parent: "Solution"
 
   belongs_to :solution
-    navigation_menu :solution
 #
 # C A L L  B A C K S
 #

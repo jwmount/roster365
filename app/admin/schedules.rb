@@ -5,13 +5,11 @@ require 'active_support/all'
 
 ActiveAdmin.register Schedule do
 
-  menu label: "Schedules", parent: "Job"
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Job.all.empty?
   #}
   belongs_to :job
-    navigation_menu :job
   
   filter :job
   filter :day, :label => "Date Range", :as => :date_range
