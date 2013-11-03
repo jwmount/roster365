@@ -18,7 +18,7 @@ ActiveAdmin.register Quote do
     quote.fire_ants_verified_by = current_user.email
     # Precondition for a new Quote -- nobody home?  Cannot complete :quote_to.  
     if quote.project.company.people.empty?
-      flash[:warning] = "WARNING:  #{quote.project.company.name} has no staff!  You will not be able to complete a quote. " + 
+      flash[:warning] = "WARNING:  #{quote.project.company.name} has no staff!  You will not be able to complete a quote " + 
         "if no one's there to give it to.  "
     end
   end
@@ -26,7 +26,7 @@ ActiveAdmin.register Quote do
 =begin  
      batch_action :flag do |selection|
       Company.find(selection).each do |company|
-        company.name = 'XXX'
+        company.name = 'XYZ'
         company.save!
       end
     end
@@ -36,7 +36,7 @@ ActiveAdmin.register Quote do
     selectable_column
 
     column :name, :sortable => 'name' do |quote|
-      link_to quote.name, admin_project_quote_path( project, quote )
+      link_to quote.name, admin_company_project_quote_path( quote.project.company, project, quote )
     end
 
     column "Project", :sortable => 'name' do |quote|
@@ -195,7 +195,7 @@ ActiveAdmin.register Quote do
     ul
       status_tag('Now you can:')
       hr
-      li link_to 'Prepare Solutions',   admin_quote_solutions_path(      quote )   
+      li link_to 'Prepare Solutions',   admin_company_project_quote_solutions_path( quote.project.company, quote.project, quote )   
       hr  
       li link_to "Return to #{quote.project.name} Project",  
                                         admin_company_project_path(      quote.project.company, quote.project )

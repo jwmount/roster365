@@ -8,5 +8,19 @@ Roster365::Application.routes.draw do
   # set namespace root in active_admin.rb
   root :to => "companies#index"
 
-
+  # Generate full path methods not done automatically to support bread crumbs all the way down and back up.
+  namespace :admin do
+    resources :companies do
+      resources :projects do
+        resources :quotes do # OK to here
+          resources :solutions do
+            resources :schedules do
+              resources :enagements
+            end
+          end
+        end
+      end
+    end
+  end
+ 
 end #routes
