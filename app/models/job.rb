@@ -4,7 +4,6 @@ class Job < ActiveRecord::Base
   
   belongs_to :solution
 
-  has_one :company, :dependent => :destroy
   has_many :dockets
   has_many :schedules, :dependent => :destroy
 

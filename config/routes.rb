@@ -12,10 +12,12 @@ Roster365::Application.routes.draw do
   namespace :admin do
     resources :companies do
       resources :projects do
-        resources :quotes do # OK to here
-          resources :solutions do
-            resources :schedules do
-              resources :enagements
+        resources :quotes do 
+          resources :solutions do #ok
+            resources :jobs do
+              resources :schedules do
+                resources :enagements
+              end
             end
           end
         end

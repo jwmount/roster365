@@ -37,7 +37,8 @@ ActiveAdmin.register Solution do
     selectable_column
 
     column :name, :sortable => 'name' do |solution|
-      link_to "Solution #{solution.name}", edit_admin_quote_solution_path( solution.quote, solution )
+      link_to "Solution #{solution.name}", 
+          edit_admin_company_project_quote_solution_path( solution.quote.project.company, solution.quote.project,solution.quote, solution )
     end
 
     column :solution_type
@@ -316,9 +317,11 @@ form do |f|
       status_tag('Now you can:')
       hr
       if solution.has_final_approval?
-        li link_to 'Prepare Jobs', admin_solution_jobs_path( solution )   
+        li link_to 'Prepare Jobs', 
+           admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote, solution )   
       else
-        li link_to 'Prepare Jobs (requires final approval)', admin_quote_solution_path( solution.quote, solution )   
+        li link_to 'Prepare Jobs (requires final approval)', 
+           admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote, solution )   
         flash[:warning] = "Solution MUST be approved before Jobs can be created."
       end
       hr
