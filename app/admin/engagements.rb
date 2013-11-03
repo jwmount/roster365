@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 #require 'active_support/core_ext/object/include_blank.rb'
 #require 'active_support/core_ext/string/filters'
 require 'active_support/all'
@@ -50,7 +50,17 @@ ActiveAdmin.register Engagement do
     #end
 
     column "Engagement Day", :sortable => :id do |engagement|
-      link_to engagement.schedule.day.strftime("%d %b, %Y"), admin_schedule_engagement_path( engagement.schedule, engagement )
+#      link_to engagement.schedule.day.strftime("%d %b, %Y"), admin_schedule_engagement_path( engagement.schedule, engagement )
+      link_to engagement.schedule.day.strftime("%d %b, %Y"), 
+           admin_company_project_quote_solution_job_schedule_engagement_path( 
+            engagement.schedule.job.solution.quote.project.company, 
+            engagement.schedule.job.solution.quote.project, 
+            engagement.schedule.job.solution.quote, 
+            engagement.schedule.job.solution, 
+            engagement.schedule.job, 
+            engagement.schedule, 
+            engagement 
+            )
     end
     selectable_column
 
@@ -168,10 +178,18 @@ ActiveAdmin.register Engagement do
     ul
       status_tag('Now you can:')
       hr
-      li link_to "New Engagement", new_admin_schedule_engagement_path( engagement.schedule )
-      li link_to "Engagements", admin_schedule_engagements_path( engagement.schedule )
+      li link_to "Make a new Engagement", 
+           admin_company_project_quote_solution_job_schedule_engagement_path( 
+            engagement.schedule.job.solution.quote.project.company, 
+            engagement.schedule.job.solution.quote.project, 
+            engagement.schedule.job.solution.quote, 
+            engagement.schedule.job.solution, 
+            engagement.schedule.job, 
+            engagement.schedule, 
+            engagement 
+            )
       br
-      status_tag('Other things you can do:')
+      status_tag('REMOVE THESEOther things you can do:')
       hr
       li link_to "Schedules",   admin_job_schedules_path(        engagement.schedule.job )
       li link_to "Jobs",        admin_solution_jobs_path(        engagement.schedule.job.solution )

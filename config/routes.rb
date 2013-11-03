@@ -16,7 +16,7 @@ Roster365::Application.routes.draw do
           resources :solutions do #ok
             resources :jobs do
               resources :schedules do
-                resources :enagements
+                resources :engagements
               end
             end
           end

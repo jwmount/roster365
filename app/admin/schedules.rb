@@ -24,7 +24,14 @@ ActiveAdmin.register Schedule do
     selectable_column
 
     column "Schedule for" do |schedule|
-      link_to schedule.day.strftime("%a,%d%b"), edit_admin_job_schedule_path(schedule.job, schedule)
+      link_to schedule.day.strftime("%a,%d%b"), 
+        edit_admin_company_project_quote_solution_job_schedule_path(
+                                    schedule.job.solution.quote.project.company,
+                                    schedule.job.solution.quote.project,
+                                    schedule.job.solution.quote,
+                                    schedule.job.solution,
+                                    schedule.job,
+                                    schedule)
     end
 
     column "Job" do |schedule|
@@ -195,7 +202,14 @@ ActiveAdmin.register Schedule do
     ul
       status_tag('Now you can:')
       br
-      li link_to 'Prepare Engagements', admin_schedule_engagements_path( schedule )   
+      li link_to 'Prepare Engagements', #admin_schedule_engagements_path( schedule )   
+         admin_company_project_quote_solution_job_schedule_engagements_path(
+                                    schedule.job.solution.quote.project.company,
+                                    schedule.job.solution.quote.project,
+                                    schedule.job.solution.quote,
+                                    schedule.job.solution,
+                                    schedule.job,
+                                    schedule)
       hr
       status_tag('Other things you can see:')
       br      

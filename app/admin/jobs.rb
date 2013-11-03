@@ -41,7 +41,7 @@ ActiveAdmin.register Job do
     # Currently its not fatal if no rep is on Project or Quote.  Warnings are given separately.
     column :job_name, :sortable => 'name' do |job|
       h5 link_to job.name, 
-          edit_admin_solution_job_path( job.solution, job )
+          edit_admin_company_project_quote_solution_job_path( job.solution.quote.project.company, job.solution.quote.project, job.solution.quote, job.solution, job )
       begin
         @prep = Person.find(job.solution.quote.project.rep_id)
         render @prep if @prep
@@ -133,7 +133,8 @@ ActiveAdmin.register Job do
     ul
       status_tag('Now you can:')
       hr
-      li link_to "Prepare Schedules", admin_job_schedules_path( job )
+      #li link_to "Prepare Schedules", admin_job_schedules_path( job )
+      li link_to "Prepare Schedules", admin_company_project_quote_solution_job_schedules_path( job.solution.quote.project.company, job.solution.quote.project, job.solution.quote, job.solution, job )
       hr
       li link_to "Jobs",        admin_solution_jobs_path(        job.solution )
       li link_to "Solutions",   admin_quote_solutions_path(      job.solution.quote )

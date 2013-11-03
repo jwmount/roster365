@@ -197,11 +197,6 @@ ActiveAdmin.register Quote do
       hr
       li link_to 'Prepare Solutions',   admin_company_project_quote_solutions_path( quote.project.company, quote.project, quote )   
       hr  
-      li link_to "Return to #{quote.project.name} Project",  
-                                        admin_company_project_path(      quote.project.company, quote.project )
-      li link_to "Return to #{quote.project.company.name}",    
-                                        admin_company_path(              quote.project.company)
-      hr
       li link_to "Review Quotes",       admin_project_quotes_path(       quote.project )
       li link_to "Review Projects",     admin_company_projects_path(     quote.project.company )
       li link_to "Review Companies",    admin_companies_path
