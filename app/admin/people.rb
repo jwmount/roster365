@@ -152,7 +152,8 @@ ActiveAdmin.register Person do
     panel "Name #{person.full_name}, #{person.title}" do
       attributes_table_for(person) do
         row :company
-        row :address
+        row ("Address") { render person.addresses }
+        row ("Rollodex") { render person.identifiers }
         row("active") { status_tag (person.active ? "YES" : "No"), (person.active ? :ok : :error) }
       end
     end
@@ -186,23 +187,6 @@ ActiveAdmin.register Person do
       end
     end
 
-    panel "Address" do
-      attributes_table_for person do
-        row :address
-      end  
-    end
-
-    panel 'Rollodex' do
-      attributes_table_for(person) do
-        person.identifiers.order(:rank).each do |item|
-          if item.name.include?("email")
-            row("#{item.name}") {mail_to "#{item.value}"}
-          else
-            row("#{item.name}") {item.value} 
-          end
-        end
-      end
-    end
     active_admin_comments
   end
 

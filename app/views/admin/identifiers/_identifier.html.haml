@@ -1,4 +1,6 @@
--if "#{identifier.name}" == "Email"
-  = mail_to "#{identifier.value}"
+-if identifier.name == "Email"
+  = identifier.name
+  = mail_to identifier.value
 -else
-  = "#{identifier.name}: #{identifier.value}"
+  = identifier.name + ':' +  identifier.value
+%p

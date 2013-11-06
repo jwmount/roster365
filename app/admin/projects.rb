@@ -136,9 +136,8 @@ ActiveAdmin.register Project do
         row :project_start_on
         row("Project Rep") do |project|   #NOTE:  not DRY, same as for :index column.
           @rep  = Person.find project.rep_id
-          render :partial => 'person', :locals => {:rep => @rep }
-          @identifiers = @rep.identifiers.order(:rank)
-          render @identifiers
+          render @rep 
+          render @rep.identifiers
         end
 
       row "Work Site" do |project|

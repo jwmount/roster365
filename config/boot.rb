@@ -5,6 +5,5 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
 require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
-ENV['VERSION'] = "1.2.20. &copy Copyright Venue Software Corporation, 2010 - 2013. "
-ENV['LICENSEE'] = 'Valley Farm Transport'
+ENV['VERSION'] = "1.2.23. &copy Copyright Venue Software Corporation, 2010 - 2013. "
 LICENSEE = 'Valley Farm Transport'

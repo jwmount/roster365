@@ -24,7 +24,7 @@ ActiveAdmin.register Certificate do
   end
 
   index do
-    column :name do |certificate|
+    column :name , :sortable => 'name' do |certificate|
       link_to certificate.name, admin_certificate_path(certificate)
     end
     column :description

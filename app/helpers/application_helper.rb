@@ -50,7 +50,7 @@ module ApplicationHelper
   # Get a list of people whose title is 'Rep' at LICENSEE company.
   # Person.alphabetically.where({:company_id => Company.where({:name => "#{ENV['LICENSEE']}"})} && {:title => 'Rep'})
   def list_of_reps
-    company = Company.where({:name=>"#{ENV['LICENSEE']}"})
+    company = Company.where({ :name=>"#{LICENSEE}" })
     reps = company[0].people.where({:title=>"Rep"})
   end
     
