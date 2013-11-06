@@ -68,7 +68,7 @@ ActiveAdmin.register Company do
       if company.equipment.size > 0 
         link_to "#{company.equipment.count.to_s} -- List", admin_company_equipment_index_path( company )
       else
-        link_to "Assign", new_admin_company_equipment_path(company)
+        link_to "New equipment", new_admin_company_equipment_path(company)
       end
     end
     
@@ -164,7 +164,7 @@ ActiveAdmin.register Company do
     attributes_table do
       row :name
       row :line_of_business
-      row :url
+      row ("Web Site") { link_to "#{company.url}", href="http://#{company.url}", target: '_blank' }
       row :credit_terms
       row("PO_required") { status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error) }        
       row("active") { status_tag (company.active ? "YES" : "No"), (company.active ? :ok : :error) }
