@@ -5,11 +5,11 @@ one:
   credit_terms: 1
   PO_required: false
   active: false
-  MYOB_number: 1
+  bookeeping_number: 1
 
 two:
   name: MyString
   credit_terms: 1
   PO_required: false
   active: false
-  MYOB_number: 1
+  bookeeping_number: 1

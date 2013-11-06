@@ -21,7 +21,7 @@ of richly specified Company associations.  These are seed'ed so preserved.
 Company.create!(:name                        => 'American Debris Box Service Inc.',
                 :active                      => false,
                 :credit_terms                => 'no', 
-                :MYOB_number                 => '00000', 
+                :bookeeping_number                 => '00000', 
                 :PO_required                 => false,
                 :addresses_attributes        => [
                            :addressable_type => 'Company', 

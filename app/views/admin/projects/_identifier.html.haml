@@ -1,2 +1,4 @@
-= "#{identifier.name}: #{identifier.value}"
-%p
+-if "#{identifier.name}" == 'Email'
+  = mail_to "#{identifier.value}"
+-else
+  = "#{identifier.name}: #{identifier.value}"

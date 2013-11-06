@@ -24,7 +24,7 @@ ActiveAdmin.register Company do
   filter :projects
   filter :people
   filter :equipment
-  filter :MYOB_number
+  filter :bookeeping_number
   
   sidebar "Company Details", only: [:show, :edit] do 
     ul do
@@ -82,7 +82,7 @@ ActiveAdmin.register Company do
     end
     
     column "Bookkeeping No." do |company|
-      company.MYOB_number
+      company.bookeeping_number
     end
 
     column :credit_terms
@@ -107,10 +107,10 @@ ActiveAdmin.register Company do
               :hint => "Short statement of company's market focus."
       f.input :url,
               :hint => "Web site or URL"
-      f.input :MYOB_number,  
+      f.input :bookeeping_number,  
               :as => :string, 
               :hint => "Roster365 unique 5 digit account number, or '00000'.",
-              :placeholder => "MYOB number"
+              :placeholder => "bookeeping_number number"
       f.input :PO_required,  
               :as => :radio, 
               :label => 'Purchase Order Required'
@@ -169,7 +169,7 @@ ActiveAdmin.register Company do
       row :credit_terms
       row("PO_required") { status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error) }        
       row("active") { status_tag (company.active ? "YES" : "No"), (company.active ? :ok : :error) }
-      row :MYOB_number
+      row :bookeeping_number
       row ("People") {render company.people}
       row ("Projects") { render company.projects}
       row ("Equipment") { render company.equipment}

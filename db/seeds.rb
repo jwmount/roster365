@@ -25,7 +25,11 @@ end
 certificate_list = [
   [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, false, true ],
   [ 'ISO 9000', 'May be required.', false, true, false, false, true ],
-  [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true, true ]
+  [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true, true ],
+  [ 'CA DOT No.', 'As displayed.', false, false, true, false, false ],
+  [ 'US DOT No.', 'As displayed.', false, false, true, false, false ],
+  [ 'Registration', 'License plate or rego.', false, false, true, false, false ],
+  [ 'VIN', 'By inspection.', false, false, true, false, false ]
 ]
 certificate_list.each do |name, description, for_person, for_company, for_equipment, for_location, active |
   Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
@@ -48,7 +52,7 @@ end
 # First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
 # Two methods here, names list and completely specified attributes.
 companies_list = [
-  ["#{ENV['LICENSEE']}", 30, false, false, "00000", "Roster365 Licensee"], 
+  ["#{ENV['LICENSEE']}", 30, false, false, "00000", "Farm Transport, Software Licensee"], 
   ["American Debris Box Service Inc.", 30, false, false, "00000", "Containers delivered and removed"],
   ["Lawson Drayage, Inc.", 30, false, false, "00000", "Cartage, Local Houl Freight Carrying Service"],
   ["Waste Management, Inc.", 30, false, false, "00000", "Waste Disposal & Removal Service"],
@@ -64,12 +68,11 @@ companies_list = [
   ["Vallejo Garbage Service", 30, false, false, "00000", "Cartages Service"],
   ["Fred Haines & Company", 30, false, false, "00000", "Cartage Service"],
   ["Specialty Solid Waste & Recycling", 30, false, false, "00000", "Waste Handling, Cartage, Waste Disposal Service"],
-  ["Tight Access Excavation", 30, false, false, "00000", "Residential - Commercial
-General Engineering Contractor"]
-
+  ["Tight Access Excavation", 30, false, false, "00000", "Residential - Commercial"],
+  ["Hazel Construction", 30, false, false, "00000", "Residential Construction"],
   ]
-companies_list.each do |c| #name, credit_terms, PO_required, active, MYOB_number, lob|
-  Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], MYOB_number: c[4], line_of_business: c[5])
+companies_list.each do |c| #name, credit_terms, PO_required, active, bookeeping_number, lob|
+  Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], bookeeping_number: c[4], line_of_business: c[5])
 end
   
 # now put some people in each company
