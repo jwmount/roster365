@@ -57,8 +57,8 @@ ActiveAdmin.register Company do
     end
 
     column :projects do |company|
-      if company.projects.size > 0
-        render company.projects
+      if company.projects.count > 0
+        link_to "#{company.projects.count.to_s} -- List", admin_company_projects_path( company )
       else
         link_to "New Project", new_admin_company_project_path( company )
       end
@@ -66,7 +66,7 @@ ActiveAdmin.register Company do
 
     column :equipment do |company|
       if company.equipment.size > 0 
-        render company.equipment
+        link_to "#{company.equipment.count.to_s} -- List", admin_company_equipment_index_path( company )
       else
         link_to "Assign", new_admin_company_equipment_path(company)
       end
@@ -74,10 +74,9 @@ ActiveAdmin.register Company do
     
     column :people do |company|
       if company.people.count > 0
-        @people = company.people
-        render @people
+        link_to "#{company.people.count.to_s} -- List", admin_company_people_path( company )
       else
-        link_to "Assign", new_admin_company_person_path(company)
+        link_to "New person", new_admin_company_person_path(company)
       end
     end
     
