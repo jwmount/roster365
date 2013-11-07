@@ -19,12 +19,12 @@ class Quote < ActiveRecord::Base
 #
 # P O L Y M O R P H I C  A S S O C I A T I O N S
 #
-  has_many :requirements,
-           :as => :requireable,
-           :autosave => true,
-           :dependent => :destroy
+#  has_many :requirements,
+#          :as => :requireable,
+#          :autosave => true,
+#           :dependent => :destroy
 # polymorpth classes are updated directly from the parent            
-  accepts_nested_attributes_for :requirements
+#  accepts_nested_attributes_for :requirements
   
 
   # Do not :scope => :project, this will cause arel to ROLLBACK with 'Cannot visit Project'

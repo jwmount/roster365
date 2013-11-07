@@ -62,32 +62,10 @@ ActiveAdmin.register Address do
     column :map_reference
   end
   
-  form do |f|
-    error_panel f
-
-    f.inputs "People" do
-      f.input :addressable, magic_select_options(Person.all)
-    end
-    f.inputs  "Companies" do
-      f.input :addressable, magic_select_options(Company.all)
-    end
-    f.inputs "Address" do
-      f.input :street_address,
-              :placeholder => "Street"
-      f.input :city,
-              :placeholder => "City"
-      f.input :state, magic_select_options(%w[QLD NSW VIC NT ICT SA WA], r=true)
-      f.input :post_code,
-              :placeholder => "Post or zip code"
-      f.input :map_reference,
-              :placeholder => "map coordinates"
-    end
-    f.buttons
-  end
   
-  show :title => :display_name do
-    render :partial => "show"
-  end
+ # show :title => :display_name do
+ #   render :partial => "show"
+ # end
 
 #  show :title => 'Address Details' do |address|
 #    h3 address.addressable.name
@@ -105,19 +83,6 @@ ActiveAdmin.register Address do
     link_to 'Company Address', edit_admin_addresses_path(address.id) 
   end
 
-controller do
-    def permitted_params
-      params.permit(:address => [ :addressable_id, 
-                                  :addressable_type, 
-                                  :state, 
-                                  :street_address, 
-                                  :city,
-                                  :post_code, 
-                                  :map_reference
-                                ]
-                    )
-    end
-  end
 
 end
 

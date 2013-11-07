@@ -91,7 +91,8 @@ ActiveAdmin.register Job do
               
       f.input :finished_on, 
               :as => :date_picker,
-              :required => true
+              :required => true,
+              :hint => "Expected finish date.  Quote estimate was #{job.solution.quote.duration} days."
     end
     f.buttons
   end

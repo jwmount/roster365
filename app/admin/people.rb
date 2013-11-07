@@ -154,7 +154,7 @@ ActiveAdmin.register Person do
         row :company
         row ("Address") { render person.addresses }
         row ("Rollodex") { render person.identifiers }
-        row("active") { status_tag (person.active ? "YES" : "No"), (person.active ? :ok : :error) }
+        row ("active") { status_tag (person.active ? "YES" : "No"), (person.active ? :ok : :error) }
       end
     end
 

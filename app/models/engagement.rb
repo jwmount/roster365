@@ -58,8 +58,10 @@ class Engagement < ActiveRecord::Base
     self.schedule.day.strftime("%H:%M")
   end
 
-  def equipment
-    self.schedule.job.solution.equipment.name    
+  # scope of this is supposed to be drivers from companies that have right equipment.
+  # 'Right' equipment means units of right kind with all or most?  required certificates.
+  def people_with_equipment_required
+    Person.alphabetically.all.map {|u| [u.display_name, u.id]}
   end
     
 

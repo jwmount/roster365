@@ -126,7 +126,7 @@ form do |f|
       f.input :unit_of_material, as:         :select, 
                                  label:      "Unit of Material", 
                                  hint:       "Unit that is basis for our price.", 
-                                 collection: %w[m3 tonne 'hourly hire' loads]
+                                 collection: %w[m3 tonne 'hourly hire' loads pounds]
 
       f.input :total_material, hint:  "How much material will be moved in this solution."
 
@@ -363,10 +363,10 @@ form do |f|
   end
 
   member_action :costing, :method => :get do
-    @solution = Solution.find(params[:id])
+    solution = Solution.find(params[:id])
     flash[:notice] = "Costing was popped (simulated, not really computed)."
     flash[:notice] << " Price was $1250.00."
-    redirect_to admin_quote_solutions_path(quote, @solution ) 
+    redirect_to admin_quote_solutions_path(solution.quote, solution ) 
   end
 
   action_item :only => [:show] do

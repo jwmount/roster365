@@ -49,10 +49,10 @@ ActiveAdmin.register Quote do
     
     column :duration
 
-    column "Requirements" do |quote|
-      @requirements = quote.requirements
-      render @requirements unless @requirements.nil?
-    end
+#    column "Requirements" do |quote|
+#      @requirements = quote.requirements
+#      render @requirements unless @requirements.nil?
+#    end
 
   end
  
@@ -99,13 +99,14 @@ ActiveAdmin.register Quote do
               :hint => "Council with jurisdiction, if known."
     end
 
+=begin
     f.inputs "Requirements" do 
       f.has_many :requirements do |r|
         r.input :certificate
         r.input :description
       end
     end
-
+=end
     f.buttons :commit
   end
   
@@ -159,6 +160,7 @@ ActiveAdmin.register Quote do
       end
     end
 
+=begin
     panel :Requirements do
       attributes_table_for quote do
         row "Requirements" do |quote|
@@ -171,6 +173,7 @@ ActiveAdmin.register Quote do
         end
       end
     end
+=end
   
   end # show
 

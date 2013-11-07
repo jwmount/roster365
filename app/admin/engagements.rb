@@ -112,9 +112,9 @@ ActiveAdmin.register Engagement do
       f.input :person, 
               :required=>true, 
               :as => :select, 
-              :collection => Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
+              :collection => engagement.people_with_equipment_required, #Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
               :include_blank => false,
-              :hint => "Person you are engaging to work.  Must work for vendor with required equipment."
+              :hint => "Person you are engaging to work.  Must work for company with #{engagement.schedule.job.solution.equipment_name.pluralize}."
                         
       f.input :schedule, 
               :hint => "Schedule this person will be on."
@@ -203,6 +203,7 @@ ActiveAdmin.register Engagement do
 #
 # P U S H B U T T O N S
 #
+
   action_item :only => [:edit, :show] do
     link_to "Create Docket",    
        new_admin_company_project_quote_solution_job_schedule_engagement_docket_path( 

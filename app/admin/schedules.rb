@@ -162,11 +162,11 @@ ActiveAdmin.register Schedule do
               :placeholder => "Date."  
       end      
 
-
-      f.inputs "Number of #{schedule.job.solution.equipment_name}(s) needed" do
+      f.inputs "Number of #{schedule.job.solution.equipment_name.pluralize} needed on site." do
 
         f.input :equipment_units_today,
-                :hint => "Number of #{schedule.job.solution.equipment_name}(s) needed on site this date for job."
+                :placeholder => "#{schedule.equipment_units_today.to_s}",
+                :hint => "Number of #{schedule.job.solution.equipment_name.pluralize} needed on site this date for job."
       end
     f.buttons
   end

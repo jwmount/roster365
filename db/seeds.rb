@@ -1,3 +1,6 @@
+
+
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
@@ -26,7 +29,7 @@ certificate_list = [
   [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, false, true ],
   [ 'ISO 9000', 'May be required.', false, true, false, false, true ],
   [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true, true ],
-  [ 'CA DOT No.', 'As displayed.', false, false, true, false, false ],
+  [ 'CA DOT', 'As displayed.', false, false, true, false, false ],
   [ 'US DOT No.', 'As displayed.', false, false, true, false, false ],
   [ 'Registration', 'License plate or rego.', false, false, true, false, false ],
   [ 'VIN', 'By inspection.', false, false, true, false, false ]
@@ -52,7 +55,7 @@ end
 # First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
 # Two methods here, names list and completely specified attributes.
 companies_list = [
-  ["#{ENV['LICENSEE']}", 30, false, false, "00000", "Farm Transport, Software Licensee"], 
+  ["#{LICENSEE}", 30, false, false, "00000", "Farm Transport, Software Licensee"], 
   ["American Debris Box Service Inc.", 30, false, false, "00000", "Containers delivered and removed"],
   ["Lawson Drayage, Inc.", 30, false, false, "00000", "Cartage, Local Houl Freight Carrying Service"],
   ["Waste Management, Inc.", 30, false, false, "00000", "Waste Disposal & Removal Service"],
@@ -77,7 +80,7 @@ end
   
 # now put some people in each company
 # LICENSEE first
-company_relation = Company.where ({name: "#{ENV['LICENSEE']}"})
+company_relation = Company.where ({name: "#{LICENSEE}"})
 @company = company_relation[0]
 @person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep' )
 @person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.' )
@@ -121,20 +124,12 @@ Identifier.create!( :identifiable_id => @person_3.id, :identifiable_type => 'Per
 Identifier.create!( :identifiable_id => @person_4.id, :identifiable_type => 'Person', :name => "Phone", :value => 'unknown', :rank => 1)
 Identifier.create!( :identifiable_id => @person_4.id, :identifiable_type => 'Person', :name => "Mobile", :value => 'unknown', :rank => 2)
 
-# OPERATIONS models
-# Projects
-#   Quotes
-#     Solutions
-#       Jobs
+
 # Two RISKY values are used here, Project.rep_id and Quote.quote_to_id both set to 1
 project_list = [
   'Project One', 'Project Two', 'Project Three'
 ]
-solution_options = [
-      'Export', 'Import', 'Hourly Hire', 'Load, Cart and Dispose', 'Cart Only', 'Budget Price', 
-      'Machine Hire - Wet', 'Machine Hire - Dry, Uninsured', 'Machine Hire - Dry, Insured',
-      'Free Tip - Private Customers', 'COD, Credit Card Accounts'
-]
+
 project_list.each do |name|
   Project.create!( name: name, company_id: @company_1.id, 
                    rep_id: 1,
@@ -144,10 +139,11 @@ project_list.each do |name|
   project_relation = Project.where( name: name)
   @project = project_relation[0]
 
-    10.times do 
-      Quote.create!( project_id: @project.id, quote_to_id: 1, rep_id: 1, fire_ants_verified_by: 'No One' )
-    end
+  10.times do 
+    Quote.create!( project_id: @project.id, quote_to_id: 1, rep_id: 1, fire_ants_verified_by: 'No One' )
+  end
 end
+
 =begin
 # useful?
 # now retrieve the first quote and create some solutions for it, one for each contract type
