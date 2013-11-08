@@ -99,13 +99,15 @@ ActiveAdmin.register Quote do
               :hint => "Council with jurisdiction, if known."
     end
 
+=begin
+ Requirements on quotes removed because there is no For_quote flag, quotes can't have requirements.
     f.inputs "Requirements" do 
       f.has_many :requirements do |r|
         r.input :certificate
         r.input :description
       end
     end
-
+=end
     f.buttons :commit
   end
   
@@ -159,6 +161,7 @@ ActiveAdmin.register Quote do
       end
     end
 
+=begin
     panel :Requirements do
       attributes_table_for quote do
         row "Requirements" do |quote|
@@ -171,7 +174,8 @@ ActiveAdmin.register Quote do
         end
       end
     end
-  
+=end
+
   end # show
 
 

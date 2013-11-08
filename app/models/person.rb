@@ -10,6 +10,7 @@ class Person < ActiveRecord::Base
   
   has_many :dockets, :dependent => :destroy
   has_many :engagements, :dependent => :destroy
+  has_many :reservations, :dependent => :destroy
   has_and_belongs_to_many :schedules
   
   #

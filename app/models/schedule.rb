@@ -4,9 +4,8 @@ class Schedule < ActiveRecord::Base
 
   belongs_to :job
   has_many :engagements, :dependent => :destroy
-  #has_many :equipment
+  has_many :reservations, :dependent => :destroy
   has_and_belongs_to_many :people
-  #has_and_belongs_to_many :equipment
 
   # audited, not on Rails 4 yet
   after_initialize :set_defaults
@@ -43,7 +42,7 @@ class Schedule < ActiveRecord::Base
 
   def display_name
     name = self.job.nil? ? 'None' : self.job.display_name
-    "#{self.day.to_s(:short)} - #{name}"
+    "#{self.day.strftime("%b %d, %Y")} - #{name}"
   end
 
   # collection of identifiers or numbers for a rep

@@ -53,8 +53,25 @@ ActiveAdmin.register Tip do
         f.input :post_code
         f.input :map_reference
       end
-
     end
+
+    # DRY -- not DRY, people, companies, tips also do this
+    f.inputs do
+      f.has_many :certs do |f|
+        f.input :certificate,
+                :collection => Certificate.where({:for_location => true}),
+                :include_blank => false
+        f.input :active
+        f.input :expires_on, 
+                :as => :date_picker,
+                :hint => "Expiration date."
+        f.input :permanent
+        f.input :serial_number, 
+                :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+      end
+    end
+
+    
     f.buttons
   end
 
@@ -66,11 +83,11 @@ ActiveAdmin.register Tip do
         row :company
         row :fee
         row :fire_ant_risk_level
-        #row (:fire_ant_risk_level) {fire_ant_risk_levels[t.fire_ant_risk_level]}
         row :address do |tip|
-          @address = tip.addresses.limit(1)
+          @address = tip.addresses
           render @address
         end
+        row ("Certifications") { render tip.certs}
       end
     end
   end

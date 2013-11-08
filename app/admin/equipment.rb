@@ -39,18 +39,22 @@ ActiveAdmin.register Equipment do
               :hint => "Select one."
       end                  
       
-      f.inputs do
-        f.has_many :certs do |f|
-          f.input :certificate,
-                  :include_blank => false
-          f.input :expires_on, 
-                  :as => :date_picker,
-                  :hint => "Expiration date.  Leave blank if certification is permanent."
-          f.input :serial_number, :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
-          f.input :permanent
-          f.input :active
-        end
+    # DRY -- not DRY, people, companies, tips also do this
+    f.inputs do
+      f.has_many :certs do |f|
+        f.input :certificate,
+                :collection => Certificate.where({:for_equipment => true}),
+                :include_blank => false
+        f.input :active
+        f.input :expires_on, 
+                :as => :date_picker,
+                :hint => "Expiration date."
+        f.input :permanent
+        f.input :serial_number, 
+                :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
       end
+    end
+
     f.buttons
     end
        
@@ -59,11 +63,10 @@ ActiveAdmin.register Equipment do
     attributes_table do
       rows :name, :company
     end
-
     
     panel 'Certificates' do
       attributes_table_for(equipment) do
-        certs = equipment.certs.all
+        certs = equipment.certs.where({:for_equipment => true})
         certs.each do |cert|
           row("#{cert.certificate.name}") {"#{cert.serial_number}"}
         end

@@ -168,13 +168,6 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.datetime "updated_at",                                        null: false
   end
 
-=begin
-  create_table "equipment_schedules", id:   false, force: true do |t|
-    t.integer "equipment_id",         null: false
-    t.integer "schedule_id",          null: false
-  end
-=end
-
   create_table "identifiers", force: true do |t|
     t.integer  "identifiable_id",                                   null: false
     t.string   "identifiable_type",                                 null: false
@@ -254,7 +247,19 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.integer  "requireable_id"
     t.string   "requireable_type"
     t.integer  "certificate_id"
+    t.boolean  "for_person",    default: false,                 null: false
+    t.boolean  "for_company",   default: false,                 null: false
+    t.boolean  "for_equipment", default: false,                 null: false
+    t.boolean  "for_location",  default: false,                 null: false    
     t.string   "description"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  create_table "reservations", force: true do |t|
+    t.integer  "schedule_id",                                   null: false
+    t.integer  "person_id",                                     null: false
+    t.integer  "equipment_id",                                  null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end

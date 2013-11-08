@@ -22,6 +22,7 @@ user_list.each do |email, role|
 end
 
 # load certificates
+# name, description, for_person, for_company, for_equipment, for_location, active
 certificate_list = [
   [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, false, true ],
   [ 'ISO 9000', 'May be required.', false, true, false, false, true ],
@@ -29,7 +30,10 @@ certificate_list = [
   [ 'CA DOT No.', 'As displayed.', false, false, true, false, false ],
   [ 'US DOT No.', 'As displayed.', false, false, true, false, false ],
   [ 'Registration', 'License plate or rego.', false, false, true, false, false ],
-  [ 'VIN', 'By inspection.', false, false, true, false, false ]
+  [ 'VIN', 'By inspection.', false, false, true, false, false ],
+  [ 'Aluminum body', '', false, false, true, false, false ],
+  [ 'Mud flaps', '', false, false, true, false, false ],
+  [ 'Green Flag', "No toxic or bad stuff", false, false, false, false, true ]]
 ]
 certificate_list.each do |name, description, for_person, for_company, for_equipment, for_location, active |
   Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
@@ -47,12 +51,13 @@ certificate_list.each do |name, description, for_person, for_company, for_equipm
   end
 end
 
+
 # load companies
 # Companies and People
 # First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
 # Two methods here, names list and completely specified attributes.
 companies_list = [
-  ["#{ENV['LICENSEE']}", 30, false, false, "00000", "Farm Transport, Software Licensee"], 
+  [ "#{LICENSEE}", 30, false, false, "00000", "Farm Transport, Software Licensee"], 
   ["American Debris Box Service Inc.", 30, false, false, "00000", "Containers delivered and removed"],
   ["Lawson Drayage, Inc.", 30, false, false, "00000", "Cartage, Local Houl Freight Carrying Service"],
   ["Waste Management, Inc.", 30, false, false, "00000", "Waste Disposal & Removal Service"],
@@ -77,7 +82,7 @@ end
   
 # now put some people in each company
 # LICENSEE first
-company_relation = Company.where ({name: "#{ENV['LICENSEE']}"})
+company_relation = Company.where ({name: "#{LICENSEE}"})
 @company = company_relation[0]
 @person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep' )
 @person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.' )

@@ -35,6 +35,10 @@ ActiveAdmin.register Requirement do
     column "Project" do |req|
       name = req.requireable_type.to_s.camelize.constantize.find(req.requireable_id).name
     end
+    column :for_person
+    column :for_company
+    column :for_equipment
+    column :for_location
     column :description
     column do |req|
     end
