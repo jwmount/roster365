@@ -6,6 +6,7 @@ class Company < ActiveRecord::Base
   has_many :people, :dependent => :destroy
   has_many :equipment, :dependent => :destroy
   has_many :projects, :dependent => :destroy
+  has_many :reservations
   # We do not use :dependent => :destroy as tips survive company owners.  OK?
   has_many :tips
 

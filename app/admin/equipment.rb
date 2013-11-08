@@ -62,8 +62,11 @@ ActiveAdmin.register Equipment do
 
     attributes_table do
       rows :name, :company
+      row ("Certifications") { render equipment.certs}
+
     end
     
+=begin    
     panel 'Certificates' do
       attributes_table_for(equipment) do
         certs = equipment.certs.where({:for_equipment => true})
@@ -72,7 +75,7 @@ ActiveAdmin.register Equipment do
         end
       end
     end
-    
+=end
     active_admin_comments
   end          
 

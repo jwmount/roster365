@@ -114,16 +114,6 @@ ActiveAdmin.register Project do
           a.input :map_reference
         end
     end
-
-    f.inputs "Requirements -- trucks have, people have, sites have" do 
-      f.has_many :requirements do |r|
-        r.input :requireable_type, 
-                :as => :check_boxes,
-                :collection => %w[Company Person Equipment Location]
-        r.input :certificate
-        r.input :description
-      end
-    end
     
     f.buttons
   end

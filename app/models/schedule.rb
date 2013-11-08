@@ -33,7 +33,7 @@ class Schedule < ActiveRecord::Base
 
   def set_defaults
     unless persisted?    
-      day = Date.current + 1.day unless day
+      day = Date.current unless day
     end
   end
 

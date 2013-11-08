@@ -187,10 +187,5 @@ ActiveAdmin.register Company do
 #
 # P U S H  B U T T O N S
 #
-  action_item :only => [:show] do
-    link_to 'Reserve', admin_reservations_path,
-      :popup => ['Place a reservation','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']
-  end
-
 
 end

@@ -31,7 +31,7 @@ certificate_list = [
   [ 'ISO 9000', 'May be required.', false, true, false, false, true ],
   [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true, true ],
   [ 'CA DOT', 'As displayed.', false, false, true, false, false ],
-  [ 'US DOT No.', 'As displayed.', false, false, true, false, false ],
+  [ 'US DOT', 'As displayed.', false, false, true, false, false ],
   [ 'Registration', 'License plate or rego.', false, false, true, false, false ],
   [ 'VIN', 'By inspection.', false, false, true, false, false ],
   [ 'Aluminum body', '', false, false, true, false, false ],
@@ -78,6 +78,7 @@ companies_list = [
   ["Specialty Solid Waste & Recycling", 30, false, false, "00000", "Waste Handling, Cartage, Waste Disposal Service"],
   ["Tight Access Excavation", 30, false, false, "00000", "Residential - Commercial"],
   ["Hazel Construction", 30, false, false, "00000", "Residential Construction"],
+  ["TMT Industries", 30, false, false, "00000", "Residential Construction"]
   ]
 companies_list.each do |c| #name, credit_terms, PO_required, active, bookeeping_number, lob|
   Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], bookeeping_number: c[4], line_of_business: c[5])

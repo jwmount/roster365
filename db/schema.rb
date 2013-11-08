@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
 
   create_table "reservations", force: true do |t|
     t.integer  "schedule_id",                                   null: false
-    t.integer  "person_id",                                     null: false
+    #t.integer  "person_id",                                     null: false
     t.integer  "equipment_id",                                  null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
