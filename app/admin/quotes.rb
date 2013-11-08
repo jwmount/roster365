@@ -99,14 +99,6 @@ ActiveAdmin.register Quote do
               :hint => "Council with jurisdiction, if known."
     end
 
-=begin
-    f.inputs "Requirements" do 
-      f.has_many :requirements do |r|
-        r.input :certificate
-        r.input :description
-      end
-    end
-=end
     f.buttons :commit
   end
   
@@ -160,21 +152,6 @@ ActiveAdmin.register Quote do
       end
     end
 
-=begin
-    panel :Requirements do
-      attributes_table_for quote do
-        row "Requirements" do |quote|
-          begin
-            @quotes = Requirement.where("requireable_id = ? AND requireable_type = ?", self.id, 'Quote')
-            render quote.requirements
-          rescue
-            render "None"
-          end
-        end
-      end
-    end
-=end
-  
   end # show
 
 

@@ -135,7 +135,9 @@ ActiveAdmin.register Person do
 
     f.inputs do
       f.has_many :certs do |f|
-        f.input :certificate
+        f.input :certificate,
+                :collection => Certificate.where({:for_person => true}),
+                :include_blank => false
         f.input :expires_on, 
                 :as => :date_picker,
                 :hint => "Expiration date."

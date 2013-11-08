@@ -26,6 +26,13 @@ ActiveAdmin.register Company do
   filter :equipment
   filter :bookeeping_number
   
+#
+# I N D E X / L I S T  C O N T E X T
+#
+  sidebar "Companies Context", only: [:index] do 
+    ul
+      li link_to "Dashboard", admin_dashboard_path
+  end
   sidebar "Company Details", only: [:show, :edit] do 
     ul do
       li link_to( "Equipment", admin_company_equipment_index_path( company ) )
@@ -34,13 +41,6 @@ ActiveAdmin.register Company do
       hr
       li link_to "Dashboard", admin_dashboard_path
     end
-  end
-  #
-# I N D E X / L I S T  C O N T E X T
-#
-  sidebar "Companies Context", only: [:index] do 
-    ul
-      li link_to "Dashboard", admin_dashboard_path
   end
 
   index do
@@ -148,13 +148,16 @@ ActiveAdmin.register Company do
     
     f.inputs do
       f.has_many :certs do |f|
-        f.input :certificate
+        f.input :certificate,
+                :collection => Certificate.where({:for_company => true}),
+                :include_blank => false
+        f.input :active
         f.input :expires_on, 
                 :as => :date_picker,
                 :hint => "Expiration date."
-        f.input :serial_number, :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
         f.input :permanent
-        f.input :active
+        f.input :serial_number, 
+                :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
       end
     end
     f.buttons
@@ -180,5 +183,14 @@ ActiveAdmin.register Company do
     active_admin_comments
 
   end
+
+#
+# P U S H  B U T T O N S
+#
+  action_item :only => [:show] do
+    link_to 'Reserve', admin_reservations_path,
+      :popup => ['Place a reservation','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']
+  end
+
 
 end

@@ -32,7 +32,6 @@ ActiveAdmin.register Engagement do
     engagements.where ({engagement_declined: true})
   end    
 
-
   index do 
    
     # http://stackoverflow.com/questions/1192843/grouped-select-in-rails
@@ -42,13 +41,8 @@ ActiveAdmin.register Engagement do
     #            :onchange => "$.post('#{admin_person_path(engagement.contact.id)}', 
     #            {'_method':'put', 'engagement[:person]':this.value} );"
 
-    #column "Engagement", :sortable => :id do |engagement|
-    #  link_to engagement.id, admin_schedule_engagement_path( engagement.schedule, engagement )
-    #end
-
     column "Engagement Day", :sortable => :id do |engagement|
-#      link_to engagement.schedule.day.strftime("%d %b, %Y"), admin_schedule_engagement_path( engagement.schedule, engagement )
-      link_to engagement.schedule.day.strftime("%d %b, %Y"), 
+       link_to engagement.schedule.day.strftime("%d %b, %Y"), 
            admin_company_project_quote_solution_job_schedule_engagement_path( 
             engagement.schedule.job.solution.quote.project.company, 
             engagement.schedule.job.solution.quote.project, 
@@ -106,7 +100,7 @@ ActiveAdmin.register Engagement do
   form do |f|
     error_panel f
 
-    f.inputs "Schedule" do      
+    f.inputs "Schedule:  #{schedule.display_name}" do      
 
       #  STILL NEED TO SCOPE THIS COLLECTION TO PEOPLE IN COMPANIES WITH THE REQUIRED EQUIPMENT
       f.input :person, 
@@ -116,8 +110,8 @@ ActiveAdmin.register Engagement do
               :include_blank => false,
               :hint => "Person you are engaging to work.  Must work for company with #{engagement.schedule.job.solution.equipment_name.pluralize}."
                         
-      f.input :schedule, 
-              :hint => "Schedule this person will be on."
+      #f.input :schedule, 
+      #        :hint => "Schedule this person will be on."
               
       f.input :docket_number,
               :required=>true, 
@@ -177,14 +171,13 @@ ActiveAdmin.register Engagement do
       status_tag('Now you can:')
       hr
       li link_to "Make a new Engagement", 
-           admin_company_project_quote_solution_job_schedule_engagement_path( 
+           new_admin_company_project_quote_solution_job_schedule_engagement_path( 
             engagement.schedule.job.solution.quote.project.company, 
             engagement.schedule.job.solution.quote.project, 
             engagement.schedule.job.solution.quote, 
             engagement.schedule.job.solution, 
             engagement.schedule.job, 
-            engagement.schedule, 
-            engagement 
+            engagement.schedule
             )
       br
       status_tag('REMOVE THESEOther things you can do:')

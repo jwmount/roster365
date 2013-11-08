@@ -190,7 +190,7 @@ form do |f|
 
       f.input :equipment_name, 
               :as => :select, 
-              :collection => %w[Unknown Crane Dozer Truck], #Equipment::equipment_list,
+              :collection => solution.quote.project.company.equipment, #Equipment::equipment_list,
               :include_blank => false,
               :hint => "Select one type of equipment for this solution.  If you need more than a single type, do a solution for each one."                           
 
