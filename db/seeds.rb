@@ -36,7 +36,7 @@ certificate_list = [
   [ 'VIN', 'By inspection.', false, false, true, false, false ],
   [ 'Aluminum body', '', false, false, true, false, false ],
   [ 'Mud flaps', '', false, false, true, false, false ],
-  [ 'Green Flag', "No toxic or bad stuff", false, false, false, false, true ]]
+  [ 'Green Flag', "No toxic or bad stuff", false, false, false, false, true ]
 ]
 certificate_list.each do |name, description, for_person, for_company, for_equipment, for_location, active |
   Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
