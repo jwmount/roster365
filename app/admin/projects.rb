@@ -158,8 +158,8 @@ ActiveAdmin.register Project do
     ul
       status_tag('Now you can:')
       hr
-      li link_to 'Create a new Quote', new_admin_company_project_quote_path( project.company, project )     
-      li link_to 'Prepare Quotes', admin_company_project_quotes_path( project.company, project )     
+      #li link_to 'Create a new Quote', new_admin_company_project_quote_path( project.company, project )     
+      li link_to 'Do Quotes', admin_company_project_quotes_path( project.company, project )     
       hr
       status_tag('Other things you can do:')
       hr

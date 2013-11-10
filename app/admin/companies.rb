@@ -47,18 +47,16 @@ ActiveAdmin.register Company do
     selectable_column
 
     column "Name (click for details)", :sortable => 'name' do |company|
-      #h5 link_to company.name, admin_company_path(company)
       render company
       if company.certs.count > 0
         @certs = company.certs
         render @certs
       end
-      #render :partial => "companies/line_of_business", :locals => { :line_of_business => line_of_business }
     end
 
     column :projects do |company|
       if company.projects.count > 0
-        link_to "#{company.projects.count.to_s} -- List", admin_company_projects_path( company )
+        link_to "Projects (#{company.projects.count.to_s})", admin_company_projects_path( company )
       else
         link_to "New Project", new_admin_company_project_path( company )
       end
@@ -66,7 +64,7 @@ ActiveAdmin.register Company do
 
     column :equipment do |company|
       if company.equipment.size > 0 
-        link_to "#{company.equipment.count.to_s} -- List", admin_company_equipment_index_path( company )
+        link_to "Equipment (#{company.equipment.count.to_s})", admin_company_equipment_index_path( company )
       else
         link_to "New equipment", new_admin_company_equipment_path(company)
       end
@@ -74,7 +72,7 @@ ActiveAdmin.register Company do
     
     column :people do |company|
       if company.people.count > 0
-        link_to "#{company.people.count.to_s} -- List", admin_company_people_path( company )
+        link_to "People (#{company.people.count.to_s})", admin_company_people_path( company )
       else
         link_to "New person", new_admin_company_person_path(company)
       end

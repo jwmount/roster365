@@ -179,15 +179,6 @@ ActiveAdmin.register Engagement do
             engagement.schedule.job, 
             engagement.schedule
             )
-      br
-      status_tag('REMOVE THESEOther things you can do:')
-      hr
-      li link_to "Schedules",   admin_job_schedules_path(        engagement.schedule.job )
-      li link_to "Jobs",        admin_solution_jobs_path(        engagement.schedule.job.solution )
-      li link_to "Solutions",   admin_quote_solutions_path(      engagement.schedule.job.solution.quote )
-      li link_to "Quotes",      admin_project_quotes_path(       engagement.schedule.job.solution.quote.project )
-      li link_to "Projects",    admin_company_projects_path(     engagement.schedule.job.solution.quote.project.company )
-      li link_to "Companies",   admin_companies_path
       hr
       li link_to "Dockets", admin_engagement_dockets_path(engagement)
       li link_to "View Dashboard", admin_dashboard_path
@@ -196,6 +187,9 @@ ActiveAdmin.register Engagement do
 #
 # P U S H B U T T O N S
 #
+  action_item :only => [:index, :show] do
+    link_to 'List engagements', admin_reservations_path
+  end
 
   action_item :only => [:edit, :show] do
     link_to "Create Docket",    

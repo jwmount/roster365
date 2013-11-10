@@ -160,7 +160,7 @@ ActiveAdmin.register Quote do
 #
   sidebar "Quotes Context", only: [:index] do 
     ul
-      li link_to "Projects",          admin_company_projects_path(     project.company )
+      li link_to "Projects", admin_company_projects_path( project.company )
       hr
       li link_to "Dashboard", admin_dashboard_path
   end
@@ -174,10 +174,6 @@ ActiveAdmin.register Quote do
       hr
       li link_to 'Prepare Solutions',   admin_company_project_quote_solutions_path( quote.project.company, quote.project, quote )   
       hr  
-      li link_to "Review Quotes",       admin_project_quotes_path(       quote.project )
-      li link_to "Review Projects",     admin_company_projects_path(     quote.project.company )
-      li link_to "Review Companies",    admin_companies_path
-      hr
       status_tag('Other things you can do:')
       hr
       li link_to "Visit the Dashboard", admin_dashboard_path

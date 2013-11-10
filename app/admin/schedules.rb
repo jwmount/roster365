@@ -22,7 +22,7 @@ ActiveAdmin.register Schedule do
     selectable_column
 
     column "Schedule for" do |schedule|
-      link_to schedule.day.strftime("%a,%d%b"), 
+      h5 link_to schedule.day.strftime("%a,%d%b"), 
         edit_admin_company_project_quote_solution_job_schedule_path(
                                     schedule.job.solution.quote.project.company,
                                     schedule.job.solution.quote.project,
@@ -163,7 +163,6 @@ ActiveAdmin.register Schedule do
       end      
 
       f.inputs "Number of #{schedule.job.solution.equipment_name.pluralize} needed on site." do
-
         f.input :equipment_units_today,
                 :placeholder => "#{schedule.equipment_units_today.to_s}",
                 :hint => "Number of #{schedule.job.solution.equipment_name.pluralize} needed on site this date for job."
@@ -187,9 +186,8 @@ ActiveAdmin.register Schedule do
 # I N D E X / L I S T  C O N T E X T
 #
   sidebar "Schedules Context", only: [:index] do 
+    status_tag('Now you can:')
     ul
-      li link_to "Jobs",        admin_solution_jobs_path(        job.solution )
-      hr
       li link_to "Dashboard", admin_dashboard_path
   end
 
@@ -224,8 +222,9 @@ ActiveAdmin.register Schedule do
 #
 # P U S H  B U T T O N S
 #    
-  action_item :only => [:show] do
-    link_to 'Reserve', '/', #admin_reservations_path,
+
+  action_item :only => [:index, :show] do
+    link_to 'Reserve equipment', admin_reservations_path,
       :popup => ['Place a reservation','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes']
   end
 

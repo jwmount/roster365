@@ -47,7 +47,7 @@ ActiveAdmin.register Solution do
       if solution.tips.all.empty?
         status_tag( "No tip site assigned.", :error)
       else
-        @tips = solution.tips #.limit(1)
+        @tips = solution.tips
         render @tips
       end
     end
@@ -69,17 +69,6 @@ ActiveAdmin.register Solution do
       status_tag (solution.semis_permitted ? "YES" : "No"), (solution.semis_permitted ? :ok : :error)      
     end       
     
-    column 'Jobs' do |solution|
-      @jobs = solution.jobs
-      @jobs.each do |job|
-        render job
-        status_tag('Active', :ok) if job.active
-        if solution.purchase_order_required
-          status_tag("Purchase Order: #{job.purchase_order}", :warning) 
-        end
-        simple_format("<br/>")
-      end
-    end
   
   end #index
 
@@ -174,7 +163,9 @@ form do |f|
     f.inputs "Required Equipment Certificates and Characteristics" do
       f.has_many :requirements do |f|
         f.input :certificate, 
-                :hint => "If the requirement is not listed, use the Certificate menu to create it."
+                :collection => Certificate.where({:for_equipment => true}),
+                :include_blank => false,
+                :hint => "What certifications are required."
       end
     end
     
@@ -319,13 +310,9 @@ form do |f|
            admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote, solution )   
       else
         li link_to 'Prepare Jobs (requires final approval)', 
-           admin_company_project_quote_solution_jobs_path( solution.quote.project.company, solution.quote.project, solution.quote, solution )   
+           admin_company_project_quote_solution_path( solution.quote.project.company, solution.quote.project, solution.quote, solution )   
         flash[:warning] = "Solution MUST be approved before Jobs can be created."
       end
-      hr
-      li link_to "Review Quotes",       admin_project_quotes_path(       quote.project )
-      li link_to "Review Projects",     admin_company_projects_path(     quote.project.company )
-      li link_to "Review Companies",    admin_companies_path   
       hr
       status_tag('Other things you can do:')
       hr

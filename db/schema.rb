@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(version: 20130212041557) do
     t.integer  "schedule_id",                                   null: false
     #t.integer  "person_id",                                     null: false
     t.integer  "equipment_id",                                  null: false
+    t.integer  "number_requested",   default: 1,                null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end
