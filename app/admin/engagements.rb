@@ -180,8 +180,14 @@ ActiveAdmin.register Engagement do
             engagement.schedule
             )
       hr
+      status_tag('Other things you can do:')
+      hr
       li link_to "Dockets", admin_engagement_dockets_path(engagement)
       li link_to "View Dashboard", admin_dashboard_path
+      hr
+      li link_to "Manage Conditions", admin_conditions_path
+      li link_to "Manage Materials", admin_materials_path
+      li link_to "Manage Tip Sites", admin_tips_path
   end
 
 #

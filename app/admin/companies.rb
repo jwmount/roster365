@@ -33,14 +33,18 @@ ActiveAdmin.register Company do
     ul
       li link_to "Dashboard", admin_dashboard_path
   end
+
   sidebar "Company Details", only: [:show, :edit] do 
-    ul do
+    ul
+      status_tag('Now you can:')
+      li link_to 'Do Projects', admin_company_projects_path( project.company )           
+      hr
+      status_tag('Work on Company Details:')
       li link_to( "Equipment", admin_company_equipment_index_path( company ) )
       li link_to( "People", admin_company_people_path( company ) )
       li link_to( "Projects", admin_company_projects_path( company ) )
       hr
       li link_to "Dashboard", admin_dashboard_path
-    end
   end
 
   index do
