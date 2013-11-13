@@ -154,7 +154,6 @@ ActiveAdmin.register Schedule do
               :hint => 'Job being scheduled.'
 
       f.input :day,
-              :as => :string,
               :as => :date_picker,
               :required => true, 
               :label=>"Day", 

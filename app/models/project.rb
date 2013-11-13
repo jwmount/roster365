@@ -46,7 +46,7 @@ class Project < ActiveRecord::Base
   # Xavier Shay disagrees, going with his approach.  Thus set defaults in schema.
   def set_defaults
     unless persisted?
-      self.project_start_on  ||= Time.now
+      day = Date.current unless day
     end
   end
 

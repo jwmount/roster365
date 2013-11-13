@@ -101,8 +101,10 @@ ActiveAdmin.register Person do
     end
 
     f.inputs "Availability" do
-      f.input :available, :as => :radio
-      f.input :available_on, :as => :datepicker
+      f.input :available, 
+              :as => :radio
+      f.input :available_on, 
+              :as => :date_picker
     end
 
     f.inputs do

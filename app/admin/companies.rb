@@ -37,7 +37,7 @@ ActiveAdmin.register Company do
   sidebar "Company Details", only: [:show, :edit] do 
     ul
       status_tag('Now you can:')
-      li link_to 'Do Projects', admin_company_projects_path( project.company )           
+      li link_to 'Do Projects', admin_company_projects_path( company )           
       hr
       status_tag('Work on Company Details:')
       li link_to( "Equipment", admin_company_equipment_index_path( company ) )
@@ -48,6 +48,7 @@ ActiveAdmin.register Company do
   end
 
   index do
+
     selectable_column
 
     column "Name (click for details)", :sortable => 'name' do |company|
@@ -100,26 +101,34 @@ ActiveAdmin.register Company do
     error_panel f
 
     f.inputs "Company Details" do
+
       f.input :name, 
-              :hint => 'Company names are unique.', 
-              :wrapper_html => { :class => "important" },
-              :placeholder => "Company name..."
+              :hint         => AdminConstants::ADMIN_COMPANY_NAME_HINT,
+              :placeholder  => AdminConstants::ADMIN_COMPANY_NAME_PLACEHOLDER
+
       f.input :line_of_business,
-              :hint => "Short statement of company's market focus."
+              :hint         => AdminConstants::ADMIN_COMPANY_LINE_OF_BUSINESS_HINT
+
       f.input :url,
-              :hint => "Web site or URL"
+              :placeholder  => AdminConstants::ADMIN_COMPANY_URL_PLACEHOLDER,
+              :hint         => AdminConstants::ADMIN_COMPANY_URL_HINT
+
       f.input :bookeeping_number,  
-              :as => :string, 
-              :hint => "Roster365 unique 5 digit account number, or '00000'.",
-              :placeholder => "bookeeping_number number"
+              :as          => :string, 
+              :hint        => AdminConstants::ADMIN_COMPANY_BOOKEEPING_NO_HINT,
+              :placeholder => AdminConstants::ADMIN_COMPANY_BOOKEEPING_NO_DEFAULT
+
       f.input :PO_required,  
-              :as => :radio, 
-              :label => 'Purchase Order Required'
+              :as          => :radio, 
+              :label       => AdminConstants::ADMIN_C0MPANY_PO_REQUIRED_LABEL
+
       f.input :credit_terms, 
-              :label => 'Credit Terms (Days)', 
-              :hint => 'Number of days we will extend credit, if any.',
-              :placeholder => 'Days'
-      f.input :active, :as => :radio
+              :label       => AdminConstants::ADMIN_C0MPANY_CREDIT_TERMS_LABEL,
+              :hint        => AdminConstants::ADMIN_C0MPANY_CREDIT_TERMS_HINT,
+              :placeholder => AdminConstants::ADMIN_C0MPANY_CREDIT_TERMS_PLACEHOLDER
+
+      f.input :active, 
+              :as => :radio
     end
 
     f.inputs "Addresses" do
@@ -132,34 +141,45 @@ ActiveAdmin.register Company do
       end
     end
     
-    f.inputs "Rollodex Items for Company (formerly Identifiers)" do
+    f.inputs "Rollodex Items for Company" do
       f.has_many :identifiers do |f|
-          f.input :name, :collection => %w[Mobile Office Truck Pager FAX Email Skype SMS Twitter URL],
-                  :label => 'Type or kind*',
-                  :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
+
+          f.input :name, 
+                  :collection  => %w[Mobile Office Truck Pager FAX Email Skype SMS Twitter URL],
+                  :label       => AdminConstants::ADMIN_IDENTIFIER_NAME_LABEL,
+                  :hint        => AdminConstants::ADMIN_IDENTIFIER_NAME_HINT
+
           f.input :value,
-                  :label => 'Phone Number, address, etc.',
-                  :hint => 'Number, address, etc.  For example, 514 509-8381, or info@somecompany.com.',
-                  :placeholder => 'Phone number, email address, ...'
-          f.input :rank, :collection => %w[1 2 3 4 5 6 7 8 9],
-                  :label => 'Priority',
-                  :hint => 'Order prefered.',
-                  :placeholder => '1..9'
+                  :label       => AdminConstants::ADMIN_IDENTIFIER_VALUE_LABEL,
+                  :hint        => AdminConstants::ADMIN_IDENTIFIER_VALUE_HINT,
+                  :placeholder => AdminConstants::ADMIN_IDENTIFIER_VALUE_PLACEHOLDER
+
+          f.input :rank, 
+                  :collection  => %w[1 2 3 4 5 6 7 8 9],
+                  :label       => AdminConstants::ADMIN_IDENTIFIER_RANK_LABEL,
+                  :hint        => AdminConstants::ADMIN_IDENTIFIER_RANK_HINT,
+                  :placeholder => AdminConstants::ADMIN_IDENTIFIER_RANK_PLACEHOLDER
       end
     end
     
     f.inputs do
       f.has_many :certs do |f|
+
         f.input :certificate,
                 :collection => Certificate.where({:for_company => true}),
                 :include_blank => false
+
         f.input :active
+
         f.input :expires_on, 
                 :as => :date_picker,
-                :hint => "Expiration date."
+                :hint => AdminConstants::ADMIN_CERT_EXPIRES_ON_HINT
+
         f.input :permanent
+
         f.input :serial_number, 
-                :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+                :hint => AdminConstants::ADMIN_CERT_SERIAL_NUMBER_HINT
+
       end
     end
     f.buttons

@@ -194,7 +194,7 @@ ActiveAdmin.register Engagement do
 # P U S H B U T T O N S
 #
   action_item :only => [:index, :show] do
-    link_to 'List engagements', admin_reservations_path
+    link_to 'List reservations', admin_reservations_path
   end
 
   action_item :only => [:edit, :show] do

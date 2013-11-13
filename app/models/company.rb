@@ -42,8 +42,11 @@ class Company < ActiveRecord::Base
   # bookeeping_number number must be unique 5 digits if given, otherwise may be blank.
   with_options :if => :is_bookeeping_number? do |c|
      c.validates_presence_of :bookeeping_number, 
-     :numericality => { :only_integer => true, :greater_than_or_equal_to => '10000',
-                        :less_than_or_equal_to => '99999', :equal_to => '00000' }
+     :numericality => { :only_integer => true, 
+                        :greater_than_or_equal_to => AdminConstants::ADMIN_COMPANY_BOOKEEPING_NO_BASE,
+                        :less_than_or_equal_to => AdminConstants::ADMIN_COMPANY_BOOKEEPING_NO_MAX,
+                        :equal_to => AdminConstants::ADMIN_COMPANY_BOOKEEPING_NO_DEFAULT
+                      }
   end
 
 #
@@ -53,10 +56,6 @@ class Company < ActiveRecord::Base
 
   def defaults
      unless persisted?
-       self.bookeeping_number||='00000'
-       self.PO_required||=false
-       self.active||=true
-       self.credit_terms||=0
     end
   end
   
