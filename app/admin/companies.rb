@@ -110,6 +110,7 @@ ActiveAdmin.register Company do
               :hint         => AdminConstants::ADMIN_COMPANY_LINE_OF_BUSINESS_HINT
 
       f.input :url,
+              :label        => AdminConstants::ADMIN_COMPANY_URL_LABEL,
               :placeholder  => AdminConstants::ADMIN_COMPANY_URL_PLACEHOLDER,
               :hint         => AdminConstants::ADMIN_COMPANY_URL_HINT
 

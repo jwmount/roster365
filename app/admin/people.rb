@@ -120,18 +120,19 @@ ActiveAdmin.register Person do
     f.inputs do
       f.has_many :identifiers do |f|
         f.input :name, 
-                :collection => %w[Mobile Email Office Truck Pager FAX Skype SMS Twitter Home URL],
-                :label => 'Type or kind*',
-                :hint => 'Kind of device or way to communicate with this Person.  Cannot be blank.'
+                :collection => AdminConstants::ADMIN_IDENTIFIER_NAME_COLLECTION,
+                :label      => AdminConstants::ADMIN_IDENTIFIER_NAME_LABEL,
+                :hint       => AdminConstants::ADMIN_IDENTIFIER_NAME_HINT
 
         f.input :value,
-                :label => 'Number, address, etc.',
-                :placeholder => 'phone number, email address, etc.'
+                :label       => AdminConstants::ADMIN_IDENTIFIER_VALUE_LABEL,
+                :hint        => AdminConstants::ADMIN_IDENTIFIER_VALUE_HINT,
+                :placeholder => AdminConstants:: ADMIN_IDENTIFIER_VALUE_PLACEHOLDER
 
         f.input :rank, :collection => %w[1 2 3 4 5 6 7 8 9],
-                :label => 'Priority*',
-                :hint => 'Order prefered.',
-                :placeholder => '1 .. 9'
+                :label       => AdminConstants::ADMIN_IDENTIFIER_RANK_LABEL,
+                :hint        => AdminConstants::ADMIN_IDENTIFIER_RANK_HINT,
+                :placeholder => AdminConstants::ADMIN_IDENTIFIER_RANK_PLACEHOLDER 
       end
     end
 

@@ -3,12 +3,15 @@
 # Internationalization, see http://stackoverflow.com/questions/3629894/internationalization-for-constants-hashes-in-rails-3
 module AdminConstants
 
-  # Company
+#
+# Company
+#
   ADMIN_COMPANY_NAME_HINT                = "Company name.  Must be unique."
   ADMIN_COMPANY_NAME_PLACEHOLDER         = "Company name"
 
   ADMIN_COMPANY_LINE_OF_BUSINESS_HINT    = "What the company does."
 
+  ADMIN_COMPANY_URL_LABEL                = "Web Site"
   ADMIN_COMPANY_URL_PLACEHOLDER          = "www.company_name.com"
   ADMIN_COMPANY_URL_HINT                 = "Web site, URL."
 
@@ -24,8 +27,10 @@ module AdminConstants
               
   ADMIN_C0MPANY_PO_REQUIRED_LABEL        = "Purchase Order Required"
 
-
-  # Identifiers
+#
+# Identifiers
+#
+  ADMIN_IDENTIFIER_NAME_COLLECTION        = %w[Mobile Email Office Truck Pager FAX Skype SMS Twitter Home URL]
   ADMIN_IDENTIFIER_NAME_LABEL             = "Type or kind of device or mode."
   ADMIN_IDENTIFIER_NAME_HINT              = "Kind of device or way to communicate with this Person.  Cannot be blank. E.g. person@company.com."
 
@@ -37,6 +42,9 @@ module AdminConstants
   ADMIN_IDENTIFIER_RANK_HINT             = "Order prefered."
   ADMIN_IDENTIFIER_RANK_PLACEHOLDER      = "1..9"
 
+#
+# Certs
+#
   ADMIN_CERT_EXPIRES_ON_HINT             = "Expriation date."
   ADMIN_CERT_SERIAL_NUMBER_HINT          = "Value that makes the certificate unique.  For example, License Number, Rego, etc."
 end
