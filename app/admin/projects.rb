@@ -79,24 +79,24 @@ ActiveAdmin.register Project do
     error_panel f
     
     f.inputs "#{company.name}" do
+
       f.input :name, 
-              :required => true, 
-              :label => 'Project Name', 
-              :hint => "Working name of project. NOTE:  if you change a project name, existing resources such as quotes, solutions, jobs etc., continue to use the old name.",
-              :placeholder => "Required"
+              :required       => true, 
+              :label          => AdminConstants::ADMIN_PROJECT_NAME_LABEL, 
+              :hint           => AdminConstants::ADMIN_PROJECT_NAME_HINT,
+              :placeholder    => AdminConstants::ADMIN_PROJECT_NAME_PLACEHOLDER
 
       # Scope this collection to LICENSEE company employees with title 'Rep'
       f.input :rep_id, 
-              :as => :select,
-              collection: list_of_reps,
-              hint: "#{ENV['LICENSEE']} Rep on this project.",
-              placeholder: "Person",
+              :as             => :select,
+              :collection     => list_of_reps,
+              :hint           => AdminConstants::ADMIN_PROJECT_REP_LABEL,
               include_blank: false
 
       f.input :project_start_on, 
-              :label => 'Expected start date',
+              :label          => AdminConstants::ADMIN_PROJECT_START_ON_LABEL,
               :as => :date_picker,
-              :hint => 'Best estimate of when project will start.'
+              :hint           => AdminConstants::ADMIN_PROJECT_START_ON_HINT
 
       f.input :intend_to_bid
       f.input :submitted_bid

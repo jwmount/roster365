@@ -357,7 +357,7 @@ form do |f|
   end
 
   action_item :only => [:show] do
-    link_to 'Copy', duplicate_admin_quote_solution_path( quote, @solution )
+    link_to 'Copy', duplicate_admin_quote_solution_path( quote, solution )    
   end
 
   # Copy solution to new one

@@ -6,7 +6,9 @@ ActiveAdmin.register Material do
   filter :description
         
   index do
-    column :name do |material|
+    selectable_column
+
+    column :name, :sortable => 'name' do |material|
       link_to material.name, admin_material_path(material)
     end
     column :description    

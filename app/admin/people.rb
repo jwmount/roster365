@@ -91,13 +91,18 @@ ActiveAdmin.register Person do
     error_panel f
 
     f.inputs "Person Details" do
+
       f.input :first_name,
-      :placeholder => "First name"
+              :placeholder => AdminConstants::ADMIN_PERSON_FIRST_NAME_PLACEHOLDER
+      
       f.input :last_name,
-      :placeholder => "Last name"
+              :placeholder => AdminConstants::ADMIN_PERSON_LAST_NAME_PLACEHOLDER
+      
       f.input :title,
-      :placeholder => "Title"
-      f.input :active, :as => :radio
+              :placeholder => AdminConstants::ADMIN_PERSON_TITLE_PLACEHOLDER 
+      
+      f.input :active, 
+              :as => :radio
     end
 
     f.inputs "Availability" do
@@ -143,8 +148,9 @@ ActiveAdmin.register Person do
                 :include_blank => false
         f.input :expires_on, 
                 :as => :date_picker,
-                :hint => "Expiration date."
-        f.input :serial_number, :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+                :hint => AdminConstants::ADMIN_CERT_EXPIRES_ON_HINT
+        f.input :serial_number, 
+                :hint => AdminConstants::ADMIN_CERT_SERIAL_NUMBER_HINT
         f.input :permanent
         f.input :active
       end
