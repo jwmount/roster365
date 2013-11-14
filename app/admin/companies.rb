@@ -87,9 +87,11 @@ ActiveAdmin.register Company do
       company.bookeeping_number
     end
 
-    column :credit_terms
-    
-    column :PO_required do |company|
+    column "Credit Terms" do |company|
+      company.credit_terms
+    end
+
+    column "PO required" do |company|
       status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error)
     end      
     column :active do |company|
