@@ -40,15 +40,15 @@ ActiveAdmin.register Condition do
       f.input :name, 
               :required => true, 
               :input_html => {:class => "large"},
-              :placeholder => "Name"
+              :placeholder => AdminConstants::ADMIN_CONDITIONS_NAME_PLACEHOLDER
               
       f.input :verbiage, 
               :required => true,
-              :placeholder => "Official description of this condition."
+              :placeholder => AdminConstants::ADMIN_CONDITIONS_VERBIAGE_PLACEHOLDER
               
       f.input :indication, 
               :required => true,
-              :placeholder => "How, When or Why Condition applies."
+              :placeholder => AdminConstants::ADMIN_CONDITIONS_INDICATION_PLACEHOLDER
       f.input :approved
     end
 

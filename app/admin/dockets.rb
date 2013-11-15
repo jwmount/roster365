@@ -71,60 +71,61 @@ ActiveAdmin.register Docket do
     #f.inputs "Docket from #{docket.person.display_name} for #{docket.engagement.schedule.job.name}" do      
     f.inputs do
       f.input :number, 
-              :input_html => {:disabled => true },
-              :hint => "Unique Booking number provided by subbie entered by operations to complete the engagement.",
-              :placeholder => "nnnnnn"
+              :input_html      => {:disabled => true },
+              :hint            => AdminConstants::ADMIN_DOCKETS_NUMBER_HINT,
+              :placeholder     => AdminConstants::ADMIN_DOCKETS_NUMBER_PLACEHOLDER
       
       f.input :person,
-              :input_html => {:disabled => true },
-              :hint => "Who is submitting this docket, or payee."
+              :input_html      => {:disabled => true },
+              :hint            => AdminConstants::ADMIN_DOCKETS_PERSON_HINT
       
       f.input :date_worked, 
-              :as => :date_picker,
-              :hint => "Day the work was performed."
+              :as              => :date_picker,
+              :hint            => AdminConstants::ADMIN_DOCKETS_DATE_WORKED_HINT
               
       f.input :engagement,
-              :required=>true, 
-              :as => :select, 
-              :collection => Engagement.all.map {|e| [e.schedule.job.name, e.id]}, 
-              :include_blank => false,
-              :hint => "Engagement associated with this docket."
+              :required        =>true, 
+              :as              => :select, 
+              :collection      => Engagement.all.map {|e| [e.schedule.job.name, e.id]}, 
+              :include_blank   => false,
+              :hint            => AdminConstants::ADMIN_DOCKETS_ENGAGEMENT_HINT
 
       f.input :dated, 
-              :as => :date_picker,
-              :required => true,
-              :hint => "Date docket was marked completed."
+              :as              => :date_picker,
+              :required        => true,
+              :hint            => AdminConstants::ADMIN_DOCKETS_DATED_HINT
               
       f.input :received_on, 
-              :as => :date_picker,
-              :required => true,
-              :hint => "Date docket was received."
+              :as              => :date_picker,
+              :required        => true,
+              :hint            => AdminConstants::ADMIN_DOCKETS_RECEIVED_ON_HINT
               
       f.input :operator_signed, 
-              :required => true,
-              :as => :radio
+              :required        => true,
+              :as              => :radio
       
       f.input :client_signed, 
-              :required => true,
-              :as => :radio              
+              :required        => true,
+              :as              => :radio              
     end
 
     
     f.inputs "Payable Amounts" do
+
       f.input :a_inv_pay, 
-              :label => "Load Client(Supplier) Invoice Pay Amount ($)",
-              :hint => "Amount we'll pay to first party.",
-              :placeholder => "000.00"
+              :label           => AdminConstants::ADMIN_DOCKETS_RECEIVED_ON_LABEL,
+              :hint            => AdminConstants::ADMIN_DOCKETS_RECEIVED_ON_HINT,
+              :placeholder     => AdminConstants::ADMIN_DOCKETS_RECEIVED_ON_PLACEHOLDER
               
       f.input :b_inv_pay, 
-              :label => "Second Party Invoice Pay Amount ($)", 
-              :hint => "Amount we'll pay to second party, if any." ,
-              :placeholder => "000.00"
+              :label           => AdminConstants::ADMIN_DOCKETS_B_INV_PAY_LABEL,
+              :hint            => AdminConstants::ADMIN_DOCKETS_B_INV_PAY_HINT,
+              :placeholder     => AdminConstants::ADMIN_DOCKETS_B_INV_PAY_PLACEHOLDER
               
       f.input :supplier_inv_pay, 
-              :label => "First Party Invoice Pay Amount ($)", 
-              :hint => "Amount we'll pay to a third party, if any.",
-              :placeholder => "000.00"
+              :label           => AdminConstants::ADMIN_DOCKETS_SUPPLIER_INV_PAY_LABEL, 
+              :hint            => AdminConstants::ADMIN_DOCKETS_SUPPLIER_INV_PAY_HINT, 
+              :placeholder     => AdminConstants::ADMIN_DOCKETS_SUPPLIER_INV_PAY_PLACEHOLDER
               
     end
     f.buttons

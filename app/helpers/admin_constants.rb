@@ -28,6 +28,53 @@ module AdminConstants
   ADMIN_C0MPANY_PO_REQUIRED_LABEL        = "Purchase Order Required"
 
 #
+# Certs
+#
+  ADMIN_CERT_EXPIRES_ON_HINT             = "Expriation date."
+  ADMIN_CERT_SERIAL_NUMBER_HINT          = "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+
+#
+# Conditions
+#
+  ADMIN_CONDITIONS_NAME_PLACEHOLDER        = "Our name for this contract provision."
+  ADMIN_CONDITIONS_VERBIAGE_PLACEHOLDER    = "Approved description of this condition."
+  ADMIN_CONDITIONS_INDICATION_PLACEHOLDER  = "How, When or Why Condition applies."
+
+#
+# Dockets
+#
+  ADMIN_DOCKETS_NUMBER_HINT              = "Unique Booking number provided by subbie entered by operations to complete the engagement."
+  ADMIN_DOCKETS_NUMBER_PLACEHOLDER       = "12345"
+
+  ADMIN_DOCKETS_PERSON_HINT              = "Who is submitting this docket, or payee."
+  ADMIN_DOCKETS_DATE_WORKED_HINT         = "Day the work was performed."
+  ADMIN_DOCKETS_ENGAGEMENT_HINT          = "Engagement associated with this docket."
+  ADMIN_DOCKETS_DATED_HINT               = "Date docket was marked completed."
+  ADMIN_DOCKETS_RECEIVED_ON_HINT         = "Date docket was received."
+
+  ADMIN_DOCKETS_RECEIVED_ON_LABEL        = "Load Client(Supplier) Invoice Pay Amount ($)"
+  ADMIN_DOCKETS_RECEIVED_ON_HINT         = "Amount we'll pay to first party."
+  ADMIN_DOCKETS_RECEIVED_ON_PLACEHOLDER  = "000.00"
+
+  ADMIN_DOCKETS_A_INV_PAY_LABEL          = "First Party Invoice Pay Amount ($)."
+  ADMIN_DOCKETS_A_INV_PAY_HINT           = "Amount we'll pay to first party, if any."
+  ADMIN_DOCKETS_A_INV_PAY_PLACEHOLDER    = "000.00"
+
+  ADMIN_DOCKETS_B_INV_PAY_LABEL          = "Second Party Invoice Pay Amount ($)."
+  ADMIN_DOCKETS_B_INV_PAY_HINT           = "Amount we'll pay to second party, if any."
+  ADMIN_DOCKETS_B_INV_PAY_PLACEHOLDER    = "000.00"
+
+  ADMIN_DOCKETS_SUPPLIER_INV_PAY_LABEL        = "Supplier Invoice Pay Amount ($)"
+  ADMIN_DOCKETS_SUPPLIER_INV_PAY_HINT         = "Amount we'll pay to a supplier party, if any."
+  ADMIN_DOCKETS_SUPPLIER_INV_PAY_PLACEHOLDER  =  "000.00"
+
+#
+# Engagements
+#
+#
+# Equipment
+#
+#
 # Identifiers
 #
   ADMIN_IDENTIFIER_NAME_COLLECTION       = %w[Mobile Email Office Truck Pager FAX Skype SMS Twitter Home URL]
@@ -43,14 +90,33 @@ module AdminConstants
   ADMIN_IDENTIFIER_RANK_PLACEHOLDER      = "1..9"
 
 #
-# Certs
+# Jobs
 #
-  ADMIN_CERT_EXPIRES_ON_HINT             = "Expriation date."
-  ADMIN_CERT_SERIAL_NUMBER_HINT          = "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+#
+# Materials
+#
+#
+# Quotes
+#
+#
+# Requirements
+#
+#
+# Roles
+#
+#
+# Schedules
+#
+#
+# Solutions
+#
+# 
+# Tips
+#
 
-  #
-  # Project
-  #
+#
+# Project
+# 
   ADMIN_PROJECT_NAME_LABEL               = 'Project Name'
   ADMIN_PROJECT_NAME_HINT                = "Working name of project. NOTE:  if you change a project name, existing resources such as quotes, solutions, jobs etc., continue to use the old name."
   ADMIN_PROJECT_NAME_PLACEHOLDER         = "Required, if no name has been given, make one up and change it later."

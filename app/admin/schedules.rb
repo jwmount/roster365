@@ -21,8 +21,8 @@ ActiveAdmin.register Schedule do
   index do
     selectable_column
 
-    column "Schedule for", :span => 2 do |schedule|
-      span link_to schedule.day.strftime("%a,%d%b"), 
+    column "Schedule for" do |schedule|
+      h5 link_to schedule.day.strftime("%a,%d%b"), 
         edit_admin_company_project_quote_solution_job_schedule_path(
                                     schedule.job.solution.quote.project.company,
                                     schedule.job.solution.quote.project,
