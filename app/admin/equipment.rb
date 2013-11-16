@@ -32,26 +32,34 @@ ActiveAdmin.register Equipment do
     error_panel f
 
     f.inputs "Equipment for #{self.company.name}" do
+
       f.input :name,
-              :as => :select,
-              :collection => equipment.equipment_list, #Equipment.alphabetically.all.map {|u| [u.name, u.id]},               
-              :include_blank => false,
-              :hint => "Select one."
+              :as                   => :select,
+              :collection           => equipment.equipment_list,
+              :include_blank        => false,
+              :hint                 => AdminConstants::ADMIN_EQUIPMENT_NAME_HINT
       end                  
       
     # DRY -- not DRY, people, companies, tips also do this
     f.inputs do
+
       f.has_many :certs do |f|
+        
         f.input :certificate,
-                :collection => Certificate.where({:for_equipment => true}),
-                :include_blank => false
+                :collection         => Certificate.where({:for_equipment => true}),
+                :hint               => AdminConstants::ADMIN_EQUIPMENT_CERTIFICATE_HINT,
+                :include_blank      => false
+
         f.input :active
+
         f.input :expires_on, 
-                :as => :date_picker,
-                :hint => "Expiration date."
+                :as                 => :date_picker,
+                :hint               => AdminConstants::ADMIN_EQUIPMENT_EXPIRES_ON_HINT
+
         f.input :permanent
+
         f.input :serial_number, 
-                :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+                :hint               => AdminConstants::ADMIN_EQUIPMENT_SERIAL_NUMBER_HINT
       end
     end
 

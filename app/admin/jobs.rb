@@ -70,29 +70,29 @@ ActiveAdmin.register Job do
 
     f.inputs "Job Details" do
       f.input :name, 
-              :required => true, 
-              :label=>"Job Name", 
-              :input_html => {:disabled => true },
-              :hint => "Job Name is generated for you.",
-              :placeholder => "Job Name"
+              :required    => true, 
+              :label       => "Job Name", 
+              :input_html  => {:disabled => true },
+              :hint        => AdminConstants::ADMIN_JOB_NAME_HINT,
+              :placeholder => AdminConstants::ADMIN_JOB_NAME_PLACEHOLDER
               
       f.input :purchase_order,
-              :placeholder => "Purchase Order"
+              :placeholder => AdminConstants::ADMIN_JOB_PURCHASE_ORDER_PLACEHOLDER
               
       f.input :active, 
-              :as => :radio
+              :as          => :radio
               
       f.input :complete,
-              :as => :radio
+              :as          => :radio
 
       f.input :start_on, 
-              :as =>  :date_picker, 
-              :required => true
+              :as          => :date_picker, 
+              :required    => true
               
       f.input :finished_on, 
-              :as => :date_picker,
-              :required => true,
-              :hint => "Expected finish date.  Quote estimate was #{job.solution.quote.duration} days."
+              :as          => :date_picker,
+              :required    => true,
+              :hint        => AdminConstants::ADMIN_JOB_FINISHED_ON_HINT + "#{job.solution.quote.duration} days."
     end
     f.buttons
   end

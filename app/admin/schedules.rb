@@ -150,21 +150,23 @@ ActiveAdmin.register Schedule do
     error_panel f
 
     f.inputs "Schedule details.  Equipment for #{schedule.job.solution.quote.project.company.name}, #{schedule.job.solution.quote.project.name} project." do
+
       f.input :job,
-              :hint => 'Job being scheduled.'
+              :hint        => 'Job being scheduled.'
 
       f.input :day,
-              :as => :date_picker,
-              :required => true, 
-              :label=>"Day", 
-              :hint => "Day you are scheduling to have the equipment on site.",
-              :placeholder => "Date."  
+              :as          => :date_picker,
+              :required    => true, 
+              :label       => AdminConstants::ADMIN_SCHEDULE_DAY_LABEL,
+              :hint        => AdminConstants::ADMIN_SCHEDULE_DAY_HINT,
+              :placeholder => AdminConstants::ADMIN_SCHEDULE_DAY_PLACEHOLDER
       end      
 
       f.inputs "Number of #{schedule.job.solution.equipment_name.pluralize} needed on site." do
+
         f.input :equipment_units_today,
-                :placeholder => "#{schedule.equipment_units_today.to_s}",
-                :hint => "Number of #{schedule.job.solution.equipment_name.pluralize} needed on site this date for job."
+                :placeholder => AdminConstants::ADMIN_SCHEDULE_EQUIPMENT_UNITS_TODAY_PLACEHOLDER + "#{schedule.equipment_units_today.to_s}",
+                :hint        => AdminConstants::ADMIN_SCHEDULE_EQUIPMENT_UNITS_TODAY_HINT + "#{schedule.job.solution.equipment_name.pluralize}."
       end
     f.buttons
   end

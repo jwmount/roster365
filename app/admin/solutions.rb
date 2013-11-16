@@ -79,159 +79,176 @@ form do |f|
   error_panel f
 
     f.inputs "Approvals" do
+
       f.input :approved, 
-              :as => :radio, 
-              :hint => 'Once approved solutions cannot be changed.'
+              :as       => :radio, 
+              :hint     => AdminConstants::ADMIN_SOLUTION_APPROVED_HINT
 
       f.input :client_approved, 
-              :as => :radio, 
-              :hint => 'Once approved solutions cannot be changed.'
+              :as       => :radio, 
+              :hint     => AdminConstants::ADMIN_SOLUTION_CLIENT_APPROVED_HINT
               
     end
     
     f.inputs "Solution Details" do 
+
       f.input :name, 
               :input_html => {:disabled => true },
-              :hint => "Name is pre-assigned.  Fully qualified name will be used for scheduling."
+              :hint       => AdminConstants::ADMIN_SOLUTION_NAME_HINT
 
       f.input :solution_type,
-                            :label => 'Contract type',
-                             :hint => "Type of solution this is.", 
-                             :as=>:select, 
-                             :include_blank => true,
-                             :collection => solution_type_options,
-                             :input_html => {
-                                             "data-placeholder"  => "Solution Type ...", 
-                                                          :style => "width:200px", 
-                                                          :class => "chzn-select"}
+              :label         => AdminConstants::ADMIN_SOLUTION_SOLUTION_TYPE_LABEL,
+              :hint          => AdminConstants::ADMIN_SOLUTION_SOLUTION_TYPE_HINT,
+              :as            => :select, 
+              :include_blank => true,
+              :collection    => solution_type_options,
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_SOLUTION_TYPE_PLACEHOLDER
+              #:input_html => {
+               #               "data-placeholder"  => "Solution Type ...", 
+                #              :style => "width:200px", 
+                 #             :class => "chzn-select"
+                  #          }
                              
-      f.input :material_id, :as => :select, 
-                            :label => 'Material', 
-                            :hint => "What kind material will be moved.", 
-                            :collection => Material.all.map {|m| [m.name, m.id]},
-                            :include_blank => false
+      f.input :material_id, 
+              :as            => :select, 
+              :collection    => Material.all.map {|m| [m.name, m.id]},
+              :label         => AdminConstants::ADMIN_SOLUTION_MATERIAL_ID_LABEL, 
+              :hint          => AdminConstants::ADMIN_SOLUTION_MATERIAL_ID_HINT, 
+              :include_blank => false
 
                             
-      f.input :unit_of_material, as:         :select, 
-                                 label:      "Unit of Material", 
-                                 hint:       "Unit that is basis for our price.", 
-                                 collection: %w[m3 tonne 'hourly hire' loads pounds]
+      f.input :unit_of_material, 
+              :as            => :select, 
+              :label         => AdminConstants::ADMIN_SOLUTION_UNIT_OF_MATERIAL_LABEL, 
+              :hint          => AdminConstants::ADMIN_SOLUTION_UNIT_OF_MATERIAL_HINT, 
+              :collection    => AdminConstants::ADMIN_SOLUTION_UNIT_OF_MATERIAL_COLLECTION
 
-      f.input :total_material, hint:  "How much material will be moved in this solution."
+      f.input :total_material, 
+              :hint          => AdminConstants::ADMIN_SOLUTION_TOTAL_MATERIAL_HINT
 
     end
     
     f.inputs "Tip Site for this solution" do
       f.input :tips, 
               :as => :radio, 
-              :collection => Tip.alphabetically.all.map {|u| [u.name, u.id]}
+              :collection    => Tip.alphabetically.all.map {|u| [u.name, u.id]}
        end
 
     f.inputs "Time & Distance -- #{solution.quote.project.addresses[0].to_s} to tip site" do
+
       f.input :kms_one_way,
-              :placeholder => "distance"    
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_KMS_ONE_WAY_PLACEHOLDER
               
       f.input :loads_per_day,
-              :placeholder => "number of loads"    
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_LOADS_PER_DAY_PLACEHOLDER
       
       f.input :drive_time_into_site,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_DRIVE_TIME_INTO_SITE_PLACEHOLDER
               
       f.input :load_time,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_LOAD_TIME_PLACEHOLDER
       
       f.input :drive_time_out_of_site,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_DRIVE_TIME_OUT_OF_SITE_PLACEHOLDER
               
       f.input :drive_time_from_load_to_tip,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_DRIVE_TIME_FROM_LOAD_TO_TIP_PLACEHOLDER
               
       f.input :drive_time_tip_to_load,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_DRIVE_TIME_TIP_TO_LOAD_PLACEHOLDER
               
       f.input :drive_time_into_tip,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_DRIVE_TIME_INTO_TIP_PLACEHOLDER
               
       f.input :unload_time,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_UNLOAD_TIME_PLACEHOLDER
               
       f.input :drive_time_out_of_tip_site,
-              :placeholder => "minutes"
+              :placeholder   => AdminConstants::ADMIN_SOLUTION_DRIVE_TIME_OUT_OF_TIP_SITE_PLACEHOLDER
               
     end
 
     f.inputs "Required Equipment Certificates and Characteristics" do
+
       f.has_many :requirements do |f|
+
         f.input :certificate, 
-                :collection => Certificate.where({:for_equipment => true}),
-                :include_blank => false,
-                :hint => "What certifications are required."
+                :collection       => Certificate.where({:for_equipment => true}),
+                :include_blank    => false,
+                :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_CERTIFICATE_HINT
       end
     end
     
     f.inputs "Equipment" do 
       # At Quote time equipment vendor not generally known... pick this up later in Scheduling
       # Once this is firmly established, do a migration to remove vendor_id from model.
+      #
       #f.input :vendor_id, :as => :select, :label => 'Equipment Vendor', required: true, 
       #                     :hint => "Subcontractor or Supplier of the equipment.  To search for equipment use the Equipment menu.", 
       #                     :collection => Company.all, :input_html => {"data-placeholder" => "Select Partner Company ...", :style=> "width:200px", 
       #                     :class => "chzn-select"}
+      
       f.input :semis_permitted, 
-              :as => :radio
+              :as               => :radio
 
       f.input :equipment_name, 
-              :as => :select, 
-              :collection => solution.quote.project.company.equipment, #Equipment::equipment_list,
-              :include_blank => false,
-              :hint => "Select one type of equipment for this solution.  If you need more than a single type, do a solution for each one."                           
+              :as               => :select, 
+              :collection       => solution.quote.project.company.equipment, #Equipment::equipment_list,
+              :include_blank    => false,
+              :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_NAME_HINT
 
       f.input :purchase_order_required, 
-              :as => :radio, 
-              :hint => "ALERT:  #{solution.quote.project.company.name} may require a purchase order before a job is activated."                                 
+              :as               => :radio, 
+              :hint             => AdminConstants::ADMIN_SOLUTION_PURCHASE_ORDER_REQUIRED_HINT
 
       f.input :equipment_units_required_per_day,
-              :hint => "Number of units needed or allowed on site on a given day.  A guideline."
+              :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_UNITS_REQUIRED_PER_DAY_HINT + "#{solution.quote.project.company.name}"
 
       f.input :equipment_dollars_per_day,
-              :precision => 8, 
-              :scale => 2,
-              :placeholder => "usually 1250 or 750...",
-              :hint => 'Total daily payment target amount.'
+              :precision        => 8, 
+              :scale            => 2,
+              :placeholder      => "usually 1250 or 750...",
+              :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_DOLLARS_PER_DAY_HINT
     end
     
 
     f.inputs "Pricing" do
+
       f.input :invoice_load_client,
-              :precision => 8, :scale => 2,
-              :placeholder => '00.00'
+              :precision       => 8, 
+              :scale           => 2,
+              :placeholder     => '00.00'
 
       f.input :pay_load_client,
-              :precision => 8, :scale => 2,
-              :placeholder => '00.00'
+              :precision       => 8, 
+              :scale           => 2,
+              :placeholder     => '00.00'
 
       f.input :invoice_tip_client,
-              :precision => 8, :scale => 2,
-              :placeholder => '00.00'
+              :precision       => 8, 
+              :scale           => 2,
+              :placeholder     => '00.00'
 
       f.input :pay_tip_client,
-              :precision => 8, :scale => 2,
-              :placeholder => '00.00'
+              :precision       => 8, 
+              :scale           => 2,
+              :placeholder     => '00.00'
               
       f.input :pay_equipment_per_unit,  
-              :precision => 8, 
-              :scale => 2
+              :precision       => 8, 
+              :scale           => 2
 
       f.input :pay_tolls,  
-              :precision => 8, 
-              :scale => 2
+              :precision       => 8, 
+              :scale           => 2
 
       f.input :pay_tip,  
-              :precision => 8, 
-              :scale => 2
+              :precision       => 8, 
+              :scale           => 2
 
       f.input :hourly_hire_rate, 
-              :precision => 8, 
-              :scale => 2
+              :precision       => 8, 
+              :scale           => 2
 
     end    
     f.buttons

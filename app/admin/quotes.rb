@@ -61,9 +61,9 @@ ActiveAdmin.register Quote do
 
     f.inputs  do
       f.input :name, 
-              :as => :hidden,
-              :hint => "Name is automatically assigned and not edited.",
-              :disabled => true
+              :as                  => :hidden,
+              :hint                => AdminConstants::ADMIN_QUOTE_NAME_HINT,
+              :disabled            => true
               
       # rep is 'our' or LICENSEE rep who manages projects     
       f.input :rep_id,
@@ -76,7 +76,7 @@ ActiveAdmin.register Quote do
       # This select needs to be scoped to employees of this company
       f.input :quote_to_id, 
               :label => "Quote to", 
-              :hint => "Person at #{quote.project.company.name} who gets quote from us.",
+              :hint => AdminConstants::ADMIN_QUOTE_QUOTE_TO_ID_HINT + " #{quote.project.company.name}",
               :required => true,
               :as => :select, 
               :collection => quote.project.company.people,

@@ -19,11 +19,11 @@ ActiveAdmin.register Material do
 
     f.inputs "material" do
       f.input :name,
-              :required => true,
-              :placeholder => "Name"
+              :required        => true,
+              :placeholder     => AdminConstants::ADMIN_MATERIAL_NAME_PLACEHOLDER
               
       f.input :description,
-              :placeholder => "Description"
+              :placeholder     => AdminConstants::ADMIN_MATERIAL_DESCRIPTION_PLACEHOLDER
     end
     f.buttons
   end

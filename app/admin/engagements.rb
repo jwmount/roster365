@@ -104,27 +104,27 @@ ActiveAdmin.register Engagement do
 
       #  STILL NEED TO SCOPE THIS COLLECTION TO PEOPLE IN COMPANIES WITH THE REQUIRED EQUIPMENT
       f.input :person, 
-              :required=>true, 
-              :as => :select, 
-              :collection => engagement.people_with_equipment_required, #Person.alphabetically.all.map {|u| [u.display_name, u.id]}, 
-              :include_blank => false,
-              :hint => "Person you are engaging to work.  Must work for company with #{engagement.schedule.job.solution.equipment_name.pluralize}."
+              :required         => true, 
+              :as               => :select, 
+              :collection       => engagement.people_with_equipment_required, 
+              :include_blank    => false,
+              :hint             => AdminConstants::ADMIN_ENGAGEMENT_PERSON_HINT + "#{engagement.schedule.job.solution.equipment_name.pluralize}."
                         
       #f.input :schedule, 
       #        :hint => "Schedule this person will be on."
               
       f.input :docket_number,
-              :required=>true, 
-              :hint => "Docket number from docket provided by driver. GET THIS FROM THE DRIVER AS EARLY IN THE DAY AS POSSIBLE.",
-              :placeholder => "00000"
+              :required         => true, 
+              :hint             => AdminConstants::ADMIN_ENGAGEMENT_DOCKET_NUMBER_HINT,
+              :placeholder      => "00000"
     end
     
     f.inputs "Status" do
       f.input :onsite_now
       
       f.input :onsite_at, 
-              :label => 'Onsite soon',
-              :hint => "Operator estimates will be at work site within 15 minutes."
+              :label           => 'Onsite soon',
+              :hint             => AdminConstants::ADMIN_ENGAGEMENT_ONSITE_AT_HINT
               
       f.input :breakdown
       

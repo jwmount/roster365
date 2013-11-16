@@ -143,15 +143,20 @@ ActiveAdmin.register Person do
 
     f.inputs do
       f.has_many :certs do |f|
+        
         f.input :certificate,
-                :collection => Certificate.where({:for_person => true}),
-                :include_blank => false
+                :collection       => Certificate.where({:for_person => true}),
+                :include_blank    => false
+
         f.input :expires_on, 
-                :as => :date_picker,
-                :hint => AdminConstants::ADMIN_CERT_EXPIRES_ON_HINT
+                :as               => :date_picker,
+                :hint             => AdminConstants::ADMIN_CERT_EXPIRES_ON_HINT
+
         f.input :serial_number, 
-                :hint => AdminConstants::ADMIN_CERT_SERIAL_NUMBER_HINT
+                :hint             => AdminConstants::ADMIN_CERT_SERIAL_NUMBER_HINT
+
         f.input :permanent
+
         f.input :active
       end
     end

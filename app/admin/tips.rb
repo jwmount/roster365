@@ -27,24 +27,23 @@ ActiveAdmin.register Tip do
 
     f.inputs "Site Details" do
       f.input :name,
-        :placeholder => "name",
-        :hint => "Commonly known name, ususally not same as Company name.",
-        :placeholder => "name"
+        :hint                => AdminConstants::ADMIN_TIP_NAME_HINT,
+        :placeholder         => AdminConstants::ADMIN_TIP_NAME_PLACEHOLDER 
       
       f.input :company,
-        :hint => "Company owner or DBA name.",
-        :placeholder => "name"
+        :hint                => AdminConstants::ADMIN_TIP_COMPANY_HINT, 
+        :placeholder         => AdminConstants::ADMIN_TIP_COMPANY_PLACEHOLDER
 
       f.input :fee,
-        :hint => "Customary tip fee.  May be negotiated by reps.",
-        :placeholder => "0.00"
+        :hint                => AdminConstants::ADMIN_TIP_FEE_HINT,
+        :placeholder         => AdminConstants::ADMIN_TIP_FEE_PLACEHOLDER
 
       f.input :fire_ant_risk_level,
-        :as => :select,
-        :collection => %w[ High Medium Low None],
-        :include_blank => false,
-        :required => true,
-        :hint => "High, medium or none.  Do not move material from high to medium or none, or from medium to none."
+        :as                  => :select,
+        :collection          => AdminConstants::ADMIN_TIP_FEE_COLLECTION, 
+        :include_blank       => false,
+        :required            => true,
+        :hint                => AdminConstants::ADMIN_TIP_FIRE_ANT_RISK_LEVEL_HINT
 
       f.has_many :addresses do |f|
         f.input :street_address
@@ -59,15 +58,19 @@ ActiveAdmin.register Tip do
     f.inputs do
       f.has_many :certs do |f|
         f.input :certificate,
-                :collection => Certificate.where({:for_location => true}),
-                :include_blank => false
+                :collection           => Certificate.where({:for_location => true}),
+                :include_blank        => false
+
         f.input :active
+
         f.input :expires_on, 
-                :as => :date_picker,
-                :hint => "Expiration date."
+                :as                   => :date_picker,
+                :hint                 => AdminConstants::ADMIN_CERT_EXPIRES_ON_HINT
+
         f.input :permanent
+
         f.input :serial_number, 
-                :hint => "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+                :hint                 => AdminConstants::ADMIN_CERT_SERIAL_NUMBER_HINT
       end
     end
 

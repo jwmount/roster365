@@ -26,14 +26,20 @@ ActiveAdmin.register Role do
     error_panel f
 
     f.inputs do
-      f.input :name, :label => 'Role Name', :required => true, :input_html => {:class => "large"}
+
+      f.input :name, 
+              :label        => 'Role Name', 
+              :required     => true, 
+              :input_html   => {:class => "large"}
     end
 
     f.inputs "Users" do
-      f.input :users, :as => :select, 
-                      :input_html => {"data-placeholder" => "Select Users...", :style=> "width:900px", :class => "chzn-select"},
-                      :collection => AdminUser.alphabetically.all.map {|u| [u.email, u.id]}, 
-                      :include_blank => false
+
+      f.input :users, 
+              :as            => :select, 
+              :input_html    => {"data-placeholder" => "Select Users...", :style=> "width:900px", :class => "chzn-select"},
+              :collection    => AdminUser.alphabetically.all.map {|u| [u.email, u.id]}, 
+              :include_blank => false
     end
     f.buttons
   end
