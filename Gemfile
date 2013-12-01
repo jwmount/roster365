@@ -9,8 +9,6 @@ gem 'cancan'
 gem 'haml'
 gem 'carrierwave'
 
-# Rails 4 support, see https://github.com/gregbell/active_admin/pull/2326
-gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
 
 gem 'mysql2'
 gem 'pg'
@@ -63,3 +61,5 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# Rails 4 support, see https://github.com/gregbell/active_admin/pull/2326
+gem 'activeadmin',         github: 'gregbell/active_admin'#, branch: 'rails4'
