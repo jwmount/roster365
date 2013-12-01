@@ -110,7 +110,7 @@ ActiveAdmin.register_page "Dashboard" do
           # active_support/core_ext/time/calculations.rb.
           column "Action" do |schedule|
             if schedule.day < Date.current
-              'None'
+              'NONE--Date is past'
             else
               case 
               when  schedule.equipment_units_today == schedule.engagements.size

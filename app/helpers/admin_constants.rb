@@ -40,6 +40,7 @@ module AdminConstants
   ADMIN_CONDITIONS_VERBIAGE_PLACEHOLDER    = "Approved description of this condition."
   ADMIN_CONDITIONS_INDICATION_PLACEHOLDER  = "How, When or Why Condition applies."
 
+  
 #
 # Dockets
 #
