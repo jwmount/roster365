@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.0.0-p353'
 
 gem 'rails', '>=4.0.1'
 gem 'rake'
@@ -16,7 +16,7 @@ gem 'mysql2'
 gem 'pg'
 # Allows the use of foreign keys used to protect data integrity (per Xavier Shay)
 gem 'foreigner'
-
+gem 'i18n'
 gem 'taps'  #needed by Heroku
 
 # Needed for Rails 4.0 on Heroku
@@ -49,9 +49,6 @@ end
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-gem 'debugger'
-# Use jquery as the JavaScript library
 
 gem 'jquery-rails'
 
