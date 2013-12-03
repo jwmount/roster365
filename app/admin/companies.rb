@@ -185,7 +185,8 @@ ActiveAdmin.register Company do
 
       end
     end
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
     
   show :title => :display_name do

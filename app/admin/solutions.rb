@@ -251,7 +251,8 @@ form do |f|
               :scale           => 2
 
     end    
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
   
   show :title => :name do |s|

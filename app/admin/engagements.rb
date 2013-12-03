@@ -135,7 +135,8 @@ ActiveAdmin.register Engagement do
       f.input :engagement_declined
 
     end
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
 
   show :title => "Engagement" do |engagement|

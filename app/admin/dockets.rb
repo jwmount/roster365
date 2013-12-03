@@ -128,7 +128,8 @@ ActiveAdmin.register Docket do
               :placeholder     => AdminConstants::ADMIN_DOCKETS_SUPPLIER_INV_PAY_PLACEHOLDER
               
     end
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
 
  show :title => "Docket" do |docket|

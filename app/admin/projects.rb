@@ -115,7 +115,8 @@ ActiveAdmin.register Project do
         end
     end
     
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
   
   

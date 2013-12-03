@@ -40,7 +40,7 @@ ActiveAdmin.register Tip do
 
       f.input :fire_ant_risk_level,
         :as                  => :select,
-        :collection          => AdminConstants::ADMIN_TIP_FEE_COLLECTION, 
+        :collection          => AdminConstants::ADMIN_TIP_FIRE_ANT_RISK_LEVEL_COLLECTION,
         :include_blank       => false,
         :required            => true,
         :hint                => AdminConstants::ADMIN_TIP_FIRE_ANT_RISK_LEVEL_HINT
@@ -73,9 +73,8 @@ ActiveAdmin.register Tip do
                 :hint                 => AdminConstants::ADMIN_CERT_SERIAL_NUMBER_HINT
       end
     end
-
-    
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
 
   show :title => :name do |t|

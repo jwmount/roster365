@@ -272,6 +272,11 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.datetime "updated_at",                                    null: false
   end
 
+  create_table "roles_users", force: true do |t|
+    t.integer  "role_id",                                       null: false
+    t.integer  "user_id",                                       null: false
+  end
+
   create_table "schedules", force: true do |t|
     t.datetime "day",                                           null: false
     t.integer  "job_id",                                        null: false

@@ -63,7 +63,8 @@ ActiveAdmin.register Equipment do
       end
     end
 
-    f.buttons
+    #f.buttons
+    f.action :submit
     end
        
   show do

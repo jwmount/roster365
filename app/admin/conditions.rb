@@ -52,7 +52,8 @@ ActiveAdmin.register Condition do
       f.input :approved
     end
 
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
 
 

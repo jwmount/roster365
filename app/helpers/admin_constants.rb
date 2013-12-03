@@ -4,6 +4,13 @@
 module AdminConstants
 
 #
+# Addresses
+#
+  ADMIN_ADDRESS_OWNER_NOT_FOUND          = "Company does not exist, address should be deleted."
+  ADMIN_ADDRESS_PERSON_NOT_FOUND         = "Person does not exist, address should be deleted."
+  ADMIN_ADDRESS_PROJECT_NOT_FOUND        = "Project does not exist, address should be deleted."
+  ADMIN_ADDRESS_TIP_NOT_FOUND            = "Tip does not exist, address should be deleted."
+#
 # Company
 #
   ADMIN_COMPANY_NAME_HINT                = "Company name.  Must be unique."
@@ -52,6 +59,8 @@ module AdminConstants
   ADMIN_DOCKETS_ENGAGEMENT_HINT          = "Engagement associated with this docket."
   ADMIN_DOCKETS_DATED_HINT               = "Date docket was marked completed."
   ADMIN_DOCKETS_RECEIVED_ON_HINT         = "Date docket was received."
+  ADMIN_DOCKETS_RECEIVED_ON_LABEL        = "Docket received on (date)"
+  ADMIN_DOCKETS_RECEIVED_ON_PLACEHOLDER  = "e.g. 12 Dec 2013"
 
   ADMIN_DOCKETS_A_INV_PAY_LABEL          = "First Party Invoice Pay Amount ($)."
   ADMIN_DOCKETS_A_INV_PAY_HINT           = "Amount we'll pay to first party, if any."
@@ -77,7 +86,8 @@ module AdminConstants
 #
   ADMIN_EQUIPMENT_NAME_HINT              = "Select one."
   ADMIN_EQUIPMENT_EXPIRES_ON_HINT        = "Expiration date."
-  ADMIN_EQUIPMENT_SERIAL_NUMBER_HINT       = "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+  ADMIN_EQUIPMENT_SERIAL_NUMBER_HINT     = "Value that makes the certificate unique.  For example, License Number, Rego, etc."
+  ADMIN_EQUIPMENT_CERTIFICATE_HINT       = "e.g. Truck and Dog"
 #
 # Identifiers
 #
@@ -119,7 +129,7 @@ module AdminConstants
 
   ADMIN_PERSON_TITLE_LABEL               = ""
   ADMIN_PERSON_TITLE_HINT                = ""
-  ADMIN_PERSION_TITLE_PLACEHOLDER        = "Title"
+  ADMIN_PERSON_TITLE_PLACEHOLDER         = "Title"
 
 #
 # Project

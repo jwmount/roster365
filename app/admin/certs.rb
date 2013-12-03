@@ -74,7 +74,8 @@ ActiveAdmin.register Cert do
         status_tag (cert.active ? "YES" : "No"), (cert.active ? :ok : :error)            
       end        
     end
-    f.buttons
+    #f.buttons
+    f.action :submit
   end
   
   show do

@@ -99,7 +99,8 @@ ActiveAdmin.register Quote do
               :hint => "Council with jurisdiction, if known."
     end
 
-    f.buttons :commit
+    #f.buttons
+    f.action :submit
   end
   
   show :title => :name do |quote|
