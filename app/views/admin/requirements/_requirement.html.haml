@@ -1,2 +1,8 @@
-= "#{requirement.certificate.name} -- #{requirement.description}" 
+= "#{requirement.certificate.name}.  "
+= requirement.description unless requirement.description.nil?
+= "Applies to:  "  unless requirement.description.nil?
+= "Company" if requirement.for_company
+= "Equipment" if requirement.for_equipment
+= "Location" if requirement.for_location
+= "Person" if requirement.for_person
 %p

@@ -71,4 +71,9 @@ Roster365::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  # Recommended by Pivotal Labs
+  # http://pivotallabs.com/rails-4-upgrade/
+  config.log_formatter = ::Logger::Formatter.new
+  config.log_level = :info
 end

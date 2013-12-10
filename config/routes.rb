@@ -1,3 +1,5 @@
+# http://pivotallabs.com/rails-4-upgrade/
+
 Roster365::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config

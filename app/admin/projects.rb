@@ -17,8 +17,7 @@ ActiveAdmin.register Project do
   scope :intend_to_bid do |projects|
     projects.where ({intend_to_bid: true})
   end
-  scope :submitted_bid do |projects|
-    projects.where ({submitted_bid: true})
+  scope :submitted_bid do |projects|    projects.where ({submitted_bid: true})
   end
 
   filter :name
@@ -34,18 +33,18 @@ ActiveAdmin.register Project do
 
     column "Work Site Address" do |project|
       @address = Address.where("addressable_id = ? AND addressable_type = ?", self.id, 'Project').limit(1)
-      render project.addresses
+      render @address #project.addresses
     end
 
     # Project may have no rep, or some rep (one); multiple reps not supported so far.
-    # Rep is 'us', that is not from the company.project set.  Hence not clear how to link to it.
+    # Rep is a person who is 'us', that is not from the company.project set.  Hence not clear how to link to it.
     column "Rep" do |project|
       flash[:WARNING] = nil
       begin
-        @rep  = Person.find project.rep_id
-        render :partial => 'person', :locals => {:rep => @rep }
-        @identifiers = @rep.identifiers.order(:rank)
-        render :partial => 'identifier', :collection => @identifiers
+        @person  = Person.find project.rep_id
+        render @person
+        @identifiers = @person.identifiers.order(:rank)
+        render @identifiers
       rescue ActiveRecord::RecordNotFound
         flash[:WARNING] = highlight(t(:project_missing_rep), "WARNING:")
         'None'
@@ -114,6 +113,39 @@ ActiveAdmin.register Project do
           a.input :map_reference
         end
     end
+
+=begin
+    # NOTE:  Project requirements, e.g. 'Aluminum Body'
+    f.inputs "Required Equipment Certificates and Characteristics" do
+
+      f.has_many :requirements do |f|
+
+        f.input :certificate, 
+                :collection       => Certificate.where({for_equipment: true}),
+                :include_blank    => false,
+                :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_CERTIFICATE_HINT
+      end
+    end
+=end
+
+    # NOTE:  Project OWNER expresses requirements, e.g. 'CA Drivers License', and 'Legal Resident'
+    # for_*, * = [people, companies, locations, equipment]
+    # It is not an error for there to be no requirements expressed.
+    f.inputs "Required Certificates and Characteristics" do
+
+      f.has_many :requirements do |f|
+
+        f.input :certificate, 
+                :collection       => project.requirements_list,
+                :include_blank    => false,
+                :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_CERTIFICATE_HINT
+        f.input :for_company
+        f.input :for_equipment
+        f.input :for_location
+        f.input :for_person
+        f.input :description
+      end
+    end
     
     #f.buttons
     f.action :submit
@@ -135,6 +167,9 @@ ActiveAdmin.register Project do
           render project.addresses
       end
       
+      row "Requirements" do |project|
+        render project.requirements
+      end
 
       row("Active") { status_tag (project.active ? "YES" : "No"), (project.active ? :ok : :error) }
     end

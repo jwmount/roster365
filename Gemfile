@@ -6,7 +6,7 @@ gem 'rake'
 
 gem 'sass-rails'
 gem 'cancan'
-gem 'haml'
+gem 'haml-rails'
 gem 'carrierwave'
 
 
@@ -17,19 +17,10 @@ gem 'foreigner'
 gem 'i18n'
 gem 'taps'  #needed by Heroku
 
-# Needed for Rails 4.0 on Heroku
+# Support for Rails 4.0 by & for Heroku
 gem 'rails_12factor', group: :production
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  # gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier', '>= 1.0.3'
 
 group :production do
   # gem 'mysql2'  On AWS using RDS instead

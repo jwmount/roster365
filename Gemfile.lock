@@ -78,6 +78,11 @@ GEM
       actionpack (>= 3.0)
     haml (4.0.4)
       tilt
+    haml-rails (0.5.2)
+      actionpack (~> 4.0.1)
+      activesupport (~> 4.0.1)
+      haml (>= 3.1, < 5.0)
+      railties (~> 4.0.1)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -197,7 +202,7 @@ DEPENDENCIES
   cancan
   carrierwave
   foreigner
-  haml
+  haml-rails
   i18n
   jbuilder (~> 1.2)
   jquery-rails
