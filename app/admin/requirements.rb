@@ -1,7 +1,7 @@
 ActiveAdmin.register Requirement do
   
   menu parent: "Compliance"
-  actions :all, :except => :new
+  #actions :all, :except => :new
 
   scope :all, :default => true 
 #  scope :active do |requirements|
