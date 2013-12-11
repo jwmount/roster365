@@ -53,17 +53,10 @@ ActiveAdmin.register Solution do
       end
     end
     
+    column :equipment_name
+
     column :equipment_units_required_per_day, 
            :label => 'Units/day'
-
-    #column :equipment_name
-    column :equipment do |solution|
-      if solution.equipment.size > 0 
-        link_to "Equipment (#{solution.equipment.count.to_s})", admin_solution_equipment_index_path( company )
-      else
-        link_to "New equipment", new_admin_company_equipment_path(company)
-      end
-    end
      
     column :approved do |solution|
       status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error)      
@@ -270,7 +263,8 @@ form do |f|
     h3 "Solution: #{s.name}"
     attributes_table do
       row :solution_type
-      row :equipment_name
+      row :equipment_name, 
+          :label => "Equipment"
       row :tip_site
       row :updated_at
       row("Roster365 Approved") { status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error) }        
