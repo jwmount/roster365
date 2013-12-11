@@ -176,6 +176,10 @@ form do |f|
                 :collection       => Certificate.where({:for_equipment => true}),
                 :include_blank    => false,
                 :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_CERTIFICATE_HINT
+        f.input :for_equipment
+        f.input :for_person
+        f.input :description
+
       end
     end
     
@@ -193,8 +197,8 @@ form do |f|
 
       f.input :equipment_name, 
               :as               => :select, 
-              #:collection       => solution.quote.project.company.equipment, #Equipment::equipment_list,
-              :collection       => Equipment.alphabetically.all.map {|u| [u.name, u.id]},
+              #:collection       => solution.quote.project.company.equipment
+              :collection       => Equipment.alphabetically.all.map {|e| [e.display_name, e.id]}, 
               :include_blank    => false,
               :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_NAME_HINT
 
@@ -255,9 +259,9 @@ form do |f|
     f.actions
   end
   
-  show :title => :name do |s|
+  show :title => "Solution Details" do |s|
+    h3 "Solution: #{s.name}"
     attributes_table do
-      row :name
       row :solution_type
       row :equipment_name
       row :tip_site

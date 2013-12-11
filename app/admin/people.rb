@@ -164,10 +164,12 @@ ActiveAdmin.register Person do
   end
 
 
-  show :title => 'Person' do
-    panel "Name #{person.full_name}, #{person.title}" do
+  show :title => 'Personal Details' do
+    h3 person.full_name
+    panel "Context" do
       attributes_table_for(person) do
         row :company
+        row :title
         row ("Address") { render person.addresses }
         row ("Rollodex") { render person.identifiers }
         row ("active") { status_tag (person.active ? "YES" : "No"), (person.active ? :ok : :error) }

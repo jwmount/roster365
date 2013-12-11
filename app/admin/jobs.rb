@@ -97,9 +97,9 @@ ActiveAdmin.register Job do
     f.actions
   end
   
-  show :title => :name do |job|
+  show :title => "Job Details" do |job|
+    h3 "Job: #{job.name}"
     attributes_table do
-      row :name
       #row ("Project Rep") { link_to job.prep.full_name, admin_person_path(@prep.id) }
       #row ("Quote Rep") { link_to job.qrep.full_name, admin_person_path(@qrep.id) }
       row :start_on.to_s #strftime("%b %m, %Y")
