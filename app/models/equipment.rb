@@ -5,7 +5,6 @@ class Equipment < ActiveRecord::Base
   belongs_to :company
   has_many :reservations, :dependent => :destroy
 
-
   #
   # P O L Y M O R P H I C  A S S O C I A T I O N S
   #

@@ -296,8 +296,8 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.integer  "drive_time_out_of_site",                                   default: 0,                     null: false
     t.integer  "drive_time_out_of_tip_site",                               default: 0,                     null: false
     t.integer  "drive_time_tip_to_load",                                   default: 0,                     null: false
-    t.decimal  "equipment_dollars_per_day",        precision: 7, scale: 2, default: 0.0,                   null: false
     t.string   "equipment_name",                                           default: "",                    null: false
+    t.decimal  "equipment_dollars_per_day",        precision: 7, scale: 2, default: 0.0,                   null: false
     t.integer  "equipment_units_required_per_day",                         default: 1,                     null: false
     t.decimal  "hourly_hire_rate",                 precision: 7, scale: 2, default: 0.0,                   null: false
     t.decimal  "invoice_load_client",              precision: 7, scale: 2, default: 0.0,                   null: false

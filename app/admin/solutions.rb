@@ -29,6 +29,7 @@ ActiveAdmin.register Solution do
   
   # Interesting note
   # "Total is %<total>.02f" % {:total => 43.1}  # => Total is 43.10
+  filter :equipment
 
 
   index do 
@@ -55,8 +56,15 @@ ActiveAdmin.register Solution do
     column :equipment_units_required_per_day, 
            :label => 'Units/day'
 
-    column :equipment_name
-    
+    #column :equipment_name
+    column :equipment do |solution|
+      if solution.equipment.size > 0 
+        link_to "Equipment (#{solution.equipment.count.to_s})", admin_solution_equipment_index_path( company )
+      else
+        link_to "New equipment", new_admin_company_equipment_path(company)
+      end
+    end
+     
     column :approved do |solution|
       status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error)      
     end       
@@ -197,8 +205,7 @@ form do |f|
 
       f.input :equipment_name, 
               :as               => :select, 
-              #:collection       => solution.quote.project.company.equipment
-              :collection       => Equipment.alphabetically.all.map {|e| [e.display_name, e.id]}, 
+              :collection       => solution.equipment_names,  #solution.quote.project.company.equipment,
               :include_blank    => false,
               :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_NAME_HINT
 

@@ -13,9 +13,8 @@ class Solution < ActiveRecord::Base
   belongs_to :vendor, 
              :class_name => 'Company', 
              :foreign_key => :vendor_id
-  has_many :jobs, 
-           :dependent => :destroy
-  #has_many :equipment
+  has_many   :jobs, 
+             :dependent => :destroy
   has_and_belongs_to_many :tips
   
   #
@@ -80,7 +79,6 @@ class Solution < ActiveRecord::Base
       self.drive_time_out_of_site ||= 0 
       self.drive_time_tip_to_load ||= 0
       self.drive_time_out_of_tip_site ||= 0
-      self.equipment_name ||= 'Unknown'
       self.invoice_load_client ||= 0.00
       self.pay_load_client ||= 0.00
       self.invoice_tip_client ||= 0.00
@@ -219,4 +217,11 @@ class Solution < ActiveRecord::Base
     self.approved && client_approved
   end
 
+  # return list of what equipment a company has, as an array.
+  def equipment_names
+    equipment = self.quote.project.company.equipment
+    list = equipment.collect! {|x| x.name}
+#    list.join()
+  end
+  
 end
