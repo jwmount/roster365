@@ -62,7 +62,6 @@ class Project < ActiveRecord::Base
   # form of find works, see use to scope to employee Reps in projects.rb
   # where(aggregate_project_id: aggregate_project_id).scoping(&block) #new 
   def requirements_list
-    #Certificate.where({for_equipment: true, for_person: true}) - certificates
     Certificate.where(
        "for_company = :for_company OR for_equipment = :for_equipment OR for_person = :for_person",
        { for_company: true, for_equipment: true, for_person: true }

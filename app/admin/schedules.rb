@@ -168,8 +168,7 @@ ActiveAdmin.register Schedule do
                 :placeholder => AdminConstants::ADMIN_SCHEDULE_EQUIPMENT_UNITS_TODAY_PLACEHOLDER + "#{schedule.equipment_units_today.to_s}",
                 :hint        => AdminConstants::ADMIN_SCHEDULE_EQUIPMENT_UNITS_TODAY_HINT + "#{schedule.job.solution.equipment_name.pluralize}."
       end
-    #f.buttons
-    f.action :submit
+    f.actions
   end
 
   show :title => 'Schedule' do |schedule|

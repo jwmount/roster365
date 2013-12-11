@@ -94,8 +94,7 @@ ActiveAdmin.register Job do
               :required    => true,
               :hint        => AdminConstants::ADMIN_JOB_FINISHED_ON_HINT + "#{job.solution.quote.duration} days."
     end
-    #f.buttons
-    f.action :submit
+    f.actions
   end
   
   show :title => :name do |job|

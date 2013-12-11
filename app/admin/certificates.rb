@@ -65,7 +65,7 @@ ActiveAdmin.register Certificate do
 
     end
     #f.buttons
-    f.action :submit
+    f.actions
   end
        
   show :title => 'Certificate Details' do

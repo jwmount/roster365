@@ -41,8 +41,7 @@ ActiveAdmin.register Role do
               :collection    => AdminUser.alphabetically.all.map {|u| [u.email, u.id]}, 
               :include_blank => false
     end
-    #f.buttons
-    f.action :submit
+    f.actions
   end
   
   show do |f|

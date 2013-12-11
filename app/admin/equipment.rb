@@ -62,9 +62,7 @@ ActiveAdmin.register Equipment do
                 :hint               => AdminConstants::ADMIN_EQUIPMENT_SERIAL_NUMBER_HINT
       end
     end
-
-    #f.buttons
-    f.action :submit
+    f.actions
     end
        
   show do

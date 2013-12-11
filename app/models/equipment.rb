@@ -1,5 +1,3 @@
-#require 'debugger'
-
 class Equipment < ActiveRecord::Base
 
   # audited, not on Rails 4 yet

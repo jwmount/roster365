@@ -10,6 +10,5 @@
     = f.input :response_received_at, :label => "Response Received", :start_year => Time.now.year, :end_year => (Time.now + 14.days).year, :disabled => true
     = f.input :response, :input_html => {:disabled => true}
 
-  = f.buttons
-  /= f.action :submit
+  = f.actions
 

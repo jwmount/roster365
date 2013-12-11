@@ -25,8 +25,7 @@ ActiveAdmin.register Material do
       f.input :description,
               :placeholder     => AdminConstants::ADMIN_MATERIAL_DESCRIPTION_PLACEHOLDER
     end
-    #f.buttons
-    f.action :submit
+    f.actions
   end
        
 

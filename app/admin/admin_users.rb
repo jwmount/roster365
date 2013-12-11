@@ -24,7 +24,7 @@ ActiveAdmin.register AdminUser do
               :placehoder => "At least 6, maximum of 128 characters"
     end
     #f.buttons
-    f.action :submit
+    f.actions
   end
   
   show :title => :email do

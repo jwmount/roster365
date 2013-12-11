@@ -193,7 +193,8 @@ form do |f|
 
       f.input :equipment_name, 
               :as               => :select, 
-              :collection       => solution.quote.project.company.equipment, #Equipment::equipment_list,
+              #:collection       => solution.quote.project.company.equipment, #Equipment::equipment_list,
+              :collection       => Equipment.alphabetically.all.map {|u| [u.name, u.id]},
               :include_blank    => false,
               :hint             => AdminConstants::ADMIN_SOLUTION_EQUIPMENT_NAME_HINT
 
@@ -251,8 +252,7 @@ form do |f|
               :scale           => 2
 
     end    
-    #f.buttons
-    f.action :submit
+    f.actions
   end
   
   show :title => :name do |s|

@@ -75,7 +75,7 @@ ActiveAdmin.register Cert do
       end        
     end
     #f.buttons
-    f.action :submit
+    f.actions
   end
   
   show do

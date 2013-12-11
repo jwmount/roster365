@@ -106,7 +106,8 @@ ActiveAdmin.register Engagement do
       f.input :person, 
               :required         => true, 
               :as               => :select, 
-              :collection       => engagement.people_with_equipment_required, 
+      #        :collection       => engagement.people_with_equipment_required, 
+              :collection       => engagement.people_who_meet_requirements, 
               :include_blank    => false,
               :hint             => AdminConstants::ADMIN_ENGAGEMENT_PERSON_HINT + "#{engagement.schedule.job.solution.equipment_name.pluralize}."
                         
@@ -135,8 +136,7 @@ ActiveAdmin.register Engagement do
       f.input :engagement_declined
 
     end
-    #f.buttons
-    f.action :submit
+    f.actions
   end
 
   show :title => "Engagement" do |engagement|

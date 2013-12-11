@@ -64,6 +64,20 @@ class Engagement < ActiveRecord::Base
     Person.alphabetically.all.map {|u| [u.display_name, u.id]}
   end
     
+  # Person.alphabetically.all.map {|u| [u.display_name, u.id]}
+  # people_with_required_certs_and_whose_companies_have_equipment, or
+  # people who work for companies with equipment_name who have certificates required.
+  def people_who_meet_requirements
+    # first get companies who have equipment required
+    equipment = Equipment.where(
+      "name = :name",
+      { name: self.schedule.job.solution.equipment_name }
+      )
+    #list = Person.where(
+    #   "for_people = :for_company OR for_equipment = :for_equipment OR for_person = :for_person",
+    #   { for_company: true, for_equipment: true, for_person: true }
+    #)
+  end
 
 end
 
