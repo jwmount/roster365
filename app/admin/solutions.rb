@@ -53,11 +53,14 @@ ActiveAdmin.register Solution do
       end
     end
     
-    column :equipment_name
+    column "Equipment" do |solution|
+      solution.equipment_name
+    end
 
-    column :equipment_units_required_per_day, 
-           :label => 'Units/day'
-     
+    column "Equip requested/day" do |solution|
+      solution.equipment_units_required_per_day
+    end
+
     column :approved do |solution|
       status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error)      
     end       

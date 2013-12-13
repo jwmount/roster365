@@ -60,8 +60,26 @@ class Engagement < ActiveRecord::Base
 
   # scope of this is supposed to be drivers from companies that have right equipment.
   # 'Right' equipment means units of right kind with all or most?  required certificates.
+  # So far we just get people from all companies with equipment we need.
   def people_with_equipment_required
-    Person.alphabetically.all.map {|u| [u.display_name, u.id]}
+    #Person.alphabetically.all.map {|u| [u.display_name, u.id]}
+    equipment = Equipment.where(
+      "name = :name",
+      { name: self.schedule.job.solution.equipment_name }
+      )
+    # now get companies that have the equipment
+    company_list = []
+    equipment.each do |e|
+      company_list << e.company.id
+      end
+    companies = Company.find company_list
+    qualified_people = []
+    companies.each do |c|
+      qualified_people << c.people
+    end
+    #list = equipment.collect! {|x| x.name}
+    names = qualified_people.flatten.collect!
+    names
   end
     
   # Person.alphabetically.all.map {|u| [u.display_name, u.id]}

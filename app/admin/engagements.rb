@@ -103,11 +103,11 @@ ActiveAdmin.register Engagement do
     f.inputs "Schedule:  #{schedule.display_name}" do      
 
       #  STILL NEED TO SCOPE THIS COLLECTION TO PEOPLE IN COMPANIES WITH THE REQUIRED EQUIPMENT
+      #  AND ALSO MEET PROJECT REQUIREMENTS
       f.input :person, 
               :required         => true, 
               :as               => :select, 
-      #        :collection       => engagement.people_with_equipment_required, 
-              :collection       => engagement.people_who_meet_requirements, 
+              :collection       => engagement.people_with_equipment_required, 
               :include_blank    => false,
               :hint             => AdminConstants::ADMIN_ENGAGEMENT_PERSON_HINT + "#{engagement.schedule.job.solution.equipment_name.pluralize}."
                         
