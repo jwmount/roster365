@@ -160,7 +160,7 @@ ActiveAdmin.register Person do
         f.input :active
       end
     end
-    f.actions
+    f.actions :submit
   end
 
 
