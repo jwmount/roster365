@@ -120,11 +120,11 @@ module AdminConstants
 # Person
 #
   ADMIN_PERSON_FIRST_NAME_LABEL          = ""
-  ADMIN_PERSON_FIRST_NAME_HINT           = ""
+  ADMIN_PERSON_FIRST_NAME_HINT           = "First name should be entered if possible."
   ADMIN_PERSON_FIRST_NAME_PLACEHOLDER    = "First name"
 
   ADMIN_PERSON_LAST_NAME_LABEL           = ""
-  ADMIN_PERSON_LAST_NAME_HINT            = ""
+  ADMIN_PERSON_LAST_NAME_HINT            = "Required."
   ADMIN_PERSON_LAST_NAME_PLACEHOLDER     = "Last name"
 
   ADMIN_PERSON_TITLE_LABEL               = ""

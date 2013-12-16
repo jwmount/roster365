@@ -22,9 +22,9 @@ class Person < ActiveRecord::Base
             :dependent => :destroy
 
   has_many :certs, 
-           :as => :certifiable, 
-           :autosave => true, 
-           :dependent => :destroy
+           :as            => :certifiable, 
+           :autosave      => true, 
+           :dependent     => :destroy
 
   has_many :identifiers, 
            :as => :identifiable, 
@@ -41,6 +41,11 @@ class Person < ActiveRecord::Base
   scope :personally, where("certifiable_type = 'Person'")
   
   delegate :post_code, :to => :address
+
+#
+# V A L I D A T I O N S
+#
+  validates_presence_of :last_name
 
 #
 # D E F A U L T S

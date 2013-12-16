@@ -100,6 +100,7 @@ ActiveAdmin.register Company do
   end
   
   form do |f|
+    f.semantic_errors *f.object.errors.keys
     error_panel f
 
     f.inputs "Company Details" do

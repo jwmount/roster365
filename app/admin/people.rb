@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Person do
 
-  actions :all # , :except => [:destroy]
+  #actions :all # , :except => [:destroy]
   #menu :parent => "Admin", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Company.all.empty?
@@ -55,8 +55,8 @@ ActiveAdmin.register Person do
   end
   
   index do
-    selectable_column
 
+    selectable_column
     column :name do |person|
       if person.identifiers.count > 0
         h5 link_to "#{person.display_name + ', ' + person.title}", admin_company_person_path(person.company_id, person.id)
@@ -84,21 +84,25 @@ ActiveAdmin.register Person do
     column :certs do |person|
       render person.certs
     end
-
+    default_actions
   end
 
   form do |f|
-    error_panel f
+    f.semantic_errors *f.object.errors.keys
+    #error_panel f
 
     f.inputs "Person Details" do
 
       f.input :first_name,
+              :hint        => AdminConstants::ADMIN_PERSON_FIRST_NAME_HINT,
               :placeholder => AdminConstants::ADMIN_PERSON_FIRST_NAME_PLACEHOLDER
-      
+
       f.input :last_name,
+              :hint        => AdminConstants::ADMIN_PERSON_LAST_NAME_HINT,
               :placeholder => AdminConstants::ADMIN_PERSON_LAST_NAME_PLACEHOLDER
       
       f.input :title,
+              :hint        => AdminConstants::ADMIN_PERSON_TITLE_HINT,
               :placeholder => AdminConstants::ADMIN_PERSON_TITLE_PLACEHOLDER 
       
       f.input :active, 
@@ -143,22 +147,22 @@ ActiveAdmin.register Person do
     end
 
     f.inputs do
-      f.has_many :certs do |f|
+      f.has_many :certs, :heading => 'Certifications' do |cf|
         
-        f.input :certificate,
+        cf.input :certificate,
                 :collection       => Certificate.where({:for_person => true}),
                 :include_blank    => false
 
-        f.input :expires_on, 
+        cf.input :expires_on, 
                 :as               => :date_picker,
                 :hint             => AdminConstants::ADMIN_CERT_EXPIRES_ON_HINT
 
-        f.input :serial_number, 
+        cf.input :serial_number, 
                 :hint             => AdminConstants::ADMIN_CERT_SERIAL_NUMBER_HINT
 
-        f.input :permanent
+        cf.input :permanent
 
-        f.input :active
+        cf.input :active
       end
     end
     f.actions
@@ -209,5 +213,13 @@ ActiveAdmin.register Person do
     active_admin_comments
   end
 
+  batch_action :enhance do |selection|
+      # Do some deleting...
+      selection.destroy
+  end
 
+  batch_action :destroy, :confirm => "really really sure ???you want to delete all of these?" do |selection|
+      # Do some deleting...
+      selection.destroy
+  end
 end

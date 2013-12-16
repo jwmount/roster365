@@ -81,6 +81,8 @@ ActiveAdmin.register Solution do
 # At this time if contract type is not given, nothing is required.
 form do |f|
   error_panel f
+  f.semantic_errors *f.object.errors.keys
+
 
     f.inputs "Approvals" do
 

@@ -2,28 +2,34 @@ class Equipment < ActiveRecord::Base
 
   # audited, not on Rails 4 yet
 
+#
+# A S S O C I A T I O N S
+#
   belongs_to :company
   has_many :reservations, :dependent => :destroy
 
-  #
-  # P O L Y M O R P H I C  A S S O C I A T I O N S
-  #
-  #has_many :certificates, :through => :certs
+#
+# P O L Y M O R P H I C  A S S O C I A T I O N S
+#
   has_many :certs, 
            :as => :certifiable, 
            :autosave => true, 
            :dependent => :destroy
-  # NESTING
   accepts_nested_attributes_for :certs
+
 #
 # V A L I D A T I O N S
 #
   validates :name, :presence => true
 
+#
+# S C O P E S
+#
   scope :alphabetically, order("name ASC")
 
+#
 # D E F A U L T S
-
+#
   after_initialize :defaults
 
   def defaults
@@ -32,6 +38,9 @@ class Equipment < ActiveRecord::Base
     end
   end
 
+#
+# M E T H O D S
+#
   def certificate_list
     certificates = self.certs  #[0].certificate.name
     list = certificates.collect! {|x| x.certificate.name + "; " }
