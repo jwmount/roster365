@@ -58,44 +58,31 @@ class Engagement < ActiveRecord::Base
     self.schedule.day.strftime("%H:%M")
   end
 
-  # scope of this is supposed to be drivers from companies that have right equipment.
-  # 'Right' equipment means units of right kind with all or most?  required certificates.
-  # So far we just get people from all companies with equipment we need.
+  # Scope of this is all people of companies that have equipment identified for the solution.
+  # CONCERN:  Here we rely on the fact that only equipment that some company has can be selected
+  # for a Solution.  This may go against normal workflow in that we might be configuring the solution
+  # before finding a company that has he equipment needed.  This is a conservative approach intended 
+  # to prevent creating bids for which no source of equipment exists.
   def people_with_equipment_required
-    #Person.alphabetically.all.map {|u| [u.display_name, u.id]}
     equipment = Equipment.where(
       "name = :name",
       { name: self.schedule.job.solution.equipment_name }
       )
-    # now get companies that have the equipment
+    # knowing get companies that have the equipment
     company_list = []
-    equipment.each do |e|
-      company_list << e.company.id
-      end
+    equipment.each { |e| company_list << e.company.id }
+  
+    # company_list is array of company ids, so get collection of companies
     companies = Company.find company_list
+
+    # get collection of qualified people, here everyone who works for a company that has 
+    # one or more pieces of <equipment_name>
     qualified_people = []
-    companies.each do |c|
-      qualified_people << c.people
-    end
-    #list = equipment.collect! {|x| x.name}
+    companies.each { |c| qualified_people << c.people }
+
+    # return an array of peoples names
     names = qualified_people.flatten.collect!
-    names
   end
     
-  # Person.alphabetically.all.map {|u| [u.display_name, u.id]}
-  # people_with_required_certs_and_whose_companies_have_equipment, or
-  # people who work for companies with equipment_name who have certificates required.
-  def people_who_meet_requirements
-    # first get companies who have equipment required
-    equipment = Equipment.where(
-      "name = :name",
-      { name: self.schedule.job.solution.equipment_name }
-      )
-    #list = Person.where(
-    #   "for_people = :for_company OR for_equipment = :for_equipment OR for_person = :for_person",
-    #   { for_company: true, for_equipment: true, for_person: true }
-    #)
-  end
-
 end
 

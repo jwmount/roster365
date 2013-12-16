@@ -134,7 +134,8 @@ ActiveAdmin.register Person do
                 :hint        => AdminConstants::ADMIN_IDENTIFIER_VALUE_HINT,
                 :placeholder => AdminConstants:: ADMIN_IDENTIFIER_VALUE_PLACEHOLDER
 
-        f.input :rank, :collection => %w[1 2 3 4 5 6 7 8 9],
+        f.input :rank, 
+                :collection => %w[1 2 3 4 5 6 7 8 9],
                 :label       => AdminConstants::ADMIN_IDENTIFIER_RANK_LABEL,
                 :hint        => AdminConstants::ADMIN_IDENTIFIER_RANK_HINT,
                 :placeholder => AdminConstants::ADMIN_IDENTIFIER_RANK_PLACEHOLDER 
@@ -160,7 +161,7 @@ ActiveAdmin.register Person do
         f.input :active
       end
     end
-    f.actions :submit
+    f.actions
   end
 
 

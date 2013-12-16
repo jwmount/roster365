@@ -6,7 +6,6 @@ require 'active_support/all'
 
 ActiveAdmin.register Engagement do
 
-
   #menu :parent => "Operations", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Schedule.all.empty?

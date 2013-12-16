@@ -15,7 +15,7 @@ class Equipment < ActiveRecord::Base
            :dependent => :destroy
   # NESTING
   accepts_nested_attributes_for :certs
-
+  batch_action :destroy, true
 #
 # V A L I D A T I O N S
 #

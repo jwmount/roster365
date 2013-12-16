@@ -187,14 +187,9 @@ form do |f|
       end
     end
     
+    # Equipment must exist before it can be quoted.  This prevents user from quoting something
+    # without a sourcing solution for it.  See also description of this constraint in Engagement.rb.
     f.inputs "Equipment" do 
-      # At Quote time equipment vendor not generally known... pick this up later in Scheduling
-      # Once this is firmly established, do a migration to remove vendor_id from model.
-      #
-      #f.input :vendor_id, :as => :select, :label => 'Equipment Vendor', required: true, 
-      #                     :hint => "Subcontractor or Supplier of the equipment.  To search for equipment use the Equipment menu.", 
-      #                     :collection => Company.all, :input_html => {"data-placeholder" => "Select Partner Company ...", :style=> "width:200px", 
-      #                     :class => "chzn-select"}
       
       f.input :semis_permitted, 
               :as               => :radio

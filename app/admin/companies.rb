@@ -185,7 +185,7 @@ ActiveAdmin.register Company do
 
       end
     end
-    f.actions :submit
+    f.actions
   end
     
   show :title => :display_name do
