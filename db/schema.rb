@@ -14,7 +14,7 @@
 #ActiveRecord::Schema.define(version: 20130212041557) do
 ActiveRecord::Schema.define(version: 201301114195707) do
 
-  create_table "RolesUsers", id: false, force: true do |t|
+  create_table "UsersRoles", id: false, force: true do |t|
     t.integer "role_id"
     t.integer "user_id"
     t.integer "id",      null: false
