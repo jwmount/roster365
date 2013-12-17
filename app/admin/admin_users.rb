@@ -5,15 +5,19 @@ ActiveAdmin.register AdminUser do
   filter :email
   
   index do
-    column do |f|
+    selectable_column
+    column "Click to email person" do |f|
       link_to f.email, edit_admin_admin_user_path(f.id)
     end
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
+
+    default_actions
   end
 
   form do |f|
+    f.semantic_errors *f.object.errors.keys
     error_panel f
 
     f.inputs "Admin Details" do
@@ -23,7 +27,6 @@ ActiveAdmin.register AdminUser do
       f.input :password,
               :placehoder => "At least 6, maximum of 128 characters"
     end
-    #f.buttons
     f.actions
   end
   
