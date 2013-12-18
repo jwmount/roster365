@@ -1,19 +1,10 @@
-#ActiveAdmin.register Role do
-
-#  menu label: "User Roles"
-#  menu parent: "System Administration"
-  
-#end
 ActiveAdmin.register Role do
-### ?? from before Rails 4.0.0  controller.authorize_resource
 
   menu :parent => "System Administration"
 
-#  menu :parent => "System Administration", :if => lambda{|tabs_renderer|
-#    controller.current_ability.can?(:manage, Role)
-#  }
-
   index do
+    selectable_column
+
     column :name do |role|
       link_to role.name, admin_role_path(role)
     end
@@ -33,14 +24,6 @@ ActiveAdmin.register Role do
               :input_html   => {:class => "large"}
     end
 
-    f.inputs "Users" do
-
-      f.input :users, 
-              :as            => :select, 
-              :input_html    => {"data-placeholder" => "Select Users...", :style=> "width:900px", :class => "chzn-select"},
-              :collection    => AdminUser.alphabetically.all.map {|u| [u.email, u.id]}, 
-              :include_blank => false
-    end
     f.actions
   end
   

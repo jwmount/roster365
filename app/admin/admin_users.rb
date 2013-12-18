@@ -9,6 +9,7 @@ ActiveAdmin.register AdminUser do
     column "Click to email person" do |f|
       link_to f.email, edit_admin_admin_user_path(f.id)
     end
+    column :role
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
@@ -26,13 +27,26 @@ ActiveAdmin.register AdminUser do
               
       f.input :password,
               :placehoder => "At least 6, maximum of 128 characters"
+
+      f.input :password_confirmation,
+              :placehoder => "At least 6, maximum of 128 characters"
+
     end
+
+    f.inputs "Role for this person" do
+      f.input :role,
+              :collection    => Role.alphabetically.all.map {|r| [r.name, r.id]}
+    end
+
     f.actions
   end
   
   show :title => :email do
+    h3 admin_user.email
+
     attributes_table do
       row ("Email") { mail_to admin_user.email }
+      row :role
       row :reset_password_sent_at
       row :sign_in_count
       row :last_sign_in_at

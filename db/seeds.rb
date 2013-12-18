@@ -1,12 +1,9 @@
-2
-
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
 #
-roles_list = %w[ admin demo staff support operations sales ]
 
+roles_list = %w[ admin demo guest operations sales staff support ]
 roles_list.each do |role|
   Role.create!(name: role)
 end
@@ -14,15 +11,14 @@ end
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 
 user_list = [
-  ["admin@example.com", 'demo'],
-  ['staff@example.com', 'staff_role'], 
-  ['john@venuesoftware.com', 'vendor_support'],
-  ['peta.forbes@roster365.com.au', 'management'],
-  ['tgodino@me.com', 'vendor_support']
+  ["admin@example.com", 0],
+  ['staff@example.com', 5], 
+  ['john@venuesoftware.com', 0]
   ]
 user_list.each do |email, role|  
-  AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365')
+  AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365', role_id: role)
 end
+
 
 # load certificates
 # name, description, for_person, for_company, for_equipment, for_location, active

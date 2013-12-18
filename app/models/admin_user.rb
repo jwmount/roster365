@@ -5,16 +5,11 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, 
-         :recoverable, :rememberable, :trackable, :validatable
-
-  
-  has_and_belongs_to_many :roles
+  belongs_to :role
+  #has_and_belongs_to_many :roles
     
   after_create { |admin| admin.send_reset_password_instructions }
+
   scope :alphabetically, order("email ASC")
 
   def password_required?

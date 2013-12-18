@@ -14,12 +14,6 @@
 #ActiveRecord::Schema.define(version: 20130212041557) do
 ActiveRecord::Schema.define(version: 201301114195707) do
 
-  create_table "UsersRoles", id: false, force: true do |t|
-    t.integer "role_id"
-    t.integer "user_id"
-    t.integer "id",      null: false
-  end
-
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",                                   null: false
     t.string   "resource_type",                                 null: false
@@ -48,6 +42,7 @@ ActiveRecord::Schema.define(version: 201301114195707) do
   end
 
   create_table "admin_users", force: true do |t|
+    t.integer  "role_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -58,8 +53,8 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",       default: '2013-10-08 00:00:00', null: false
-    t.datetime "updated_at",       default: '2013-10-08 00:00:00', null: false
+    t.datetime "created_at",             default: '2013-10-08 00:00:00', null: false
+    t.datetime "updated_at",             default: '2013-10-08 00:00:00', null: false
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -260,7 +255,6 @@ ActiveRecord::Schema.define(version: 201301114195707) do
 
   create_table "reservations", force: true do |t|
     t.integer  "schedule_id",                                   null: false
-    #t.integer  "person_id",                                     null: false
     t.integer  "equipment_id",                                  null: false
     t.integer  "number_requested",   default: 1,                null: false
     t.datetime "created_at",                                    null: false
@@ -268,15 +262,18 @@ ActiveRecord::Schema.define(version: 201301114195707) do
   end
 
   create_table "roles", force: true do |t|
-    t.string   "name"
+    t.string   "name"           
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
   end
 
-  create_table "roles_users", force: true do |t|
+=begin
+  works with the HABTM approach
+  create_table "admin_users_roles", id: false, force: true do |t|
     t.integer  "role_id",                                       null: false
-    t.integer  "user_id",                                       null: false
+    t.integer  "admin_user_id",                                 null: false
   end
+=end
 
   create_table "schedules", force: true do |t|
     t.datetime "day",                                           null: false
