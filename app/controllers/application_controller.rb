@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 
 def error_panel( f )
   if f.object.errors.size >= 1  
