@@ -57,6 +57,9 @@ ActiveAdmin.setup do |config|
   # within the controller.
   config.authentication_method = :authenticate_admin_user!
 
+  # == User Authentication (from ActiveAdmin Docs)
+  config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  config.on_unauthorized_access = :access_denied
 
   # == Current User
   #

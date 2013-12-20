@@ -2,7 +2,7 @@
 ActiveAdmin.register Company do
 
   menu label: "Customers", parent: "Companies"
-  
+  #before_filter :check_permissions, :only => [:new, :create, :cancel]  
 #
 # W H I T E   L I S T   M A N A G E M E N T
 # 
@@ -209,6 +209,7 @@ ActiveAdmin.register Company do
     active_admin_comments
 
   end
+
 
 #
 # P U S H  B U T T O N S

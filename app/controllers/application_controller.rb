@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 
 def error_panel( f )
   if f.object.errors.size >= 1  
@@ -22,6 +22,19 @@ end
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
+
+ def access_denied(exception)
+    Rails.logger.error "access denied! '#{exception.message}'"
+    redirect_to new_admin_admin_user_path, :alert => exception.message
+    #redirect_to :root
+  end
+
+=begin  
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to root_url
+  end
+=end
 
   def current_user
     current_admin_user
@@ -49,36 +62,6 @@ class ActiveAdmin::Views::Pages::Base < Arbre::HTML::Document
 
 end
 
-#
-#  M O D U L E 
-#
-module AbilityHelper
-
-  class Ability
-    include CanCan::Ability
- 
-    def initialize(user)
-      user ||= User.new # guest user
- 
-      if user.role? :super_admin
-        can :manage, :all
-      elsif user.role? :product_admin
-        can :manage, [Product, Asset, Issue]
-      elsif user.role? :product_team
-        can :read, [Product, Asset]
-        # manage products, assets he owns
-        can :manage, Product do |product|
-          product.try(:owner) == user
-        end
-        can :manage, Asset do |asset|
-          asset.assetable.try(:owner) == user
-        end
-      end
-    end
-
-  end
-  
-end
 
 #
 #  M O D U L E 

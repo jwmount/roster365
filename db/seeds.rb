@@ -3,7 +3,7 @@
 # Works best with rake db:reset
 #
 
-roles_list = %w[ admin demo guest operations sales staff support ]
+roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
 roles_list.each do |role|
   Role.create!(name: role)
 end
@@ -11,9 +11,10 @@ end
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 
 user_list = [
-  ["admin@example.com", 0],
-  ['staff@example.com', 5], 
-  ['john@venuesoftware.com', 0]
+  ["peta@example.com", 1],
+  ['guest@example.com', 4], 
+  ['magge@example.com', 2], 
+  ['john@venuesoftware.com', 8]
   ]
 user_list.each do |email, role|  
   AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365', role_id: role)
