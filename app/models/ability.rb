@@ -22,7 +22,6 @@
 #   sales (sees anything related to accounts they have oversight for)
 #   superadmin (have to be one to create a Person with role of 'admin')
  
-
 class Ability
   include CanCan::Ability
 
@@ -34,10 +33,11 @@ class Ability
       #can :read, ActiveAdmin::Page, :name => "Dashboard"
   end
 
+  # redirect loop will occur when expression leads to root or nil.
   def initialize(user)
 
-    can :manage, :all
-    return
+    #can :manage, :all
+    #return
     
     user ||= AdminUser.new # user (not logged in)
 
@@ -47,9 +47,9 @@ class Ability
       can :manage, :all
 
     when 'bookeeper'
-      can :manage, Docket
       can :read, :all
-    
+      can :manage, Docket
+      
     when 'driver'
       can :read, Engagement
 
@@ -72,7 +72,8 @@ class Ability
     # actually want to return to login
     # guest
     else
-      can :read, ActiveAdmin::Page, :name => "Dashboard"
+      can :read, :all
+      can :manage, Comment
     end  
 =begin
     if user.role.name == 'admin'

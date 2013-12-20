@@ -40,7 +40,11 @@ Roster365::Application.routes.draw do
         end
       end
     end
-    
-  end
+
+    resources :people do
+      resources :dockets
+    end
+
+  end #end namespace
  
 end #routes
