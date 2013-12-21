@@ -11,9 +11,6 @@ end
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 
 user_list = [
-  ["peta@example.com", "", 1],
-  ['guest@example.com', "", 4], 
-  ['magge@example.com', "", 2], 
   ['john@venuesoftware.com', 'jvs9275', 8]
   ]
 user_list.each do |email, password, role|  
