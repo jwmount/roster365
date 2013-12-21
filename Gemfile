@@ -9,9 +9,8 @@ gem 'cancan'
 gem 'haml-rails'
 gem 'carrierwave'
 
-gem 'mysql2',   group: [:development, :test]
-gem 'debugger', group: [:development, :test]
 
+gem 'devise'
 gem 'pg'
 # Allows the use of foreign keys used to protect data integrity (per Xavier Shay)
 gem 'foreigner'
