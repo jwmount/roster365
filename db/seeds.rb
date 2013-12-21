@@ -11,7 +11,7 @@ end
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 
 user_list = [
-  ['john@venuesoftware.com', 'jwm0unt', 8]
+  ['john@venuesoftware.com', 'jvs9275', 8]
   ]
 user_list.each do |email, password, role|  
   AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)

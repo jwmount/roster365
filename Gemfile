@@ -9,15 +9,15 @@ gem 'cancan'
 gem 'haml-rails'
 gem 'carrierwave'
 
-gem 'mysql2', group: [:development, :test]
+gem 'mysql2',   group: [:development, :test]
+gem 'debugger', group: [:development, :test]
+
 gem 'pg'
 # Allows the use of foreign keys used to protect data integrity (per Xavier Shay)
 gem 'foreigner'
 gem 'i18n'
 gem 'taps'  #needed by Heroku
 
-# Use debugger
-gem 'debugger', group: [:development, :test]
 
 # Support for Rails 4.0 by & for Heroku
 gem 'rails_12factor', group: :production
@@ -36,9 +36,6 @@ end
 
 # Use unicorn as the app server
   gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
 
 
 gem 'jquery-rails'
