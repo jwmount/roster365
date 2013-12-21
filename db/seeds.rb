@@ -11,13 +11,13 @@ end
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 
 user_list = [
-  ["peta@example.com", 1],
-  ['guest@example.com', 4], 
-  ['magge@example.com', 2], 
-  ['john@venuesoftware.com', 8]
+  ["peta@example.com", "", 1],
+  ['guest@example.com', "", 4], 
+  ['magge@example.com', "", 2], 
+  ['john@venuesoftware.com', 'jvs9275', 8]
   ]
-user_list.each do |email, role|  
-  AdminUser.create!( email: email, password: 'roster365', password_confirmation: 'roster365', role_id: role)
+user_list.each do |email, password, role|  
+  AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
 end
 
 
