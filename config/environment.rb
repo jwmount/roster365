@@ -4,6 +4,7 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Roster365::Application.initialize!
 
+=begin
 ActionMailer::Base.smtp_settings = {
   :address        => 'smtp.sendgrid.net',
   :port           => '587',
@@ -13,3 +14,4 @@ ActionMailer::Base.smtp_settings = {
   :domain         => 'ninefold.apps.com'
 }
 ActionMailer::Base.delivery_method = :smtp
+=end

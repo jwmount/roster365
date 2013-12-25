@@ -1,5 +1,3 @@
-
-=begin
 	
 ActionMailer::Base.smtp_settings = {
   :address        => 'smtp.sendgrid.net',
@@ -11,5 +9,3 @@ ActionMailer::Base.smtp_settings = {
   :domain         => 'ninefold.apps.com'
 }
 ActionMailer::Base.delivery_method = :smtp
-
-=end
