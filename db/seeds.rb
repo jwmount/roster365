@@ -10,7 +10,14 @@ end
 
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 user_list = [
-  ['john@venuesoftware.com', 8]
+  ['Admin@venuesoftware.com', 1]
+  ['Bookeeper@venuesoftware.com', 2]
+  ['Driver@venuesoftware.com', 3]
+  ['Guest@venuesoftware.com', 4]
+  ['Manager@venuesoftware.com', 5]
+  ['Dispatcher@venuesoftware.com', 6]
+  ['Sales@venuesoftware.com', 7]
+  ['SuperAdmin@venuesoftware.com', 8]
   ]
 user_list.each do |email, password = 'roster365', role|  
   AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
