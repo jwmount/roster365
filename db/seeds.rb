@@ -9,7 +9,14 @@ roles_list.each do |role|
 end
 
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
-
+user_list = [
+  ['john@venuesoftware.com', 8]
+  ]
+user_list.each do |email, password = 'roster365', role|  
+  AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
+  Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
+end
+=begin
 user_list = [
   ['john@venuesoftware.com', 'jvs9275', 8]
   ]
@@ -17,7 +24,7 @@ user_list.each do |email, password, role|
   AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
   Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
 end
-
+=end
 
 # load certificates
 # name, description, for_person, for_company, for_equipment, for_location, active
