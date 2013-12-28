@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 ActiveAdmin.register Quote do
       
   filter :name
@@ -13,6 +13,7 @@ ActiveAdmin.register Quote do
 #
 # C A L L  B A C K S
 #
+
   # Warn user if project work site has not been entered.  
   before_build do |quote|
     flash[:warning] = AdminConstants::ADMIN_QUOTE_NO_WORK_SITE_DEFINED unless quote.worksite_defined?
