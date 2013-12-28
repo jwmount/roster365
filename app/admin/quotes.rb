@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 ActiveAdmin.register Quote do
       
   filter :name
@@ -10,13 +10,20 @@ ActiveAdmin.register Quote do
   # NOT OPTIONAL, effect is to scope quotes to project, apparently is NOT same effect as same statement in quote.rb.
   belongs_to :project
 
+#
+# C A L L  B A C K S
+#
+  # Warn user if project work site has not been entered.  
+  before_build do |quote|
+    flash[:warning] = AdminConstants::ADMIN_QUOTE_NO_WORK_SITE_DEFINED unless quote.worksite_defined?
+  end
+
   after_build do |quote|
     quote.generate_name
     quote.fire_ants_verified_by = current_user.email
     # Precondition for a new Quote -- nobody home?  Cannot complete :quote_to.  
     if quote.project.company.people.empty?
-      flash[:warning] = "WARNING:  #{quote.project.company.name} has no staff!  You will not be able to complete a quote " + 
-        "if no one's there to give it to.  "
+      flash[:warning] = AdminConstants::ADMIN_NOONE_WORKS_FOR_COMPANY
     end
   end
 
@@ -32,7 +39,7 @@ ActiveAdmin.register Quote do
   index do
     selectable_column
 
-    column :name, :sortable => 'name' do |quote|
+    column "Name (click for details)", :sortable => 'name' do |quote|
       link_to quote.name, admin_company_project_quote_path( quote.project.company, project, quote )
     end
 

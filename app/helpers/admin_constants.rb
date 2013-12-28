@@ -156,7 +156,9 @@ module AdminConstants
   ADMIN_QUOTE_QUOTE_TO_ID_LABEL          = "Quote to"
   ADMIN_QUOTE_QUOTE_TO_ID_HINT           = "Deliver quote to "
 
-#
+  ADMIN_QUOTE_NO_WORK_SITE_DEFINED       = "WARNING:  Project address is not defined so no solutions can be created.  Provide a work location for the project before you proceed."
+  ADMIN_NOONE_WORKS_FOR_COMPANY          = "WARNING:  Company has no staff!  You will not be able to complete a quote if no one's there to give to receive it.  "
+# 
 # Requirements
 #
 # none

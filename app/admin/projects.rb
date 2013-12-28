@@ -25,7 +25,7 @@ ActiveAdmin.register Project do
   index do
     selectable_column
 
-    column "Name" do |project|
+    column "Name (click for details)" do |project|
       link_to project.name, admin_company_project_path( project.company, project )
     end
 

@@ -9,22 +9,6 @@ class Quote < ActiveRecord::Base
 
   belongs_to :project  
   has_many :solutions, :dependent => :destroy
-  #NO! has_many :jobs, :through => :solutions, :dependent => :destroy
-
-  # This follows association used for Project, however it's not what we want exactly
-  # There is a single rep, if any.  We need a scope :rep to refer to is, or?
-  #has_one  :rep,          :as => :person
-  #has_many :people
-
-#
-# P O L Y M O R P H I C  A S S O C I A T I O N S
-#
-#  has_many :requirements,
-#          :as => :requireable,
-#          :autosave => true,
-#           :dependent => :destroy
-# polymorpth classes are updated directly from the parent            
-#  accepts_nested_attributes_for :requirements
   
 
   # Do not :scope => :project, this will cause arel to ROLLBACK with 'Cannot visit Project'
@@ -146,6 +130,9 @@ class Quote < ActiveRecord::Base
     end
   end
 
+  def worksite_defined?
+    Address.where(addressable_type: "Project", addressable_id: "#{self.project.id}").exists?
+  end
 
 end
 

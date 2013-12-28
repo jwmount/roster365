@@ -110,15 +110,12 @@ class Solution < ActiveRecord::Base
   end
   
 
-  # Remember:  redirect_to include admin_project_*_path or breadcrumbs will be invalid.  
+  # Remember:  redirect_to must include entire admin_project_*_path or breadcrumbs will be invalid.  
   def isApproved?
-    #solution = Solution.find params[:id]
-     # if solution
-        if self.approved
-           flash[:warning] = "Solution cannot be changed because it has final approval.  You can Copy it and edit that one."
-           redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
-        end
-      #end
+    if self.approved
+       flash[:warning] = "Solution cannot be changed because it has final approval.  You can Copy it and edit that one."
+       redirect_to admin_project_quote_solution_path(solution.quote.project.id,solution.quote.id, solution.id)
+    end
   end
 
   def printed_quote
