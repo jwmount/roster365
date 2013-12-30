@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
 #
-
+#require 'debugger'
 roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
 roles_list.each do |role|
   Role.create!(name: role)
@@ -54,83 +54,161 @@ certificate_list.each do |name, description, for_person, for_company, for_equipm
   end
 end
 
-
-# load companies
-# Companies and People
-# First one is licensee, this admittedly fragile rule, is/was? used next to determine this status.
-# Two methods here, names list and completely specified attributes.
+#
+# D I R E C T O R Y   C O M P A N I E S
+# 
+# Format here works well for company listings in Directories.   
+# Array of hashes, each contains four hashes "company", "address", "person", and "identifier".
+# First company is our licensee, this admittedly fragile rule, is/was? used next to determine this status.
+# Note:  hash values cannot be duplicates so cannot have two "Identifiers" for example.
+#
 companies_list = [
-  [ "#{LICENSEE}", 30, false, false, "00000", "Farm Transport, Software Licensee"], 
-  ["American Debris Box Service Inc.", 30, false, false, "00000", "Containers delivered and removed"],
-  ["Lawson Drayage, Inc.", 30, false, false, "00000", "Cartage, Local Houl Freight Carrying Service"],
-  ["Waste Management, Inc.", 30, false, false, "00000", "Waste Disposal & Removal Service"],
-  ["Reliable Crane & Rigging", 30, false, false, "00000", "Carting, Hoist Service & REntal, Machinery Moving & Erecting Service"],
-  ["Foothill Disposal Co. Inc.", 30, false, false, "00000", "Cartages Service"],
-  ["BWRS", 30, false, false, "00000", "Debris box, compactors, recycling"],
-  ["Pleasanton Garbage Serivice, Inc.", 30, false, false, "00000", "Waste Transport Service"],
-  ["Dillard Trucking, Inc.", 30, false, false, "00000", "Hazardous Waste Transport"],
-  ["Blue Line Transfer", 30, false, false, "00000", "Cartage, waste removal & recycling service"],
-  ["Gan-Tran Ltd.", 30, false, false, "00000", "Cartage Services"],
-  ["Precision Crane Service", 30, false, false, "00000", "Crane & Freight Carrier Service"],
-  ["East Bay Sanitary Co., Inc.", 30, false, false, "00000", "Cartage, Waste Disposal & Removing Service"],
-  ["Vallejo Garbage Service", 30, false, false, "00000", "Cartages Service"],
-  ["Fred Haines & Company", 30, false, false, "00000", "Cartage Service"],
-  ["Specialty Solid Waste & Recycling", 30, false, false, "00000", "Waste Handling, Cartage, Waste Disposal Service"],
-  ["Tight Access Excavation", 30, false, false, "00000", "Residential - Commercial"],
-  ["Hazel Construction", 30, false, false, "00000", "Residential Construction"],
-  ["TMT Industries", 30, false, false, "00000", "Residential Construction"]
-  ]
-companies_list.each do |c| #name, credit_terms, PO_required, active, bookeeping_number, lob|
-  Company.create!( name: c[0], credit_terms: c[1], PO_required: c[2], active: c[3], bookeeping_number: c[4], line_of_business: c[5])
+  { "company"    => { name: "#{LICENSEE}", line_of_business: "Farm Transport, Software Licensee", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "American Debris Box Service Inc.", line_of_business: "Containers delivered and removed", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Lawson Drayage, Inc.", line_of_business: "Cartage, Local Houl Freight Carrying Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Waste Management, Inc.", line_of_business: "Waste Disposal & Removal Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Reliable Crane & Rigging", line_of_business: "Carting, Hoist Service & Rental, Machinery Moving & Erecting Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Foothill Disposal Co. Inc.", line_of_business: "Cartage Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "BWRS", line_of_business: "Debris box, compactors, recycling", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Pleasanton Garbage Serivice, Inc.", line_of_business: "Waste Transport Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Dillard Trucking, Inc.", line_of_business: "Hazardous Waste Transport", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Blue Line Transfer", line_of_business: "Cartage, waste removal & recycling service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Gan-Tran Ltd.", line_of_business: "Cartage Services", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Precision Crane Service", line_of_business: "Crane & Freight Carrier Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "East Bay Sanitary Co., Inc.", line_of_business: "Cartage, Waste Disposal & Removing Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Vallejo Garbage Service", line_of_business: "Cartages Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Fred Haines & Company", line_of_business: "Cartage Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Specialty Solid Waste & Recycling", line_of_business: "Waste Handling, Cartage, Waste Disposal Service", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Tight Access Excavation", line_of_business: "Residential - Commercial", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "Hazel Construction", line_of_business: "Residential Construction", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+  { "company"    => { name: "TMT Industries", line_of_business: "Residential Construction", url: ""},
+    "address"    => {},
+    "person"     => { last_name: "t.b.d."},
+    "identifier" => { name: "Main Office", value: "t.b.d."}
+    }, 
+# East Bay Book of Lists
+  { "company"    => { name: "O.C. Jones & Sons Inc.", line_of_business:  "Heavy civil construction", url: "www.ocjones.com" },
+    "address"    => { street_address: "1520 Fourth St.", city: "Berkeley", state: "CA", post_code: "94710" },
+    "person"     => { first_name: "Kelly", last_name: "Kolander", title: "CEO" },
+    "identifier" => { name: "Main Company", value: "510 526-3424", rank: 1 }
+  },
+  { "company"    => { name: "Bay Cities Paving & Grading Inc.", line_of_business:   "General engineering, heavy construction", url: "NR"},
+    "address"    => { street_address: "5029 Forni Drive", city: "Concord", state: "CA", post_code: "94520" },
+    "person"     => { first_name: "Ben", last_name: "Rodrigues Jr", title: "President" },
+    "identifier" => { name: "Main Company", value: "925 687-6666", rank: 1 }
+  },
+  { "company"    => { name: "S&S Supplies and Solutions", line_of_business: "Industrial supplies and services", url: "www.supliesandsolutions.com"},
+    "address"    => { street_address: "501 Shell Ave", city: "Martinez", state: "CA", post_code: "94553"},
+    "person"     => { first_name: "Tracy", last_name: "Tomkovicz", title: "CEO" },
+    "identifier" => { name: "Main Company", value: "925 687-6666", rank: 1 }
+  },
+  { "company"    => { name: "McGuire and Hester", line_of_business: "Heavy civi engineering and construction services", url: "www.mandhcorp.com"},
+    "address"    => { street_address: "9009 Railroad Ave.", city: "San Ramon", state: "CA", post_code: "94583"},
+    "person"     => { first_name: "Michael", last_name: "Hester", title: "President"},
+    "identifier" => { name: "email", value: "pres@mandhcorp.com", rank: 1}
+  },
+  { "company"    => { name: "Shames Construction Co. Ltd.", line_of_business: "Commercial general contractor", url: "www.shames.com"},
+    "address"    => { street_address: "5826 Brisa St.", city: "Livermore", state: "CA", post_code: "94550"},
+    "person"     => { first_name: "Carolyn", last_name: "Shames", title: "President and CEO"},
+    "identifier" => { name: "Main Number", value: "925 606-3000"}
+  },
+  { "company"    => { name: "James E. Roberts - Obayashi Corp.", line_of_business: "General construction", url: "www.robertsobayashi.com"},
+    "address"    => { street_address: "20 Oak Court", city: "Danville", state: "CA", post_code: "94526"},
+    "person"     => { first_name: "Scott", last_name: "Smith"},
+    "identifier" => { name: "Main Number", value: "925 820-0600"}
+    },
+  { "company"    => { name: "Engineering/Remediation Resources Group Inc.", line_of_business: "Environmental construction and engineering", url: "www.errg.com"},
+    "address"    => { street_address: "4585 Pacheco Blvd., Suite 200", city: "Martinez", state: "CA", post_code: "94553"},
+    "person"     => { first_name: "Cynthia", last_name: "Liu"},
+    "identifier" => { name: "Main Number", value: "925 969-0750"}
+  },
+  { "company"    => { name: "Paradigm General Contractors", line_of_business: "General contractor", url: "www.paradigmgc.com"},
+    "address"    => { street_address: "1017 MaxDonald Ave.", city: "Richmod", state: "CA", post_code: "94801"},
+    "person"     => { first_name: "Karla", last_name: "Deshon"},
+    "identifier" => { name: "Main Number", value: "510-478-1121"}
+  }
+]
+
+companies_list.each do |company| 
+  @company = Company.create!( company["company"] )
+  @company.addresses.create!( company["address"] )
+  @company.people.create!( company["person"] )
+  @company.identifiers.create!( company["identifier"] )
 end
-  
-# now put some people in each company
-# LICENSEE first
-company_relation = Company.where ({name: "#{LICENSEE}"})
-@company = company_relation[0]
-@person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep' )
-@person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.' )
 
-company_relation = Company.where ({name: "American Debris Box Service Inc."})
-@company = company_relation[0]
-@person_1 = Person.create!(company_id: @company.id, first_name: 'John', last_name: 'Doe', title: 'Rep', available_on: Date.today)
-@person_2 = Person.create!(company_id: @company.id, first_name: 'Jane', last_name: 'Doe', title: 'Ms.', available_on: Date.today)
-@equipment = Equipment.new({name: 'Crane', company_id: @company.id})
-@equipment.save!
-
-company_relation = Company.where ({name: companies_list[2][0]})
-@company_1 = company_relation[0]
-@person_3 = Person.create!(company_id: @company_1.id, first_name: 'William', last_name: 'Wellsmore', title: 'Mr.', available_on: Date.today)
-@person_4 = Person.create!(company_id: @company_1.id, first_name: 'Peter', last_name: 'Petersen', title: 'Project Mgr', available_on: Date.today)
-
-company_relation = Company.where ({name: companies_list[2][0]})
-@company_2 = company_relation[0]
-@person_5 = Person.create!(company_id: @company_2.id, first_name: 'Vance', last_name: 'Smith', title: 'Owner', available_on: Date.today)
-@person_6 = Person.create!(company_id: @company_2.id, first_name: 'Sam', last_name: 'Jones', title: 'Driver', available_on: Date.today)
-
-Address.create!( addressable_id: @company.id, addressable_type: 'Company', street_address: '7 Strathaird Road',
-                 city: 'Bundall', state: 'QL', post_code: '4217' )
-
-
-
-Identifier.create!( :identifiable_id => @company.id, :identifiable_type => 'Company', :name => "Office", :value => '07-55-047-100', :rank => 1)
-Identifier.create!( :identifiable_id => @company.id, :identifiable_type => 'Company', :name => "eMail", :value => 'info@roster365.com.au', :rank => 2)
-Identifier.create!( :identifiable_id => @company.id, :identifiable_type => 'Company', :name => "FAX", :value => '07-55-047-133', :rank => 3)
-
-Identifier.create!( :identifiable_id => @person_1.id, :identifiable_type => 'Person', :name => "Phone", :value => '07-55-047-100', :rank => 1)
-Identifier.create!( :identifiable_id => @person_1.id, :identifiable_type => 'Person', :name => "Mobile", :value => '07-55-047-100', :rank => 2)
-
-Identifier.create!( :identifiable_id => @person_2.id, :identifiable_type => 'Person', :name => "Phone", :value => '07-55-047-100', :rank => 1)
-Identifier.create!( :identifiable_id => @person_2.id, :identifiable_type => 'Person', :name => "Mobile", :value => '07-55-047-100', :rank => 2)
-Identifier.create!( :identifiable_id => @person_2.id, :identifiable_type => 'Person', :name => "Blackberry", :value => '07-55-047-100', :rank => 3)
-
-Identifier.create!( :identifiable_id => @person_3.id, :identifiable_type => 'Person', :name => "Phone", :value => 'unknown', :rank => 1)
-Identifier.create!( :identifiable_id => @person_3.id, :identifiable_type => 'Person', :name => "Mobile", :value => 'unknown', :rank => 2)
-
-Identifier.create!( :identifiable_id => @person_4.id, :identifiable_type => 'Person', :name => "Phone", :value => 'unknown', :rank => 1)
-Identifier.create!( :identifiable_id => @person_4.id, :identifiable_type => 'Person', :name => "Mobile", :value => 'unknown', :rank => 2)
-
-
+=begin
 # Two RISKY values are used here, Project.rep_id and Quote.quote_to_id both set to 1
 project_list = [
   'Project One', 'Project Two', 'Project Three'
@@ -149,22 +227,11 @@ project_list.each do |name|
     Quote.create!( project_id: @project.id, quote_to_id: 1, rep_id: 1, fire_ants_verified_by: 'No One' )
   end
 end
-
-=begin
-# useful?
-# now retrieve the first quote and create some solutions for it, one for each contract type
-@quote = Quote.first
-  solution_options.each do |contract|
-    solution = Solution.new( quote_id: @quote.id, equipment_name: "Crane", total_material: 1, solution_type: contract )
-    solution.name = "S#{Solution.count+1}"
-    solution.material_name = 'Crane'
-    solution.kms_one_way = 1
-    solution.save!
-  end
 =end
 
-
+#
 # Material types  
+#
 [
   "Clean Fill",
   "Clean Compactable Fill",
@@ -344,9 +411,3 @@ end
   Tip.create!( :name => t[0], :company_id => t[1], :fee => t[2], :fire_ant_risk_level => t[3]  )
 end
 
-=begin
-@company = Company.where(name: "Tight Access Excavation")
-@address.create!( addressable_type: 'Company', addressable_id: @company, 
-  street_address: "6504 Orchard Station Road", city: "Sebastopol", state: "CA", postal_code: "95472" )
-@address.save!
-=end
