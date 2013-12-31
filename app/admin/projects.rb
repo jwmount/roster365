@@ -1,13 +1,13 @@
 #require 'debugger'
 ActiveAdmin.register Project do
 
+  menu label: "Projects"
   
   # NOT OPTIONAL, effect is to scope projects to companies.
   belongs_to :company
 
-
   scope :all, :default => true 
-#  scope :active, -> { where(active: true) }
+
   scope :active do |projects|
     projects.where ({active: true})
   end
@@ -21,6 +21,14 @@ ActiveAdmin.register Project do
   end
 
   filter :name
+
+#
+# C A L L  B A C K S
+#
+# Warn user if project work site has not been entered.  Fires on #new only.
+  before_build do |project|
+    flash[:warning] = AdminConstants::ADMIN_COMPANY_INACTIVE unless project.company.active
+  end
 
   index do
     selectable_column

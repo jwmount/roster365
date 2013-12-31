@@ -13,6 +13,8 @@ module AdminConstants
 #
 # Company
 #
+  ADMIN_COMPANY_ACTIVE                   = "Company is active."
+  ADMIN_COMPANY_INACTIVE                 = "Company is not active.  Projects cannot be defined."
   ADMIN_COMPANY_NAME_HINT                = "Company name.  Must be unique."
   ADMIN_COMPANY_NAME_PLACEHOLDER         = "Company name"
 
@@ -138,7 +140,7 @@ module AdminConstants
   ADMIN_PROJECT_NAME_HINT                = "Working name of project. NOTE:  if you change a project name, existing resources such as quotes, solutions, jobs etc., continue to use the old name."
   ADMIN_PROJECT_NAME_PLACEHOLDER         = "Required, if no name has been given, make one up and change it later."
 
-  ADMIN_PROJECT_REP_LABEL                = "Rep on this project, who's running it."
+  ADMIN_PROJECT_REP_LABEL                = "Rep on this project, who's running it for "
   ADMIN_PROJECT_REP_PLACEHOLDER          = "Person"
 
   ADMIN_PROJECT_START_ON_LABEL           = "Expected start date"

@@ -1,7 +1,7 @@
 #require 'debugger'
 ActiveAdmin.register Company do
 
-  menu label: "Customers", parent: "Companies"
+  menu label: "Companies"
   #before_filter :check_permissions, :only => [:new, :create, :cancel]  
 #
 # W H I T E   L I S T   M A N A G E M E N T
@@ -211,8 +211,22 @@ ActiveAdmin.register Company do
   end
 
 
-#
+# 
 # P U S H  B U T T O N S
 #
+  # ACTIVATE
+  # Activate sets the company status to Active (true).  Does not toggle.
+  # 
+  action_item :only => [:edit, :show] do
+    link_to 'Activate', activate_admin_company_path( company )
+  end
+
+  member_action :activate, :method => :get do
+    company = Company.find(params[:id])
+    company.active = true
+    company.save!
+    flash[:notice] = AdminConstants::ADMIN_COMPANY_ACTIVE
+    redirect_to admin_company_path( company )
+  end
 
 end

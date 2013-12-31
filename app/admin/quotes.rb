@@ -14,7 +14,7 @@ ActiveAdmin.register Quote do
 # C A L L  B A C K S
 #
 
-  # Warn user if project work site has not been entered.  
+  # Warn user if project work site has not been entered.  Fires on #new only.
   before_build do |quote|
     flash[:warning] = AdminConstants::ADMIN_QUOTE_NO_WORK_SITE_DEFINED unless quote.worksite_defined?
   end

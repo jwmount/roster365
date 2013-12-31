@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
 #
-#require 'debugger'
+require 'debugger'
 roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
 roles_list.each do |role|
   Role.create!(name: role)
@@ -22,6 +22,17 @@ user_list = [
 user_list.each do |email, password, role|  
   AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
   Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
+end
+
+#
+# T I P  S I T E S
+#
+[
+  [ "ABC Tip", 1, 10.00, 'High'],
+  [ "Marin Recycling Center", 2, 15.00, 'None'],
+  [ "XYC Tip", 2, 15.00, 'Low']
+].each do |t|
+  Tip.create!( :name => t[0], :company_id => t[1], :fee => t[2], :fire_ant_risk_level => t[3]  )
 end
 
 # load certificates
@@ -63,10 +74,16 @@ end
 # Note:  hash values cannot be duplicates so cannot have two "Identifiers" for example.
 #
 companies_list = [
-  { "company"    => { name: "#{LICENSEE}", line_of_business: "Farm Transport, Software Licensee", url: ""},
+# LICENSEE
+  { "company"    => { name: "#{ENV['LICENSEE']}", line_of_business: "#{ENV['LICENSEE_LOB']}", url: "#{ENV['LICENSEE_URL']}"},
     "address"    => {},
-    "person"     => { last_name: "t.b.d."},
-    "identifier" => { name: "Main Office", value: "t.b.d."}
+    "person"     => { first_name: "Account", last_name: "Representative", title: "Rep"},
+    "identifier" => { name: "Office", value: "415 555-1212"}
+    }, 
+  { "company"    => { name: "Demo Company", line_of_business: "Resource managers", url: "www.wsj.com"},
+    "address"    => {},
+    "person"     => { first_name: "Project", last_name: "Manager", title: "Project Manager"},
+    "identifier" => { name: "Office", value: "415 555-1212"}
     }, 
   { "company"    => { name: "American Debris Box Service Inc.", line_of_business: "Containers delivered and removed", url: ""},
     "address"    => {},
@@ -195,7 +212,7 @@ companies_list = [
     "identifier" => { name: "Main Number", value: "925 969-0750"}
   },
   { "company"    => { name: "Paradigm General Contractors", line_of_business: "General contractor", url: "www.paradigmgc.com"},
-    "address"    => { street_address: "1017 MaxDonald Ave.", city: "Richmod", state: "CA", post_code: "94801"},
+    "address"    => { street_address: "1017 MacDonald Ave.", city: "Richmond", state: "CA", post_code: "94801"},
     "person"     => { first_name: "Karla", last_name: "Deshon"},
     "identifier" => { name: "Main Number", value: "510-478-1121"}
   }
@@ -208,26 +225,66 @@ companies_list.each do |company|
   @company.identifiers.create!( company["identifier"] )
 end
 
-=begin
-# Two RISKY values are used here, Project.rep_id and Quote.quote_to_id both set to 1
-project_list = [
-  'Project One', 'Project Two', 'Project Three'
+#
+# D E M O  P R O J E C T
+#
+#company
+#  project
+#    quote
+#      solutions
+#        jobs
+#          schedules
+#            engagements
+@licensee = Company.where("name = ?", ["#{ENV['LICENSEE']}"] )
+@rep = Person.where("company_id = ? AND title = ?", @licensee[0].id, "Rep")
+
+demo_list = [
+  { "company"    => { name: "Demo", line_of_business: "General resource contractor", url: "www.wsj.com"},
+    "address"    => { street_address: "9 Alder Court", city: "Fairfax", state: "CA", post_code: "94935"},
+    "person"     => { first_name: "Demo", last_name: "Demosthenes"},
+    "identifier" => { name: "Main Number", value: "415-478-1121"},
+    "equipment"  => { name: "Truck"},
+    "project"    => { name: 'DemoProject', rep_id: @rep[0].id, project_start_on: Date.today},
+    "projAddr"   => { street_address: "1017 MacDonald Ave.", city: "Richmond", state: "CA", post_code: "94801"},
+    "quote"      => { name: "Q001", expected_start: Date.today + 1 },
+    "solution"   => { name: "S01" },
+    "job"        => { name: "JDemo", start_on: Date.today + 1, finished_on: Date.today + 2  },
+    "schedule"   => { day: Date.today + 1 },
+    "engagement" => {}
+  }
 ]
 
-project_list.each do |name|
-  Project.create!( name: name, company_id: @company_1.id, 
-                   rep_id: 1,
-                   project_start_on: Date.today, 
-                   active: false
-                 )   
-  project_relation = Project.where( name: name)
-  @project = project_relation[0]
+demo_list.each do |model| 
+  @company = Company.create!( model["company"] )
+  @company.addresses.create!( model["address"] )
+  @company.people.create!( model["person"] )
+  @company.identifiers.create!( model["identifier"] )
+  @company.equipment.create!( model["equipment"])
+  @project = @company.projects.create!( model["project"])
+  @project.addresses.create!( model["projAddr"])
+  @projmgr = @company.people.first
 
-  10.times do 
-    Quote.create!( project_id: @project.id, quote_to_id: 1, rep_id: 1, fire_ants_verified_by: 'No One' )
-  end
+  @quote = @project.quotes.new( model["quote"])
+  @quote.quote_to_id = @projmgr.id
+  @quote.rep_id = @rep[0].id
+  @quote.expected_start = Date.today + 1
+  @quote.fire_ants_verified_by = @rep[0].id
+  @quote.save! 
+
+  @solution = @quote.solutions.new( model ["solution"] )
+  @solution.material_id = 1
+  @solution.equipment_name = "Truck"
+  @solution.save!
+
+  @job = @solution.jobs.create!( model ["job"] )
+  @schedule = @job.schedules.create!( model ["schedule"] )
+
+  @engagement = @schedule.engagements.new( model ["engagement"] )
+  @engagement.person_id = 1
+  @engagement.save!
+
 end
-=end
+
 
 #
 # Material types  
@@ -400,14 +457,4 @@ end
   Condition.create!(:name => condition[0], :verbiage => condition[1], :indication => condition[2], change_approved_at: Date.today)
 end
 
-#
-# T I P  S I T E S
-#
-[
-  [ "ABC Tip", 1, 10.00, 'High'],
-  [ "Marin Recycling Center", 2, 15.00, 'None'],
-  [ "XYC Tip", 2, 15.00, 'Low']
-].each do |t|
-  Tip.create!( :name => t[0], :company_id => t[1], :fee => t[2], :fire_ant_risk_level => t[3]  )
-end
 

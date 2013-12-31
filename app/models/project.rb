@@ -29,15 +29,14 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :requirements
 
 
-  #
-  # V A L I D A T I O N S
-  #
+#
+# V A L I D A T I O N S
+#
   validates_presence_of :name
   validates_presence_of :company_id
-
-  #
-  # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
-  #
+#
+# C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
+#
   after_initialize :set_defaults
   
   # Best practice in Rails is set defaults here and not in database; however
