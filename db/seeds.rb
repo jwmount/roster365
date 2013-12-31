@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
 #
-require 'debugger'
+#require 'debugger'
 roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
 roles_list.each do |role|
   Role.create!(name: role)
