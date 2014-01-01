@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works best with rake db:reset
 #
-#require 'debugger'
+require 'debugger'
 roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
 roles_list.each do |role|
   Role.create!(name: role)
@@ -183,7 +183,7 @@ companies_list = [
   },
   { "company"    => { name: "Bay Cities Paving & Grading Inc.", line_of_business:   "General engineering, heavy construction", url: "NR"},
     "address"    => { street_address: "5029 Forni Drive", city: "Concord", state: "CA", post_code: "94520" },
-    "person"     => { first_name: "Ben", last_name: "Rodrigues Jr", title: "President" },
+    "person"     => { first_name: "Ben", last_name: "Rodrigues Jr.", title: "President" },
     "identifier" => { name: "Main Company", value: "925 687-6666", rank: 1 }
   },
   { "company"    => { name: "S&S Supplies and Solutions", line_of_business: "Industrial supplies and services", url: "www.supliesandsolutions.com"},
@@ -285,6 +285,21 @@ demo_list.each do |model|
 
 end
 
+# Pick up personal identifiers not captured so far.  These people exist already.
+personal_identifiers_list = [
+  {first_name: "Kelly", last_name: "Kolander", name: "email", value: "pat@osisoft.com"},
+  {first_name: "Ben", last_name: "Rodrigues Jr.", name: "email", value: "jpetersen@petersendean.com"},
+  {first_name: "Michael", last_name: "Hester", name: "email", value: "pres@mandhcorp.com"},
+  {first_name: "Cynthia", last_name: "Liu", name: "email", value: "cindy.liu@errg.com"},
+  {first_name: "Karla", last_name: "Deshon", name: "email", value: "karla@paradigmgc.com"}
+]
+personal_identifiers_list.each do |model|
+  @people = Person.where( "first_name = ? AND last_name = ?", model[:first_name], model[:last_name] )
+  puts "*-*-*-*-* WARNING:  Person not found: #{model}" if @people.empty?
+  @people.each do |person| 
+    person.identifiers.create!( name: model[:name], value: model[:value], rank: person.identifiers.count + 1 )
+  end
+end
 
 #
 # Material types  

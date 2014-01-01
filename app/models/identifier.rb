@@ -1,6 +1,7 @@
 class Identifier < ActiveRecord::Base
   
   # audited, not on Rails 4 yet
+  belongs_to :identifiable, :polymorphic => true
 
   # removed, prevents @contact.save operations if present
   #  validates_presence_of :identifiable_id, :identifiable_type, :name, :value
