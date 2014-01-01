@@ -21,7 +21,8 @@ ActiveAdmin.register Project do
   end
 
   filter :name
-
+  filter :description
+  filter :company
 #
 # C A L L  B A C K S
 #
@@ -29,13 +30,15 @@ ActiveAdmin.register Project do
   before_build do |project|
     flash[:warning] = AdminConstants::ADMIN_COMPANY_INACTIVE unless project.company.active
   end
-
+  
   index do
     selectable_column
 
     column "Name (click for details)" do |project|
       link_to project.name, admin_company_project_path( project.company, project )
     end
+
+    column :description
 
     column :company
 
@@ -105,6 +108,7 @@ ActiveAdmin.register Project do
               :as => :date_picker,
               :hint           => AdminConstants::ADMIN_PROJECT_START_ON_HINT
 
+      f.input :description
       f.input :intend_to_bid
       f.input :submitted_bid
       f.input :active
@@ -174,6 +178,8 @@ ActiveAdmin.register Project do
           render project.addresses
       end
       
+      row :description
+
       row "Requirements" do |project|
         render project.requirements
       end
@@ -187,9 +193,9 @@ ActiveAdmin.register Project do
 #
 # I N D E X / L I S T  C O N T E X T
 #
-  sidebar "Projects Context", only: [:index] do 
+  sidebar "Project list Context", only: [:index] do 
     ul
-      li link_to "Companies",         admin_companies_path
+      li link_to "Companies", admin_companies_path
       hr
       li link_to "Dashboard", admin_dashboard_path
   end

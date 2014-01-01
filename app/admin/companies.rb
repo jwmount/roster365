@@ -193,6 +193,7 @@ ActiveAdmin.register Company do
     attributes_table do
       row :name
       row :line_of_business
+      row ("Rollodex") { render company.identifiers}
       row ("Web Site") { link_to "#{company.url}", href="http://#{company.url}", target: '_blank' }
       row :credit_terms
       row("PO_required") { status_tag (company.PO_required ? "YES" : "No"), (company.PO_required ? :ok : :error) }        
@@ -203,7 +204,6 @@ ActiveAdmin.register Company do
       row ("Equipment") { render company.equipment}
       row ("Address") { render company.addresses}
       row ("Certifications") { render company.certs}
-      row ("Rollodex") { render company.identifiers}
     end
 
     active_admin_comments

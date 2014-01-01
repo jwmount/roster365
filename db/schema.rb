@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.integer  "company_id",                                       null: false
     t.integer  "rep_id",                                           null: false
     t.datetime "project_start_on",                                 null: false
+    t.string   "description"
     t.boolean  "active",           default: true,                  null: false
     t.boolean  "intend_to_bid",    default: false,                 null: false
     t.boolean  "submitted_bid",    default: false,                 null: false
