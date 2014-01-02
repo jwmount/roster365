@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.string   "name",             default: "",                    null: false
     t.integer  "credit_terms",     default: AdminConstants::ADMIN_COMPANY_CREDIT_TERMS_DEFAULT,   null: false
     t.boolean  "PO_required",      default: false,                 null: false
-    t.boolean  "active",           default: false,                 null: false
+    t.boolean  "active",           default: true,                  null: false
     t.string   "bookeeping_number",default: AdminConstants::ADMIN_COMPANY_BOOKEEPING_NO_DEFAULT,  null: false
     t.string   "line_of_business", default: "",                    null: false
     t.string   "url",              default: "",                    null: false
