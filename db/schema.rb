@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.string   "bookeeping_number",default: AdminConstants::ADMIN_COMPANY_BOOKEEPING_NO_DEFAULT,  null: false
     t.string   "line_of_business", default: "",                    null: false
     t.string   "url",              default: "",                    null: false
+    t.boolean  "licensee",         default: false,                 null: false
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
   end

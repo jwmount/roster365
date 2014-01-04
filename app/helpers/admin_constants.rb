@@ -2,7 +2,7 @@
 # $ bundle exec rake db:drop db:create db:schema:load db:seed
 # Internationalization, see http://stackoverflow.com/questions/3629894/internationalization-for-constants-hashes-in-rails-3
 module AdminConstants
-
+  
 #
 # Addresses
 #
