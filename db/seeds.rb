@@ -317,7 +317,7 @@ end
 # Equipment, employee names not known as not in BT List
 #
 def rep
-  rep ||= Person.where("title = ?", "Rep")[0].id
+  1 # rep ||= Person.where("title = ?", "Rep")[0].id
 end
 projects_list = [
  { "company"     => { name: "McCarthy Building Cos. Inc.", line_of_business: "Construction", url: "www.mccarthy.com"},
@@ -506,14 +506,12 @@ projects_list = [
 
 ]
 
-@rep = 1
 projects_list.each do |model| 
- # puts
   begin
     @company = Company.create!( model["company"] )
     @company.addresses.create!( model["address"] )
     @company.identifiers.create!( model["identifier"] )
- #   puts @company.name + " -- Created."
+    puts @company.name + " -- Created."
   rescue
     company_association = Company.where( name: model["company"][:name])
     @company = company_association[0]
@@ -521,7 +519,7 @@ projects_list.each do |model|
   @project = @company.projects.create!( model["project"])
   @project.addresses.create!( model["projAddr"])
   @projmgr = @company.people.first
-#  puts "#{model} -- Created."
+  puts "#{model} -- Created."
 end
 
 
