@@ -7,3 +7,4 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 ENV['VERSION'] = "v1.2.53. &copy Copyright Venue Software Corporation, 2010 - 2014. "
 
+ENV['LICENSEE'] = "Valley Farm Transport"

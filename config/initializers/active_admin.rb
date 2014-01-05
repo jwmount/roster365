@@ -7,10 +7,7 @@ ActiveAdmin.setup do |config|
   #
   # Conventionally this will be the LICENSEE defined in config/seeds.rb
   #
-  licensee = Company.where( licensee: true )
-  ENV['LICENSEE'] = licensee[0].name
   config.site_title = "Roster365-#{ENV['LICENSEE']}"
-  #config.site_title = "Roster365-#{licensee[0].name}"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
