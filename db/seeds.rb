@@ -8,6 +8,7 @@
 # T I P  S I T E S
 #
 # Revise this, done as part of Company declaration now.
+
 [
   [ "ABC Tip", 1, 10.00, 'High'],
   [ "Marin Recycling Center", 2, 15.00, 'None'],
