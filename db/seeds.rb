@@ -216,14 +216,14 @@ companies_list = [
 # Create Rep once licensee company exists
 #
 companies_list.each do |model| 
- # puts
+  puts
   @company = Company.create!( model["company"] )
   @company.addresses.create!( model["address"] )
   model["person"]["title"] = "Rep" if @company.licensee
   @company.people.create!( model["person"] )
   @company.identifiers.create!( model["identifier"] )
   @company.tips.create!( model["tip"] ) unless model["tip"].nil?
- #puts "#{model} -- CREATED"
+  puts "#{model} -- CREATED"
 end
 
 #
@@ -305,10 +305,10 @@ personal_identifiers_list = [
 personal_identifiers_list.each do |model|
  # puts
   @people = Person.where( "first_name = ? AND last_name = ?", model[:first_name], model[:last_name] )
-  #puts "*-*-*-*-* WARNING:  Person not found: #{model}" if @people.empty?
+  puts "*-*-*-*-* WARNING:  Person not found: #{model}" if @people.empty?
   @people.each do |person| 
     person.identifiers.create!( name: model[:name], value: model[:value], rank: person.identifiers.count + 1 )
-   # puts "#{@person} -- CREATED"
+    puts "#{@person} -- CREATED"
   end
 end
 
@@ -317,7 +317,7 @@ end
 # Equipment, employee names not known as not in BT List
 #
 def rep
-  1 # rep ||= Person.where("title = ?", "Rep")[0].id
+  rep ||= Person.where("title = ?", "Rep")[0].id
 end
 projects_list = [
  { "company"     => { name: "McCarthy Building Cos. Inc.", line_of_business: "Construction", url: "www.mccarthy.com"},
