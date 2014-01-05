@@ -216,14 +216,14 @@ companies_list = [
 # Create Rep once licensee company exists
 #
 companies_list.each do |model| 
-  puts
+ # puts
   @company = Company.create!( model["company"] )
   @company.addresses.create!( model["address"] )
   model["person"]["title"] = "Rep" if @company.licensee
   @company.people.create!( model["person"] )
   @company.identifiers.create!( model["identifier"] )
   @company.tips.create!( model["tip"] ) unless model["tip"].nil?
-  puts "#{model} -- CREATED"
+ #puts "#{model} -- CREATED"
 end
 
 #
@@ -303,12 +303,12 @@ personal_identifiers_list = [
   {first_name: "Karla", last_name: "Deshon", name: "email", value: "karla@paradigmgc.com"}
 ]
 personal_identifiers_list.each do |model|
-  puts
+ # puts
   @people = Person.where( "first_name = ? AND last_name = ?", model[:first_name], model[:last_name] )
-  puts "*-*-*-*-* WARNING:  Person not found: #{model}" if @people.empty?
+  #puts "*-*-*-*-* WARNING:  Person not found: #{model}" if @people.empty?
   @people.each do |person| 
     person.identifiers.create!( name: model[:name], value: model[:value], rank: person.identifiers.count + 1 )
-    puts "#{@person} -- CREATED"
+   # puts "#{@person} -- CREATED"
   end
 end
 
@@ -508,12 +508,12 @@ projects_list = [
 
 @rep = 1
 projects_list.each do |model| 
-  puts
+ # puts
   begin
     @company = Company.create!( model["company"] )
     @company.addresses.create!( model["address"] )
     @company.identifiers.create!( model["identifier"] )
-    puts @company.name + " -- Created."
+ #   puts @company.name + " -- Created."
   rescue
     company_association = Company.where( name: model["company"][:name])
     @company = company_association[0]
@@ -521,7 +521,7 @@ projects_list.each do |model|
   @project = @company.projects.create!( model["project"])
   @project.addresses.create!( model["projAddr"])
   @projmgr = @company.people.first
-  puts "#{model} -- Created."
+#  puts "#{model} -- Created."
 end
 
 
@@ -720,23 +720,23 @@ end
 #
 # W R A P U P
 #
-puts "\n\nLICENSEE: \t#{@licensee}"
-puts "Addresses:    \t#{Address.count.to_s}"
-puts "Certificates: \t#{Certificate.count.to_s}"
-puts "Cert:         \t#{Cert.count.to_s}"
-puts "Companies:    \t#{Company.count.to_s}"
-puts "Conditions:   \t#{Condition.count.to_s}"
-puts "Dockets:      \t#{Docket.count.to_s}"
-puts "Engagements:  \t#{Engagement.count.to_s}"
-puts "Equipment:    \t#{Equipment.count.to_s}"
-puts "Identifiers:  \t#{Identifier.count.to_s}"
-puts "Jobs:         \t#{Job.count.to_s}"
-puts "People:       \t#{Person.count.to_s}"
-puts "Projects:     \t#{Project.count.to_s}"
-puts "Quotes:       \t#{Quote.count.to_s}"
-puts "Roles:        \t#{Role.count.to_s}"
-puts "Schedules:    \t#{Schedule.count.to_s}"
-puts "Solutions:    \t#{Solution.count.to_s}"
-puts "Tips:         \t#{Tip.count.to_s}"
-puts "Users:        \t#{AdminUser.count.to_s}"
-puts "\n\n --Done"
+#puts "\n\nLICENSEE: \t#{@licensee}"
+#puts "Addresses:    \t#{Address.count.to_s}"
+#puts "Certificates: \t#{Certificate.count.to_s}"
+#puts "Cert:         \t#{Cert.count.to_s}"
+#puts "Companies:    \t#{Company.count.to_s}"
+#puts "Conditions:   \t#{Condition.count.to_s}"
+#puts "Dockets:      \t#{Docket.count.to_s}"
+#puts "Engagements:  \t#{Engagement.count.to_s}"
+#puts "Equipment:    \t#{Equipment.count.to_s}"
+#puts "Identifiers:  \t#{Identifier.count.to_s}"
+#puts "Jobs:         \t#{Job.count.to_s}"
+#puts "People:       \t#{Person.count.to_s}"
+#puts "Projects:     \t#{Project.count.to_s}"
+#puts "Quotes:       \t#{Quote.count.to_s}"
+#puts "Roles:        \t#{Role.count.to_s}"
+#puts "Schedules:    \t#{Schedule.count.to_s}"
+#puts "Solutions:    \t#{Solution.count.to_s}"
+#puts "Tips:         \t#{Tip.count.to_s}"
+#puts "Users:        \t#{AdminUser.count.to_s}"
+#puts "\n\n --Done"
