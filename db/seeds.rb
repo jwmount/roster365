@@ -4,6 +4,22 @@
 #
 #require 'debugger'
 
+# Create users (roles not implemented yet, MUST be chosen from roles_list)
+user_list = [
+  ['admin@venuesoftware.com', 'roster365', 1],
+  ['bookeeper@venuesoftware.com', 'bookeeper', 2],
+  ['driver@venuesoftware.com', 'driver', 3],
+  ['guest@venuesoftware.com', 'roster365', 4],
+  ['manager@venuesoftware.com', 'manager', 5],
+  ['dispatcher@venuesoftware.com', "dispatcher", 6],
+  ['Sales@venuesoftware.com', 'roster365', 7],
+  ['john@venuesoftware.com', 'roster365', 8]
+  ]
+user_list.each do |email, password, role|  
+  AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
+  Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
+end
+
 #
 # T I P  S I T E S
 #
@@ -490,6 +506,18 @@ projects_list = [
                       project_start_on: "05-01-2012",
                       description: "175 luxury live/work units and ground-level retail."},
     "projAddr"   => { street_address: "1225 Powell St.", city: "Emeryville", state: "CA", post_code: "94608"}
+  },
+ { "company"     => { name: "McCarthy Building Cos. Inc." },
+    "project"    => { name: "LBNL Solar Energy Research Center", rep_id: rep, 
+                      project_start_on: "08-01-2012",
+                      description: "40,000-square-foot laboratory to house solar reserch."},
+    "projAddr"   => { street_address: "One Cyclotron Road", city: "Berkeley", state: "CA", post_code: "94720"}
+  },
+ { "company"     => { name: "McCarthy Building Cos. Inc." },
+    "project"    => { name: "La Escuelita Educational Center Phase I", rep_id: rep, 
+                      project_start_on: "08-01-2012",
+                      description: "Two new buildings totaling 55,655 square feet."},
+    "projAddr"   => { street_address: "314 E. 10th St.", city: "Oakley", state: "CA", post_code: "94606"}
   }
 
 ]
@@ -688,21 +716,6 @@ roles_list.each do |role|
   Role.create!(name: role)
 end
 
-# Create users (roles not implemented yet, MUST be chosen from roles_list)
-user_list = [
-  ['admin@venuesoftware.com', 'roster365', 1],
-  ['bookeeper@venuesoftware.com', 'bookeeper', 2],
-  ['driver@venuesoftware.com', 'driver', 3],
-  ['guest@venuesoftware.com', 'roster365', 4],
-  ['manager@venuesoftware.com', 'manager', 5],
-  ['dispatcher@venuesoftware.com', "dispatcher", 6],
-  ['Sales@venuesoftware.com', 'roster365', 7],
-  ['john@venuesoftware.com', 'roster365', 8]
-  ]
-user_list.each do |email, password, role|  
-  AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
-  Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
-end
 
 #
 # W R A P U P
