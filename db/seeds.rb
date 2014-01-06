@@ -506,18 +506,6 @@ projects_list = [
                       project_start_on: "05-01-2012",
                       description: "175 luxury live/work units and ground-level retail."},
     "projAddr"   => { street_address: "1225 Powell St.", city: "Emeryville", state: "CA", post_code: "94608"}
-  },
- { "company"     => { name: "McCarthy Building Cos. Inc." },
-    "project"    => { name: "LBNL Solar Energy Research Center", rep_id: rep, 
-                      project_start_on: "08-01-2012",
-                      description: "40,000-square-foot laboratory to house solar reserch."},
-    "projAddr"   => { street_address: "One Cyclotron Road", city: "Berkeley", state: "CA", post_code: "94720"}
-  },
- { "company"     => { name: "McCarthy Building Cos. Inc." },
-    "project"    => { name: "La Escuelita Educational Center Phase I", rep_id: rep, 
-                      project_start_on: "08-01-2012",
-                      description: "Two new buildings totaling 55,655 square feet."},
-    "projAddr"   => { street_address: "314 E. 10th St.", city: "Oakley", state: "CA", post_code: "94606"}
   }
 
 ]
