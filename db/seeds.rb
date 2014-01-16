@@ -411,7 +411,7 @@ projects_list = [
                       description: "300,000 square foot renovation including central utility plant."},
     "projAddr"   => { street_address: "1100 Airport Drive", city: "Oakland", state: "CA", post_code: "94621"}
   },
- { "company"     => { name: "Rudolph and Sletten Inc.", line_of_business: "Construction", url: "www.turnerconstruction.com/oakland"},
+ { "company"     => { name: "Rudolph and Sletten Inc.", line_of_business: "Construction", url: ""},
     "address"    => { street_address: "1111 Broadway, Ste. 2100", city: "Oakland", state: "CA", post_code: "94607"},
     "identifier" => { name: "Main Number", value: "510 267-8100"},
     "project"    => { name: "UC Berkeley Energy Biosciences Building", rep_id: rep, 
@@ -517,9 +517,10 @@ projects_list.each do |model|
     @company.identifiers.create!( model["identifier"] )
     puts @company.name + " -- Created."
   rescue
-    #company_association = Company.where( name: model["company"][:name])
-    company_association = Company.where( model["company"] )
-    @company = company_association[0]
+    puts "rescue model: #{model.inspect}"
+    puts model["company"][:name]
+    @company = Company.where( "name = ?", model["company"][:name])
+    @company = @company[0]
   end
   @project = @company.projects.create!( model["project"])
   @project.addresses.create!( model["projAddr"])
