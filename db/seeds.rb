@@ -4,6 +4,11 @@
 #
 #require 'debugger'
 
+roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
+roles_list.each do |role|
+  Role.create!(name: role)
+end
+
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 user_list = [
   ['admin@venuesoftware.com', 'roster365', 1],
@@ -700,10 +705,6 @@ end
   Condition.create!(:name => condition[0], :verbiage => condition[1], :indication => condition[2], change_approved_at: Date.today)
 end
 
-roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
-roles_list.each do |role|
-  Role.create!(name: role)
-end
 
 
 #
