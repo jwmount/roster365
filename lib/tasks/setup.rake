@@ -1,9 +1,10 @@
 require 'rake'
+
 namespace :setup do
   desc "Setup Conditions"
   task :conditions => :environment do
-  	puts "Conditions"
   	puts Condition.all.inspect
+    puts "Done.  #{Condition.count} conditions."
   end
 
   desc "Setup Customers"
@@ -28,4 +29,5 @@ namespace :setup do
   task projects: :environment do
   end
 
+  
 end
