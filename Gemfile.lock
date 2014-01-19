@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: f381f220219061ee11e65132d2a06bf73007bb8e
+  revision: dd96207da5b47107ee4d5e701307a0908e395a2e
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0)
@@ -217,7 +217,7 @@ DEPENDENCIES
   pg
   rails (>= 4.0.1)
   rails_12factor
-  rake
+  rake (>= 10.1.1)
   sass-rails
   sdoc
   taps
