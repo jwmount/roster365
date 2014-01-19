@@ -3,8 +3,6 @@
 Roster365::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-
-  resources :dispatches
   
   # Generate all routes in Admin namespace
   ActiveAdmin.routes(self)
