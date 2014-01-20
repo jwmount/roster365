@@ -16,7 +16,6 @@ gem 'foreigner'
 gem 'i18n'
 gem 'taps'  #needed by Heroku
 
-
 gem 'debugger', group: :development
 # Support for Rails 4.0 by & for Heroku
 gem 'rails_12factor', group: :production
