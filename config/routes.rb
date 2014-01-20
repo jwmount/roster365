@@ -14,8 +14,6 @@ Roster365::Application.routes.draw do
   # Eventually we can simplify this so that each dependent is at one level down, but before that's possible
   # how ActiveAdmin does the bread crumb navigation has to be accomodated or those paths will be invalid.
 
-  
-
   namespace :admin do
 
     resources :roles do
