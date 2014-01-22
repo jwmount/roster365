@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'rails', '>=4.0.1'
-gem 'rake', '>=10.1.0'
 
 gem 'sass-rails'
 gem 'cancan'

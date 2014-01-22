@@ -217,7 +217,6 @@ DEPENDENCIES
   pg
   rails (>= 4.0.1)
   rails_12factor
-  rake (>= 10.1.0)
   sass-rails
   sdoc
   taps
