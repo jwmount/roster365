@@ -15,6 +15,13 @@ ActiveRecord::Schema.define(version: 201301114195707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+  enable_extension "pg_trgm"
+  enable_extension "cube"
+  enable_extension "earthdistance"
+  enable_extension "uuid-ossp"
+  enable_extension "unaccent"
+  enable_extension "fuzzystrmatch"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",                                   null: false
