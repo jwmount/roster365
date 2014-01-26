@@ -18,12 +18,12 @@ user_list = [
   ['Sales@venuesoftware.com', 'roster365', 7],
   ['john@venuesoftware.com', 'roster365', 8]
   ]
-=begin
+
 user_list.each do |email, password, role|  
   AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
   Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
 end
-=end
+
 #
 # T I P  S I T E S
 #
