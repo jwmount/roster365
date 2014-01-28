@@ -3,10 +3,9 @@
 #
 # It is necessary this file be checked into your version control system in order to deploy to 
 # Ninefold when deployment is based on schema.rb and migrations are not used.
-# In the After Software section of the Software tab on Ninefold use these:
-# cp -f db/schema-ninefold.rb db/schema.rb
-# RAILS_ENV=production bundle exec rake db:reset
-
+# After the deploy runs on Ninefold, ssh onto the server and cd into current db
+# then $ mv schema-ninefold.rb schema.rb
+# then $ RAILS_ENV=production bundle exec rake db:reset
 ActiveRecord::Schema.define(version: 201301114195707) do
 
   # These are extensions that must be enabled in order to support this database
