@@ -1,15 +1,11 @@
 # encoding: UTF-8
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
+# This file is an EXACT COPY of the one auto-generated from the current state of the database. 
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
-#
-# It's strongly recommended that you check this file into your version control system.
+# It is necessary this file be checked into your version control system in order to deploy to 
+# Ninefold when deployment is based on schema.rb and migrations are not used.
+# In the After Software section of the Software tab on Ninefold use these:
+# mv db/schema-ninefold.rb db/schema.rb
+# RAILS_ENV=production bundle exec rake db:reset
 
 ActiveRecord::Schema.define(version: 201301114195707) do
 
