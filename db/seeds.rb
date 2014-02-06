@@ -16,7 +16,8 @@ user_list = [
   ['manager@venuesoftware.com', 'manager', 5],
   ['dispatcher@venuesoftware.com', "dispatcher", 6],
   ['Sales@venuesoftware.com', 'roster365', 7],
-  ['john@venuesoftware.com', 'roster365', 8]
+  ['john@venuesoftware.com', 'roster365', 8],
+  ['rebecca@daycaredecisions.com.au', 'rebecca', 1]
   ]
 
 user_list.each do |email, password, role|  

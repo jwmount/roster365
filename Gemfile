@@ -17,13 +17,13 @@ gem 'i18n'
 gem 'taps'  #needed by Heroku
 
 gem 'debugger', group: :development
-# Support for Rails 4.0 by & for Heroku
-gem 'rails_12factor', group: :production
 
 gem 'uglifier', '>= 1.0.3'
 
 group :production do
   # gem 'mysql2'  On AWS using RDS instead
+  # Support for Rails 4.0 by & for Heroku
+  gem 'rails_12factor'
 end
 
 # To use ActiveModel has_secure_password
