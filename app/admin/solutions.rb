@@ -135,9 +135,7 @@ form do |f|
     end
     
     f.inputs "Tip Site for this solution" do
-      f.input :tips, 
-              :as => :radio, 
-              :collection    => Tip.alphabetically.all.map {|u| [u.name, u.id]}
+      f.input :tips
        end
 
     f.inputs "Time & Distance -- #{solution.quote.project.addresses[0].to_s} to tip site" do
@@ -265,7 +263,6 @@ form do |f|
       row :solution_type
       row :equipment_name, 
           :label => "Equipment"
-      row :tip_site
       row :updated_at
       row("Roster365 Approved") { status_tag (solution.approved ? "YES" : "No"), (solution.approved ? :ok : :error) }        
       row("Client Approved") { status_tag (solution.client_approved ? "YES" : "No"), (solution.client_approved ? :ok : :error) }        
@@ -274,6 +271,13 @@ form do |f|
       row (:purchase_order_required) { status_tag (solution.purchase_order_required ? "YES" : "No"), (solution.purchase_order_required ? :ok : :error) }
     end
 
+    panel "Tip Sites" do
+      attributes_table_for solution do
+        solution.tips.each do |t|
+          row ("#{t.name}") { number_to_currency(t.fee) }
+        end
+      end
+    end
     panel "Requirements" do
       attributes_table_for solution do
         solution.requirements.each do |s|

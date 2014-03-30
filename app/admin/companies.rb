@@ -54,10 +54,8 @@ ActiveAdmin.register Company do
 
     column "Name (click for details)", :sortable => 'name' do |company|
       render company
-      if company.certs.count > 0
-        @certs = company.certs
-        render @certs
-      end
+      render company.identifiers unless company.identifiers.empty?
+      render company.addresses unless company.addresses.empty?
     end
 
     column :projects do |company|

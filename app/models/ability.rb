@@ -25,14 +25,17 @@
 class Ability
   include CanCan::Ability
 
-  def XXinitialize(user)
+=begin
+  nice examples
+  def initialize(user)
     can :manage, :all
       #can :manage, Company
       #can :read, Project
       #can :manage, User, :id => user.id
       #can :read, ActiveAdmin::Page, :name => "Dashboard"
   end
-
+=end
+ 
   # redirect loop will occur when expression leads to root or nil.
   def initialize(user)
 

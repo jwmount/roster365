@@ -20,6 +20,11 @@ gem 'debugger', group: :development
 
 gem 'uglifier', '>= 1.0.3'
 
+group :development do
+  gem 'better_errors'	
+  gem 'binding_of_caller'
+end
+
 group :production do
   # gem 'mysql2'  On AWS using RDS instead
   # Support for Rails 4.0 by & for Heroku
