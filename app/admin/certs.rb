@@ -1,6 +1,6 @@
 ActiveAdmin.register Cert do
 
-  menu :parent => "Compliance"
+  menu parent: "Compliance"
   #menu :parent => "Compliance", :if => lambda{|tabs_renderer|
   #  controller.current_ability.can?(:manage, Role) &&
   #  !Certificate.all.empty?

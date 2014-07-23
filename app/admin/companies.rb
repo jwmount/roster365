@@ -1,7 +1,6 @@
 #require 'debugger'
 ActiveAdmin.register Company do
 
-  menu label: "Companies"
   #before_filter :check_permissions, :only => [:new, :create, :cancel]  
 #
 # W H I T E   L I S T   M A N A G E M E N T

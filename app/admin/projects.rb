@@ -17,7 +17,8 @@ ActiveAdmin.register Project do
   scope :intend_to_bid do |projects|
     projects.where ({intend_to_bid: true})
   end
-  scope :submitted_bid do |projects|    projects.where ({submitted_bid: true})
+  scope :submitted_bid do |projects| 
+    projects.where ({submitted_bid: true})
   end
 
   filter :name
