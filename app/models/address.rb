@@ -12,7 +12,7 @@ class Address < ActiveRecord::Base
   after_validation :geocode
 
   def full_address
-    [street, city, state, post_code].compact.join(', ')
+    [street_address, city, state, post_code].compact.join(', ')
   end
 
   # audited, not on Rails 4 yet
