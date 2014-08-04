@@ -76,7 +76,6 @@ class Ability
     # guest
     else
       can :read, :all
-      can :manage, Comment
     end  
 =begin
     if user.role.name == 'admin'
