@@ -53,7 +53,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     h2 section "Active Jobs" do
 
-     unless Job.exists?
+     unless Job.exists? and Job.count > 0
        jobs = Job.is_active?.by_start_on
   #    jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
 
@@ -85,7 +85,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     h2 section "Daily Schedules" do
 
-      unless Schedule.exists?
+      unless Schedule.exists? and Schedule.count > 0
         schedules = Schedule.by_start_on
  
           table_for schedules do

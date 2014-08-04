@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 # Works fine with rake db:reset
 #
-roles_list = %w[ admin bookeeper driver guest management operations sales superadmin ]
+roles_list = %w[ admin bookeeper driver management operations sales superadmin visitor]
 roles_list.each do |role|
   Role.create!(name: role)
 end
@@ -12,11 +12,11 @@ user_list = [
   ['admin@venuesoftware.com', 'roster365', 1],
   ['bookeeper@venuesoftware.com', 'bookeeper', 2],
   ['driver@venuesoftware.com', 'driver', 3],
-  ['visitor@venuesoftware.com', 'visitor', 4],
-  ['manager@venuesoftware.com', 'manager', 5],
-  ['dispatcher@venuesoftware.com', "dispatcher", 6],
-  ['Sales@venuesoftware.com', 'roster365', 7],
-  ['john@venuesoftware.com', 'roster365', 8],
+  ['manager@venuesoftware.com', 'manager', 4],
+  ['dispatcher@venuesoftware.com', "dispatcher", 5],
+  ['Sales@venuesoftware.com', 'roster365', 6],
+  ['john@venuesoftware.com', 'roster365', 7],
+  ['visitor@venuesoftware.com', 'visitor', 8]
   ]
 
 user_list.each do |email, password, role|  
