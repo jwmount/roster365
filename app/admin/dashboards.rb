@@ -51,24 +51,28 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
-    section "Active Jobs" do
+    h2 section "Active Jobs" do
 
-     jobs = Job.is_active?.by_start_on
-#     jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
+     unless Job.exists?
+       jobs = Job.is_active?.by_start_on
+  #    jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
 
-      table_for jobs do
-        column :name do |job|
-          link_to job.name, admin_solution_job_path( job.solution, job )
+        table_for jobs do
+          column :name do |job|
+            link_to job.name, admin_solution_job_path( job.solution, job )
+          end
+
+          column :start do |job|
+            job.start_on.strftime("%d %b, %Y")
+          end
+
+          column :end do |job|
+            job.finished_on.strftime("%d %b, %Y")
+          end
+
         end
-
-        column :start do |job|
-          job.start_on.strftime("%d %b, %Y")
-        end
-
-        column :end do |job|
-          job.finished_on.strftime("%d %b, %Y")
-        end
-
+      else
+        h3 'There are no active jobs.'
       end
     end
 
@@ -79,56 +83,57 @@ ActiveAdmin.register_page "Dashboard" do
  #   end
  # end
 
-    section "Daily Schedules" do
+    h2 section "Daily Schedules" do
 
-      schedules = Schedule.by_start_on
-
-        table_for schedules do
-          column :date do |schedule|
-            link_to schedule.day.strftime("%A, %d %B, %Y"), admin_job_schedule_path( schedule.job, schedule )
-          end
+      unless Schedule.exists?
+        schedules = Schedule.by_start_on
  
-          column :project do |schedule|
-            link_to schedule.job.solution.quote.project.name, 
-               admin_company_project_path( schedule.job.solution.quote.project.company, schedule.job.solution.quote.project)
-          end
-
-          column :equpment do |schedule|
-            schedule.job.solution.equipment_name
-          end
+          table_for schedules do
+            column :date do |schedule|
+              link_to schedule.day.strftime("%A, %d %B, %Y"), admin_job_schedule_path( schedule.job, schedule )
+            end
  
-          column "Plan" do |schedule|
-            schedule.equipment_units_today.to_s
-          end
+            column :project do |schedule|
+              link_to schedule.job.solution.quote.project.name, 
+                 admin_company_project_path( schedule.job.solution.quote.project.company, schedule.job.solution.quote.project)
+            end
+
+            column :equpment do |schedule|
+              schedule.job.solution.equipment_name
+            end
+ 
+            column "Plan" do |schedule|
+              schedule.equipment_units_today.to_s
+            end
       
-          column "Got" do |schedule|
-            schedule.engagements.size.to_s
-          end
+            column "Got" do |schedule|
+              schedule.engagements.size.to_s
+            end
       
-          # active_support/core_ext/date/calculations.rb.
-          # active_support/core_ext/date_time/calculations.rb.
-          # active_support/core_ext/time/calculations.rb.
-          column "Action" do |schedule|
-            if schedule.day < Date.current
-              'NONE--Date is past'
-            else
-              case 
-              when  schedule.equipment_units_today == schedule.engagements.size
-                'OK'
-#             status_tag (schedule.equipment_units_today == schedule.engagements.size ? "OK" : "No"), (schedule.equipment_units_today == schedule.people.size ? :ok : :error)      
-              when schedule.equipment_units_today > schedule.engagements.size
-                h5 link_to "HIRE", new_admin_schedule_engagement_path(schedule)
+            # active_support/core_ext/date/calculations.rb.
+            # active_support/core_ext/date_time/calculations.rb.
+            # active_support/core_ext/time/calculations.rb.
+            column "Action" do |schedule|
+              if schedule.day < Date.current
+                'NONE--Date is past'
               else
-                'Evaluate'
+                case 
+                when  schedule.equipment_units_today == schedule.engagements.size
+                  'OK'
+  #             status_tag (schedule.equipment_units_today == schedule.engagements.size ? "OK" : "No"), (schedule.equipment_units_today == schedule.people.size ? :ok : :error)      
+                when schedule.equipment_units_today > schedule.engagements.size
+                  h5 link_to "HIRE", new_admin_schedule_engagement_path(schedule)
+                else
+                  'Evaluate'
+                end
               end
             end
-          end
       
-          column "Engagement" do |schedule|
-            if schedule.day >= Date.current
-              link_to "Roster", admin_schedule_engagements_path(schedule)
+            column "Engagement" do |schedule|
+              if schedule.day >= Date.current
+                link_to "Roster", admin_schedule_engagements_path(schedule)
+              end
             end
-          end
 
 #      column "Dockets" do |schedule|
 #        @docket = Docket.new
@@ -138,7 +143,11 @@ ActiveAdmin.register_page "Dashboard" do
 #        @docket.save!
 #      end
 
-        end
+          end
+
+        else
+          h3 'There are no active Schedules.'
+        end#if
       end
 
 

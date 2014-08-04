@@ -7,14 +7,14 @@ Roster365::Application.routes.draw do
   # Generate all routes in Admin namespace
   ActiveAdmin.routes(self)
   
-  # set namespace root in active_admin.rb
-  root :to => "companies#index"
 
   # Generate full path methods not done automatically to support bread crumbs all the way down and back up.
   # Eventually we can simplify this so that each dependent is at one level down, but before that's possible
   # how ActiveAdmin does the bread crumb navigation has to be accomodated or those paths will be invalid.
 
   namespace :admin do
+  # set namespace root in active_admin.rb
+  #root :to => "companies#index"
 
     resources :roles do
       resources :admin_users
@@ -42,5 +42,7 @@ Roster365::Application.routes.draw do
     end
 
   end #end namespace
+
+  root to: "home#index"
  
 end #routes

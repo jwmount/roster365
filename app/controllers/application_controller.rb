@@ -49,12 +49,6 @@ class ApplicationController < ActionController::Base
 
 end
 
-class HomeController < ActionController::Base
-
-  def how
-  end
-  
-end
 
 class ActiveAdmin::Views::Pages::Base < Arbre::HTML::Document
 
