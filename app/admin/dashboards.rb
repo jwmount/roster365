@@ -54,8 +54,8 @@ ActiveAdmin.register_page "Dashboard" do
     h2 section "Active Jobs" do
 
      unless Job.exists? and Job.count > 0
-       jobs = Job.is_active?.by_start_on
-  #    jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
+      # jobs = Job.is_active?.by_start_on
+      jobs = Job.includes(:solution).is_active?.started.ongoing.by_start_on.limit(10)
 
         table_for jobs do
           column :name do |job|
