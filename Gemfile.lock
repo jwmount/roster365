@@ -278,7 +278,7 @@ DEPENDENCIES
   ninefold
   pg
   polyamorous!
-  rails (>= 4.1)
+  rails (>= 4.1.4)
   rake (>= 10.3.2)
   sass-rails (~> 4.0.2)
   sdoc
