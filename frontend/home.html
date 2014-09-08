@@ -1,0 +1,301 @@
+<div class="content">
+    <section>
+        <!-- Main Content -->
+        <article class="main-content">
+            <h1>Finding childcare is hard. We can help.</h1>
+            <!-- Provider Search Form -->
+            <form action="" method="get" class="provider-search">
+
+                <!-- 1 -->
+                <section>
+                    <article class="left-column">
+                        <span class="number-circle">1</span>
+                    </article>
+                    <article class="right-column form-group">
+                        <h3><strong>Where</strong> do you need daycare?</h3>
+                        <autocomplete ng-model="form.locality" data="locations" on-type="updateLocations" attr-placeholder="City or Town Name..." on-select="updateProviders"></autocomplete>
+                        <!-- <a href="" ng-click="updateProviders()">Update Results</a> -->
+                    </article>
+
+
+                    <div ng-if=providers.length>
+                      <article class="left-column"></article>
+                      <article class="right-column form-group">
+                        <h3>We have {{providers.length}} providers in {{form.locality}}.</h3>
+                      </article>
+                    </div>
+                </section>
+
+                <!-- 2 -->
+                <section>
+                    <article class="left-column">
+                        <span class="number-circle">2</span>
+                    </article>
+                    <article class="right-column kinds">
+                        <h3>What <strong>kind</strong> of daycare are you looking for?</h3>
+                        <div>
+                            <section>
+                                <article class="left-checkboxes-col">
+                                    <label>
+                                        <input type="checkbox" 
+                                        name="" >
+                                        Long Day Care 
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" name="">
+                                        Family Day Care
+                                    </label>
+                                </article>
+                                <article class="right-checkboxes-col">
+                                    <label>
+                                        <input type="checkbox" name="">
+                                        Kinder Care
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="">
+                                        Outside of School Hours
+                                    </label>
+                                </article>
+                            </section>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- 3 -->
+                <section>
+                    <article class="left-column">
+                        <span class="number-circle">3</span>
+                    </article>
+                    <article class="right-column preferences">
+                        <h3>What special <strong>preferences</strong> do you have?</h3>
+                        
+                        <section>
+                            <article class="left-checkboxes-col">
+                                <label>
+                                    <input type="checkbox" 
+                                           name="additional_activities" 
+                                           ng-change="updateProviders()" 
+                                           ng-change="toggleChosenAttribute()"
+                                           ng-model="form.additional_activities">
+                                    Additional Activities
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="air_conditioning" ng-change="updateProviders()" ng-model="form.air_conditioning">
+                                    Air Conditioning
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="bus_service" ng-change="updateProviders()" ng-model="form.bus_service">
+                                    Bus Service
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="disposable_nappies" ng-change="updateProviders()" ng-model="form.disposable_nappies">
+                                    Disposable Nappies
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="cloth_nappies" ng-change="updateProviders()" ng-model="form.cloth_nappies">
+                                    Cloth Nappies
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="excursions" ng-change="updateProviders()" ng-model="form.excursions">
+                                    Excursions
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="extended_hours_for_kindys" ng-change="updateProviders()" ng-model="form.extended_hours_for_kindys">
+                                    Extended Hours for Kindys
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="food_provided" ng-change="updateProviders()" ng-model="form.food_provided">
+                                    Food Provided
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="guest_speakers" ng-change="updateProviders()" ng-model="form.guest_speakers">
+                                    Guest Speakers
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="kindergarten" ng-change="updateProviders()" ng-model="form.kindergarten">
+                                    Kindergarten (QLD only)
+                                </label>
+
+                            </article>
+
+                            <article class="right-checkboxes-col">
+                                <label>
+                                    <input type="checkbox" name="outdoor_play_area" ng-change="updateProviders()" ng-model="form.outdoor_play_area">
+                                    Outdoor Play Area
+                                </label>
+
+                                <label>
+                                    <input type="checkbox" name="languages" ng-change="updateProviders()" ng-model="form.languages">
+                                    Languages
+                                </label>
+                                <br/>
+                                <label>
+                                    <input type="checkbox" name="real_grass" ng-change="updateProviders()" ng-model="form.real_grass">
+                                    Real Grass
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="secure_access" ng-change="updateProviders()" ng-model="form.secure_access">
+                                    Secure Access
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="siblings_given_priority" ng-change="updateProviders()" ng-model="form.sibling_priority">
+                                    Siblings Given Priority
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="technology" ng-change="updateProviders()" ng-model="form.technology">
+                                    Technology
+                                </label>
+                                <br/>
+                                <label>
+                                    <input type="checkbox" name="vacancies" ng-change="updateProviders()" ng-model="form.vacancies">
+                                    Vacancies
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="vaccinations_compulsory" ng-change="updateProviders()" ng-model="form.vaccinations_compulsory">
+                                    Vaccinations Compulsory
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="waitlist_online" ng-change="updateProviders()" ng-model="form.waitlist_online">
+                                    Waitlist Online
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="waitlist_reimbursed" ng-change="updateProviders()" ng-model="form.waitlist_reimbursed", ng-change="toggle_label">
+                                    Waitlist Fee Reimbursed
+                                </label>
+
+                            </article>
+                        </section>
+
+                    </article>
+                </section>
+            </form>
+
+
+            <!-- Provider Results -->
+            <div class="providers" ng-repeat="provider in providers">
+                <!--
+                <section>    
+                -->
+                   <mouseover ng-mouseover="expand = 1">
+                   <mouseleave ng-mouseleave="expand = 0">
+
+                    <section>
+                    
+                        <h4>
+                            <a href="#/providers/{{provider.id}}" target='_blank'>{{provider.name}}</a>
+                        </h4>
+                        <!--
+                        REMOVED TO SIMPLIFY DISPLAY
+                        Expand on mouseover
+                        Click to pop separate page
+                        -->
+
+                        <label ng-show=expand>{{provider.address}}</label>
+
+                        <h5 ng-show=expand&&provider.description>
+                            {{provider.description}}
+                        </h5>
+
+                        <h5 ng-show=expand&&provider.fee>Fee: 
+                            <span>{{provider.fee | currency:" AUD$ "}}</span>
+
+                        <h5 ng-show=expand&&provider.vacancies>
+                            Vacancies: {{provider.vacancies_list}}
+
+                        <h5 ng-show=expand&&!provider.vacancies>
+                            Vacancies: None.
+                            
+                    
+ 
+                        <h5 ng-show=expand&&provider.age_range> Age range: {{provider.age_range}}</h5>
+                        <h5 ng-show=expand&&provider.hours> Hours of operation: {{provider.hours}} </h5> 
+
+                        
+                        <!-- 
+                        We should be able to iterate on Object.keys(provider), 
+                        but this doesn't seem to work, are these properties
+                        no ennumerable?
+                        <div class="provider-properties" ng-repeat="attr in provider">
+                            <h5 ng-show=attr&&expand> {{attr}} </h5>
+                            </div>
+                        -->
+
+                      
+                        <label ng-show=expand&&provider.air_conditioning>
+                            Air Conditioning.
+                            </label>
+                        <label ng-show=expand&&provider.bus_service>
+                            Bus Service.
+                            </label>
+                        <label ng-show=expand&&provider.cloth_nappies>
+                            Cloth Nappies.
+                            </label>
+                        <label ng-show=expand&&provider.disposable_nappies>
+                            Disposable Nappies.
+                            </label>
+                        <label ng-show=expand&&provider.excursions>
+                            Excursions
+                            </label>
+                        <label ng-show=expand&&provider.extended_hours_for_kindys>
+                            Extended Hours for Kindys.
+                            </label>
+                        <label ng-show=expand&&provider.food_provided>
+                            Food Provided.
+                            </label>
+                        <label ng-show=expand&&provider.guest_speakers>
+                            Guest Speakers.
+                            </label>
+                        <label ng-show=expand&&provider.kindergarten_approved>
+                            Kindergarten Approved (QLD only).
+                            </label>
+                        <label ng-show=expand&&provider.online_enrollment>
+                            Online Enrollment.
+                            </label>
+                        <label ng-show=expand&&provider.outdoor_play_area>
+                            Outdoor Play Area.
+                            </label>
+                        <label ng-show=expand&&provider.real_grass>
+                            Real Grass.
+                            </label>
+                        <label ng-show=expand&&provider.secure_access>
+                            Secure Access.
+                            </label>
+                        <label ng-show=expand&&provider.sibling_priority>
+                            Siblings Given Priority.
+                            </label>
+
+                        <label ng-show=expand&&provider.url></label>
+                                
+                        <label ng-show=expand&&provider.vaccinations_compulsory>
+                            Vaccinations Compulsory.
+                            </label>
+                        <label ng-show=expand&&provider.waitlist_online>
+                            Waitlist Online.
+                            </label>
+                        <label ng-show=expand&&provider.waitlist_reimbursed>
+                            Waitlist Fee Reimbursed.
+                            </label>
+
+
+                        <label ng-show=expand>
+                          <a href="#/providers/{{provider.id}}" target='_blank'>More about {{provider.name}}</a>
+                        </label>
+
+
+                  </mouseleave>
+                  </mouseover>
+
+                </section>
+            </div>
+        </article>
+
+        <!-- Sidebar Ads -->
+        <article class="sidebar">
+            <img src="http://placehold.it/200x100">
+            <img src="http://placehold.it/200x100">
+            <img src="http://placehold.it/200x100">
+            <img src="http://placehold.it/200x100">
+        </article>
+    </section>
+</div>

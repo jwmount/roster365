@@ -1,0 +1,96 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'update', '-g', 'divshot-cli' ]
+2 info using npm@1.4.15
+3 info using node@v0.10.28
+4 verbose node symlink /usr/local/bin/node
+5 verbose url raw divshot-cli
+6 verbose url resolving [ 'https://registry.npmjs.org/', './divshot-cli' ]
+7 verbose url resolved https://registry.npmjs.org/divshot-cli
+8 info trying registry request attempt 1 at 07:28:55
+9 verbose etag "303PSTH73H58XJUW7TYUE95FN"
+10 http GET https://registry.npmjs.org/divshot-cli
+11 http 200 https://registry.npmjs.org/divshot-cli
+12 silly registry.get cb [ 200,
+12 silly registry.get   { date: 'Thu, 28 Aug 2014 14:28:56 GMT',
+12 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+12 silly registry.get     etag: '"EOVMMQQY8M7KIHYV6UOYF3TQS"',
+12 silly registry.get     'content-type': 'application/json',
+12 silly registry.get     'cache-control': 'max-age=60',
+12 silly registry.get     'content-length': '174706',
+12 silly registry.get     'accept-ranges': 'bytes',
+12 silly registry.get     via: '1.1 varnish',
+12 silly registry.get     age: '0',
+12 silly registry.get     'x-served-by': 'cache-lax1433-LAX',
+12 silly registry.get     'x-cache': 'MISS',
+12 silly registry.get     'x-cache-hits': '0',
+12 silly registry.get     'x-timer': 'S1409236136.319758,VS0,VE408',
+12 silly registry.get     vary: 'Accept',
+12 silly registry.get     'keep-alive': 'timeout=10, max=50',
+12 silly registry.get     connection: 'Keep-Alive' } ]
+13 info outdated updating [ [ '/usr/local/lib',
+13 info outdated     'divshot-cli',
+13 info outdated     '0.15.7',
+13 info outdated     '0.16.0',
+13 info outdated     '0.16.0',
+13 info outdated     '*' ] ]
+14 verbose install where,what [ '/usr/local/lib', [ 'divshot-cli@0.16.0' ] ]
+15 verbose cache add [ 'divshot-cli@0.16.0', null ]
+16 verbose cache add name=undefined spec="divshot-cli@0.16.0" args=["divshot-cli@0.16.0",null]
+17 verbose parsed url { protocol: null,
+17 verbose parsed url   slashes: null,
+17 verbose parsed url   auth: null,
+17 verbose parsed url   host: null,
+17 verbose parsed url   port: null,
+17 verbose parsed url   hostname: null,
+17 verbose parsed url   hash: null,
+17 verbose parsed url   search: null,
+17 verbose parsed url   query: null,
+17 verbose parsed url   pathname: 'divshot-cli@0.16.0',
+17 verbose parsed url   path: 'divshot-cli@0.16.0',
+17 verbose parsed url   href: 'divshot-cli@0.16.0' }
+18 verbose cache add name="divshot-cli" spec="0.16.0" args=["divshot-cli","0.16.0"]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: '0.16.0',
+19 verbose parsed url   path: '0.16.0',
+19 verbose parsed url   href: '0.16.0' }
+20 verbose addNamed [ 'divshot-cli', '0.16.0' ]
+21 verbose addNamed [ '0.16.0', '0.16.0' ]
+22 silly lockFile f4ed6296-divshot-cli-0-16-0 divshot-cli@0.16.0
+23 verbose lock divshot-cli@0.16.0 /Users/john/.npm/f4ed6296-divshot-cli-0-16-0.lock
+24 verbose registry.get divshot-cli not expired, no request
+25 silly lockFile 886aaac8-vshot-cli-divshot-cli-0-16-0-tgz https://registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz
+26 verbose lock https://registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz /Users/john/.npm/886aaac8-vshot-cli-divshot-cli-0-16-0-tgz.lock
+27 verbose addRemoteTarball [ 'https://registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz',
+27 verbose addRemoteTarball   'e4608e38b000aaf7d66d2fa247f02f086953d024' ]
+28 info retry fetch attempt 1 at 07:29:06
+29 verbose fetch to= /var/folders/zb/3q5wyj1n1s9fn2ywj4n1rjm00000gn/T/npm-11949-91b-_wfB/registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz
+30 http GET https://registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz
+31 http 200 https://registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz
+32 silly lockFile 886aaac8-vshot-cli-divshot-cli-0-16-0-tgz https://registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz
+33 silly lockFile 886aaac8-vshot-cli-divshot-cli-0-16-0-tgz https://registry.npmjs.org/divshot-cli/-/divshot-cli-0.16.0.tgz
+34 silly lockFile f4ed6296-divshot-cli-0-16-0 divshot-cli@0.16.0
+35 silly lockFile f4ed6296-divshot-cli-0-16-0 divshot-cli@0.16.0
+36 error Error: EACCES, mkdir '/Users/john/.npm/divshot-cli/0.16.0'
+36 error  { [Error: EACCES, mkdir '/Users/john/.npm/divshot-cli/0.16.0']
+36 error   errno: 3,
+36 error   code: 'EACCES',
+36 error   path: '/Users/john/.npm/divshot-cli/0.16.0' }
+37 error Please try running this command again as root/Administrator.
+38 error System Darwin 13.3.0
+39 error command "node" "/usr/local/bin/npm" "update" "-g" "divshot-cli"
+40 error cwd /Users/john/Devo/daycare-decisions/frontend
+41 error node -v v0.10.28
+42 error npm -v 1.4.15
+43 error path /Users/john/.npm/divshot-cli/0.16.0
+44 error code EACCES
+45 error errno 3
+46 error stack Error: EACCES, mkdir '/Users/john/.npm/divshot-cli/0.16.0'
+47 verbose exit [ 3, true ]

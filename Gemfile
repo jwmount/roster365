@@ -73,7 +73,7 @@ end
 
 # Rails 4 support, see https://github.com/gregbell/active_admin/pull/2326
 # http://stackoverflow.com/questions/20648814/rails-4-1-0-beta1-upgrade-fails
-gem 'formtastic', github: 'justinfrench/formtastic'
-gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
+#gem 'formtastic', github: 'justinfrench/formtastic'
+#gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 gem 'activeadmin', github: 'gregbell/active_admin'

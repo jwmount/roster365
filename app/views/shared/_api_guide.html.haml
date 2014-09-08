@@ -1,0 +1,47 @@
+%h1 Roster 365 -- API Specifications
+
+%h2 Use case:  As a sales rep I need to develop a quote.
+%h3 Get Quote Development Page Matching Partial String
+%ul
+  %li Start new quote: /api/quote
+  %li List of quotes: /api/quotes
+  %li Work on quote: /api/quote/identifier
+  %p= ["Q12-345-abc", "Q-Shamrock-27"]
+
+/
+  %li.h3 Get Locations in a state using Australian abbrviations, e.g. 'QLD'
+  %p Note:  A list of all provider names is not supported.
+  %ul
+    %li Request: GET /api/states/_state_abbreviation_
+    %li Returns: JSON array of all providers in state
+    %li Example 1: /api/states/NT
+    %p= ["Alpurrurulam, NT"]
+    
+  %li.h3 Get Providers based on Partial Name
+  %p Note:  A list of all names is not supported.
+  %ul
+    %li Request: GET /api/names/_name_
+    %li Returns: JSON array of all providers with names beginning _name_
+    %li Example 1: /api/names/Small World
+
+/
+  %li.h3 Get All Providers
+  %ul
+    %li Request: GET /api/providers
+    %li Returns: JSON array of all providers in Australia
+    %li Example: /api/locations
+  
+  %li.h3 Get All Providers With Filters
+  %ul
+    %li Request: GET /api/providers/?locality=Brisbane, QLD real_grass=1 food_provided
+    %li Returns: JSON array of providers in Brisbane with real grass and food provided
+    %li Example 1: /api/providers/?locality=Brisbane, QLD&real_grass=1&food_provided=1 (with real grass and food provided)
+    %li Example 2: /api/providers/?locality=Brisbane, QLD&real_grass=0&food_provided=0 (no real grass and no food provided)
+
+/
+  %li.h3 Get Single Provider By ID
+  %ul
+    %li Request: GET /api/provider/:id
+    %li Returns: JSON of provider with :id
+    %li Example: /api/provider/100
+

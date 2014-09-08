@@ -43,6 +43,22 @@ Roster365::Application.routes.draw do
 
   end #end namespace
 
+  namespace :api do  
+    get 'names',                          to: :names
+    get 'names/:name',                    to: :names
+    get 'rolodex/:id',                    to: :rolodex
+    get 'states',                         to: :states
+    get 'states/:state',                  to: :states
+    # GET /api/locations/<partial string>
+    # for example:  <host>/api/locations/Bris
+    get 'locations/:locality',           to: :locations
+    get 'projects',                      to: :providers
+    get 'project/:id',                   to: :provider
+    get 'state/:state',                  to: :state
+    get '/',                             to: :help
+  
+  end #:api namespace
+
   root to: "home#index"
  
 end #routes

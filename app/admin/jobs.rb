@@ -24,14 +24,9 @@ ActiveAdmin.register Job do
 # S C O P E S
 #
   
-  scope :all
-  scope :is_active?
-  scope :is_not_active?
   
   filter :name
        
-  # Use Jobify method to force context of given solution.
-  #actions :all, :except => [:new]
 
   index do
     selectable_column

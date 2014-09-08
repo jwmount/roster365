@@ -3,7 +3,7 @@ ActiveAdmin.register Quote do
       
   filter :name
   filter :rep
-  filter :expected_start
+ # filter :expected_start
   filter :project
   filter :duration
 
