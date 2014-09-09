@@ -20,7 +20,10 @@ user_list = [
   ]
 
 user_list.each do |email, password, role|  
-  AdminUser.create!( email: email, password: password, password_confirmation: password, role_id: role)
+  user = AdminUser.where( email: email )
+  if user[0] == nil
+    AdminUser.create( email: email, password: password, password_confirmation: password, role_id: role)
+  end
   Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
 end
 
