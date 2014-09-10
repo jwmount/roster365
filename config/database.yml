@@ -1,5 +1,6 @@
 common: &common
   adapter: postgresql
+  username: john
   password: 180lbs
 
 development:
