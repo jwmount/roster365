@@ -14,33 +14,7 @@
 ActiveRecord::Schema.define(version: 201301114195707) do
 
   # These are extensions that must be enabled in order to support this database
-  # These are extensions that must be enabled in order to support this database on 
-  # Ninefold (pg)
   enable_extension "plpgsql"
-  enable_extension "hstore"
-  enable_extension "pg_trgm"
-  enable_extension "cube"
-  enable_extension "earthdistance"
-  enable_extension "uuid-ossp"
-  enable_extension "unaccent"
-  enable_extension "fuzzystrmatch" 
-
-  create_table "admin_users", force: true do |t|
-    t.integer  "role_id",                             null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",                                   null: false
