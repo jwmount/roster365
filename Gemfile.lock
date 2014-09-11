@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: 4ea4042e0b14aedce3d6ed4ab5f4c3a84a954f18
+  revision: 6472173b22621c4f838c70c1b9a47dc22b8f3fa3
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0, >= 1.0.2)
@@ -187,7 +187,7 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.1)
-    rdoc (4.1.1)
+    rdoc (4.1.2)
       json (~> 1.4)
     ref (1.0.5)
     responders (1.0.0)
