@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.datetime "updated_at",                 default: '2013-10-08 00:00:00', null: false
   end
 
- create_table "admin_users", force: true do |t|
+  create_table "admin_users", force: true do |t|
     t.integer  "role_id",                             null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
