@@ -59,7 +59,7 @@ Roster365::Application.routes.draw do
   
   end #:api namespace
 
- root :to => "companies#index"   works
+ root :to => "companies#index"   #works
  #root :to => "admin/dashboard#index"    # better
  
 end #routes
