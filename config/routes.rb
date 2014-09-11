@@ -14,7 +14,7 @@ Roster365::Application.routes.draw do
 
   namespace :admin do
   # set namespace root in active_admin.rb
-  #root :to => "companies#index"
+  # root :to => "companies#index"
 
     resources :roles do
       resources :admin_users
@@ -59,6 +59,7 @@ Roster365::Application.routes.draw do
   
   end #:api namespace
 
-  root to: "home#index"
+ #root :to => "admin/companies#index"   works
+ root :to => "admin/dashboard#index"    # better
  
 end #routes
