@@ -1,6 +1,8 @@
 Roster365::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  config/serve_static_assets=true
+  
   config.eager_load = true 
   config.assets.js_compressor = :uglifier
   
