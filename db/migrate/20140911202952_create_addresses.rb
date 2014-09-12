@@ -1,6 +1,6 @@
 class CreateAddresses < ActiveRecord::Migration
   def change
-    create_table :addresseses do |t|
+    create_table :addresses do |t|
       t.integer  "addressable_id",                                             null: false
       t.string   "addressable_type",                                           null: false
       t.string   "street_address",             default: "",                    null: false
