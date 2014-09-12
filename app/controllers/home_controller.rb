@@ -4,6 +4,7 @@ class HomeController < ApplicationController
     redirect_to admin_dashboard_path
   end
 
+
   def edit
   end
 
