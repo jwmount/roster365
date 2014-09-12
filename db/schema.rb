@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.datetime "updated_at",                       null: false
   end
 
+=begin
   create_table "reservations", force: true do |t|
     t.integer  "schedule_id",                  null: false
     t.integer  "equipment_id",                 null: false
@@ -263,6 +264,7 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
+=end
 
   create_table "roles", force: true do |t|
     t.string   "name"
