@@ -1,20 +1,22 @@
 # encoding: UTF-8
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
+# This file is an EXACT COPY of the one auto-generated from the current state of the database. 
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
-#
-# It's strongly recommended that you check this file into your version control system.
-
+# It is necessary this file be checked into your version control system in order to deploy to 
+# Ninefold when deployment is based on schema.rb and migrations are not used.
+# After the deploy runs on Ninefold, ssh onto the server and cd into current db
+# then $ mv schema-ninefold.rb schema.rb
+# then $ RAILS_ENV=production bundle exec rake db:reset
 ActiveRecord::Schema.define(version: 201301114195707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+  enable_extension "pg_trgm"
+  enable_extension "cube"
+  enable_extension "earthdistance"
+  enable_extension "uuid-ossp"
+  enable_extension "unaccent"
+  enable_extension "fuzzystrmatch"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",                                   null: false
@@ -40,26 +42,29 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.string   "post_code",                  default: "",                    null: false
     t.string   "map_reference",              default: "",                    null: false
     t.float    "latitude"
-    t.float    "longitude"
+    t.float    "longitude"    
     t.datetime "created_at",                 default: '2013-10-08 00:00:00', null: false
     t.datetime "updated_at",                 default: '2013-10-08 00:00:00', null: false
   end
 
   create_table "admin_users", force: true do |t|
-    t.integer  "role_id",                             null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.integer  "role_id",                                                null: false
+    t.string   "email",                  default: "",                    null: false
+    t.string   "encrypted_password",     default: "",                    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             default: '2013-10-08 00:00:00', null: false
+    t.datetime "updated_at",             default: '2013-10-08 00:00:00', null: false
   end
+
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "audits", force: true do |t|
     t.integer  "auditable_id"
@@ -256,7 +261,6 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.datetime "updated_at",                       null: false
   end
 
-=begin
   create_table "reservations", force: true do |t|
     t.integer  "schedule_id",                  null: false
     t.integer  "equipment_id",                 null: false
@@ -264,7 +268,6 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
-=end
 
   create_table "roles", force: true do |t|
     t.string   "name"
