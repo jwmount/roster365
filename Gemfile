@@ -3,7 +3,7 @@ ruby '2.1.2'
 
 gem 'rails'
 gem 'rake'
-gem 'activerecord', '=4.1.6'
+gem 'activerecord'
 
 # sprockets Environment error, it's ALWAYS sprockets
 # http://stackoverflow.com/questions/22426698/undefined-method-environment-for-nilnilclass-when-importing-bootstrap-into-ra
@@ -27,11 +27,11 @@ gem 'cancan'
 gem 'foreigner'
 gem 'i18n'
 gem 'taps'  #needed by Heroku
-
+gem 'pg'
 gem "country_select"
 
 group :development do
-  gem 'mysql2'
+  #gem 'mysql2'
   gem 'better_errors' 
   gem 'binding_of_caller'
 end
@@ -41,7 +41,6 @@ group :production do
   # gem 'rails_12factor'
   # needed for asset pipeline cache by Heroku, all 4.0.x releases, is in 4.1.x
   gem 'sprockets_better_errors'
-  gem 'pg'
   gem 'ninefold'
 end
 
