@@ -3,7 +3,7 @@ ruby '2.1.2'
 
 gem 'rails'
 gem 'rake'
-
+gem 'activerecord', '=4.1.6'
 
 # sprockets Environment error, it's ALWAYS sprockets
 # http://stackoverflow.com/questions/22426698/undefined-method-environment-for-nilnilclass-when-importing-bootstrap-into-ra
@@ -75,5 +75,5 @@ end
 # http://stackoverflow.com/questions/20648814/rails-4-1-0-beta1-upgrade-fails
 #gem 'formtastic', github: 'justinfrench/formtastic'
 #gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
-gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
+#gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 gem 'activeadmin', github: 'gregbell/active_admin'

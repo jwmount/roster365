@@ -1,7 +1,7 @@
 common: &common
   adapter: postgresql
   username: john
-  password: 180lbs
+  password: postgres
 
 development:
   <<: *common
@@ -14,3 +14,4 @@ test:
 production:
   <<: *common
   database: roster365_production
+

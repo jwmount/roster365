@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/activerecord-hackery/polyamorous.git
-  revision: d41fc35b4fc396307e2ff2e9b10f3b574fc5fbe4
-  specs:
-    polyamorous (1.1.0)
-      activerecord (>= 3.0)
-
-GIT
   remote: git://github.com/gregbell/active_admin.git
   revision: 4e43ae2767b9a9274dd3b03e6e888cd1f22c14ad
   specs:
@@ -159,6 +152,8 @@ GEM
       thor (~> 0.19)
     orm_adapter (0.5.0)
     pg (0.17.1)
+    polyamorous (1.1.0)
+      activerecord (>= 3.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -250,6 +245,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  activerecord (= 4.1.6)
   angular-rails
   angular-rails-templates
   better_errors
@@ -271,7 +267,6 @@ DEPENDENCIES
   mysql2
   ninefold
   pg
-  polyamorous!
   rails
   rake
   sass-rails (~> 4.0.2)

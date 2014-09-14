@@ -1,5 +1,6 @@
 class CreateAdminUsers < ActiveRecord::Migration
-  def change
+
+  def self.up
     create_table :admin_users do |t|
       t.integer  "role_id",                             null: false
       t.string   "email",                  default: "", null: false
