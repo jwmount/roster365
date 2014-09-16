@@ -1,5 +1,6 @@
 # encoding: UTF-8
 # This file is an EXACT COPY of the one auto-generated from the current state of the database. 
+
 #
 # It is necessary this file be checked into your version control system in order to deploy to 
 # Ninefold when deployment is based on schema.rb and migrations are not used.
