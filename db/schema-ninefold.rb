@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 201301114195707) do
     t.string   "state",            limit: 2, default: "",                    null: false
     t.string   "post_code",                  default: "",                    null: false
     t.string   "map_reference",              default: "",                    null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",                 default: '2013-10-08 00:00:00', null: false
     t.datetime "updated_at",                 default: '2013-10-08 00:00:00', null: false
   end
