@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: 35084ca71a48e48e4aaa16366b7d1c73039bfed4
+  revision: 930d34cd224272687613dcf1db4cf5b1347f1098
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0, >= 1.0.2)
@@ -84,7 +84,7 @@ GEM
     commonjs (0.2.7)
     countries (0.9.3)
       currencies (~> 0.4.2)
-    country_select (2.0.0)
+    country_select (2.0.1)
       countries (~> 0.9, >= 0.9.3)
     currencies (0.4.2)
     debug_inspector (0.0.2)
