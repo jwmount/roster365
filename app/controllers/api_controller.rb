@@ -1,6 +1,5 @@
-# localhost:3000/api => all providers
-# localhost:3000/api/locations/bri => locations with 'b-r-i' prefix
-# http://localhost:3000/api?utf8=%E2%9C%93&locality=burleigh%20wa&post_code=&state=&commit=Find+Address
+# localhost:3000/api => User Guide
+# localhost:3000/api/projects/bri => projects with 'b-r-i' prefix
 # curl -i -H "Accept: application/json" http://localhost:3000/api/locations/Bro
 # curl -i -H "Accept: application/json" http://daycare-decisions.herokuapp.com/api/locations/Bri  
 # jsonify gem:  https://github.com/bsiggelkow/jsonify
