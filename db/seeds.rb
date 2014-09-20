@@ -9,7 +9,7 @@ end
 
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 user_list = [
-  ['admin@venuesoftware.com', 'roster365', 1],
+  ['john@venuesoftware.com', 'roster365', 1],
   ['bookeeper@venuesoftware.com', 'bookeeper', 2],
   ['driver@venuesoftware.com', 'driver', 3],
   ['manager@venuesoftware.com', 'manager', 4],
