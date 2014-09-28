@@ -7,6 +7,9 @@
 # After the deploy runs on Ninefold, ssh onto the server and cd into current db
 # then $ mv schema-ninefold.rb schema.rb
 # then $ RAILS_ENV=production bundle exec rake db:reset
+#
+# If assets have been cleared (with rake assets:clean for example) run
+# $ rails generate active_admin:assets
 ActiveRecord::Schema.define(version: 201301114195707) do
 
   # These are extensions that must be enabled in order to support this database
