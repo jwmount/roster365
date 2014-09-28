@@ -20,6 +20,7 @@ class Application < Rails::Application
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.assets.precompile = %w( *.js *.css )
     # Required by Heroku, http://guides.rubyonrails.org/asset_pipeline.html#manifest-files-and-directives
     config.assets.initialize_on_precompile = false
 
