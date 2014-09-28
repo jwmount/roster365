@@ -20,7 +20,6 @@ class Application < Rails::Application
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.precompile = %w( *.js *.css )
     # Required by Heroku, http://guides.rubyonrails.org/asset_pipeline.html#manifest-files-and-directives
     config.assets.initialize_on_precompile = false
 
@@ -29,7 +28,6 @@ class Application < Rails::Application
     # Set it to false to avoid this.  Apparently it defaults to true!
     config.api_only = false
 
-=begin
     # CORS enable, see https://github.com/cyu/rack-cors
     config.middleware.use Rack::Cors do
       allow do
@@ -37,7 +35,6 @@ class Application < Rails::Application
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
-=end
 
   end
 end

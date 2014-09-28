@@ -5,6 +5,7 @@ gem 'rails'
 gem 'rake'
 gem 'activerecord'
 
+
 # sprockets Environment error, it's ALWAYS sprockets
 # http://stackoverflow.com/questions/22426698/undefined-method-environment-for-nilnilclass-when-importing-bootstrap-into-ra
 gem 'uglifier', '>= 1.0.3'
@@ -76,3 +77,7 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 #gem 'ransack', github: 'activerecord-hackery/ransack'
 #gem 'formtastic', github: 'justinfrench/formtastic'
+
+# CORS using ransack
+# https://github.com/cyu/rack-cors
+gem 'rack-cors', :require => 'rack/cors'
