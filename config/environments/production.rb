@@ -13,6 +13,7 @@ Roster365::Application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   # If true, Ninefold will serve assets without recompiling them
+  # Usually we want Ninefold to compile them, so default to false.
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS

@@ -9,7 +9,6 @@ end
 
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 user_list = [
-  ['john@venuesoftware.com', 'roster365', 1],
   ['bookeeper@venuesoftware.com', 'bookeeper', 2],
   ['driver@venuesoftware.com', 'driver', 3],
   ['manager@venuesoftware.com', 'manager', 4],
@@ -20,6 +19,7 @@ user_list = [
   ]
 
 user_list.each do |email, password, role|  
+  Rails::logger.info( "*-*-*-*-* About to Create user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
   user = AdminUser.where( email: email )
   if user[0] == nil
     AdminUser.create( email: email, password: password, password_confirmation: password, role_id: role)
