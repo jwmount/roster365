@@ -1,6 +1,12 @@
 require 'rake'
 
 namespace :setup do
+
+  desc "Create California"
+  task :California => :environment do
+    puts "California loaded"
+  end
+
   desc "Setup Conditions"
   task :conditions => :environment do
   	puts Condition.all.inspect

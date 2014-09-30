@@ -8,7 +8,9 @@ class AdminUser < ActiveRecord::Base
   belongs_to :role
   #has_and_belongs_to_many :roles
     
-  after_create { |admin| admin.send_reset_password_instructions }
+  # turned off for Ninefold deployment, raises excepiton for unauthorized user
+  # FIX THIS if we want to notify users on create, not required yet.  09-28-2014.
+  # after_create { |admin| admin.send_reset_password_instructions }
 
   scope :alphabetically, order("email ASC")
 

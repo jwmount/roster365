@@ -1,4 +1,4 @@
-	
+# FIXME -- mail.rb: Not setup for Ninefold, thinks it's all Heroku	
 ActionMailer::Base.smtp_settings = {
   :address        => 'smtp.sendgrid.net',
   :port           => '587',
