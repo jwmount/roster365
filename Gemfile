@@ -41,7 +41,7 @@ group :production do
   # Support for Rails 4 by & for Heroku, removed for Ninefold
   # gem 'rails_12factor'
   # needed for asset pipeline cache by Heroku, all 4.0.x releases, is in 4.1.x
-  gem 'sprockets_better_errors'
+  #gem 'sprockets_better_errors'
   gem 'ninefold'
 end
 
@@ -73,10 +73,10 @@ end
 
 # Rails 4 support, see https://github.com/gregbell/active_admin/pull/2326
 # http://stackoverflow.com/questions/20648814/rails-4-1-0-beta1-upgrade-fails
+gem 'formtastic' #, github: 'justinfrench/formtastic'
+gem 'ransack' #, github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
+gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 gem 'activeadmin', github: 'gregbell/active_admin'
-#gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
-#gem 'ransack', github: 'activerecord-hackery/ransack'
-#gem 'formtastic', github: 'justinfrench/formtastic'
 
 # CORS using ransack
 # https://github.com/cyu/rack-cors

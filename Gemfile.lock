@@ -1,6 +1,13 @@
 GIT
+  remote: git://github.com/activerecord-hackery/polyamorous.git
+  revision: d41fc35b4fc396307e2ff2e9b10f3b574fc5fbe4
+  specs:
+    polyamorous (1.1.0)
+      activerecord (>= 3.0)
+
+GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: 708e59018cdec2a078a173da0dbc0b732b3a9399
+  revision: 0c83cfe0b9b43a4a27a63c13f27d6682b0ff6cae
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0, >= 1.0.2)
@@ -84,7 +91,7 @@ GEM
     commonjs (0.2.7)
     countries (0.9.3)
       currencies (~> 0.4.2)
-    country_select (2.0.1)
+    country_select (2.1.0)
       countries (~> 0.9, >= 0.9.3)
     currencies (0.4.2)
     debug_inspector (0.0.2)
@@ -151,8 +158,6 @@ GEM
       thor (~> 0.19)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    polyamorous (1.1.0)
-      activerecord (>= 3.0)
     rack (1.5.2)
     rack-cors (0.2.9)
     rack-test (0.6.2)
@@ -208,8 +213,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sprockets_better_errors (0.0.4)
-      sprockets-rails (>= 1.0.0)
     taps (0.3.24)
       rack (>= 1.0.1)
       rest-client (>= 1.4.0, < 1.7.0)
@@ -257,6 +260,7 @@ DEPENDENCIES
   country_select
   devise
   foreigner
+  formtastic
   geocoder
   haml-rails
   i18n
@@ -266,12 +270,13 @@ DEPENDENCIES
   less-rails
   ninefold
   pg
+  polyamorous!
   rack-cors
   rails
   rake
+  ransack
   sass-rails (~> 4.0.2)
   sdoc
-  sprockets_better_errors
   taps
   therubyracer
   turbolinks
