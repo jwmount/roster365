@@ -27,49 +27,13 @@ user_list.each do |email, password, role|
   Rails::logger.info( "*-*-*-*-* Created user #{email}, pswd: #{password.slice(0..2)}, role: #{role}" )
 end
 
-#
-# T I P  S I T E S
-#
-# Revise this, done as part of Company declaration now.
-
-[
-  [ "ABC Tip", 1, 10.00, 'High'],
-  [ "Marin Recycling Center", 2, 15.00, 'None'],
-  [ "XYC Tip", 2, 15.00, 'Low']
-].each do |t|
-  Tip.create!( :name => t[0], :company_id => t[1], :fee => t[2], :fire_ant_risk_level => t[3]  )
+namespace :tips do
+#  Rake::Task['load'].invoke
+  Rake::Task['all'].invoke
 end
 
-# load certificates
-# name, description, for_person, for_company, for_equipment, for_location, active
-certificate_list = [
-  [ 'Commercial Driving License', 'Initialized default, Must be verified.', true, false, false, false, true ],
-  [ 'ISO 9000', 'May be required.', false, true, false, false, true ],
-  [ 'Insurance', 'Must be current & Must be verified.', false, false, true, true, true ],
-  [ 'CA DOT', 'As displayed.', false, false, true, false, false ],
-  [ 'US DOT', 'As displayed.', false, false, true, false, false ],
-  [ 'Registration', 'License plate or rego.', false, false, true, false, false ],
-  [ 'VIN', 'By inspection.', false, false, true, false, false ],
-  [ 'Aluminum body', '', false, false, true, false, false ],
-  [ 'Mud flaps', '', false, false, true, false, false ],
-  [ 'Green Flag', "No toxic or bad stuff", false, false, false, false, true ],
-  [ "WBE", "CA Womman Owned Business", false, true, false, false, false],
-  [ "SDB", "State & Federal Small Disadvantaged Business", false, true, false, false, false]
-]
-certificate_list.each do |name, description, for_person, for_company, for_equipment, for_location, active |
-  Certificate.create!( name: name, description: description, for_person: for_person, for_company: for_company, 
-                       for_equipment: for_equipment, for_location: for_location, active: active )
-  certificate = Certificate.where(name: name)
-  case 
-    when certificate[0].for_person
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Person', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
-    when certificate[0].for_company     
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Company', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
-    when certificate[0].for_equipment
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Equipment', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
-    when certificate[0].for_location
-      Cert.create!( certifiable_id: certificate[0].id, certificate_id: certificate[0].id, certifiable_type: 'Place', expires_on: Date.today, serial_number: '000000', permanent: 1, active: 1)
-  end
+namespace :certificates do
+  Rake::Task['all'].invoke
 end
 
 #
