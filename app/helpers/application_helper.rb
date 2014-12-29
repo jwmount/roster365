@@ -47,11 +47,18 @@ module ApplicationHelper
     ]
   end
 
-  # Get a list of people whose title is 'Rep' at LICENSEE company.
+  # Get people whose title is 'Rep' at LICENSEE company.
   # Person.alphabetically.where({:company_id => Company.where({:name => "#{ENV['LICENSEE']}"})} && {:title => 'Rep'})
+  # This list may be empty if: 
+  # 1.  No company is licensee
+  # 2.  No person is 'Rep'
   def list_of_reps
-    company = Company.where({ name: ENV['LICENSEE'] })
-    reps = company[0].people.where({:title=>"Rep"})
+    company = Company.where({ licensee: true } && {:title => "Rep"} )
+    if company.count == 0 
+      return []
+    else
+      reps = company[0].people.where({:title=>"Rep"})
+    end
   end
     
   def index_actions(resource, exclude = {})
