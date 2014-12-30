@@ -84,7 +84,7 @@ ActiveAdmin.register Person do
     column :certs do |person|
       render person.certs
     end
-    default_actions
+    actions
   end
 
   form do |f|

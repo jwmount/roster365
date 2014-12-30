@@ -1,12 +1,15 @@
+# TODO -- Cleanup form with hints and placeholders
+# TODO -- Add permissions so only Admin role holders can manage users
 ActiveAdmin.register AdminUser do
 
   menu parent: "System Administration"
 
   filter :email
+  filter :role
   
   index do
     selectable_column
-    column "Click to email person" do |f|
+    column "Click to email person", :sortable => 'email' do |f|
       link_to f.email, edit_admin_admin_user_path(f.id)
     end
     column :role
@@ -14,7 +17,7 @@ ActiveAdmin.register AdminUser do
     column :last_sign_in_at
     column :sign_in_count
 
-    default_actions
+    actions
   end
 
   form do |f|
@@ -35,7 +38,8 @@ ActiveAdmin.register AdminUser do
 
     f.inputs "Role for this person" do
       f.input :role,
-              :collection    => Role.alphabetically.all.map {|r| [r.name, r.id]}
+              :include_blank => false,
+              :collection    => Role.all.map {|r| [r.name, r.id]}
     end
 
     f.actions

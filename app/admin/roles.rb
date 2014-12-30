@@ -9,7 +9,7 @@ ActiveAdmin.register Role do
       link_to role.name, admin_role_path(role)
     end
 
-    default_actions
+    actions
   end
 
 
