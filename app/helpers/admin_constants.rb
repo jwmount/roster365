@@ -152,11 +152,11 @@ module AdminConstants
 #
   ADMIN_QUOTE_NAME_HINT                  = "Name is automatically assigned and not edited."
 
-  ADMIN_QUOTE_REP_ID_LABEL               = "Quote Rep"
-  ADMIN_QUOTE_REP_ID_HINT                = "Quote and Project Reps may be same person."
+  ADMIN_QUOTE_REP_NAME_LABEL             = "Name of Rep for this Quote:"
+  ADMIN_QUOTE_REP_NAME_HINT              = "Quote and Project Reps may be same person."
 
   ADMIN_QUOTE_QUOTE_TO_ID_LABEL          = "Quote to"
-  ADMIN_QUOTE_QUOTE_TO_ID_HINT           = "Deliver quote to "
+  ADMIN_QUOTE_QUOTE_TO_ID_HINT           = "Who will handle our quote at "
 
   ADMIN_QUOTE_NO_WORK_SITE_DEFINED       = "WARNING:  Project address is not defined so no solutions can be created.  Provide a work location for the project before you proceed."
   ADMIN_NOONE_WORKS_FOR_COMPANY          = "WARNING:  Company has no staff!  You will not be able to complete a quote if no one's there to receive it."

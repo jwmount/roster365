@@ -88,6 +88,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    columnize (0.9.0)
     commonjs (0.2.7)
     countries (0.9.3)
       currencies (~> 0.4.2)
@@ -95,6 +96,10 @@ GEM
       countries (~> 0.9, >= 0.9.3)
     currencies (0.4.2)
     debug_inspector (0.0.2)
+    debugger-linecache (1.2.0)
+    debugger2 (1.0.0.beta2)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -258,6 +263,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails
   country_select
+  debugger2
   devise
   foreigner
   formtastic

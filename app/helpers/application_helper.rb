@@ -1,3 +1,4 @@
+require 'debugger'
 module ApplicationHelper
 
   # Do not call flash here!  will get Stack Level Too Deep on flash (which is indeed missing)!
@@ -47,20 +48,24 @@ module ApplicationHelper
     ]
   end
 
+  # The LICENSEE company (us) MUST have one or more Reps.
   # Get people whose title is 'Rep' at LICENSEE company.
   # Person.alphabetically.where({:company_id => Company.where({:name => "#{ENV['LICENSEE']}"})} && {:title => 'Rep'})
   # This list may be empty if: 
   # 1.  No company is licensee
   # 2.  No person is 'Rep'
+  # FIXME -- Use of company[0] (association) seems wrong.  Why is this necessary?
   def list_of_reps
-    company = Company.where({ licensee: true } && {:title => "Rep"} )
-    if company.count == 0 
-      return []
-    else
-      reps = company[0].people.where({:title=>"Rep"})
+    begin
+      company = Company.where({ licensee: true })
+      reps = company[0].people.where({ title: "Rep" })
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "Ooops, we have no Reps defined!" if reps.nil?
+      reps = []
     end
+    reps
   end
-    
+
   def index_actions(resource, exclude = {})
     path_elements = [:admin, resource]
     links = []

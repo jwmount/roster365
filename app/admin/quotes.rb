@@ -1,4 +1,10 @@
 #require 'debugger'
+#
+# Quotes are made by company that is LICENSEE.  The deliver to person at the customer or partner company
+# does not have the title 'Rep'.
+# Quotes consequently cannot be created for company that is NOT LICENSEE.  They would use another instance of 
+# the app, that is their own account.
+#
 ActiveAdmin.register Quote do
       
   filter :name
@@ -65,7 +71,7 @@ ActiveAdmin.register Quote do
   end
  
   form do |f|
-    error_panel f
+    f.semantic_errors *f.object.errors.keys
 
     f.inputs  do
       f.input :name, 
@@ -75,15 +81,17 @@ ActiveAdmin.register Quote do
               
       # rep is 'our' or LICENSEE rep who manages projects     
       f.input :rep_id,
-              label: "Quote Rep",
-              hint:  "Quote and Project Reps may be same person.",
+              required: true,
+              label: AdminConstants::ADMIN_QUOTE_REP_NAME_LABEL,
+              hint:  AdminConstants::ADMIN_QUOTE_REP_NAME_HINT,
               as: :select,
               collection: list_of_reps,
               include_blank: false
 
       # This select needs to be scoped to employees of this company
       f.input :quote_to_id, 
-              :label => "Quote to", 
+              :required => true,
+              :label => "Quote to:", 
               :hint => AdminConstants::ADMIN_QUOTE_QUOTE_TO_ID_HINT + " #{quote.project.company.name}",
               :required => true,
               :as => :select, 

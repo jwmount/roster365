@@ -33,6 +33,7 @@ gem "country_select"
 
 group :development do
   #gem 'mysql2'
+  gem 'debugger2'
   gem 'better_errors' 
   gem 'binding_of_caller'
 end
