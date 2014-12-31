@@ -1,7 +1,7 @@
 ActiveAdmin.register Reservation do
 
   index do
-    h2 'Experimental'
+    h2 'Experimental Resource Scheduler'
 
     selectable_column
     column :schedule
@@ -11,7 +11,7 @@ ActiveAdmin.register Reservation do
   form do |f|
     error_panel f
     f.inputs "Schedule Details" do
-      h2 'Experimental'
+      h2 'Experimental Resource Scheduler'
 
       f.input :schedule, 
               :as => :select, 
@@ -23,7 +23,7 @@ ActiveAdmin.register Reservation do
       f.input :equipment_id,
               :required=>true, 
               :as => :select, 
-              :collection => Equipment.alphabetically.all.map {|e| [e.display_name, e.id]}, 
+              :collection => Equipment.all.map {|e| [e.display_name, e.id]}, 
               :include_blank => false,
               :hint => "Equipment.  Must work for vendor with required equipment."
 
