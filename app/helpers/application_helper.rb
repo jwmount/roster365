@@ -1,4 +1,3 @@
-require 'debugger'
 module ApplicationHelper
 
   # Do not call flash here!  will get Stack Level Too Deep on flash (which is indeed missing)!
