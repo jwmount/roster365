@@ -67,7 +67,7 @@ class Company < ActiveRecord::Base
   end
   
   def display_name
-    name
+    name = licensee ? self.name + ' (Licensee)' : self.name
   end
 
   def show_people(company)

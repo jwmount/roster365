@@ -25,6 +25,7 @@ ActiveAdmin.register Company do
   filter :equipment
   filter :bookeeping_number
   filter :addresses
+  filter :licensee
 
 #
 # I N D E X / L I S T  C O N T E X T
