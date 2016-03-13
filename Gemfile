@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.3'
+ruby '2.2.2'
 
 gem 'rails'
 gem 'rake'
@@ -43,7 +43,6 @@ group :production do
   # gem 'rails_12factor'
   # needed for asset pipeline cache by Heroku, all 4.0.x releases, is in 4.1.x
   # gem 'sprockets_better_errors'  DOES NOT WORK AFTER RAILS 4.0.5, causes the notorious render fail
-  gem 'ninefold'
 end
 
 # To use ActiveModel has_secure_password
