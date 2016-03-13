@@ -151,22 +151,22 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
 
-    section "Recent Companies" do
-      ul do
+     h2 section "Recent Companies" do
+      h3 ul do
         Company.order("updated_at DESC").limit(15).collect do |company|
           li link_to(company.name, admin_company_path(company))
         end
       end
     end
-=begin
-    section "15 Most Recently Contacted People" do
-      ul do
-        Person.order("updated_at DESC").limit(15).collect do |person|
-          li link_to(person.display_name + ' -- '+"#{person.company.name}", admin_company_person_path(person.company, person))
-        end
+
+    h2 section "15 Most Recently Contacted People" do
+      h3 ul do
+        #Person.order("updated_at DESC").limit(15).collect do |person|
+          #li link_to(person.display_name + ' -- '+"#{person.company.name}", admin_company_person_path(person.company, person))
+        #end
       end
     end
-=end
+
   end
 
 end
