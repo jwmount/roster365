@@ -158,7 +158,7 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
     end
-
+=begin
     section "15 Most Recently Contacted People" do
       ul do
         Person.order("updated_at DESC").limit(15).collect do |person|
@@ -166,7 +166,7 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
     end
-
+=end
   end
 
 end
