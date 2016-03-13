@@ -119,8 +119,7 @@ ActiveAdmin::Views::Pages::Base.class_eval do
 
   def build_footer
     div :id => "footer" do
-  #    footer = "#{ENV['LICENSEE']}(Licensee) #{link_to("Control Center", "http://www.roster365.com.au")} #{ENV['VERSION']};".html_safe
-      footer = "#{ENV['LICENSEE']}(Licensee) #{link_to("Control Center", "roster365.herokuapp.com")} #{ENV['VERSION']};".html_safe
+      footer = "#{ENV['LICENSEE']}(Licensee), #{link_to("Roster 365", "http://roster365.herokuapp.com", :target => "_blank")} #{ENV['VERSION']};".html_safe
       footer << "  Powered by #{link_to("Active Admin", "http://www.activeadmin.info")} #{ActiveAdmin::VERSION}".html_safe
       para footer
     end
