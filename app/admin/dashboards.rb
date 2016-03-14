@@ -42,7 +42,7 @@
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
 
 ActiveAdmin.register_page "Dashboard" do
-=begin
+
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     div :class => "blank_slate_container", :id => "dashboard_default_message" do
       span :class => "blank_slate" do
@@ -51,6 +51,7 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
+=begin
     h2 section "Active Jobs" do
 
      if Job.count > 0
@@ -158,16 +159,17 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
     end
-
+=end
     h2 section "15 Most Recently Contacted People" do
       h3 ul do
-        Person.order("updated_at DESC").limit(15).collect do |person|
+#        Person.find_each.order("updated_at DESC").limit(15).collect do |person|
+        Person.order("updated_at DESC").select(:id, :company_id, :first_name, :last_name).limit(15).collect do |person|
           li link_to(person.display_name + ' -- '+"#{person.company.name}", admin_company_person_path(person.company, person))
         end
       end
     end
 
   end
-=end
+
 end
 
