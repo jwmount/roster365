@@ -1,5 +1,5 @@
 #ActiveAdmin::Dashboards.build do
-=begin
+
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.
@@ -42,7 +42,7 @@
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
 
 ActiveAdmin.register_page "Dashboard" do
-
+=begin
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     div :class => "blank_slate_container", :id => "dashboard_default_message" do
       span :class => "blank_slate" do
