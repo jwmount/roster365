@@ -42,7 +42,7 @@
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
 
 ActiveAdmin.register_page "Dashboard" do
-
+=begin
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     div :class => "blank_slate_container", :id => "dashboard_default_message" do
       span :class => "blank_slate" do
@@ -50,7 +50,7 @@ ActiveAdmin.register_page "Dashboard" do
 #       small I18n.t("active_admin.dashboard_welcome.call_to_action")
       end
     end
-=begin
+=end
     h2 section "Active Jobs" do
 
      if Job.count > 0
@@ -75,7 +75,7 @@ ActiveAdmin.register_page "Dashboard" do
         h3 'There are no active jobs.'
       end
     end
-
+=begin
  # section "Dockets" do
  #   div do
       # render 'recent_posts' # => this will render /app/views/admin/dashboard/_recent_posts.html.erb
