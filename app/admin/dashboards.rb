@@ -1,5 +1,6 @@
 #ActiveAdmin::Dashboards.build do
 
+  h3 There seems to be a problem with our dashboard... 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.
