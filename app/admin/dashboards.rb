@@ -42,7 +42,7 @@
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
 
 ActiveAdmin.register_page "Dashboard" do
-=begin
+
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     div :class => "blank_slate_container", :id => "dashboard_default_message" do
       span :class => "blank_slate" do
@@ -50,7 +50,7 @@ ActiveAdmin.register_page "Dashboard" do
 #       small I18n.t("active_admin.dashboard_welcome.call_to_action")
       end
     end
-=end
+
     h2 section "Active Jobs" do
 
      if Job.count > 0
@@ -169,6 +169,5 @@ ActiveAdmin.register_page "Dashboard" do
 
   end
 
-=end
 end
 
