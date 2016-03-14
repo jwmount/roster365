@@ -39,7 +39,8 @@ group :development do
 end
 
 group :production do
-  # Support for Rails 4 by & for Heroku, removed for Ninefold
+  # Support for Rails 4 by & for Heroku
+  gem 'puma'
   # gem 'rails_12factor'
   # needed for asset pipeline cache by Heroku, all 4.0.x releases, is in 4.1.x
   # gem 'sprockets_better_errors'  DOES NOT WORK AFTER RAILS 4.0.5, causes the notorious render fail
