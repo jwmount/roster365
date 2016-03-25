@@ -179,6 +179,7 @@ ActiveAdmin.register Quote do
       li link_to "Projects", admin_company_projects_path( project.company )
       hr
       li link_to "Dashboard", admin_dashboard_path
+      li link_to 'Back', 'javascript:history.go(-1);'
   end
 
 #
@@ -196,7 +197,9 @@ ActiveAdmin.register Quote do
       li link_to "Manage Conditions",   admin_conditions_path
       li link_to "Manage Materials",    admin_materials_path
       li link_to "Manage Tip Sites",    admin_tips_path
-
+      hr
+      li link_to 'Back', 'javascript:history.go(-1);'
+      
   end
 
 #
