@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+ruby '2.5.3'
 
-gem 'rails'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.2.2'
 gem 'rake'
 gem 'activerecord'
-
-
+gem 'foreman'
 # sprockets Environment error, it's ALWAYS sprockets
 # http://stackoverflow.com/questions/22426698/undefined-method-environment-for-nilnilclass-when-importing-bootstrap-into-ra
 gem 'uglifier', '>= 1.0.3'
 gem 'coffee-rails'
-gem "sass-rails", "~> 4.0.2"
+#gem "sass-rails", "~> 4.0.2"
 
 gem "twitter-bootstrap-rails"
 gem "bootstrap-sass"
 gem "therubyracer"
-gem "less-rails"   # added to move to frontend
+#gem "less-rails"   # added to move to frontend
 gem "angular-rails"
 gem "angular-rails-templates"  # added to move to frontend, http://angular-rails.com/find_and_browse.html
 gem 'haml-rails'
@@ -25,7 +25,6 @@ gem 'carrierwave'
 gem 'devise'
 gem 'cancan'
 # Allows the use of foreign keys used to protect data integrity (per Xavier Shay)
-gem 'foreigner'
 gem 'i18n'
 gem 'taps'  #needed by Heroku
 gem 'pg'
@@ -50,7 +49,6 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
 
 # Use unicorn as the app server
 gem 'unicorn'
@@ -65,7 +63,6 @@ group :assets do
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -76,9 +73,12 @@ end
 # http://stackoverflow.com/questions/20648814/rails-4-1-0-beta1-upgrade-fails
 gem 'formtastic' #, github: 'justinfrench/formtastic'
 gem 'ransack' #, github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
-gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
+#gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 gem 'activeadmin', github: 'gregbell/active_admin'
 
 # CORS using ransack
 # https://github.com/cyu/rack-cors
 gem 'rack-cors', :require => 'rack/cors'
+gem "json", "~> 1.8"
+
+gem "foreigner", "~> 1.7"
