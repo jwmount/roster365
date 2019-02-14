@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
-ruby '2.5.3'
+ruby '2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
+
 gem 'rake'
 gem 'activerecord'
 gem 'foreman'
@@ -10,7 +11,6 @@ gem 'foreman'
 # http://stackoverflow.com/questions/22426698/undefined-method-environment-for-nilnilclass-when-importing-bootstrap-into-ra
 gem 'uglifier', '>= 1.0.3'
 gem 'coffee-rails'
-#gem "sass-rails", "~> 4.0.2"
 
 gem "twitter-bootstrap-rails"
 gem "bootstrap-sass"
@@ -23,6 +23,7 @@ gem 'geocoder'
 
 gem 'carrierwave'
 gem 'devise'
+
 gem 'cancan'
 # Allows the use of foreign keys used to protect data integrity (per Xavier Shay)
 gem 'i18n'
