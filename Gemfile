@@ -7,6 +7,7 @@ gem 'rails', '~> 5.2.2'
 gem 'rake'
 gem 'activerecord'
 gem 'foreman'
+
 # sprockets Environment error, it's ALWAYS sprockets
 # http://stackoverflow.com/questions/22426698/undefined-method-environment-for-nilnilclass-when-importing-bootstrap-into-ra
 gem 'uglifier', '>= 1.0.3'
@@ -33,6 +34,7 @@ gem "country_select"
 
 group :development do
   #gem 'mysql2'
+  gem 'puma'
   gem 'debugger2'
   gem 'better_errors' 
   gem 'binding_of_caller'
@@ -40,6 +42,7 @@ end
 
 group :production do
   # Support for Rails 4 by & for Heroku
+  # https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
   gem 'puma'
   # gem 'rails_12factor'
   # needed for asset pipeline cache by Heroku, all 4.0.x releases, is in 4.1.x
@@ -51,8 +54,6 @@ end
 
 # To use Jbuilder templates for JSON
 
-# Use unicorn as the app server
-gem 'unicorn'
 
 gem 'jquery-rails'
 
