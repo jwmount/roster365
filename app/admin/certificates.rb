@@ -12,7 +12,7 @@ ActiveAdmin.register Certificate do
   scope :equipment, -> { where(for_equipment: true) }
   scope :location, -> { where(forelocation: true) }
 =begin 
-  Rails 3.x
+  Rails 3.x remove 
   scope :all, :default => true 
   scope :active do |certificates|
     certificates.where ({active: true})
