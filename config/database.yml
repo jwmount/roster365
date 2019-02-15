@@ -1,12 +1,13 @@
 common: &common
   adapter: postgresql
   host: 127.0.0.1
-  username: john
-  password: postgres
+  username:
+  password:
 
 development:
   <<: *common
-  database: roster365_development\
+  database: roster365_development
+  host: localhost
   
 test:
   <<: *common

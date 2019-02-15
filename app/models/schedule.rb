@@ -13,12 +13,12 @@ class Schedule < ActiveRecord::Base
   # this scope redone for Rails 5.2.2
   scope :is_active?, -> { includes(:job).where("jobs.active = ?", true) }
 
-=begin  
-  scope :is_active?, includes(:job).where("jobs.active = ?", true)
+
+#  scope :is_active?, includes(:job).where("jobs.active = ?", true)
 #  pg fails on this
 #  scope :ongoing, where("DATE(day) <= DATE(NOW() + INTERVAL 3 DAY)")
-  scope :by_start_on, order("day DESC")
-=end
+#  scope :by_start_on, order("day DESC")
+
 
   validates_presence_of :day
   validate :validate_date

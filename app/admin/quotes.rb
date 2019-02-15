@@ -93,7 +93,6 @@ ActiveAdmin.register Quote do
               :required => true,
               :label => "Quote to:", 
               :hint => AdminConstants::ADMIN_QUOTE_QUOTE_TO_ID_HINT + " #{quote.project.company.name}",
-              :required => true,
               :as => :select, 
               :collection => quote.project.company.people,
               :include_blank => false
