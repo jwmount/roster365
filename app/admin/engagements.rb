@@ -14,6 +14,7 @@ ActiveAdmin.register Engagement do
   belongs_to :person, :optional=>true
   belongs_to :schedule, :optional=>false
 
+=begin
   scope :all, :default => true
   scope :onsite_now do |engagements|
     engagements.where ({onsite_now: true})
@@ -30,6 +31,7 @@ ActiveAdmin.register Engagement do
   scope :engagement_declined do |engagements|
     engagements.where ({engagement_declined: true})
   end    
+=end
 
   index do 
    

@@ -25,7 +25,7 @@ class Equipment < ActiveRecord::Base
 #
 # S C O P E S
 #
-  scope :alphabetically, order("name ASC")
+#  scope :alphabetically, order("name ASC")
 
 #
 # D E F A U L T S

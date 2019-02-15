@@ -6,6 +6,7 @@ ActiveAdmin.register Project do
   # NOT OPTIONAL, effect is to scope projects to companies.
   belongs_to :company
 
+=begin
   scope :all, :default => true 
 
   scope :active do |projects|
@@ -20,6 +21,7 @@ ActiveAdmin.register Project do
   scope :submitted_bid do |projects| 
     projects.where ({submitted_bid: true})
   end
+=end
 
   filter :name
   filter :description

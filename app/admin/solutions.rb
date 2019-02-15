@@ -16,6 +16,7 @@ ActiveAdmin.register Solution do
 #
 # S C O P E S
 #
+=begin
    scope :all, :default => true
    scope :approved do |solutions|
      solutions.where ({approved: true})
@@ -26,7 +27,8 @@ ActiveAdmin.register Solution do
    scope :semis_permitted do |solutions|
      solutions.where ({semis_permitted: true})
    end    
-  
+=end
+
   # Interesting note
   # "Total is %<total>.02f" % {:total => 43.1}  # => Total is 43.10
   filter :equipment

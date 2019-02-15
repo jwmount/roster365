@@ -23,9 +23,9 @@ ActiveAdmin.register Job do
 #
 # S C O P E S
 #
-  scope :active do |projects|
-    projects.where ({active: true})
-  end
+#  scope :active do |projects|
+#    projects.where ({active: true})
+#  end
  
 #
 # F I L T E R S

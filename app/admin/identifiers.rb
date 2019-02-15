@@ -6,6 +6,7 @@ ActiveAdmin.register Identifier do
   
   actions :all, :except => :new
 
+=begin
   scope :all, :default => true
   scope :People do |identifiers|
     identifiers.where ({identifiable_type: 'Person'})
@@ -13,6 +14,7 @@ ActiveAdmin.register Identifier do
   scope :Companies do |identifiers|
     identifiers.where ({identifiable_type: 'Company'})
   end
+=end
 
   filter :name
   filter :value  

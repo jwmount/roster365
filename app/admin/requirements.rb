@@ -3,6 +3,7 @@ ActiveAdmin.register Requirement do
   menu parent: "Compliance"
   #actions :all, :except => :new
 
+=begin
   scope :all, :default => true 
 #  scope :active do |requirements|
 #    requirements.where ({active: 'true'})
@@ -28,7 +29,8 @@ ActiveAdmin.register Requirement do
   scope :solutions do |requirements|
     requirements.where({requireable_type: 'Site'})
   end
-   
+=end
+
   index do
     column :certificate
     column :requireable_type

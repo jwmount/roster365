@@ -32,6 +32,9 @@ class Solution < ActiveRecord::Base
     accepts_nested_attributes_for :address
     accepts_nested_attributes_for :requirements
 
+  # Rails 5.2.2 version, not tested
+  scope :aphabetically, -> { order("name ASC")}
+  # Rails 3.x
   scope :alphabetically, order("name ASC")
   
   #

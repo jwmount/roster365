@@ -4,6 +4,11 @@ ActiveAdmin.register Docket do
 
   menu label: "Dockets", parent: "Engagement"
 
+  # Rails 5.2.2 scope statements
+  # t.b.d.
+
+=begin
+  Rails 5.2.2, remove
   scope :all, :default => true
   scope :operator_signed do |solutions|
     solutions.where ({operator_signed: true})
@@ -23,6 +28,7 @@ ActiveAdmin.register Docket do
   scope :not_approved do |solutions|
     solutions.where ({approved: false})
   end
+=end
 
   belongs_to :engagement
 #  actions :all, :except => :new

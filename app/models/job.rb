@@ -28,15 +28,18 @@ class Job < ActiveRecord::Base
     end
   end
   
+=begin  
+  Old scope statements, replace as needed in rails 5.2.2 form
   scope :is_active?, where(:active => true)
   scope :is_not_active?, where(:active => false)
   scope :starting_from_today, where("DATE(start_on) >= DATE(NOW())")
+
 
 # pg errors on next two scopes on heroku
 #  scope :started, where("DATE(start_on) <= DATE(NOW() + INTERVAL 3 DAY)")
 #  scope :ongoing, where("DATE(finished_on) >= DATE(NOW() + INTERVAL 1 DAY)")
   scope :by_start_on, order("start_on DESC")
-
+=end
 
   JOB_UPDATE_OK = "Job was updated."
 

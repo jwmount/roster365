@@ -5,7 +5,7 @@ ActiveAdmin.register Condition do
 #    controller.current_ability.can?(:manage, AdminUser)
 #  }
 
-  scope approved: -> { where(approved: true) }
+  scope :approved, -> { where(approved: true) }
 
 =begin
   # Rails 3.x scopes, remove
