@@ -5,6 +5,10 @@ ActiveAdmin.register Condition do
 #    controller.current_ability.can?(:manage, AdminUser)
 #  }
 
+  scope approved: -> { where(approved: true) }
+
+=begin
+  # Rails 3.x scopes, remove
   scope :all
   scope :approved do |conditions|
     conditions.where ({approved: true})
@@ -12,6 +16,7 @@ ActiveAdmin.register Condition do
   scope :approved do |conditions|
     conditions.where ({approved: false})
   end
+=end 
 
   filter :name
   filter :status
@@ -27,7 +32,7 @@ ActiveAdmin.register Condition do
     column :verbiage
 
     column :indication
-#    column :approved
+
     column :approved do |condition|
       status_tag (condition.approved ? "YES" : "No"), (condition.approved ? :ok : :error)
     end
