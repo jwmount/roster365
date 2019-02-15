@@ -5,6 +5,15 @@ ActiveAdmin.register Company do
 #
 # W H I T E   L I S T   M A N A G E M E N T
 # 
+  # Rails 5.2.2 scope definitions
+  scope :all, -> { default: true } 
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
+  scope :po_required, -> { where(PO_required: true) }
+  scope :po_not_required, -> { where(PO_required: false) }
+
+=begin
+  Rails 3.x, remove
   scope :all, :default => true 
   scope :active do |companies|
     companies.where ({active: true})
@@ -18,7 +27,7 @@ ActiveAdmin.register Company do
   scope :po_not_required do |companies|
     companies.where ({PO_required: false})
   end
-
+=end
   filter :name
   filter :projects
   filter :people
