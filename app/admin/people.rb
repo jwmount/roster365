@@ -12,6 +12,13 @@ ActiveAdmin.register Person do
   belongs_to :company
 
 
+# Update scopes for rails 4.2.2
+  scope :all,            -> { where(all: true) }
+  scope :available,      -> { where(available: true) }
+  scope :not_available,  -> { where(available: true) }
+  scope :OK_to_contact,  -> { where(OK_to_contact: true) }  
+  scope :Do_NOT_contact, -> { where(OK_to_contact: false) }
+=begin
   scope :all, :default => true
   scope :available do |people|
     people.where ({available: true})
@@ -25,7 +32,7 @@ ActiveAdmin.register Person do
   scope :Do_NOT_contact do |people|
     people.where ({OK_to_contact: false})
   end
-
+=end
 
 #
 # I N D E X / L I S T  C O N T E X T
