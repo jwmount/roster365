@@ -15,4 +15,9 @@ For one thing it would work better as a set of micro services.  For another the 
 its design intent (which is no fault of its own) and the result was the time to complete data capture began to exceed the time 
 available to respond and there was no obvious way to alleviate this constraint without deeply refactoring the user stories themselves.  
 
+===Upgrade to Rails 5.2.2
+1.  Rebuild gems using bundler and resolve conflicts
+2.  Revise scope statements (incompatible as not based on callable blocks before 4.x)
 
+
+Copyright 2011 - 2019 by John W. Mount

@@ -36,7 +36,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :certs
   accepts_nested_attributes_for :identifiers
   
-  # Update scopes for rails 4.2.2
+  # Update scopes for rails 5.2.2
   scope :alphabetically, -> { order: ("last_name DESC") }
   scope :post_code,      -> { where(certifiable_type: "Person")}
   

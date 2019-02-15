@@ -3,6 +3,16 @@ ActiveAdmin.register Certificate do
 
   menu parent: "Compliance"
 
+# Rails 5.2.2
+  scope :all, -> { where(default: true) }
+  scope :active, -> { where(active: true ) }
+  scope :inactive, -> { where(active: false) }
+  scope :people, -> { where(for_person: true) }
+  scope :companies, -> { where(for_company: true) }
+  scope :equipment, -> { where(for_equipment: true) }
+  scope :location, -> { where(forelocation: true) }
+=begin 
+  Rails 3.x
   scope :all, :default => true 
   scope :active do |certificates|
     certificates.where ({active: true})
@@ -22,7 +32,7 @@ ActiveAdmin.register Certificate do
   scope :location do |certificates|
     certificates.where ({for_location: true})
   end
-
+=end
   index do
     column :name , :sortable => 'name' do |certificate|
       link_to certificate.name, admin_certificate_path(certificate)

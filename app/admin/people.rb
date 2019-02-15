@@ -12,7 +12,7 @@ ActiveAdmin.register Person do
   belongs_to :company
 
 
-# Update scopes for rails 4.2.2
+# Update scopes for rails 5.2.2
   scope :all,            -> { where(all: true) }
   scope :available,      -> { where(available: true) }
   scope :not_available,  -> { where(available: true) }

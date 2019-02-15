@@ -1,5 +1,11 @@
 ActiveAdmin.setup do |config|
 
+
+  # update for Rails 5.2.2
+  # from https://stackoverflow.com/posts/52663892/revisions
+  def resource_params
+    [(params[resource_request_name] || params[resource_instance_name]).try(:permit!) || {}]
+  end 
   # == Site Title
   #
   # Set the title that is displayed on the main layout
