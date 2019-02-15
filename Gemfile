@@ -32,9 +32,9 @@ gem 'taps'  #needed by Heroku
 gem 'pg'
 gem "country_select"
 
+
+
 group :development do
-  #gem 'mysql2'
-  gem 'puma', '~> 3.11'
   gem 'debugger2'
   gem 'better_errors' 
   gem 'binding_of_caller'
@@ -43,10 +43,10 @@ end
 group :production do
   # Support for Rails 4 by & for Heroku
   # https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
-  gem 'puma', '~> 3.11'
-  # gem 'rails_12factor'
+    # gem 'rails_12factor'
   # needed for asset pipeline cache by Heroku, all 4.0.x releases, is in 4.1.x
   # gem 'sprockets_better_errors'  DOES NOT WORK AFTER RAILS 4.0.5, causes the notorious render fail
+  gem 'puma', '~> 3.11'  
 end
 
 # To use ActiveModel has_secure_password
@@ -82,5 +82,3 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 # https://github.com/cyu/rack-cors
 gem 'rack-cors', :require => 'rack/cors'
 gem "json", "~> 1.8"
-
-gem "foreigner", "~> 1.7"
