@@ -76,7 +76,7 @@ end
 gem 'formtastic' #, github: 'justinfrench/formtastic'
 gem 'ransack' #, github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 #gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin' #, github: 'gregbell/active_admin'
 
 # CORS using ransack
 # https://github.com/cyu/rack-cors

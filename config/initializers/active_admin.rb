@@ -107,7 +107,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  config.allow_comments = true
+  # *** config.allow_comments = true
   #
   # You can disable the menu item for the comments index page:
   # config.show_comments_in_menu = false
@@ -128,7 +128,7 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources and pages from here.
   #
-  # config.before_filter :do_something_awesome
+  # config.before_action :do_something_awesome
 
 
   # == Register Stylesheets & Javascripts
@@ -215,7 +215,7 @@ ActiveAdmin.setup do |config|
 
   # Strong parameters is a briar patch, unworkable.
   # http://stackoverflow.com/questions/13091011/how-to-get-activeadmin-to-work-with-strong-parameters/14511396#14511396
-    config.before_filter do
+    config.before_action do
       params.permit!
     end
 end
