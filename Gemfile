@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.4.1'
+ruby '2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
@@ -34,7 +34,7 @@ gem "country_select"
 
 group :development do
   #gem 'mysql2'
-  gem 'puma'
+  gem 'puma', '~> 3.11'
   gem 'debugger2'
   gem 'better_errors' 
   gem 'binding_of_caller'
@@ -43,7 +43,7 @@ end
 group :production do
   # Support for Rails 4 by & for Heroku
   # https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
-  gem 'puma'
+  gem 'puma', '~> 3.11'
   # gem 'rails_12factor'
   # needed for asset pipeline cache by Heroku, all 4.0.x releases, is in 4.1.x
   # gem 'sprockets_better_errors'  DOES NOT WORK AFTER RAILS 4.0.5, causes the notorious render fail

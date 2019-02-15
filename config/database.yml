@@ -6,8 +6,8 @@ common: &common
 
 development:
   <<: *common
-  database: roster365_development
-
+  database: roster365_development\
+  
 test:
   <<: *common
   database: roster365_test
