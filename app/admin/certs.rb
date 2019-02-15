@@ -7,7 +7,15 @@ ActiveAdmin.register Cert do
   #}
   
   actions :all, :except => :new
-
+  
+  # Rails 5.2.2 scopes
+  scope :all, -> { where(default: true) }
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
+  scope :permanent, -> { where(permanent: true) }
+  
+=begin
+  Rails 3.x removed
   scope :all, :default => true 
   scope :active do |certificates|
     certificates.where ({active: 'true'})
@@ -18,7 +26,8 @@ ActiveAdmin.register Cert do
   scope :permanent do |certificates|
     certificates.where ({permanent: 'true'})
   end
-   
+=end
+
   index do
     selectable_column
 
