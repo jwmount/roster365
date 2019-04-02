@@ -10,12 +10,14 @@ class Solution < ActiveRecord::Base
   # A S S O C I A T I O N S     A S S O C I A T I O N S     A S S O C I A T I O N S     A S S O C I A T I O N S     
   belongs_to :quote
   belongs_to :material
-  belongs_to :vendor, 
-             :class_name => 'Company', 
-             :foreign_key => :vendor_id
   has_many   :jobs, 
              :dependent => :destroy
   has_and_belongs_to_many :tips
+  
+  #unclear what this was supposed to enable?
+  #belongs_to :vendor, 
+  #           :class_name => 'Company', 
+  #           :foreign_key => :vendor_id
   
   #
   # P O L Y M O R P H I C  A S S O C I A T I O N S
@@ -33,9 +35,9 @@ class Solution < ActiveRecord::Base
     accepts_nested_attributes_for :requirements
 
   # Rails 5.2.2 version, not tested
-  scope :aphabetically, -> { order("name ASC")}
+  # scope :aphabetically, -> { order("name ASC")}
   # Rails 3.x
-  scope :alphabetically, order("name ASC")
+  # scope :alphabetically, order("name ASC")
   
   #
   # V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S    V A L I D A T I O N S
@@ -47,8 +49,8 @@ class Solution < ActiveRecord::Base
   validates :invoice_tip_client, :pay_tip_client, :numericality => {:greater_than_or_equal_to => 0}
 
   # validate :invoice_client_total
-  validate :pay_amounts?
-  validate :PO_required?
+  validates :pay_amounts?
+  validates :PO_required?
 
 
   # C O N T R A C T  T Y P E  V A L I D A T I O N S  --  I N C O M P L E T E

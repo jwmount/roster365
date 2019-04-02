@@ -10,7 +10,7 @@ class Identifier < ActiveRecord::Base
   validates_presence_of :name, :value
   validates :rank, :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than => 10}
    
-  scope :ranked, -> { where(rank: "DSC") }
+  # scope :ranked, -> { where(rank: "DSC") }
   
   # this doesn't seem to work?  refers to line below
   # scope :ranked, order("rank DSC")

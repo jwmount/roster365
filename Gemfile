@@ -81,4 +81,4 @@ gem 'activeadmin' #, github: 'gregbell/active_admin'
 # CORS using ransack
 # https://github.com/cyu/rack-cors
 gem 'rack-cors', :require => 'rack/cors'
-gem "json", "~> 1.8"
+gem "json" #, "~> 1.8"

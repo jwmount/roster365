@@ -4,7 +4,7 @@ ActiveAdmin.register Condition do
 #  menu :label => "Compliance", :if => lambda{|tabs_renderer|
 #    controller.current_ability.can?(:manage, AdminUser)
 #  }
-
+=begin
   scope :approved, -> { where(approved: true) }
 
 =begin

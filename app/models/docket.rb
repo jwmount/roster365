@@ -5,7 +5,7 @@ class Docket < ActiveRecord::Base
   
   validates_uniqueness_of :number
   validates_presence_of :number
-  validate :engagement, presence => true
+  validates :engagement, presence => true
 
   # audited, not on Rails 4 yet
 

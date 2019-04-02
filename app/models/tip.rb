@@ -22,7 +22,7 @@ class Tip < ActiveRecord::Base
     accepts_nested_attributes_for :certs
 
 
-  scope :alphabetically, order("name ASC")
+  # scope :alphabetically, order("name ASC")
   
 # D E F A U L T S
 

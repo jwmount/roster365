@@ -1,12 +1,12 @@
 #require 'debugger'
 ActiveAdmin.register Company do
 
-  #before_action :check_permissions, :only => [:new, :create, :cancel]  
+  before_action :check_permissions, :only => [:new, :create, :cancel]  
 #
 # W H I T E   L I S T   M A N A G E M E N T
 # 
   # Rails 5.2.2 scope definitions
-#  scope :all, -> { default: true } 
+=begin
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
   scope :po_required, -> { where(PO_required: true) }
@@ -237,4 +237,4 @@ ActiveAdmin.register Company do
     redirect_to admin_company_path( company )
   end
 
-end
+end #companies

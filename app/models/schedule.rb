@@ -1,36 +1,56 @@
 #require 'debugger'
 
 class Schedule < ActiveRecord::Base
+  include ActiveModel::Validations
+
+  attr_accessor :day, :job, :equipment_units_today
 
   belongs_to :job
   has_many :engagements, :dependent => :destroy
   has_many :reservations, :dependent => :destroy
   has_and_belongs_to_many :people
 
+  #validates_associated :engagements
+  #validates_associated :reservations
+  #validates_associated :people
+
+  validate :must_be_present
+    
+  def must_be_present
+    errors.add(:base, "Must be present")
+  end
+  
   # audited, not on Rails 4 yet
   after_initialize :set_defaults
 
+  #validate :day
+  #validate :job
+  #validate :equipment_units_today
+# With a block which is passed with the current record to be validated:
+
+
   # this scope redone for Rails 5.2.2
   scope :is_active?, -> { includes(:job).where("jobs.active = ?", true) }
+  scope :ongoing, ->(day) { where("DATE(day) <= DATE(NOW() + INTERVAL 3 DAY") }
+  scope :by_start_on, -> { order("day DESC") }
+  scope :validate_date, -> (day){ (day.nil? or day < Date.yesterday) }
 
+=begin
 
+#  Rails 3x, remove
 #  scope :is_active?, includes(:job).where("jobs.active = ?", true)
 #  pg fails on this
 #  scope :ongoing, where("DATE(day) <= DATE(NOW() + INTERVAL 3 DAY)")
 #  scope :by_start_on, order("day DESC")
 
+=end 
+  validates :job, 
+    :presence => {:message => "Job cannot be blank."}
 
-  validates_presence_of :day
-  validate :validate_date
-  validate :job, presence => true
-  validate :equipment_units_today, :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than => 100}
+  #validates :equipment_units_today, :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than => 100}
   # Modified to work with datepicker and datetime fields --JWM
 
-  def validate_date
-    if day.nil? or day < Date.yesterday
-      errors.add(:day, "PROBLEM:  Scheduled date cannot be in the past")
-    end
-  end
+
 
 # C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     C A L L B A C K S     
 # Best practice in Rails is set defaults here and not in database
@@ -80,7 +100,8 @@ class Schedule < ActiveRecord::Base
   def no_tip_assigned
     'No tip assigned.'
   end
- 
-
 
 end
+
+
+

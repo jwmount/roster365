@@ -35,7 +35,7 @@ ActiveAdmin.register Solution do
 
 
   index do 
-    selectable_column
+  #  selectable_column
 
     column "Name (click for details)", :sortable => 'name' do |solution|
       link_to "Solution #{solution.name}", 

@@ -10,8 +10,8 @@ class Job < ActiveRecord::Base
   # audited, not on Rails 4 yet
 
   validates :name, :presence => true
-  validate :is_solution_approved?
-  validate :purchase_order_required?
+  validates :is_solution_approved?
+  validates :purchase_order_required?
 
   delegate :equipment_units_required_per_day, :to => :solution
 
@@ -28,16 +28,16 @@ class Job < ActiveRecord::Base
     end
   end
   
-=begin  
-  Old scope statements, replace as needed in rails 5.2.2 form
+=begin
+  # Old scope statements, replace as needed in rails 5.2.2 form
   scope :is_active?, where(:active => true)
   scope :is_not_active?, where(:active => false)
   scope :starting_from_today, where("DATE(start_on) >= DATE(NOW())")
 
 
 # pg errors on next two scopes on heroku
-#  scope :started, where("DATE(start_on) <= DATE(NOW() + INTERVAL 3 DAY)")
-#  scope :ongoing, where("DATE(finished_on) >= DATE(NOW() + INTERVAL 1 DAY)")
+  scope :started, where("DATE(start_on) <= DATE(NOW() + INTERVAL 3 DAY)")
+  scope :ongoing, where("DATE(finished_on) >= DATE(NOW() + INTERVAL 1 DAY)")
   scope :by_start_on, order("start_on DESC")
 =end
 

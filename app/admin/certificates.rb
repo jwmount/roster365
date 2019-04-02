@@ -4,6 +4,7 @@ ActiveAdmin.register Certificate do
   menu parent: "Compliance"
 
 # Rails 5.2.2
+=begin 
   scope :all, -> { where(default: true) }
   scope :active, -> { where(active: true ) }
   scope :inactive, -> { where(active: false) }
@@ -11,7 +12,7 @@ ActiveAdmin.register Certificate do
   scope :companies, -> { where(for_company: true) }
   scope :equipment, -> { where(for_equipment: true) }
   scope :location, -> { where(forelocation: true) }
-=begin 
+
   Rails 3.x remove 
   scope :all, :default => true 
   scope :active do |certificates|

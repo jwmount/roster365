@@ -7,7 +7,7 @@ class Role < ActiveRecord::Base
   
   validates_presence_of :name
   
-  scope :alphabetically, order("name ASC")
+  # scope :alphabetically, order("name ASC")
 
   class << self
     def by_name
