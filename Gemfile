@@ -23,7 +23,8 @@ gem "angular-rails-templates"  # added to move to frontend, http://angular-rails
 gem 'haml-rails'
 gem 'geocoder'
 
-gem 'carrierwave'
+# gem 'carrierwave' 03/06/2021 JWM to clear security alert
+gem "carrierwave", ">= 1.3.2"
 gem 'devise'
 
 gem 'cancan'
