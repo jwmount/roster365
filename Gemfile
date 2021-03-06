@@ -5,7 +5,8 @@ ruby '2.5.3'
 gem 'rails', '~> 5.2.2'
 
 gem 'rake'
-gem 'activerecord'
+# gem 'activerecord'
+gem "activerecord", ">= 5.2.4.5"
 gem 'foreman'
 
 # sprockets Environment error, it's ALWAYS sprockets
