@@ -34,6 +34,7 @@ gem 'taps'  #needed by Heroku
 gem 'pg'
 gem "country_select"
 
+gem "rest-client", ">= 1.8.0"
 
 
 group :development do
