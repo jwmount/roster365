@@ -85,7 +85,7 @@ ActiveAdmin.register Company do
     
     column :people do |company|
       if company.people.count > 0
-        link_to "People (#{company.people.count.to_s})", admin_company_people_path( company )
+        link_to "Peoples (#{company.people.count.to_s})", admin_company_people_path( company )
       else
         link_to "New person", new_admin_company_person_path(company)
       end
